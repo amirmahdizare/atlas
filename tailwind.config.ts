@@ -51,6 +51,9 @@ const config: Config = {
         //   ]
 
 
+      },
+      borderRadius:{
+        'circle':'50%'
       }
     },
   },
