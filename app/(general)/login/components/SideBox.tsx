@@ -31,9 +31,8 @@ export const SideBox = () => {
                 <SocialMediaButton icon={IconBrandTwitter} link='www.twitter.com' type='normal' />
                 <SocialMediaButton icon={IconBrandWhatsapp} link='www.whatsapp' type='colored' />
                 <SocialMediaButton icon={IconBrandTelegram} link='www.telegram' type='normal' />
-
-
             </div>
+            
         </div>
     )
 }
