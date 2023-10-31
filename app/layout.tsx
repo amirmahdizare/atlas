@@ -14,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${IRANYekan.className} ${IRANYekanNumber.className}`}>{children}</body>
+    <html lang="fa" dir='rtl' className='text-mobile lg:text-desktop '>
+      <body className={`${IRANYekan.className} ${IRANYekanNumber.className} text-body-2-normal`}>
+        {children}
+        </body>
     </html>
   )
 }

@@ -1,8 +1,10 @@
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      به دپارتمان املاک اطلس خوش آمدید
+    <main className="flex flex-row items-center justify-center gap-1 p-4">
+      به دپارتمان املاک
+      <span className="text-body-1-bolder">اطلس</span>
+      خوش آمدید
     </main>
   )
 }
