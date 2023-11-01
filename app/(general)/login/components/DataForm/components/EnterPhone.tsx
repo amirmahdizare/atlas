@@ -2,6 +2,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useLoginPage } from '../../hooks'
+import { Input } from '@components'
 
 export const EnterPhone = () => {
 
@@ -18,7 +19,11 @@ export const EnterPhone = () => {
         <form className='flex flex-col gap-3' onSubmit={handleSubmit(handleEnter)}>
             <span className='text-h5-normal text-gray-400'>لطفا شماره موبایل خود را وارد کنید</span>
 
-            <input className='border p-1 rounded outline-none text-body-2-normal' {...register('phoneNumber', { required: true })} placeholder='شماره تلفن' />
+            <Input
+                required
+                placeholder='شماره موبایل'
+                register={register('phoneNumber')}
+            />
 
             <button className='bg-gray-300 p-2 text-gray-800 rounded'>ورود</button>
 
