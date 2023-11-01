@@ -31,7 +31,8 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
     icon?: typeof Icon123,
     iconSide?: 'left' | 'right',
     textColor?: keyof typeof bgColors
-    bgColor: keyof typeof bgColors
+    bgColor?: keyof typeof bgColors,
+    fullWidth?: boolean
 
 }
 const renderColor = (item: string, defaultColor: string, pre: string) => {
@@ -43,13 +44,14 @@ const renderColor = (item: string, defaultColor: string, pre: string) => {
 
 
 
-export const Button = ({ loading, bgColor, icon: Icon, iconSide, textColor, className, ...props }: Props) => {
+export const Button = ({ loading, bgColor, icon: Icon,fullWidth , iconSide, textColor, className, ...props }: Props) => {
     return (
         <button
             className={cx(
-                renderColor(bgColor, 'primaryNormal', 'bg'),
+                renderColor(bgColor ?? '', 'primaryNormal', 'bg'),
                 renderColor(textColor ?? '', 'white', 'text'),
-                'p-2 rounded-[4px] flex flex-row gap-2 items-center  bg-r ed-500 justify-center bor der bg-g ray-400'
+                'p-2 rounded-[4px] flex flex-row gap-2 items-center  bg-r ed-500 justify-center bor der bg-g ray-400',
+                fullWidth && 'flex-1' 
             )}
 
             {...props}>

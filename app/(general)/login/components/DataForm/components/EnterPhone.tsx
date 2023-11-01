@@ -26,7 +26,7 @@ export const EnterPhone = () => {
                 type='tel'
             />
 
-            <Button  bgColor='gray' textColor='textGray'>
+            <Button  bgColor='secondary' >
                 ورود
             </Button>
 
