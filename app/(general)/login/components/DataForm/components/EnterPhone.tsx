@@ -23,6 +23,7 @@ export const EnterPhone = () => {
                 required
                 placeholder='شماره موبایل'
                 register={register('phoneNumber')}
+                type='tel'
             />
 
             <button className='bg-gray-300 p-2 text-gray-800 rounded'>ورود</button>
