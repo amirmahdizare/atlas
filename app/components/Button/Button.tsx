@@ -9,7 +9,7 @@ const bgColors = {
     primaryDarker: 'bg-blue-500',
     primaryNormal: 'bg-blue-700',
     primaryLighter: 'bg-blue-400',
-    gray: 'bg-gray-400',
+    gray: 'bg-gray-200',
     white: 'bg-white',
     textGray: 'bg-gray-700'
 }
@@ -20,7 +20,7 @@ const textColors = {
     primaryDarker: 'text-blue-500',
     primaryNormal: 'text-blue-700',
     primaryLighter: 'text-blue-400',
-    gray: 'text-gray-400',
+    gray: 'text-gray-200',
     white: 'text-white',
     textGray: 'text-gray-700'
 }
