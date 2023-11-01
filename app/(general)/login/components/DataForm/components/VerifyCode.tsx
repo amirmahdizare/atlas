@@ -1,4 +1,4 @@
-import { Input } from '@components'
+import { Button, Input } from '@components'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -18,7 +18,9 @@ export const VerifyCode = () => {
                 register={register('verifyCode')}
                 type='tel'
             />
-            <button className='bg-gray-300 p-2 text-gray-800 rounded'>تایید</button>
+            <Button bgColor='gray' textColor='textGray'>
+                تایید
+            </Button>
 
         </form>
     )

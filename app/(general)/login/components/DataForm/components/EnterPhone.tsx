@@ -2,7 +2,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useLoginPage } from '../../hooks'
-import { Input } from '@components'
+import { Button, Input } from '@components'
 
 export const EnterPhone = () => {
 
@@ -26,7 +26,9 @@ export const EnterPhone = () => {
                 type='tel'
             />
 
-            <button className='bg-gray-300 p-2 text-gray-800 rounded'>ورود</button>
+            <Button  bgColor='gray' textColor='textGray'>
+                ورود
+            </Button>
 
         </form>
     )
