@@ -24,6 +24,9 @@ export const EnterPhone = () => {
                 placeholder='شماره موبایل'
                 register={register('phoneNumber')}
                 type='tel'
+                // error
+                errorText='sdf'
+                label='sdf'
             />
 
             <Button  bgColor='secondary' >
