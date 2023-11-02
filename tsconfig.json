@@ -21,10 +21,10 @@
 
     "baseUrl": "./app/",
     "paths": {
-      "@config/*": [
+      "@config": [
         "/config/*"
       ],
-      "@api/*": [
+      "@api": [
         "/api/*"
       ],
       "@components": [
@@ -32,6 +32,9 @@
       ],
       "@images": [
         "images/*"
+      ],
+      "@icons": [
+        "icons/*","icons/index"
       ]
     }
   },
