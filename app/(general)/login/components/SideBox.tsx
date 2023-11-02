@@ -1,8 +1,10 @@
+'use client'
 import React, { ReactNode } from 'react'
 import loginPhoto from 'images/loginPhoto.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { IconArrowLeft , IconBrandInstagram , IconBrandTwitter , IconBrandWhatsapp ,IconBrandTelegram } from '@tabler/icons-react'
+import { IconArrowLeft , IconBrandInstagram , IconBrandTwitter , IconBrandWhatsapp ,IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
+import { Button } from '@components'
 
 const SocialMediaButton = ({ icon :Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
 
@@ -16,6 +18,12 @@ const SocialMediaButton = ({ icon :Icon, link, type }: { icon: typeof IconArrowL
 export const SideBox = () => {
     return (
         <div className='col-span-7 lg:col-span-3 bg-[#F9F9FF] p-2 h-full flex items-center justify-center flex-col gap-4 relative'>
+
+            <div className='flex flex-row absolute top-8 left-8 gap-2 items-center'>
+                <Button icon={IconArrowDownLeft}  iconSide='left' bgColor='white' textColor='textGray'>درخواست ملک</Button>
+                <Button icon={IconPlus} bgColor='secondary' >ثبت آگهی</Button>
+
+            </div>
             <Image src={loginPhoto} alt='تصویر ورود به اطلس' />
             <span className='text-h2-bolder'>حس
                 &nbsp;

@@ -1,5 +1,5 @@
 'use client'
-import { Icon123 } from '@tabler/icons-react'
+import { Icon123, TablerIconsProps } from '@tabler/icons-react'
 import React, { HTMLAttributes } from 'react'
 import cx from 'classnames'
 
@@ -12,7 +12,7 @@ const bgColors = {
     gray: 'bg-anti-flash-white-lighter',
     white: 'bg-white',
     textGray: 'bg-ultra-violet',
-    lightBlue:'bg-celeste-lighter',
+    lightBlue: 'bg-celeste-lighter',
 }
 
 const textColors = {
@@ -24,13 +24,13 @@ const textColors = {
     gray: 'text-anti-flash-white-lighter',
     white: 'text-white',
     textGray: 'text-ultra-violet',
-    lightBlue:'bg-celeste-lighter'
+    lightBlue: 'bg-celeste-lighter'
 }
 
 
 interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     loading?: boolean,
-    icon?: typeof Icon123,
+    icon?: (props: TablerIconsProps) => JSX.Element,
     iconSide?: 'left' | 'right',
     textColor?: keyof typeof bgColors
     bgColor?: keyof typeof bgColors,
@@ -47,7 +47,7 @@ const renderColor = (item: string, defaultColor: string, pre: string) => {
 
 
 
-export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, textColor, className, ...props }: Props) => {
+export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, children, textColor, className, ...props }: Props) => {
     return (
         <button
             className={cx(
@@ -55,11 +55,16 @@ export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, text
                 textColor ? `${(textColors as any)?.[textColor]}` : `${textColors.white}`,
                 // renderColor(bgColor ?? '', 'primaryNormal', 'bg'),
                 // renderColor(textColor ?? '', 'white', 'text'),
-                'p-2 rounded-[4px] flex flex-row gap-2 items-center  bg-r ed-500 justify-center bor der bg-g ray-400',
+                iconSide == 'left' ? 'flex-row' : 'flex-row-reverse',
+                'px-2 py-1.5 rounded-[4px] flex  gap-1 items-center  bg-r ed-500 justify-center bor der bg-g ray-400',
+
                 fullWidth && 'flex-1'
             )}
 
             {...props}>
+            {children}
+            {!!Icon && <Icon width={20} height={20} />}
+
 
         </button>
     )
