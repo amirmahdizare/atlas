@@ -1,8 +1,9 @@
 'use client'
-import { Icon123, TablerIconsProps } from '@tabler/icons-react'
-import React, { HTMLAttributes } from 'react'
+import { TablerIconsProps } from '@tabler/icons-react'
+import React from 'react'
 import cx from 'classnames'
-import { Spinner } from '@components'
+import { Spinner } from '../Spinner/Spinner'
+import { useRouter } from 'next/navigation'
 
 const bgColors = {
     secondary: 'bg-coral',
@@ -25,7 +26,7 @@ const textColors = {
     gray: 'text-anti-flash-white-lighter',
     white: 'text-white',
     textGray: 'text-ultra-violet',
-    lightBlue: 'bg-celeste-lighter'
+    lightBlue: 'text-celeste-lighter'
 }
 
 
@@ -35,7 +36,8 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
     iconSide?: 'left' | 'right',
     textColor?: keyof typeof bgColors
     bgColor?: keyof typeof bgColors,
-    fullWidth?: boolean
+    fullWidth?: boolean,
+    href?: string
 
 }
 const renderColor = (item: string, defaultColor: string, pre: string) => {
@@ -48,7 +50,10 @@ const renderColor = (item: string, defaultColor: string, pre: string) => {
 
 
 
-export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, children, textColor, className, ...props }: Props) => {
+export const Button = ({ loading, bgColor, icon: Icon, fullWidth, onClick, href, iconSide, children, textColor, className, ...props }: Props) => {
+
+    const router = useRouter()
+
     return (
         <button
             className={cx(
@@ -62,7 +67,9 @@ export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, chil
                 fullWidth && 'flex-1'
             )}
 
-            {...props}>
+            {...props}
+            onClick={(e)=>href ? router.push(href) : typeof onClick=='function' && onClick(e)}
+        >
             {loading
                 ? <Spinner />
                 : <>

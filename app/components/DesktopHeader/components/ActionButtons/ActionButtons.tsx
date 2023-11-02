@@ -9,7 +9,7 @@ export const ActionButtons = () => {
         <div className='flex flex-row gap-2'>
             <Button 
             icon={IconArrowDownLeft} 
-            iconSide='left' bgColor='white' textColor='textGray'>درخواست ملک</Button>
+            iconSide='left' bgColor='gray' textColor='textGray'>درخواست ملک</Button>
             <Button 
             icon={IconPlus} 
             bgColor='secondary' >ثبت آگهی</Button>
