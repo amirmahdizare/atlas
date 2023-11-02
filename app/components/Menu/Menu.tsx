@@ -1,0 +1,16 @@
+import Link from 'next/link'
+import React from 'react'
+
+export const Menu = ({onClickLink}:{onClickLink:Function}) => {
+  return (
+    <div className='flex flex-col gap-4'>
+
+        <Link href={'#'}>بازگشت به صفحه اصلی</Link>
+        <Link href={'#'}>بازگشت به صفحه اصلی</Link>
+        <Link href={'#'}>بازگشت به صفحه اصلی</Link>
+        <Link href={'#'}>بازگشت به صفحه اصلی</Link>
+
+
+    </div>
+  )
+}
