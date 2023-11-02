@@ -60,7 +60,7 @@ const config: Config = {
         'coral': '#FF734C',
         'robin-egg': '#05BAC6',
         'mint-green': '#00A3AD',
-        'robin-egg-lighter': '#00A3AD',
+        'robin-egg-lighter': '#3FD5DF',
         'raisin-black': '#1C1C28',
         'space-codet': '#28293D',
         'ultra-violet': '#555770',
