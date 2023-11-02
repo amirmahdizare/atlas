@@ -2,6 +2,7 @@
 import { Icon123, TablerIconsProps } from '@tabler/icons-react'
 import React, { HTMLAttributes } from 'react'
 import cx from 'classnames'
+import { Spinner } from '@components'
 
 const bgColors = {
     secondary: 'bg-coral',
@@ -62,8 +63,12 @@ export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, chil
             )}
 
             {...props}>
-            {children}
-            {!!Icon && <Icon width={20} height={20} />}
+            {loading
+                ? <Spinner />
+                : <>
+                    {children}
+                    {!!Icon && <Icon width={20} height={20} />}</>}
+
 
 
         </button>
