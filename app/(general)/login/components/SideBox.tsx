@@ -8,7 +8,7 @@ import { Button } from '@components'
 
 const SocialMediaButton = ({ icon :Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
 
-    const appendClassName = type == 'colored' ? 'bg-orange-500 text-white' : 'bg-gray-300 text-gray-800'
+    const appendClassName = type == 'colored' ? 'bg-coral text-white' : 'bg-gray-300 text-gray-800'
     return <Link href={link} className={`rounded-circle p-1.5 aspect-square ${appendClassName}`
     }>
         <Icon width={22.5} height={22.5}/>
@@ -17,21 +17,21 @@ const SocialMediaButton = ({ icon :Icon, link, type }: { icon: typeof IconArrowL
 
 export const SideBox = () => {
     return (
-        <div className='col-span-7 lg:col-span-3 bg-[#F9F9FF] p-2 h-full flex items-center justify-center flex-col gap-4 relative'>
+        <div className='col-span-7 lg:col-span-3 bg-[#F9F9FF] p-2 lg:h-full flex items-center justify-center flex-col gap-4 relative'>
 
-            <div className='flex flex-row absolute top-8 left-8 gap-2 items-center'>
+            <div className='hidden lg:flex flex-row absolute top-8 left-8 gap-2 items-center'>
                 <Button icon={IconArrowDownLeft}  iconSide='left' bgColor='white' textColor='textGray'>درخواست ملک</Button>
                 <Button icon={IconPlus} bgColor='secondary' >ثبت آگهی</Button>
 
             </div>
-            <Image src={loginPhoto} alt='تصویر ورود به اطلس' />
-            <span className='text-h2-bolder'>حس
+            <Image src={loginPhoto} alt='تصویر ورود به اطلس' className='max-w-[300px] lg:max-w-none' />
+            <span className='text-h2-bolder lg:block hidden'>حس
                 &nbsp;
                 <span className='text-green-600'>خوب</span>
                 &nbsp;
                 و خرید مطمئن
             </span>
-            <span className='text-h6-normal text-gray-500'>خانه دلخواه تان را به کمک مشاورین متخصص اطلس پیدا کنید.</span>
+            <span className='text-h6-normal text-gray-500 lg:block hidden'>خانه دلخواه تان را به کمک مشاورین متخصص اطلس پیدا کنید.</span>
 
 
             <div className='flex flex-row gap-2 items-center lg:absolute bottom-4'>

@@ -26,6 +26,7 @@ export const EnterPhone = () => {
                 type='tel'
                 // error
                 errorText='sdf'
+                autoComplete='off'
             />
 
             <Button  bgColor='primaryNormal' >
