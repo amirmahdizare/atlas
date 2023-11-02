@@ -38,7 +38,7 @@ export const VerifyCode = () => {
                 />
       
             </div>
-            <Button bgColor='secondary' >
+            <Button bgColor='primaryNormal' >
                 تایید
             </Button>
 

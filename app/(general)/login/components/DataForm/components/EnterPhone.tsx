@@ -26,10 +26,9 @@ export const EnterPhone = () => {
                 type='tel'
                 // error
                 errorText='sdf'
-                label='sdf'
             />
 
-            <Button  bgColor='secondary' >
+            <Button  bgColor='primaryNormal' >
                 ورود
             </Button>
 

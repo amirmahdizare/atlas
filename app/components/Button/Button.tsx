@@ -1,28 +1,30 @@
 'use client'
 import { Icon123 } from '@tabler/icons-react'
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 import cx from 'classnames'
 
 const bgColors = {
-    secondary: 'bg-orange-500',
-    dark: 'bg-blue-900',
-    primaryDarker: 'bg-blue-500',
-    primaryNormal: 'bg-blue-700',
-    primaryLighter: 'bg-blue-400',
-    gray: 'bg-gray-200',
+    secondary: 'bg-coral',
+    dark: 'bg-raisin-black',
+    primaryDarker: 'mint-green',
+    primaryNormal: 'bg-robin-egg',
+    primaryLighter: 'bg-robin-egg-lighter',
+    gray: 'bg-anti-flash-white-lighter',
     white: 'bg-white',
-    textGray: 'bg-gray-700'
+    textGray: 'bg-ultra-violet',
+    lightBlue:'bg-celeste-lighter',
 }
 
 const textColors = {
-    secondary: 'text-orange-500',
-    dark: 'text-blue-900',
-    primaryDarker: 'text-blue-500',
-    primaryNormal: 'text-blue-700',
-    primaryLighter: 'text-blue-400',
-    gray: 'text-gray-200',
+    secondary: 'text-coral',
+    dark: 'text-raisin-black',
+    primaryDarker: 'mint-green',
+    primaryNormal: 'text-robin-egg',
+    primaryLighter: 'text-robin-egg-lighter',
+    gray: 'text-anti-flash-white-lighter',
     white: 'text-white',
-    textGray: 'text-gray-700'
+    textGray: 'text-ultra-violet',
+    lightBlue:'bg-celeste-lighter'
 }
 
 
@@ -44,14 +46,17 @@ const renderColor = (item: string, defaultColor: string, pre: string) => {
 
 
 
-export const Button = ({ loading, bgColor, icon: Icon,fullWidth , iconSide, textColor, className, ...props }: Props) => {
+
+export const Button = ({ loading, bgColor, icon: Icon, fullWidth, iconSide, textColor, className, ...props }: Props) => {
     return (
         <button
             className={cx(
-                renderColor(bgColor ?? '', 'primaryNormal', 'bg'),
-                renderColor(textColor ?? '', 'white', 'text'),
+                bgColor ? `${(bgColors as any)?.[bgColor]}` : `${bgColors.primaryNormal}`,
+                textColor ? `${(textColors as any)?.[textColor]}` : `${textColors.white}`,
+                // renderColor(bgColor ?? '', 'primaryNormal', 'bg'),
+                // renderColor(textColor ?? '', 'white', 'text'),
                 'p-2 rounded-[4px] flex flex-row gap-2 items-center  bg-r ed-500 justify-center bor der bg-g ray-400',
-                fullWidth && 'flex-1' 
+                fullWidth && 'flex-1'
             )}
 
             {...props}>
