@@ -11,7 +11,7 @@ import { ActionButtons } from './components/ActionButtons/ActionButtons'
 
 export const DesktopHeader = () => {
     return (
-        <div className='lg:flex flex-row gap-4 items-center justify-between p-1 text-body-3-bolder text-ultra-violet hidden'>
+        <div className='lg:flex flex-row gap-4 items-center justify-between p-2 text-body-3-bolder text-ultra-violet hidden'>
             <Image src={fullLogo} alt='لوگوی دپارتمان اطلس' className='h-5' />
 
             <div className='flex flex-row gap-5 items-center justify-between'>
