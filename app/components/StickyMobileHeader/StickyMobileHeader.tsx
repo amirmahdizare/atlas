@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Menu as MenuIcon } from 'icons'
 import logofull from 'images/logo-full.svg'
 import Image from 'next/image'
-import { Menu } from '@components'
+import { Menu } from '../Menu/Menu'
 import { IconArrowBack, IconX } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener';
 import logo from 'images/atlaslight.svg'
