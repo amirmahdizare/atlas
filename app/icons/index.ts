@@ -1,1 +1,5 @@
 export { Menu } from './Menu'
+export { Building } from './Building'
+export { Announcement } from './Announcement'
+export { Bookmark } from './Bookmark'
+export { BookmarkFilled } from './BookmarkFilled'
