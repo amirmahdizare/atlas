@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { IRANYekan, IRANYekanNumber } from './fonts/iranYekan'
 import { DesktopHeader, StickyMobileHeader } from '@components'
-
+import 'swiper/css';
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',

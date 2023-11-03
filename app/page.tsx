@@ -1,9 +1,10 @@
-import { HeroSection } from "components/landingPage/HeroSection";
+import { HeroSection, Services } from "components/landingPage";
 
 export default function Home() {
   return (
-    <main className="flex flex-col py-4 gap-4 box-border ">
+    <main className="flex flex-col py-4 gap-8 box-border ">
       <HeroSection/>
+      <Services />
     </main>
   )
 }
