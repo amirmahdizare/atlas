@@ -27,8 +27,9 @@ export const Input = ({ label, error, errorText, customMinWidthClass, required, 
              [&:not(:placeholder-shown)]:border
              [&:not(:placeholder-shown)]:text-space-codet
             focus: border
+            ${fullWidth ? 'flex-1' : ''}
             ${error ? 'border-bittersweet bg-white' : ' border-ultra-violet    [&:not(:focus):placeholder-shown]:border-anti-flash-white-lighter bg-seasalt'}
-            ${customMinWidthClass ?? 'min-w-[300px]'} `}
+            ${customMinWidthClass ?? 'lg:min-w-[300px] min-w-[150px]'} `}
                 // placeholder={`${placeholder} `}
                 {...register}
                 {...props} />

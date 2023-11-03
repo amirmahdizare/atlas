@@ -8,7 +8,7 @@ import { Suggest } from './components/Suggest/Suggest'
 export const HeroSection = () => {
     return (
         <div className='grid grid-cols-4 gap-4 '>
-            <div className='col-span-4 lg:col-span-2 flex flex-col gap-3 items-center lg:items-start text-center lg:text-right'>
+            <div className='col-span-4 lg:col-span-2 flex flex-col gap-3 items-stretch lg:items-start text-center lg:text-right'>
 
                 <div className='flex flex-col gap-2'>
 
@@ -26,7 +26,7 @@ export const HeroSection = () => {
                 </div>
 
                 <div className='bg-white p-1 flex flex-row gap-1 lg:gap-4 items-center border border-gray-100  whitespace-nowrap'>
-                    <Input  placeholder='مثلا : ویلا یا خانه' />
+                    <Input customMinWidthClass='-' fullWidth  placeholder='مثلا : ویلا یا خانه' />
                     <Button bgColor='secondary' >جستجو کن !</Button>
                 </div>
 
