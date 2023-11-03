@@ -7,8 +7,8 @@ import { Suggest } from './components/Suggest/Suggest'
 
 export const HeroSection = () => {
     return (
-        <div className='grid grid-cols-4 '>
-            <div className='col-span-4 lg:col-span-2 flex flex-col gap-3'>
+        <div className='grid grid-cols-4 gap-4 '>
+            <div className='col-span-4 lg:col-span-2 flex flex-col gap-3 items-center lg:items-start text-center lg:text-right'>
 
                 <div className='flex flex-col gap-2'>
 
@@ -25,8 +25,8 @@ export const HeroSection = () => {
                     </p>
                 </div>
 
-                <div className='bg-white p-2 flex flex-row gap-4 items-center border w-fit'>
-                    <Input placeholder='مثلا : ویلا یا خانه' />
+                <div className='bg-white p-1 flex flex-row gap-1 lg:gap-4 items-center border border-gray-100  whitespace-nowrap'>
+                    <Input  placeholder='مثلا : ویلا یا خانه' />
                     <Button bgColor='secondary' >جستجو کن !</Button>
                 </div>
 
@@ -34,10 +34,10 @@ export const HeroSection = () => {
 
             </div>
 
-            <div className='col-span-4 lg:col-span-2 flex gap-4 justify-end'>
+            <div className='col-span-4 lg:col-span-2  gap-4 justify-end hidden lg:flex'>
 
-                <Image src={landingOne} alt='دپارتمان املاک اطلس' className='rounded max-h-[400px]' />
-                <Image src={landingTwo} alt='دپارتمان املاک اطلس' className='rounded max-h-[400px]' />
+                <Image src={landingOne} alt='دپارتمان املاک اطلس' className='rounded max -h-[400px] ' />
+                <Image src={landingTwo} alt='دپارتمان املاک اطلس' className='rounded max -h-[400px] ' />
 
             </div>
 
