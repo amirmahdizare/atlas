@@ -4,6 +4,7 @@ import corporate from 'images/corporate.png'
 import Image from 'next/image'
 import { Button } from '@components'
 import logo from 'images/atlaslight.svg'
+import corpBack from 'images/corp-back.svg'
 
 const CorporateOption = ({ icon: Icon, title }: { icon: (props: TablerIconsProps) => JSX.Element, title: string }) => <div className=' col-span-1 flex flex-row gap-2 items-center '>
     <div className='bg-robin-egg-lighter rounded-circle aspect-square p-2 text-white'>
@@ -14,14 +15,17 @@ const CorporateOption = ({ icon: Icon, title }: { icon: (props: TablerIconsProps
 
 export const Corporate = () => {
     return (
-        <div className='flex flex-col gap-4'>
-            <div className='text-h3-bolder text-raisin-black relative text-center'>
+        <div className='flex flex-col gap-4 relative'>
+            <div className='absolute left-0 bottom-0 top-2/3 lg:-translate-y-1/2'>
+                <Image src={corpBack} alt='' className='max-w-[200px] lg:max-w-[300px]' />
+            </div>
+            <div className='text-h3-bolder text-raisin-black relative text-center z-2'>
                 مشارکت در ساخت با اطلس
                 <div className='absolute bg-mint-green w-[80px] left-1/2 -translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
             </div>
             <span className='sr-only'>مشارکت در ساخت شهر جدید هشتگرد مهستان</span>
 
-            <div className='grid grid-cols-3 gap-4'>
+            <div className='grid grid-cols-3 gap-4 z-2'>
 
 
                 <div className='col-span-3 lg:col-span-1 '>
