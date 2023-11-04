@@ -36,7 +36,7 @@ export const Corporate = () => {
 
                         <div className='flex flex-col bg-white rounded gap-2 absolute bottom-2 left-1/2 -translate-x-1/2 p-2'>
                             <span className='text-space-codet text-h4-bolder leading-3 text-center'>برای مشارکت در ساخت قدم به قدم با اطلس همراه باشید.</span>
-                            <Button bgColor='secondary'>مشارکت در شرکت</Button>
+                            <Button bgColor='secondary'>مشارکت در ساخت</Button>
                             <div className='absolute top-0 -translate-y-3/4 bg-white border aspect-square p-1.5 border-robin-egg right-1/2 translate-x-1/2 rounded-circle '>
                                 <div className='w-6 h-6 relative'>
                                 <Image src={logo} alt='لوگوی دپارتمان املاک اطلس' fill />
