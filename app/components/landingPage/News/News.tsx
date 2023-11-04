@@ -11,7 +11,7 @@ export const News = () => {
                 <div className='absolute bg-mint-green w-[80px] left-1/2 -translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
             </div>
 
-            <div className='flex flex-col p-2 lg:p-4 bg-seasalt gap-2'>
+            <div className='flex flex-col p-2 lg:p-4 bg-seasalt gap-2 overflow-hidden'>
                 <div className='flex flex-row gap-2 justify-between items-center'>
 
                     <div className='flex flex-row gap-2 items-center'>

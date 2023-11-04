@@ -3,7 +3,7 @@ export interface PropertyListItemType {
     isSaved: boolean,
     title: string,
     location: string,
-    subLocation: string,
+    subLocation?: string,
     price: number,
     id:string
 }
