@@ -1,4 +1,4 @@
-import { HeroSection, News, Services } from "components/landingPage";
+import { Banner, HeroSection, News, Services } from "components/landingPage";
 
 export default function Home() {
   return (
@@ -6,6 +6,7 @@ export default function Home() {
       <HeroSection/>
       <Services />
       <News />
+      <Banner />
     </main>
   )
 }
