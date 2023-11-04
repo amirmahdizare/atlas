@@ -2,6 +2,7 @@ import { IconArrowDownLeft, IconBook } from '@tabler/icons-react'
 import React from 'react'
 import { TopBlog } from './components/TopBlog'
 import { blogs } from './data.mock'
+import { SingleBlog } from './components/SingleBlogs'
 
 export const Blogs = () => {
     return (
@@ -51,9 +52,9 @@ export const Blogs = () => {
                     <TopBlog {...blogs[0]} />
 
                 </div>
-                
-                <div className='col-span-3 lg:col-span-2'>
 
+                <div className='col-span-3 lg:col-span-2 flex flex-col gap-1'>
+                    {blogs.slice(1, 3).map(item => <SingleBlog {...item} />)}
                 </div>
 
             </div>
