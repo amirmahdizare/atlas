@@ -19,6 +19,7 @@ export const Corporate = () => {
                 مشارکت در ساخت با اطلس
                 <div className='absolute bg-mint-green w-[80px] left-1/2 -translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
             </div>
+            <span className='sr-only'>مشارکت در ساخت شهر جدید هشتگرد مهستان</span>
 
             <div className='grid grid-cols-3 gap-4'>
 
