@@ -33,10 +33,10 @@ export const PropertyListCard = ({ id, img, isSaved, location, price, subLocatio
                 <span className='text-ultra-violet line-clamp-1 text-ellipsis' title={`${location} ${subLocation ? `, ${subLocation}` : ''}`}>{location} {subLocation ? `, ${subLocation}` : ''}</span>
             </div>
 
-            <div className='flex flex-row gap-2 justify-between'>
-                <p>
+            <div className='flex flex-row gap-3 justify-between'>
+                <p className='line-clamp-1 text-ellipsis overflow-hidden'>
                     <span className='text-space-codet text-h6-bolder'>{price.toLocaleString()}</span>
-                    <span className='text-ultra-violet text-body-2-light'> تومان</span>
+                    <span className='text-ultra-violet  text-body-3-light mr-[1px]'> تومان</span>
                 </p>
 
                 <div className='aspect-square bg-orange-200 rounded hidden lg:block'>
