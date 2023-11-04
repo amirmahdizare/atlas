@@ -10,14 +10,14 @@ export const PropertyListCard = ({ id, img, isSaved, location, price, subLocatio
 
 
     return (
-        <Link href={`/property/${id}`} className='flex flex-col p-2 bg-white items-stretch rounded-[2px] gap-2 ' prefetch={false}>
+        <Link href={`/property/${id}`} className='flex flex-col p-2 bg-white items-stretch rounded-[2px] gap-2 hover:shadow ' prefetch={false}>
 
             <div className='flex flex-row justify-center'>
 
 
-                <div className='relative aspect-[1.5/1] w-[170px] lg:w-[200px] rounded-sm overflow-hidden'>
+                <div className='relative aspect-square lg:aspect-[3/2] w- [170px] lg:w-[ 200px] flex-1 w - full rounded-sm overflow-hidden'>
 
-                    <Image src={img} alt={`${title} | دپارتمان املاک اطلس`} fill className='object-cover' />
+                    <Image src={img} alt={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect-square lg:aspect-[3/2] ' />
 
                     <div className='absolute aspect-square bg-white rounded shadow left-1 top-1 p-1'>
                         <BookmarkStatus isSaved={isSaved} />
@@ -26,16 +26,14 @@ export const PropertyListCard = ({ id, img, isSaved, location, price, subLocatio
                 </div>
             </div>
 
-            {/* <div className='leading-6'> */}
-            <span className='text-raisin-black text-h5-bolder leading-3 line-clamp-2 h -6  text-ellipsis ' title={title}>{title}</span>
-            {/* </div> */}
+            <span className='text-raisin-black text-h5-bolder leading-3 line-clamp-2 h-6  text-ellipsis ' title={title}>{title}</span>
 
             <div className='flex flex-row gap-0.5 items-center'>
                 <IconMapPin width={20} height={20} className='text-french-gray' />
                 <span className='text-ultra-violet line-clamp-1 text-ellipsis' title={`${location} ${subLocation ? `, ${subLocation}` : ''}`}>{location} {subLocation ? `, ${subLocation}` : ''}</span>
             </div>
 
-            <div className='flex flex-row gap-2'>
+            <div className='flex flex-row gap-2 justify-between'>
                 <p>
                     <span className='text-space-codet text-h6-bolder'>{price.toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-light'> تومان</span>
