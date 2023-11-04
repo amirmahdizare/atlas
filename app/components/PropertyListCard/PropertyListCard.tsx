@@ -17,7 +17,7 @@ export const PropertyListCard = ({ id, img, isSaved, location, price, subLocatio
 
                 <div className='relative aspect-square lg:aspect-[3/2] w- [170px] lg:w-[ 200px] flex-1 w - full rounded-sm overflow-hidden'>
 
-                    <Image src={img} alt={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect-square lg:aspect-[3/2] ' />
+                    <Image src={img} alt={`${title} | دپارتمان املاک اطلس`} title={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect-square lg:aspect-[3/2] ' />
 
                     <div className='absolute aspect-square bg-white rounded shadow left-1 top-1 p-1'>
                         <BookmarkStatus isSaved={isSaved} />
