@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { IRANYekan, IRANYekanNumber } from './fonts/iranYekan'
-import { DesktopHeader, StickyMobileHeader } from '@components'
+import { DesktopHeader, Footer, StickyMobileHeader } from '@components'
 import 'swiper/css';
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function RootLayout({
         <DesktopHeader />
         <StickyMobileHeader />
         {children}
+        <Footer/>
         </body>
     </html>
   )
