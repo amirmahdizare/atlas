@@ -28,6 +28,7 @@ export type pageProps<PT = {}, SP = {}> = {
 }
 
 export interface PropertyDetailType {
+    id:string,
     title: string,
     location: string,
     subLocation?: string,
@@ -52,5 +53,6 @@ export interface PropertyDetailType {
         id:string,
         name:string
     },
-    medias?: string[]
+    medias?: string[],
+    isBookmarked: boolean
 }
