@@ -1,4 +1,4 @@
-import { Banner, Blogs, Corporate, HeroSection, MostViewed, News, SecondBanner, Services } from "components/landingPage";
+import { Banner, Blogs, ContactSummary, Corporate, HeroSection, MostViewed, News, SecondBanner, Services } from "components/landingPage";
 
 export default function Home() {
   return (
@@ -11,6 +11,7 @@ export default function Home() {
       <MostViewed/>
       <SecondBanner/>
       <Blogs />
+      <ContactSummary />
     </main>
   )
 }
