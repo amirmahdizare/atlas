@@ -3,6 +3,7 @@ import './globals.css'
 import { IRANYekan, IRANYekanNumber } from './fonts/iranYekan'
 import { DesktopHeader, Footer, StickyMobileHeader } from '@components'
 import 'swiper/css';
+import { ContactSummary } from 'components/landingPage';
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
@@ -20,6 +21,7 @@ export default function RootLayout({
         <DesktopHeader />
         <StickyMobileHeader />
         {children}
+        <ContactSummary/>
         <Footer/>
         </body>
     </html>

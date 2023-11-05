@@ -11,7 +11,7 @@ export default function Home() {
       <MostViewed/>
       <SecondBanner/>
       <Blogs />
-      <ContactSummary />
+      {/* <ContactSummary /> */}
     </main>
   )
 }
