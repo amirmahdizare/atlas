@@ -28,9 +28,9 @@ export const sampleProprty: PropertyDetailType = {
     agentNote: 'خوبه بفروشسی',
     privateNote: '',
     medias: [
+        "https://s100.divarcdn.com/static/photo/real_estate/Vu7Nn1O4-NXQLwLwgGA2BA/CEDBC984-963B-4C80-8EF9-2E7AFD2BEB31.jpg",
         "https://s100.divarcdn.com/static/videos/thumbnails/aaf13b4a-ef3d-4d4d-9cb0-9c2b75ac92c5.jpg",
         "https://s100.divarcdn.com/static/videos/aaf13b4a-ef3d-4d4d-9cb0-9c2b75ac92c5.mp4",
-        "https://s100.divarcdn.com/static/photo/real_estate/Vu7Nn1O4-NXQLwLwgGA2BA/CEDBC984-963B-4C80-8EF9-2E7AFD2BEB31.jpg"
     ],
     isBookmarked:false,
     id:'sdfds'
