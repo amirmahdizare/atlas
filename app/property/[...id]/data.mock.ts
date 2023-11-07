@@ -8,7 +8,8 @@ export const sampleProprty: PropertyDetailType = {
     agentInfo: {
         avatar: 'SDF',
         id: '15',
-        name: '1545'
+        name: 'امیرحسین کشن زارع',
+        phoneNumber:'912456789'
     },
     category: {
         id: '5454',
@@ -24,7 +25,7 @@ export const sampleProprty: PropertyDetailType = {
         id: 'SDF',
         name: 'فروش'
     },
-    agentNote: '',
+    agentNote: 'خوبه بفروشسی',
     privateNote: '',
     medias: [
         "https://s100.divarcdn.com/static/videos/thumbnails/aaf13b4a-ef3d-4d4d-9cb0-9c2b75ac92c5.jpg",

@@ -38,7 +38,8 @@ export interface PropertyDetailType {
     agentInfo: {
         avatar: string,
         name: string,
-        id: string
+        id: string,
+        phoneNumber:string
     },
     type:{
         name:string,
