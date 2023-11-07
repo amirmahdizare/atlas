@@ -3,7 +3,7 @@ import { pageProps } from 'types'
 import { Breadcrumb } from './components/Breadcrumb'
 import { sampleProprty } from './data.mock'
 import { MobileBreadcrumb } from './components/MobileBreadcrumb'
-import { Descriptions, Title } from './components'
+import { Descriptions, SimilarCategories, Title } from './components'
 
 
 export default function page({ params: { id } }: pageProps<{ id: string[] }>) {
@@ -24,6 +24,10 @@ export default function page({ params: { id } }: pageProps<{ id: string[] }>) {
             <div className='order-3 col-span-5 lg:col-span-3'>
                 <Descriptions data={sampleProprty} />
 
+            </div>
+
+            <div className='order-4 col-span-5 lg:col-span-3'>
+                <SimilarCategories data={sampleProprty} />
             </div>
 
             <div className='order-1 lg:order-2 col-span-5 lg:col-span-2'>
