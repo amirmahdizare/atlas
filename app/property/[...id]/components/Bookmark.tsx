@@ -1,3 +1,5 @@
+
+'use client'
 import React, { useState } from 'react'
 import { BookmarkFilled , Bookmark as BookmarkIcon } from '@icons'
 
@@ -7,10 +9,10 @@ export const Bookmark = ({ isBookmarked , id }: { isBookmarked?: boolean ,id:str
 
 
     return (
-        <div className='bg-anti-flash-white-lighter rounded-circle p-2'>
+        <div className='bg-anti-flash-white-lighter rounded-circle p-1.5 shrink-0 hover:bg-gray-200 cursor-pointer transition-all duration-100'onClick={() => setBookmark(!bookmark)} >
             {bookmark
-                ? <BookmarkFilled width={15} height={15} className='text-orange cursor-pointer' onClick={() => setBookmark(false)} />
-                : <BookmarkIcon width={15} height={15} className='text-raisin-black cursor-pointer' onClick={() => setBookmark(true)} />}
+                ? <BookmarkFilled width={15} height={15} className='text-orange cursor-pointer' />
+                : <BookmarkIcon width={15} height={15} className='text-raisin-black cursor-pointer' />}
 
         </div>
     )

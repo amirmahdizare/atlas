@@ -33,6 +33,7 @@ export interface PropertyDetailType {
     location: string,
     subLocation?: string,
     price: number,
+    metr:number,
     description: string, ///markdown HTML 
     agentInfo: {
         avatar: string,
