@@ -13,7 +13,7 @@ export const StickyMobileHeader = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     return (
-        <div className='flex flex-row gap-4 shadow items-center p-1.5 justify-around fixed lg:hidden top-0 right-0 w-full bg-white z-[999] '>
+        <div className='flex flex-row gap-4 shadow items-center p-1.5 justify-around fixed lg:hidden top-0 right-0 w-full bg-white z-20'>
 
             <div className='cursor-pointer   p-0.1' onClick={() => setIsOpen(!isOpen)}> <MenuIcon /></div>
             <Image src={logofull} className='h-6' alt='لوگوی دپارتمان املاک اطلس' />

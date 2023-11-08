@@ -3,6 +3,8 @@ import './globals.css'
 import { IRANYekan, IRANYekanNumber } from './fonts/iranYekan'
 import { DesktopHeader, Footer, StickyMobileHeader } from '@components'
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { ContactSummary } from 'components/landingPage';
 
 export const metadata: Metadata = {
