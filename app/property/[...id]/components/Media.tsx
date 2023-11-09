@@ -22,14 +22,29 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                 <IconChevronLeft />
             </div>}
 
+            <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
+
+
             <Swiper
-                spaceBetween={2}
+                spaceBetween={10}
                 slidesPerView={1}
                 onSlideChange={(e) => setSlide(e.activeIndex)}
                 onSwiper={(swiper) => console.log(swiper)}
                 className='flex flex-col items-stretch justify-stretch backdrop-brigh tness-50'
                 modules={[Pagination, Navigation]}
-                pagination
+                pagination={{
+                    enabled: true,
+                    el: '.pagination-ss',
+                    bulletActiveClass:'active',                    
+                    bulletClass:'w-2 h-1 rounded bg-gray-200'
+                    // currentClass:'bg-red-500',
+                    // dynamicMainBullets:
+                    // renderBullet:(index , className )=>{
+                    //     console.log(className)
+                    //     return `<span class="w-2 h-1 rounded  ${className =='active' ? 'bg-mint-green'  : 'bg-white'} "></span>`
+                
+                // }
+                }}
                 navigation={
                     {
                         enabled: true,
@@ -40,7 +55,7 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
 
             >
                 {medias?.map(item => <SwiperSlide className='h-full'>
-                    <img onClick={() => setState(!state)} src={item} className=' rounded w-full max-h-[80vh] aspect-video  object-contain bg- seasalt b order border-anti-flash-white-lighter' />
+                    <img onClick={() => setState(!state)} src={item} className=' rounded w-full max-h-[80vh] aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' />
                 </SwiperSlide>)}
 
             </Swiper>
