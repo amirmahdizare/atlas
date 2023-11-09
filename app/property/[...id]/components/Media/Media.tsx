@@ -32,21 +32,19 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                 <IconChevronLeft />
             </div>}
 
-
-
             <Swiper
                 spaceBetween={10}
                 slidesPerView={1}
                 onSlideChange={(e) => setSlide(e.activeIndex)}
                 onSwiper={(swiper) => console.log(swiper)}
                 className='flex flex-col items-stretch justify-stretch backdrop-brigh tness-50 relative'
-                modules={[Pagination, Navigation]}
+                modules={[Pagination, Navigation, Thumbs , FreeMode]}
                 pagination={{
                     enabled: true,
                     el: '.pagination-ss',
                     bulletActiveClass: 'active',
                     bulletClass: 'w-2 h-1 rounded bg-gray-200 cursor-pointer',
-                    clickable:true
+                    clickable: true
                     // currentClass:'bg-red-500',
                     // dynamicMainBullets:
                     // renderBullet:(index , className )=>{
@@ -60,10 +58,10 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                         enabled: true,
                         nextEl: '#nextSlideMedia',
                         prevEl: '#prevSlideMedia',
-                    
+
                     }
                 }
-                thumbs={!!thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+                thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
 
             >
                 <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
@@ -74,10 +72,7 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
             </Swiper>
 
             <Swiper
-                onSwiper={(e) => {
-                    // if (e)
-                    setThumbsSwiper(e)
-                }}
+                onSwiper={setThumbsSwiper}
                 spaceBetween={10}
                 slidesPerView={4}
                 freeMode={true}
@@ -88,8 +83,6 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                 {medias?.map(item => <SwiperSlide className='h-full'>
                     <Thumb src={item} onClick={() => { }} />
                 </SwiperSlide>)}
-
-
             </Swiper>
 
         </div>
