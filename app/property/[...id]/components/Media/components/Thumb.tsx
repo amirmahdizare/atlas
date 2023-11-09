@@ -5,7 +5,7 @@ import { isFileSrcImage, isFileSrcVideo } from 'utils'
 export const Thumb = ({ src, onClick }: { src: string, onClick: Function }) => {
 
     if (isFileSrcImage(src))
-        return <img src={src} onClick={() => onClick()} className='cursor-pointer border-2 duration-100 translate-all hover:border-mint-green rounded w-fukll aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' />
+        return <img src={src} onClick={() => onClick()} className='cursor-pointer border-2 duration-100 translate-all hover:border-mint-green rounded w-full aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' />
 
     else if (isFileSrcVideo(src))
 
