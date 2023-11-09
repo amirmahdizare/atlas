@@ -45,7 +45,8 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                     enabled: true,
                     el: '.pagination-ss',
                     bulletActiveClass: 'active',
-                    bulletClass: 'w-2 h-1 rounded bg-gray-200'
+                    bulletClass: 'w-2 h-1 rounded bg-gray-200 cursor-pointer',
+                    clickable:true
                     // currentClass:'bg-red-500',
                     // dynamicMainBullets:
                     // renderBullet:(index , className )=>{
@@ -58,10 +59,11 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                     {
                         enabled: true,
                         nextEl: '#nextSlideMedia',
-                        prevEl: '#prevSlideMedia'
+                        prevEl: '#prevSlideMedia',
+                    
                     }
                 }
-                thumbs={isInit ? { swiper: thumbsSwiper } : undefined}
+                thumbs={!!thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
 
             >
                 <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
@@ -74,7 +76,7 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
             <Swiper
                 onSwiper={(e) => {
                     // if (e)
-                        setThumbsSwiper(e)
+                    setThumbsSwiper(e)
                 }}
                 spaceBetween={10}
                 slidesPerView={4}
@@ -84,15 +86,9 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                 className="mt-1"
             >
                 {medias?.map(item => <SwiperSlide className='h-full'>
-
-
-                    {/* <img onClick={() => setState(!state)} src={item} className='cursor-pointer border-2 duration-100 translate-all hover:border-mint-green rounded w-fukll aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' /> */}
-                    <Thumb src={item} onClick={() => {}} />
-
+                    <Thumb src={item} onClick={() => { }} />
                 </SwiperSlide>)}
-                {/* {medias?.map(item => <SwiperSlide className='h-full'>
-                    <img onClick={() => setState(!state)} src={item} className=' rounded h-4 w-4 aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' />
-                </SwiperSlide>)} */}
+
 
             </Swiper>
 
