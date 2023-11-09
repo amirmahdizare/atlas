@@ -5,6 +5,7 @@ import { DesktopHeader, Footer, StickyMobileHeader } from '@components'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/thumbs';
 import { ContactSummary } from 'components/landingPage';
 
 export const metadata: Metadata = {
