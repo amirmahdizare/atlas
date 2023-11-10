@@ -5,6 +5,7 @@ import { PropertyDetailType } from 'types'
 import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper/modules';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { Thumb } from './components/Thumb';
+import { View } from './components/View';
 
 export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
 
@@ -65,8 +66,10 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
 
             >
                 <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
-                {medias?.map(item => <SwiperSlide className='h-full'>
-                    <img onClick={() => setState(!state)} src={item} className=' rounded w-full max-h-[80vh] aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' />
+                {medias?.map(item => <SwiperSlide className='h-full max-h-[70vh]'>
+
+                    <View isOpen={state} src={item}  onClick={() => setState(!state)}/> 
+                    {/* <img onClick={() => setState(!state)} src={item} className=' rounded w-full max-h-[80vh] aspect-video  object-cover bg- seasalt b order border-anti-flash-white-lighter' /> */}
                 </SwiperSlide>)}
 
             </Swiper>
