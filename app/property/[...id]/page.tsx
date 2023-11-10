@@ -21,24 +21,23 @@ export default function page({ params: { id } }: pageProps<{ id: string[] }>) {
                 <Title data={sampleProprty} />
             </div>
 
-            <div className='order-3 col-span-5 lg:col-span-3'>
+            <div className='order-3 col-span-5 lg:col-span-3 mt-3 lg:mt-0'>
                 <Descriptions data={sampleProprty} />
-
             </div>
 
-            <div className='order-4 col-span-5 lg:col-span-3'>
+            <div className='order-5 col-span-5 lg:col-span-3'>
                 <SimilarCategories data={sampleProprty} />
             </div>
 
-            <div className='order-5 col-span-5 lg:col-span-2 fixed w-full bottom-0 left-0 py-1.5 z-20 border-t-2 border-anti-flash-white-lighter lg:border-none lg:pb-0 bg-seasalt lg:relative'>
+            <div className='order-4 col-span-5 lg:col-span-2 fixed w-full bottom-0 left-0 py-1.5 z-20 border-t-2 border-anti-flash-white-lighter lg:border-none lg:pb-0 bg-seasalt lg:relative'>
                 <AgentInfo data={sampleProprty} />
             </div>
 
-            <div className='order-6 col-span-5 lg:col-span-3 hidden lg:block'>
+            <div className='order-7 col-span-5 lg:col-span-3 hidden lg:block'>
 
             </div>
 
-            <div className='order-7 col-span-5 lg:col-span-2'>
+            <div className='order-6 col-span-5 lg:col-span-2'>
                 <Note />
             </div>
 
