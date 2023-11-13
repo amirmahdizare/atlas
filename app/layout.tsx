@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir='rtl' className='text-mobile lg:text-desktop '>
-      <body className={`${IRANYekan.className} ${IRANYekanNumber.className} text-body-2-normal px-2 container mx-auto max-w-[1300px] pt-[65px] lg:py-0 `}>
+      <body className={`${IRANYekan.className} ${IRANYekanNumber.className} text-body-2-normal px-2 container mx-auto max-w-[1400px] pt-[65px] lg:py-0 `}>
         <DesktopHeader />
         <StickyMobileHeader />
         {children}

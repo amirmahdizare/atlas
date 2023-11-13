@@ -5,7 +5,13 @@ export interface PropertyListItemType {
     location: string,
     subLocation?: string,
     price: number,
-    id: string
+    id: string,
+    agentInfo?: {
+        avatar: string,
+        username: string,
+        name: string,
+        phoneNumber:string
+    }
 }
 
 
@@ -28,32 +34,32 @@ export type pageProps<PT = {}, SP = {}> = {
 }
 
 export interface PropertyDetailType {
-    id:string,
+    id: string,
     title: string,
     location: string,
     subLocation?: string,
     price: number,
-    metr:number,
+    metr: number,
     description: string, ///markdown HTML 
     agentInfo: {
         avatar: string,
         name: string,
         id: string,
-        phoneNumber:string
+        phoneNumber: string
     },
-    type:{
-        name:string,
-        id:string
+    type: {
+        name: string,
+        id: string
     }
     agentNote: string,
     privateNote: string,
     category: {
-        id:string,
-        name:string
+        id: string,
+        name: string
     },
     subCategory?: {
-        id:string,
-        name:string
+        id: string,
+        name: string
     },
     medias?: string[],
     isBookmarked: boolean
