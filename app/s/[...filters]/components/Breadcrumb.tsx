@@ -8,7 +8,7 @@ export const Breadcrumb = () => {
     const name = 'خرید'
     const onvan = 'هشتگرد'
     return (
-        <div className='px-2 py-1.5 text-french-gray flex flex-row items-center gap-1 text-body-3-normal bg-seasalt'>
+        <div className='py-0.5 px-1 text-french-gray flex flex-row items-center gap-1 text-body-3-normal bg-seasalt'>
 
             <span >{name}</span>
             <IconChevronLeft />
