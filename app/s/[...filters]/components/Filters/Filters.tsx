@@ -1,11 +1,13 @@
 import React from 'react'
-import { CategoryFilter } from './components'
+import { CategoryFilter, SelectType } from './components'
 
 export const Filters = () => {
   return (
-    <div className='flex flex-col gap-2'>
+    <div className='flex flex-col gap-3'>
+        <SelectType />
 
         <CategoryFilter />
+
 
     </div>
   )

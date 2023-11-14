@@ -64,7 +64,8 @@ export const Button = ({ loading, bgColor, icon: Icon, fullWidth, onClick, href,
                 iconSide == 'left' ? 'flex-row' : 'flex-row-reverse',
                 'px-2 py-1.5 rounded-[4px] flex  gap-1 items-center  bg-r ed-500 justify-center bor der bg-g ray-400',
 
-                fullWidth && 'flex-1'
+                fullWidth && 'flex-1',
+                className
             )}
 
             {...props}
