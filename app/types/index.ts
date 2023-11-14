@@ -1,3 +1,5 @@
+import { PropertyType } from 'enums'
+
 export interface PropertyListItemType {
     img: string,
     isSaved: boolean,
@@ -10,7 +12,7 @@ export interface PropertyListItemType {
         avatar: string,
         username: string,
         name: string,
-        phoneNumber:string
+        phoneNumber: string
     }
 }
 
@@ -63,4 +65,20 @@ export interface PropertyDetailType {
     },
     medias?: string[],
     isBookmarked: boolean
+}
+
+
+export interface CategoryType {
+    title: string,
+    enTitle: string,
+    id: string,
+    subCategories: Array<Omit<CategoryType, 'subCategories'>>,
+    filters?: Array<any> ///Coming Soon
+}
+
+
+export interface PropertyListFilterType {
+    type: keyof typeof PropertyType,
+    category?: string,
+    // subCategory?:string
 }
