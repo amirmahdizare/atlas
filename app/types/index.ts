@@ -1,4 +1,4 @@
-import { PropertyType } from 'enums'
+import { CategorySpecialField, PropertyType } from 'enums'
 
 export interface PropertyListItemType {
     img: string,
@@ -73,9 +73,23 @@ export interface CategoryType {
     enTitle: string,
     id: string,
     subCategories: Array<Omit<CategoryType, 'subCategories'>>,
-    filters?: Array<any> ///Coming Soon
+    filters?: Array<{
+        type: ''
+    }> ///Coming Soon
 }
 
+
+export interface CategorySpecialFieldType {
+    type: keyof typeof CategorySpecialField,
+    title: string,
+    hint?: string,
+    suggest?: Array<
+        {
+            title: string,
+            items: Array<{ value: number | string, title: string }>
+        }
+    >
+}
 
 export interface PropertyListFilterType {
     type: keyof typeof PropertyType,

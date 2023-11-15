@@ -15,7 +15,7 @@ export const CategoryFilter = () => {
         <div className='flex flex-col gap-2 '>
 
             <div className='flex flex-row gap-4 items-center justify-between cursor-pointer'>
-                <span className='text-space-codet text-body-3-bolder'>دسته بندی آگهی</span>
+                <span className='text-space-codet text-body-3-bolder'>دسته بندی</span>
                 {/* <IconChevronUp width={15} height={15} /> */}
             </div>
 
