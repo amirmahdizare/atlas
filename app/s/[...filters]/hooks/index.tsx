@@ -19,5 +19,6 @@ export const useSearchProperty = create<StoreType>((set) => ({
     filter: {
         type: 'SELL',
         city:[],
+        zone:[]
     }
 }))
