@@ -17,6 +17,7 @@ export const useSearchProperty = create<StoreType>((set) => ({
     dispatch: (data) => set((state) => ({ ...state, ...data })),
     dispatchFilter: (filter) => set((state) => ({ ...state, filter: { ...state.filter, ...filter } })),
     filter: {
-        type: 'SELL'
+        type: 'SELL',
+        city:[],
     }
 }))

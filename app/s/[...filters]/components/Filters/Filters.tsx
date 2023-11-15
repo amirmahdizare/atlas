@@ -1,5 +1,6 @@
+'use client'
 import React from 'react'
-import { CategoryFilter, SelectType } from './components'
+import { CategoryFilter, SelectCity, SelectType } from './components'
 
 const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]'></div>
 
@@ -10,6 +11,7 @@ export const Filters = () => {
         <Divider/>
         <CategoryFilter />
         <Divider/>
+        <SelectCity/>
 
 
     </div>

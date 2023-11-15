@@ -94,5 +94,13 @@ export interface CategorySpecialFieldType {
 export interface PropertyListFilterType {
     type: keyof typeof PropertyType,
     category?: string,
+    city?: Array<{ value: string, title: string }>,
+    zone?: Array<{ value: string, title: string }>
     // subCategory?:string
+}
+
+export interface LocationType {
+    title: string,
+    id: string,
+    parentId: string | null
 }

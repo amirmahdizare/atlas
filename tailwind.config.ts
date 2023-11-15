@@ -53,7 +53,8 @@ const config: Config = {
 
       },
       borderRadius: {
-        'circle': '50%'
+        'circle': '50%',
+        'app':'4px'
       },
       colors: {
         'tomato': '#F3643C',
