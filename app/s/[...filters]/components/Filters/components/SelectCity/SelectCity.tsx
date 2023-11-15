@@ -23,7 +23,7 @@ export const SelectCity = () => {
     const isLocationInclude = (cityId: string) => filter.city?.findIndex(i => i.value == cityId) != -1
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className={`flex flex-col ${isOpen ? ' gap-2' : ''}`}>
 
             <div className='flex flex-row gap-4 justify-between text-raisin-black items-center cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
                 <div className='flex flex-row gap-1 items-center'>
