@@ -4,7 +4,7 @@ export const categories: CategoryType[] = [
     {
         title: 'زمین',
         enTitle: 'ground',
-        id: '1215sdf',
+        id: '121sdf5sdf',
         subCategories: [
             {
                 title: 'آپارتمانی',
@@ -32,6 +32,83 @@ export const categories: CategoryType[] = [
                 title: 'آموزشی خدماتی',
                 enTitle: 'services',
                 id: 'sdfsdf',
+            }
+        ],
+        filters: [
+            {
+                title: 'قیمت',
+                type: 'RANGE',
+                hint: 'مثلا : 80,000',
+                unit:'تومان',
+                suggest: [
+                    {
+                        items: [
+
+                            {
+                                title: '750 میلیون',
+                                value: '750000'
+                            },
+
+                            {
+                                title: '1 میلیارد',
+                                value: '1000000000'
+                            }
+                            ,                            {
+                                title: '2 میلیارد',
+                                value: '2000000000'
+                            }
+
+                        ],
+                        title: 'حداقل',
+                        itemKey:'minPrice'
+                    },
+                    {
+                        items: [
+                            {
+                                title: '3 میلیارد',
+                                value: '3000000000'
+                            },
+                            {
+                                title: '5 میلیارد',
+                                value: '5000000000'
+                            },
+                            {
+                                title: '7 میلیارد',
+                                value: '7000000000'
+                            }
+                        ],
+                        title: 'حداکثر',
+                        itemKey:'maxPrice'
+                    }
+                ]
+            },
+            {
+                title: 'متراژ',
+                type: 'RANGE',
+                hint: 'مثلا 15',
+                unit:'متر',
+                suggest: [
+                    {
+                        items: [
+                            {
+                                title: '50متر ',
+                                value: '50'
+                            }
+                        ],
+                        title: 'از',
+                        itemKey:'metrDown'
+                    },
+                    {
+                        items: [
+                            {
+                                title: '75متر ',
+                                value: '75'
+                            }
+                        ],
+                        title: 'تا',
+                        itemKey:'metrUp'
+                    }
+                ]
             }
         ]
     },
@@ -75,19 +152,19 @@ export const categories: CategoryType[] = [
         ]
     },
     {
-        title:'باغ و باغ ویلا',
-        enTitle:'garden',
-        id:'sdaf',
-        subCategories:[
+        title: 'باغ و باغ ویلا',
+        enTitle: 'garden',
+        id: 'sdaf',
+        subCategories: [
             {
-                enTitle:'gardenPure',
-                id:'1dsfdsf',
-                title:'باغ و باغچه'
+                enTitle: 'gardenPure',
+                id: '1dsfdsf',
+                title: 'باغ و باغچه'
             },
             {
-                enTitle:'gardenVila',
-                id:'1515',
-                title:'باغ ویلا'   
+                enTitle: 'gardenVila',
+                id: '1515',
+                title: 'باغ ویلا'
             }
         ]
     }

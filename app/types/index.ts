@@ -73,9 +73,7 @@ export interface CategoryType {
     enTitle: string,
     id: string,
     subCategories: Array<Omit<CategoryType, 'subCategories'>>,
-    filters?: Array<{
-        type: ''
-    }> ///Coming Soon
+    filters?: Array<CategorySpecialFieldType> ///Coming Soon
 }
 
 
@@ -83,8 +81,10 @@ export interface CategorySpecialFieldType {
     type: keyof typeof CategorySpecialField,
     title: string,
     hint?: string,
+    unit?: string
     suggest?: Array<
         {
+            itemKey: keyof PropertyListFilterType
             title: string,
             items: Array<{ value: number | string, title: string }>
         }
@@ -95,7 +95,11 @@ export interface PropertyListFilterType {
     type: keyof typeof PropertyType,
     category?: string,
     city?: Array<{ value: string, title: string }>,
-    zone?: Array<{ value: string, title: string }>
+    zone?: Array<{ value: string, title: string }>,
+    minPrice?: string | number,
+    maxPrice?: string | number,
+    metrDown?:number,
+    metrUp?:number,
     // subCategory?:string
 }
 
@@ -104,3 +108,4 @@ export interface LocationType {
     id: string,
     parentId: string | null
 }
+
