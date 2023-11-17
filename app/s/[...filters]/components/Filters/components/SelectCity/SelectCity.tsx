@@ -27,7 +27,7 @@ export const SelectCity = () => {
 
             <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen  ?  'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                 <div className='flex flex-row gap-1 items-center'>
-                    <span className='text-body-3-bolder'>شهر</span>
+                    <span className='text-body-2-bolder'>شهر</span>
                     {!!filter.city?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
                      rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.city?.length}</span>}
                 </div>
