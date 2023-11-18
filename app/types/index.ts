@@ -79,6 +79,7 @@ export interface CategoryType {
 
 export interface CategorySpecialFieldType {
     type: keyof typeof CategorySpecialField,
+    itemkey?:keyof PropertyListFilterType
     title: string,
     hint?: string,
     unit?: string
@@ -100,6 +101,8 @@ export interface PropertyListFilterType {
     maxPrice?: string | number,
     metrDown?:number,
     metrUp?:number,
+    elevator?:boolean,
+    parking?:boolean
     // subCategory?:string
 }
 

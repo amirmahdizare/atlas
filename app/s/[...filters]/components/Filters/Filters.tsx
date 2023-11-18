@@ -3,7 +3,7 @@ import React from 'react'
 import { CategoryFilter, SelectArea, SelectCity, SelectType } from './components'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { categories } from './components/CategoryFilter/data.mock'
-import { RangeFilter } from './components/FilterTypes'
+import { BooleanFilter, RangeFilter } from './components/FilterTypes'
 
 const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]'></div>
 
@@ -24,6 +24,12 @@ export const Filters = () => {
             return <>
               <Divider />
               <RangeFilter  {...item} />
+            </>
+
+          if (item.type == 'BOOLEAN')
+            return <>
+              <Divider />
+              <BooleanFilter {...item} />
             </>
           return <>sdcd</>
         })

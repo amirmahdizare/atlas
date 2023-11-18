@@ -109,6 +109,16 @@ export const categories: CategoryType[] = [
                         itemKey:'metrUp'
                     }
                 ]
+            },
+            {
+                title:'آسانسور',
+                type:'BOOLEAN',
+                itemkey:'elevator',
+            },
+            {
+                title:'پارکینگ',
+                type:'BOOLEAN',
+                itemkey:'parking',
             }
         ]
     },

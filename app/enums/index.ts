@@ -8,6 +8,6 @@ export enum CategorySpecialField {
     "NUMBER"  = "NUMBER",
     "RANGE"  = "RANGE",
     "BOOLEAN" = "BOOLEAN",
-    "STRING" = "STRING",
+    "STRING" = "STRING"
 
 }
