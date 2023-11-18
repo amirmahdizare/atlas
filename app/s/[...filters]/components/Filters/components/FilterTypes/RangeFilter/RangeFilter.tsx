@@ -1,8 +1,10 @@
 import { IconChevronDown, IconX } from '@tabler/icons-react'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import ClickAwayListener from 'react-click-away-listener'
+import { NumericFormat } from 'react-number-format'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
+import { handleKeyPress } from 'utils'
 
 export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecialFieldType) => {
 
@@ -17,6 +19,12 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
     }
 
     const fieldfilter = (key: keyof PropertyListFilterType) => filter?.[key]
+
+    const [searchKey, setSearchKey] = useState('')
+
+    useEffect(() => {
+        setIsActive({})
+    }, [filter])
 
     return (
         <div className={`flex flex-col ${isOpen ? ' gap-3' : ''}`}>
@@ -47,19 +55,27 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
                     <ClickAwayListener onClickAway={() => setIsActive({ ...isActive, [item.itemKey]: false })}>
                         <div className={`border border-anti-flash-white-lighter rounded-app w- full justify -stretch items-center   flex flex-row  relative p-1.5 text-body-3-normal cursor-pointer ${isActive?.[item.itemKey] ? 'bg-white' : 'bg-seasalt'}`} onClick={() => setIsActive({ ...isActive, [item.itemKey]: !isActive[item.itemKey] })}>
 
-
-                            {/* //Input Manually */}
-
-                            <div className='flex flex-row gap -1 flex-1 w  '>
+                            <div className='flex flex-row gap-1 flex-1 w  '>
                                 {!!fieldfilter(item.itemKey) && <IconX width={15} height={15} className='cursor-pointer' onClick={() => dispachFilter(item.itemKey, undefined)} />}
 
-                                <input
-                                    placeholder={hint}
-                                    size={7}
-                                    className={`${isActive?.[item.itemKey] ? 'bg-white' : 'bg-seasalt'} outline-none shri nk-0 ba sis-0 w-fit `}
-                                    onBlur={({ target: { value } }) => dispachFilter(item.itemKey, value)}
-                                    value={fieldfilter(item.itemKey)?.toString() ?? ''}
-                                    onChange={({ target: { value } }) => dispachFilter(item.itemKey, value)} />
+                                {item.items.find(i => i.value == fieldfilter(item.itemKey)) ?
+                                    <span>{item.items.find(i => i.value == fieldfilter(item.itemKey))?.title}</span>
+                                    : <NumericFormat
+                                        onKeyDown={handleKeyPress((e) => dispachFilter(item.itemKey, e.currentTarget.value.replaceAll(',', '')))}
+                                        placeholder={hint}
+                                        size={7}
+                                        thousandSeparator
+                                        className={`${isActive?.[item.itemKey] ? 'bg-white' : 'bg-seasalt'} outline-none shri nk-0 ba sis-0 w-fit input-range`}
+                                        onBlur={({ target: { value } }) => dispachFilter(item.itemKey, value.replaceAll(',', ''))}
+                                        value={fieldfilter(item.itemKey)?.toString() ?? ''}
+                                        decimalScale={0}
+                                        autoFocus
+                                        type='tel'
+                                        dir='rtl'
+                                    />
+                                }
+
+
                             </div>
                             <div className='flex flex-row gap-1 text-french-gray items-center text-body-3-light'>
                                 <span>{unit}</span>
@@ -72,11 +88,20 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
                             {/* {item.items.map(item => item.title)} */}
                             {isActive?.[item.itemKey] &&
                                 <div className='flex flex-col gap-1 p-1 rounded-app z-10 bg-white absolute top-full left-0 w-full shadow'>
-                                    <input className='border-b bg-seasalt border-anti-flash-white-lighter p-1 outline-none' placeholder='جستجو' />
+
+                                    <input
+                                        className='border-b bg-seasalt border-anti-flash-white-lighter p-1 outline-none'
+                                        placeholder='جستجو'
+                                        value={searchKey}
+                                        onChange={({ target: { value } }) => setSearchKey(value)}
+                                        onClick={e => e.stopPropagation()}
+                                    />
+
                                     <div className='flex flex-col  overflow-y-auto max-h-[300px] h-fit'>
-                                        <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt'>وارد کردن مبلغ دلخواه</span>
-                                        {item.items.map(item => <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt'>{item.title}</span>)}
+                                        <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt' onClick={(e) => dispachFilter(item.itemKey, undefined)}>وارد کردن مبلغ دلخواه</span>
+                                        {item.items.filter(f => f.title.includes(searchKey) || f.value == fieldfilter(item.itemKey)).map(op => <span className={`text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt ${fieldfilter(item.itemKey) == op.value ? 'bg-seasalt' : ''}`} onClick={() => dispachFilter(item.itemKey, op.value)}>{op.title}</span>)}
                                     </div>
+
                                 </div>
                             }
                         </div>
