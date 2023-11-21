@@ -39,7 +39,7 @@ export const categories: CategoryType[] = [
                 title: 'قیمت',
                 type: 'RANGE',
                 hint: 'مثلا : 80,000',
-                unit:'تومان',
+                unit: 'تومان',
                 suggest: [
                     {
                         items: [
@@ -53,14 +53,14 @@ export const categories: CategoryType[] = [
                                 title: '1 میلیارد',
                                 value: '1000000000'
                             }
-                            ,                            {
+                            , {
                                 title: '2 میلیارد',
                                 value: '2000000000'
                             }
 
                         ],
                         title: 'حداقل',
-                        itemKey:'minPrice'
+                        itemKey: 'minPrice'
                     },
                     {
                         items: [
@@ -78,7 +78,7 @@ export const categories: CategoryType[] = [
                             }
                         ],
                         title: 'حداکثر',
-                        itemKey:'maxPrice'
+                        itemKey: 'maxPrice'
                     }
                 ]
             },
@@ -86,7 +86,7 @@ export const categories: CategoryType[] = [
                 title: 'متراژ',
                 type: 'RANGE',
                 hint: 'مثلا 15',
-                unit:'متر',
+                unit: 'متر',
                 suggest: [
                     {
                         items: [
@@ -96,7 +96,7 @@ export const categories: CategoryType[] = [
                             }
                         ],
                         title: 'از',
-                        itemKey:'metrDown'
+                        itemKey: 'metrDown'
                     },
                     {
                         items: [
@@ -106,45 +106,80 @@ export const categories: CategoryType[] = [
                             }
                         ],
                         title: 'تا',
-                        itemKey:'metrUp'
+                        itemKey: 'metrUp'
                     }
                 ]
             },
             {
-                title:'آسانسور',
-                type:'BOOLEAN',
-                itemkey:'elevator',
+                title: 'آسانسور',
+                type: 'BOOLEAN',
+                itemkey: 'elevator',
             },
             {
-                title:'پارکینگ',
-                type:'BOOLEAN',
-                itemkey:'parking',
+                title: 'پارکینگ',
+                type: 'BOOLEAN',
+                itemkey: 'parking',
             },
             {
-                title:'سن بنا',
-                type:'ONESELECTRANGE',
-                itemkey:'age',
-                hint:'سن بنا را انتخاب کنید',
-                suggest:[
+                title: 'سن بنا',
+                type: 'ONESELECTRANGE',
+                itemkey: 'age',
+                hint: 'سن بنا را انتخاب کنید',
+                suggest: [
                     {
-                        itemKey:'age',
-                        items:[
+                        itemKey: 'age',
+                        items: [
                             {
-                                title:'حداکثر یک سال',
-                                value:'0-1',
+                                title: 'حداکثر یک سال',
+                                value: '0-1',
                             },
                             {
-                                title:'حداکثر 3 سال',
-                                value:'0-3',
+                                title: 'حداکثر 3 سال',
+                                value: '0-3',
                             },
                             {
-                                title:'حداکثر 5 سال',
-                                value:'0-5',
+                                title: 'حداکثر 5 سال',
+                                value: '0-5',
                             },
                             {
-                                title:'بیش از 10 سال',
-                                value:'10-',
+                                title: 'بیش از 10 سال',
+                                value: '10-',
                             },
+                        ],
+                        title: ''
+                    }
+                ]
+            }
+            ,
+            {
+                title: 'تعداد اتاق',
+                type: 'ONEBUTTON',
+                hint: 'تعداد اتاق را انتخاب کنید',
+                suggest: [
+                    {
+                        itemKey: 'rooms',
+                        items: [
+                            {
+                                title: 'بدون اتاق',
+                                value: '0'
+                            },
+                            {
+                                title: '1',
+                                value: '1'
+                            },
+                            {
+                                title: '2',
+                                value: '2'
+                            }
+                            ,
+                            {
+                                title: '3',
+                                value: '3'
+                            },
+                            {
+                                title: 'بیش از 3',
+                                value: '3-'
+                            }
                         ],
                         title:''
                     }

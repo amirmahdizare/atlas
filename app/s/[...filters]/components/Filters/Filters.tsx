@@ -3,7 +3,7 @@ import React from 'react'
 import { CategoryFilter, SelectArea, SelectCity, SelectType } from './components'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { categories } from './components/CategoryFilter/data.mock'
-import { BooleanFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
+import { BooleanFilter, OneButtonFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
 
 const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]'></div>
 
@@ -38,6 +38,14 @@ export const Filters = () => {
               <Divider />
               <OneSelectFilter {...item} />
             </>
+
+          else if (item.type == 'ONEBUTTON')
+            return <>
+              <Divider />
+              <OneButtonFilter {...item} />
+            </>
+
+            
 
           return <></>
         })
