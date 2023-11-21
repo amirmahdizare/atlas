@@ -119,6 +119,36 @@ export const categories: CategoryType[] = [
                 title:'پارکینگ',
                 type:'BOOLEAN',
                 itemkey:'parking',
+            },
+            {
+                title:'سن بنا',
+                type:'ONESELECTRANGE',
+                itemkey:'age',
+                hint:'سن بنا را انتخاب کنید',
+                suggest:[
+                    {
+                        itemKey:'age',
+                        items:[
+                            {
+                                title:'حداکثر یک سال',
+                                value:'0-1',
+                            },
+                            {
+                                title:'حداکثر 3 سال',
+                                value:'0-3',
+                            },
+                            {
+                                title:'حداکثر 5 سال',
+                                value:'0-5',
+                            },
+                            {
+                                title:'بیش از 10 سال',
+                                value:'10-',
+                            },
+                        ],
+                        title:''
+                    }
+                ]
             }
         ]
     },

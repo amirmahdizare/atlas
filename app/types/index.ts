@@ -102,7 +102,9 @@ export interface PropertyListFilterType {
     metrDown?:number,
     metrUp?:number,
     elevator?:boolean,
-    parking?:boolean
+    parking?:boolean,
+    rooms?:string,
+    age?:string
     // subCategory?:string
 }
 

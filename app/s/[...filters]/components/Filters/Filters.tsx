@@ -3,13 +3,14 @@ import React from 'react'
 import { CategoryFilter, SelectArea, SelectCity, SelectType } from './components'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { categories } from './components/CategoryFilter/data.mock'
-import { BooleanFilter, RangeFilter } from './components/FilterTypes'
+import { BooleanFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
 
 const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]'></div>
 
 export const Filters = () => {
 
   const { filter } = useSearchProperty()
+
   return (
     <div className='flex flex-col gap-2'>
       <SelectType />
@@ -26,12 +27,19 @@ export const Filters = () => {
               <RangeFilter  {...item} />
             </>
 
-          if (item.type == 'BOOLEAN')
+          else if (item.type == 'BOOLEAN')
             return <>
               <Divider />
               <BooleanFilter {...item} />
             </>
-          return <>sdcd</>
+
+          else if (item.type == 'ONESELECTRANGE')
+            return <>
+              <Divider />
+              <OneSelectFilter {...item} />
+            </>
+
+          return <></>
         })
         : undefined}
 
