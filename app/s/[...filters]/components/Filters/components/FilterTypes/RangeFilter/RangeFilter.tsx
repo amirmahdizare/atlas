@@ -35,7 +35,6 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggest }: Categ
         setIsActive({})
     }, [filter])
 
-    console.log(filter)
 
     return (
         <div className={`flex flex-col ${isOpen ? ' gap-3' : ''}`}>
