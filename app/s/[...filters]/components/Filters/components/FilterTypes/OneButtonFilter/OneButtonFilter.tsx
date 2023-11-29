@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
 
-export const OneButtonFilter = ({ title, type, hint, unit, suggest }: CategorySpecialFieldType) => {
+export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: CategorySpecialFieldType) => {
 
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -38,7 +38,7 @@ export const OneButtonFilter = ({ title, type, hint, unit, suggest }: CategorySp
 
 
                 <div className='flex flex-row gap-1.5 items-center'>
-                    {suggest?.[0].itemKey && filter?.[suggest?.[0].itemKey] && <span className='cursor-pointer text-vermilion text-body-3-normal ' onClick={() => dispachFilter(suggest?.[0].itemKey, undefined)}>حذف</span>}
+                    {itemKey && filter?.[itemKey] && <span className='cursor-pointer text-vermilion text-body-3-normal ' onClick={() => dispachFilter(itemKey, undefined)}>حذف</span>}
 
                     <IconChevronDown className={isOpen ? 'rotate-180 transition-all duration-300' : ' transition-all duration-300'} width={15} height={15} />
 
@@ -49,7 +49,7 @@ export const OneButtonFilter = ({ title, type, hint, unit, suggest }: CategorySp
 
                 {suggest?.map(item => <div className='flex flex-col gap-1.5 w-full'>
 
-                    <div className={`rounded-app w- full justify -stretch items-center gap-1  flex flex-wrap flex-row  relative  text-body-3-normal cursor-pointer`} onClick={() => setIsActive({ ...isActive, [item.itemKey]: !isActive[item.itemKey] })}>
+                    <div className={`rounded-app w- full justify -stretch items-center gap-1  flex flex-wrap flex-row  relative  text-body-3-normal cursor-pointer`} onClick={() => setIsActive({ ...isActive, [itemKey]: !isActive[itemKey] })}>
 
                         {/* <div className='flex flex-row gap-1 flex-1 w  '>
                             {!!fieldfilter(item.itemKey) && <IconX width={15} height={15} className='cursor-pointer' onClick={() => dispachFilter(item.itemKey, undefined)} />}
@@ -65,7 +65,7 @@ export const OneButtonFilter = ({ title, type, hint, unit, suggest }: CategorySp
                             <IconChevronDown className={isActive?.[item.itemKey] ? 'rotate-180 transition-all duration-300' : ' transition-all duration-300'} width={15} height={15} />
                         </div> */}
 
-                        {item.items.map(op => <span className={`text-body-3-normal  rounded-lg border-anti-flash-white  p-1 px-1 border  hov er:bg-s easalt ${fieldfilter(item.itemKey) == op.value ? 'bg-robin-egg text-white' : 'text-french-gray bg-white'}`} onClick={() => dispachFilter(item.itemKey, op.value)}>{op.title}</span>)}
+                        {item.items.map(op => <span className={`text-body-3-normal  rounded-lg border-anti-flash-white  p-1 px-1 border  hov er:bg-s easalt ${fieldfilter(itemKey) == op.value ? 'bg-robin-egg text-white' : 'text-french-gray bg-white'}`} onClick={() => dispachFilter(itemKey, op.value)}>{op.title}</span>)}
 
 
                     </div>

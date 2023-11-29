@@ -3,13 +3,13 @@ import ReactSwitch from 'react-switch'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { CategorySpecialFieldType } from 'types'
 
-export const BooleanFilter = ({ title, itemkey }: CategorySpecialFieldType) => {
+export const BooleanFilter = ({ title, itemKey }: CategorySpecialFieldType) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const { filter, dispatchFilter } = useSearchProperty()
 
-    if (itemkey)
+    if (itemKey)
         return (
             <div className={`flex flex-col ${isOpen ? ' gap-3' : ''}`}>
 
@@ -22,7 +22,7 @@ export const BooleanFilter = ({ title, itemkey }: CategorySpecialFieldType) => {
                     <div className='flex flex-row gap-2 items-center'>
 
 
-                    <ReactSwitch checkedIcon={false} uncheckedIcon={false} handleDiameter={15} height={22} width={42} onChange={(checked) => dispatchFilter({ [itemkey]: checked ? true : undefined })} checked={!!filter?.[itemkey]} offColor='#EBEBF0' onColor='#05BAC6' />
+                    <ReactSwitch checkedIcon={false} uncheckedIcon={false} handleDiameter={15} height={22} width={42} onChange={(checked) => dispatchFilter({ [itemKey]: checked ? true : undefined })} checked={!![itemKey]} offColor='#EBEBF0' onColor='#05BAC6' />
 
                     </div>
                 </div>

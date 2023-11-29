@@ -39,6 +39,7 @@ export const categories: CategoryType[] = [
                 title: 'قیمت',
                 type: 'RANGE',
                 hint: 'مثلا : 80,000',
+                itemKey:'price',
                 unit: 'تومان',
                 suggest: [
                     {
@@ -60,7 +61,7 @@ export const categories: CategoryType[] = [
 
                         ],
                         title: 'حداقل',
-                        itemKey: 'minPrice'
+                        // itemKey: 'minPrice'
                     },
                     {
                         items: [
@@ -78,7 +79,7 @@ export const categories: CategoryType[] = [
                             }
                         ],
                         title: 'حداکثر',
-                        itemKey: 'maxPrice'
+                        // itemKey: 'maxPrice'
                     }
                 ]
             },
@@ -86,6 +87,7 @@ export const categories: CategoryType[] = [
                 title: 'متراژ',
                 type: 'RANGE',
                 hint: 'مثلا 15',
+                itemKey:'metr',
                 unit: 'متر',
                 suggest: [
                     {
@@ -96,7 +98,7 @@ export const categories: CategoryType[] = [
                             }
                         ],
                         title: 'از',
-                        itemKey: 'metrDown'
+                        // itemKey: 'metrDown'
                     },
                     {
                         items: [
@@ -106,28 +108,28 @@ export const categories: CategoryType[] = [
                             }
                         ],
                         title: 'تا',
-                        itemKey: 'metrUp'
+                        // itemKey: 'metrUp'
                     }
                 ]
             },
             {
                 title: 'آسانسور',
                 type: 'BOOLEAN',
-                itemkey: 'elevator',
+                itemKey: 'elevator',
             },
             {
                 title: 'پارکینگ',
                 type: 'BOOLEAN',
-                itemkey: 'parking',
+                itemKey: 'parking',
             },
             {
                 title: 'سن بنا',
                 type: 'ONESELECTRANGE',
-                itemkey: 'age',
+                itemKey: 'age',
                 hint: 'سن بنا را انتخاب کنید',
                 suggest: [
                     {
-                        itemKey: 'age',
+                        // itemKey: 'age',
                         items: [
                             {
                                 title: 'حداکثر یک سال',
@@ -154,10 +156,11 @@ export const categories: CategoryType[] = [
             {
                 title: 'تعداد اتاق',
                 type: 'ONEBUTTON',
+                itemKey: 'rooms',
                 hint: 'تعداد اتاق را انتخاب کنید',
                 suggest: [
                     {
-                        itemKey: 'rooms',
+                        // itemKey: 'rooms',
                         items: [
                             {
                                 title: 'بدون اتاق',
@@ -181,7 +184,7 @@ export const categories: CategoryType[] = [
                                 value: '3-'
                             }
                         ],
-                        title:''
+                        title: ''
                     }
                 ]
             }

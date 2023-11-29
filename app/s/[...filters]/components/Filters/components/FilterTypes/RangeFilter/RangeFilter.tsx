@@ -4,9 +4,9 @@ import ClickAwayListener from 'react-click-away-listener'
 import { NumericFormat } from 'react-number-format'
 import { useSearchProperty } from 's/[...filters]/hooks'
 import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
-import { handleKeyPress } from 'utils'
+import { handleKeyPress, isStringExist } from 'utils'
 
-export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecialFieldType) => {
+export const RangeFilter = ({ title, type, hint, unit, itemKey, suggest }: CategorySpecialFieldType) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -14,17 +14,28 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
 
     const { filter, dispatchFilter } = useSearchProperty()
 
-    const dispachFilter = (item: keyof PropertyListFilterType, value: any) => {
-        dispatchFilter({ [item]: value })
-    }
+    const fieldfilterByIndex = (key: keyof PropertyListFilterType, index: number) => !!filter?.[key]?.toString().includes('-') ? filter?.[key]?.toString().split('-')[index] : undefined
 
     const fieldfilter = (key: keyof PropertyListFilterType) => filter?.[key]
+
+    const dispachFilter = (item: keyof PropertyListFilterType, value: any, index: number) => {
+        console.table({ field: fieldfilter(itemKey)?.toString(), value, index })
+
+        if (!isStringExist(fieldfilterByIndex(itemKey, index == 0 ? 1 : 0)) && !isStringExist(value))
+            return dispatchFilter({ [item]: undefined })
+
+        dispatchFilter({ [item]: `${index == 0 ? value : (fieldfilterByIndex(itemKey, 0) ?? '')}-${index == 1 ? value : (fieldfilterByIndex(itemKey, 1) ?? '')}` })
+
+    }
+
 
     const [searchKey, setSearchKey] = useState('')
 
     useEffect(() => {
         setIsActive({})
     }, [filter])
+
+    console.log(filter)
 
     return (
         <div className={`flex flex-col ${isOpen ? ' gap-3' : ''}`}>
@@ -48,26 +59,26 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
 
             <div className={`flex flex-col gap-2.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                {suggest?.map(item => <div className='flex flex-col gap-1.5 w-full'>
+                {suggest?.map((item, index) => <div className='flex flex-col gap-1.5 w-full'>
 
                     <span className='text-body-3-bolder text-ultra-violet'>{item.title}</span>
 
-                    <ClickAwayListener onClickAway={() => setIsActive({ ...isActive, [item.itemKey]: false })}>
-                        <div className={`border border-anti-flash-white-lighter rounded-app w- full justify -stretch items-center   flex flex-row  relative p-1.5 text-body-3-normal cursor-pointer ${isActive?.[item.itemKey] ? 'bg-white' : 'bg-seasalt'}`} onClick={() => setIsActive({ ...isActive, [item.itemKey]: !isActive[item.itemKey] })}>
+                    <ClickAwayListener onClickAway={() => setIsActive({ ...isActive, [index]: false })}>
+                        <div className={`border border-anti-flash-white-lighter rounded-app w- full justify -stretch items-center   flex flex-row  relative p-1.5 text-body-3-normal cursor-pointer ${isActive?.[index] ? 'bg-white' : 'bg-seasalt'}`} onClick={() => setIsActive({ ...isActive, [index]: !isActive[index] })}>
 
                             <div className='flex flex-row gap-1 flex-1 w  '>
-                                {!!fieldfilter(item.itemKey) && <IconX width={15} height={15} className='cursor-pointer' onClick={() => dispachFilter(item.itemKey, undefined)} />}
+                                {!!fieldfilterByIndex(itemKey, index) && <IconX width={15} height={15} className='cursor-pointer' onClick={() => dispachFilter(itemKey, '', index)} />}
 
-                                {item.items.find(i => i.value == fieldfilter(item.itemKey)) ?
-                                    <span>{item.items.find(i => i.value == fieldfilter(item.itemKey))?.title}</span>
+                                {item.items.find(i => i.value == fieldfilterByIndex(itemKey, index)) ?
+                                    <span>{item.items.find(i => i.value == fieldfilterByIndex(itemKey, index))?.title}</span>
                                     : <NumericFormat
-                                        onKeyDown={handleKeyPress((e) => dispachFilter(item.itemKey, e.currentTarget.value.replaceAll(',', '')))}
+                                        onKeyDown={handleKeyPress((e) => dispachFilter(itemKey, e.currentTarget.value.replaceAll(',', ''), index))}
                                         placeholder={hint}
                                         size={7}
                                         thousandSeparator
-                                        className={`${isActive?.[item.itemKey] ? 'bg-white' : 'bg-seasalt'} outline-none shri nk-0 ba sis-0 w-fit input-range`}
-                                        onBlur={({ target: { value } }) => dispachFilter(item.itemKey, value.replaceAll(',', ''))}
-                                        value={fieldfilter(item.itemKey)?.toString() ?? ''}
+                                        className={`${isActive?.[index] ? 'bg-white' : 'bg-seasalt'} outline-none shri nk-0 ba sis-0 w-fit input-range`}
+                                        // onBlur={({ target: { value } }) => dispachFilter(itemKey, value.replaceAll(',', ''), index)}
+                                        value={fieldfilterByIndex(itemKey, index) ?? ''}
                                         decimalScale={0}
                                         autoFocus
                                         type='tel'
@@ -79,14 +90,14 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
                             </div>
                             <div className='flex flex-row gap-1 text-french-gray items-center text-body-3-light'>
                                 <span>{unit}</span>
-                                <IconChevronDown className={isActive?.[item.itemKey] ? 'rotate-180 transition-all duration-300' : ' transition-all duration-300'} width={15} height={15} />
+                                <IconChevronDown className={isActive?.[itemKey] ? 'rotate-180 transition-all duration-300' : ' transition-all duration-300'} width={15} height={15} />
                             </div>
 
 
 
 
                             {/* {item.items.map(item => item.title)} */}
-                            {isActive?.[item.itemKey] &&
+                            {isActive?.[index] &&
                                 <div className='flex flex-col gap-1 p-1 rounded-app z-10 bg-white absolute top-full left-0 w-full shadow'>
 
                                     <input
@@ -98,8 +109,8 @@ export const RangeFilter = ({ title, type, hint, unit, suggest }: CategorySpecia
                                     />
 
                                     <div className='flex flex-col  overflow-y-auto max-h-[300px] h-fit'>
-                                        <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt' onClick={(e) => dispachFilter(item.itemKey, undefined)}>وارد کردن مبلغ دلخواه</span>
-                                        {item.items.filter(f => f.title.includes(searchKey) || f.value == fieldfilter(item.itemKey)).map(op => <span className={`text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt ${fieldfilter(item.itemKey) == op.value ? 'bg-seasalt' : ''}`} onClick={() => dispachFilter(item.itemKey, op.value)}>{op.title}</span>)}
+                                        <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt' onClick={(e) => dispachFilter(itemKey, '', index)}>وارد کردن مبلغ دلخواه</span>
+                                        {item.items.filter(f => f.title.includes(searchKey) || f.value == fieldfilterByIndex(itemKey, index)).map(op => <span className={`text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt ${fieldfilterByIndex(itemKey, index) == op.value ? 'bg-seasalt' : ''}`} onClick={() => dispachFilter(itemKey, op.value, index)}>{op.title}</span>)}
                                     </div>
 
                                 </div>

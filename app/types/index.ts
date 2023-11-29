@@ -79,13 +79,13 @@ export interface CategoryType {
 
 export interface CategorySpecialFieldType {
     type: keyof typeof CategorySpecialField,
-    itemkey?:keyof PropertyListFilterType
+    itemKey:keyof PropertyListFilterType
     title: string,
     hint?: string,
     unit?: string
     suggest?: Array<
         {
-            itemKey: keyof PropertyListFilterType
+            // itemKey: keyof PropertyListFilterType
             title: string,
             items: Array<{ value: number | string, title: string }>
         }
@@ -97,10 +97,12 @@ export interface PropertyListFilterType {
     category?: string,
     city?: Array<{ value: string, title: string }>,
     zone?: Array<{ value: string, title: string }>,
-    minPrice?: string | number,
-    maxPrice?: string | number,
-    metrDown?:number,
-    metrUp?:number,
+    price?:string
+    // minPrice?: string | number,
+    // maxPrice?: string | number,
+    metr?:string
+    // metrDown?:number,
+    // metrUp?:number,
     elevator?:boolean,
     parking?:boolean,
     rooms?:string,
