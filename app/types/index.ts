@@ -73,16 +73,18 @@ export interface CategoryType {
     enTitle: string,
     id: string,
     subCategories: Array<Omit<CategoryType, 'subCategories'>>,
-    filters?: Array<CategorySpecialFieldType> ///Coming Soon
+    filters?: Array<CategorySpecialFieldType> ///Fields
 }
 
 
 export interface CategorySpecialFieldType {
-    type: keyof typeof CategorySpecialField,
+    type:'string' | 'number' | 'boolean'
+    filtertype: keyof typeof CategorySpecialField,
     itemKey:keyof PropertyListFilterType
     title: string,
     hint?: string,
-    unit?: string
+    unit?: string,
+    isPrimary?:boolean,
     suggest?: Array<
         {
             // itemKey: keyof PropertyListFilterType

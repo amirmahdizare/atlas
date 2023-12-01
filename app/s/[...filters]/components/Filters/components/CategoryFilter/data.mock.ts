@@ -37,8 +37,9 @@ export const categories: CategoryType[] = [
         filters: [
             {
                 title: 'قیمت',
-                type: 'RANGE',
+                filtertype: 'RANGE',
                 hint: 'مثلا : 80,000',
+                type:'string',
                 itemKey:'price',
                 unit: 'تومان',
                 suggest: [
@@ -85,9 +86,10 @@ export const categories: CategoryType[] = [
             },
             {
                 title: 'متراژ',
-                type: 'RANGE',
+                filtertype: 'RANGE',
                 hint: 'مثلا 15',
                 itemKey:'metr',
+                type:'number',
                 unit: 'متر',
                 suggest: [
                     {
@@ -114,19 +116,22 @@ export const categories: CategoryType[] = [
             },
             {
                 title: 'آسانسور',
-                type: 'BOOLEAN',
+                filtertype: 'BOOLEAN',
                 itemKey: 'elevator',
+                type:'boolean'
             },
             {
                 title: 'پارکینگ',
-                type: 'BOOLEAN',
+                filtertype: 'BOOLEAN',
                 itemKey: 'parking',
+                type:'boolean'
             },
             {
                 title: 'سن بنا',
-                type: 'ONESELECTRANGE',
+                filtertype: 'ONESELECTRANGE',
                 itemKey: 'age',
                 hint: 'سن بنا را انتخاب کنید',
+                type:'number',
                 suggest: [
                     {
                         // itemKey: 'age',
@@ -155,9 +160,10 @@ export const categories: CategoryType[] = [
             ,
             {
                 title: 'تعداد اتاق',
-                type: 'ONEBUTTON',
+                filtertype: 'ONEBUTTON',
                 itemKey: 'rooms',
                 hint: 'تعداد اتاق را انتخاب کنید',
+                type:'number',
                 suggest: [
                     {
                         // itemKey: 'rooms',
