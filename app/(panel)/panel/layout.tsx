@@ -2,9 +2,11 @@
 import React, { ReactNode } from 'react'
 import fullogo from 'images/logo-full.svg'
 import Image from 'next/image'
-import { IconBell } from '@tabler/icons-react'
+import { IconBell, IconInfoCircle } from '@tabler/icons-react'
 import { Monitor, UserEdit } from 'icons'
 import { MenuItem } from './components/MenuItem'
+import { MenuCollection } from './components/MenuCollection'
+import { accesses } from './data.mock'
 
 export default function layout({ children }: { children: ReactNode }) {
     return (
@@ -15,9 +17,10 @@ export default function layout({ children }: { children: ReactNode }) {
 
                 <span className='text-body-2-normal-normal text-french-gray'>منو</span>
 
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col gap-3'>
 
                     <MenuItem isLink icon={UserEdit} link='panel/profile' title='اطلاعات کاربری' />
+                    <MenuCollection baseLink='base' icon={Monitor} items={accesses} title='اطلاعات پایه' />
                     {/* <a href='/panel/info'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>

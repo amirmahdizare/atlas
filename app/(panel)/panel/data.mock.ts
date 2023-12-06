@@ -33,7 +33,8 @@ export const accesses: AccessType[] = [
     },
     {
         route: 'base/info',
-        title: ' مدیریت درباره ما ، تماس باما و ...',
+        title: 'مدیریت اطلاعات دپارتمان',
+        isMenuItem:true,
         hint: 'با این دسترسی امکان ویرایش اطلاعات درباره ما ، تماس با و ... به کاربر داده می شود.'
     }
 ]
