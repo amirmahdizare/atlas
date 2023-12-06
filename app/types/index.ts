@@ -118,3 +118,7 @@ export interface LocationType {
     parentId: string | null
 }
 
+export interface AccessType {
+    title:string,
+    route:string
+}
