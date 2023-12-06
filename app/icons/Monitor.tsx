@@ -1,0 +1,18 @@
+import React from 'react'
+
+export const Monitor = (props: React.SVGProps<SVGSVGElement>) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" {...props}>
+            <g clip-path="url(#clip0_1149_711)">
+                <path d="M11.668 15.1668C11.668 15.7857 11.9138 16.3792 12.3514 16.8167C12.789 17.2543 13.3825 17.5002 14.0013 17.5002C14.6201 17.5002 15.2136 17.2543 15.6512 16.8167C16.0888 16.3792 16.3346 15.7857 16.3346 15.1668C16.3346 14.548 16.0888 13.9545 15.6512 13.5169C15.2136 13.0793 14.6201 12.8335 14.0013 12.8335C13.3825 12.8335 12.789 13.0793 12.3514 13.5169C11.9138 13.9545 11.668 14.548 11.668 15.1668Z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.6914 13.4752L18.0831 11.0835" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7.46667 23.3331C5.76117 21.9775 4.51956 20.125 3.91391 18.0323C3.30825 15.9396 3.36854 13.7103 4.08642 11.6534C4.8043 9.59646 6.14422 7.81377 7.92048 6.55235C9.69675 5.29094 11.8214 4.61328 14 4.61328C16.1786 4.61328 18.3032 5.29094 20.0795 6.55235C21.8558 7.81377 23.1957 9.59646 23.9136 11.6534C24.6315 13.7103 24.6917 15.9396 24.0861 18.0323C23.4804 20.125 22.2388 21.9775 20.5333 23.3331H7.46667Z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <defs>
+                <clipPath id="clip0_1149_711">
+                    <rect width="28" height="28" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+    )
+}
