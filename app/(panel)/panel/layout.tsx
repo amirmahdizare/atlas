@@ -1,9 +1,10 @@
-// 'use client'
+'use client'
 import React, { ReactNode } from 'react'
 import fullogo from 'images/logo-full.svg'
 import Image from 'next/image'
 import { IconBell } from '@tabler/icons-react'
-import { Monitor } from 'icons'
+import { Monitor, UserEdit } from 'icons'
+import { MenuItem } from './components/MenuItem'
 
 export default function layout({ children }: { children: ReactNode }) {
     return (
@@ -16,12 +17,12 @@ export default function layout({ children }: { children: ReactNode }) {
 
                 <div className='flex flex-col gap-2'>
 
-                    <a href='/panel/dsf'>داشبورد مدیریت</a>
-                    <a href='/panel/info'>ویرایش اطلاعات</a>
+                    <MenuItem isLink icon={UserEdit} link='panel/profile' title='اطلاعات کاربری' />
+                    {/* <a href='/panel/info'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
-                    <a href='/panel/dsf'>ویرایش اطلاعات</a>
+                    <a href='/panel/dsf'>ویرایش اطلاعات</a> */}
                 </div>
 
                 {/* <div className='flex flex-col gap-1'>

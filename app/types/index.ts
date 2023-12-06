@@ -120,5 +120,7 @@ export interface LocationType {
 
 export interface AccessType {
     title:string,
-    route:string
+    route:string,
+    hint?:string,
+    isMenuItem?:boolean
 }
