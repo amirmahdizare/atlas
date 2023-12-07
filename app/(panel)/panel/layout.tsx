@@ -22,6 +22,7 @@ export default function layout({ children }: { children: ReactNode }) {
                     <MenuItem isLink icon={UserEdit} link='panel/profile' title='اطلاعات کاربری' />
                     <MenuCollection baseLink='base' icon={Monitor} items={accesses} title='اطلاعات پایه' />
                     <MenuCollection baseLink='property' icon={ContactInfo} items={accesses} title='آگهی (فایل) ها' />
+                    <MenuCollection baseLink='blog' icon={ContactInfo} items={accesses} title='مقالات' />
                     {/* <a href='/panel/info'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
