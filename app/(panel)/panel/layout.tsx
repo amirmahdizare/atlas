@@ -3,14 +3,14 @@ import React, { ReactNode } from 'react'
 import fullogo from 'images/logo-full.svg'
 import Image from 'next/image'
 import { IconBell, IconInfoCircle } from '@tabler/icons-react'
-import { Monitor, UserEdit } from 'icons'
+import { ContactInfo, Monitor, UserEdit } from 'icons'
 import { MenuItem } from './components/MenuItem'
 import { MenuCollection } from './components/MenuCollection'
 import { accesses } from './data.mock'
 
 export default function layout({ children }: { children: ReactNode }) {
     return (
-        <div className='grid grid-cols-6 flex-1 border rounded border-gray-100'>
+        <div className='grid grid-cols-5 flex-1 border rounded border-gray-100'>
 
             <div className='col-span-1 p-2 flex flex-col justify-start gap-4 border-l'>
                 <Image src={fullogo} className='max-h-5' alt='لوگوی اطلس' />
@@ -21,6 +21,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
                     <MenuItem isLink icon={UserEdit} link='panel/profile' title='اطلاعات کاربری' />
                     <MenuCollection baseLink='base' icon={Monitor} items={accesses} title='اطلاعات پایه' />
+                    <MenuCollection baseLink='property' icon={ContactInfo} items={accesses} title='آگهی (فایل) ها' />
                     {/* <a href='/panel/info'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
                     <a href='/panel/dsf'>ویرایش اطلاعات</a>
@@ -37,7 +38,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
             </div>
 
-            <div className='col-span-5 flex flex-col'>
+            <div className='col-span-4 flex flex-col'>
                 <div className='flex flex-row gap-2 p-2'>
                     <div className='flex flex-row gap-2 items-center justify-between flex-1'>
                         <div className='flex flex-row gap-2 items-center'>
