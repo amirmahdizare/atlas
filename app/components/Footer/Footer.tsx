@@ -49,12 +49,12 @@ export const Footer = () => {
                     <IconArrowDownLeft />
                 </div> */}
 
-                <div className='flex flex-row gap-4 text-ultra-violet text-h4-bolder justify-center  lg:justify-between text-center leading-3 flex-wrap ' >
+                <div className='flex flex-row gap-4 text-ultra-violet text-h4-bolder justify-evenly   text-center leading-3 flex-wrap ' >
 
-                    <Link href={'#'}>ورود و ثبت نام</Link>
-                    <Link href={'#'}>مقالات</Link>
-                    <Link href={'#'}>درباره ما</Link>
-                    <Link href={'#'}>تماس با ما</Link>
+                    <Link href={'/login'}>ورود و ثبت نام</Link>
+                    <Link href={'/blogs'}>مقالات</Link>
+                    <Link href={'/aboutus'}>درباره ما</Link>
+                    <Link href={'/contactus'}>تماس با ما</Link>
                     {/* <Link href={'#'}>حریم خصوصی</Link> */}
 
                 </div>

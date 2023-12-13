@@ -11,5 +11,5 @@ export const NESHAN_SHORTCUT = "https://nshn.ir/_bv0-UOxSRKg"
 
 export const CONTACT_INFO = {
     email:'abcd@gmail.com',
-    phone:'02144224817'
+    phone:'02644250952'
 }
