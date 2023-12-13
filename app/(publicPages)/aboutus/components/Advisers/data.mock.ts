@@ -1,34 +1,40 @@
 import { AdviserType } from "types";
+import dadash from 'images/agents/dadash.png'
+import hosein from 'images/agents/akhlaghi.png'
+import hamed from 'images/agents/hamed.png'
+import hadi from 'images/agents/hadi.png'
+import aghaei from 'images/agents/aghaei.png'
+
 
 export const advisers: AdviserType[] = [
     {
-        img: '',
+        img: dadash,
         name: 'امیرحسین کشن زارع',
         phoneNumber: '09196442725',
         username:'amir24'
     },
     {
-        img:'',
+        img:hosein,
         name:'حسین اخلاقی',
-        phoneNumber:'0916444444',
+        phoneNumber:'09377634864',
         username:'hosein'
     },
     {
-        img:'',
+        img:hamed,
         name:'حامد امین دهقان',
-        phoneNumber:'091966664',
+        phoneNumber:'09129675563',
         username:'hamed'
     },
     {
-        img:'',
+        img:hadi,
         name:'هادی امین دهقان',
-        phoneNumber:'091966664',
+        phoneNumber:'09361588960',
         username:'hadi'
     },
     {
-        img:'',
+        img:aghaei,
         name:'مهدی آقایی',
-        phoneNumber:'091966664',
+        phoneNumber:'09361617876',
         username:'mahdiAghaei'
     }, 
 ]

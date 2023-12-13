@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { SwiperSlide, Swiper } from 'swiper/react'
+import { SwiperSlide, Swiper  } from 'swiper/react'
 import { advisers } from './data.mock'
 import { AdviserCard } from '@components'
 
@@ -27,7 +27,7 @@ export const Advisers = () => {
                             spaceBetween: 15
                         },
                         470: {
-                            slidesPerView: 3,
+                            slidesPerView: 2,
                             spaceBetween: 20
                         },
                         700: {

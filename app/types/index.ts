@@ -1,4 +1,5 @@
 import { CategorySpecialField, PropertyType } from 'enums'
+import { StaticImageData } from 'next/image'
 
 export interface PropertyListItemType {
     img: string,
@@ -129,6 +130,6 @@ export interface AdviserType {
     name: string,
     phoneNumber: string,
     username: string,
-    img: string,
+    img:  StaticImageData,
     title?: string
 }
