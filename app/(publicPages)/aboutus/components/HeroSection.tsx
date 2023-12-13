@@ -9,7 +9,7 @@ import { IconArrowDownLeft, IconPhoneCall } from '@tabler/icons-react'
 
 export const HeroSection = () => {
     return (
-        <div className='grid grid-cols-2 relative items-center justify-center'>
+        <div className='grid grid-cols-2 relative items-center justify-center bg-white'>
             <div className=' col-span-2 md:col-span-1 flex flex-col gap-4 p-2 lg:p-4'>
 
                 <span className='text-h3-bolder text-raisin-black leading-5'>دپارتمان اطلس تجربه خرید مطمئن را
