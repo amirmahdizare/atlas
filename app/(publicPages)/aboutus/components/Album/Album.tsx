@@ -10,8 +10,6 @@ export const Album = () => {
 
     const [selected, setSelected] = useState<string | undefined>(undefined)
 
-
-    console.log(selected)
     return (
         <div className='flex flex-col gap-2 overflow-hidden'>
 
