@@ -130,6 +130,12 @@ export interface AdviserType {
     name: string,
     phoneNumber: string,
     username: string,
-    img:  StaticImageData,
+    img: StaticImageData,
     title?: string
+}
+
+
+export interface GoalType {
+    title: string,
+    description: string
 }

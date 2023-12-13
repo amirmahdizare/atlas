@@ -1,6 +1,6 @@
 import React from 'react'
 import { HeroSection } from './components/HeroSection'
-import { Advisers, Description, TeamBanner } from './components'
+import { Advisers, Description, Goals, TeamBanner } from './components'
 
 export const ClientPage = () => {
 
@@ -10,6 +10,7 @@ export const ClientPage = () => {
         <Description/>
         <TeamBanner />
         <Advisers/>
+        <Goals/>
     </div>
   )
 }
