@@ -78,13 +78,13 @@ export interface CategoryType {
 
 
 export interface CategorySpecialFieldType {
-    type:'string' | 'number' | 'boolean'
+    type: 'string' | 'number' | 'boolean'
     filtertype: keyof typeof CategorySpecialField,
-    itemKey:keyof PropertyListFilterType
+    itemKey: keyof PropertyListFilterType
     title: string,
     hint?: string,
     unit?: string,
-    isPrimary?:boolean,
+    isPrimary?: boolean,
     suggest?: Array<
         {
             // itemKey: keyof PropertyListFilterType
@@ -99,16 +99,16 @@ export interface PropertyListFilterType {
     category?: string,
     city?: Array<{ value: string, title: string }>,
     zone?: Array<{ value: string, title: string }>,
-    price?:string
+    price?: string
     // minPrice?: string | number,
     // maxPrice?: string | number,
-    metr?:string
+    metr?: string
     // metrDown?:number,
     // metrUp?:number,
-    elevator?:boolean,
-    parking?:boolean,
-    rooms?:string,
-    age?:string
+    elevator?: boolean,
+    parking?: boolean,
+    rooms?: string,
+    age?: string
     // subCategory?:string
 }
 
@@ -119,8 +119,16 @@ export interface LocationType {
 }
 
 export interface AccessType {
-    title:string,
-    route:string,
-    hint?:string,
-    isMenuItem?:boolean
+    title: string,
+    route: string,
+    hint?: string,
+    isMenuItem?: boolean
+}
+
+export interface AdviserType {
+    name: string,
+    phoneNumber: string,
+    username: string,
+    img: string,
+    title?: string
 }
