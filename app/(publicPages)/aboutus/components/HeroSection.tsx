@@ -5,7 +5,7 @@ import React from 'react'
 import photo from 'images/aboutus.png'
 import Image from 'next/image'
 import vector from 'images/buildingVector.svg'
-import { IconArrowDownLeft } from '@tabler/icons-react'
+import { IconArrowDownLeft, IconPhoneCall } from '@tabler/icons-react'
 
 export const HeroSection = () => {
     return (
@@ -20,16 +20,16 @@ export const HeroSection = () => {
 
                 <div className='flex flex-row gap-2'>
 
-                    <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark'>درخواست ملک</Button></Link>
+                    <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left'>درخواست ملک</Button></Link>
 
-                    <Link href={'/contactus'}><Button bgColor='primaryNormal' textColor='white' iconSide='left' >تماس با اطلس</Button></Link>
+                    <Link href={'/contactus'}><Button bgColor='primaryNormal' icon={IconPhoneCall} textColor='white' iconSide='left' >تماس با اطلس</Button></Link>
 
                 </div>
 
 
             </div>
 
-            <div className=' col-span-2 md:col-span-1 relative flex flex-row justify-end z-[2] max-w-[400px] md:max-w-none'>
+            <div className=' col-span-2 md:col-span-1 relative flex flex-row justify-end z-[2] max-w-[330px] md:max-w-none'>
 
                 <Image alt='درباره ما | دپارتمان املاک اطلس' src={photo}  />
 
