@@ -1,3 +1,4 @@
+import { IconBabyBottle } from '@tabler/icons-react'
 import { CategorySpecialField, PropertyType } from 'enums'
 import { StaticImageData } from 'next/image'
 
@@ -138,4 +139,11 @@ export interface AdviserType {
 export interface GoalType {
     title: string,
     description: string
+}
+
+export interface SocialMediaType {
+    title: string,
+    enTitle: string,
+    link: string,
+    icon: typeof IconBabyBottle
 }
