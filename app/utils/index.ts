@@ -18,3 +18,4 @@ export const handleKeyPress = (onEnter: React.KeyboardEventHandler<HTMLInputElem
 }
 
 export const isStringExist = (string?: string) => typeof string == 'string' && string?.length > 0
+
