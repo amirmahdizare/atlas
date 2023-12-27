@@ -20,7 +20,7 @@ export const HeroSection = () => {
 
                 <div className='flex flex-row gap-2'>
 
-                    <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left'>درخواست ملک</Button></Link>
+                    <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left' href='requestproperty'>درخواست ملک</Button></Link>
 
                     <Link href={'/contactus'}><Button bgColor='primaryNormal' icon={IconPhoneCall} textColor='white' iconSide='left' >تماس با اطلس</Button></Link>
 

@@ -18,7 +18,7 @@ export const HeroSection = () => {
 
                 <div className='flex flex-row gap-2'>
 
-                    <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left'>درخواست ملک</Button></Link>
+                    <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} href='requestproperty' textColor='dark' iconSide='left'>درخواست ملک</Button></Link>
 
                     <a href={`tel:+02644250952`}><Button bgColor='primaryNormal' icon={IconPhoneCall} textColor='white' iconSide='left' >تماس با اطلس</Button></a>
 

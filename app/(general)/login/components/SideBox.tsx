@@ -20,7 +20,7 @@ export const SideBox = () => {
         <div className='col-span-7 lg:col-span-3 bg-[#F9F9FF] p-2 lg:h-full flex items-center justify-center flex-col gap-4 relative'>
 
             <div className='hidden lg:flex flex-row absolute top-8 left-8 gap-2 items-center'>
-                <Button icon={IconArrowDownLeft} iconSide='left' bgColor='white' textColor='textGray'>درخواست ملک</Button>
+                <Button icon={IconArrowDownLeft} iconSide='left' bgColor='white' href='requestproperty' textColor='textGray'>درخواست ملک</Button>
                 <Button icon={IconPlus} bgColor='secondary'
                     href='/addproperty'
 
