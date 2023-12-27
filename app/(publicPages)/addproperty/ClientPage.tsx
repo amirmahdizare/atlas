@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { Button, Input } from '@components'
+import { Button, Input, TextArea } from '@components'
 import Image from 'next/image'
 import upload from 'images/upload.svg'
 import vector from 'images/housesVector.svg'
@@ -25,6 +25,8 @@ export const ClientPage = () => {
                 <Input placeholder='مثلا : آپارتمان دوبلکس' label='عنوان ملک' />
 
                 <Input placeholder='مثلا :  علی رضایی' label='نام و نام خانوادگی' />
+
+                <TextArea label='توضیحات' placeholder='مثلا : آپارتمان 200 متری دارای پارکینگ و آسانسور و ...'/>
 
                 <textarea placeholder='توضیحات' />
 
