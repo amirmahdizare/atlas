@@ -12,7 +12,9 @@ export const ActionButtons = () => {
             iconSide='left' bgColor='gray' textColor='textGray'>درخواست ملک</Button>
             <Button 
             icon={IconPlus} 
-            bgColor='secondary' >ثبت آگهی</Button>
+            bgColor='secondary'
+            href='/addproperty'
+            >ثبت آگهی</Button>
         </div>
     )
 }
