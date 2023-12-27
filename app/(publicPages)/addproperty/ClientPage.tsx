@@ -1,22 +1,26 @@
 'use client'
+import React from 'react'
 import { Button, Input } from '@components'
 import Image from 'next/image'
-import React from 'react'
 import upload from 'images/upload.svg'
+import vector from 'images/housesVector.svg'
 import { IconUpload } from '@tabler/icons-react'
+
 export const ClientPage = () => {
     return (
         <div className='grid grid-cols-3 py-4 gap-2'>
 
             <div className='col-span-3 lg:col-span-2 flex flex-col gap-3'>
-                <span className='text-h3-bolder'>
-                    <span className='text-robin-egg'>ثبت ملک</span>
-                    &nbsp;
-                    &nbsp;
-                    <span className='text-space-codet'>با دپارتمان اطلس</span>
-                </span>
 
-                <span className='text-ultra-violet'>برای ثبت ملک خود اطلاعات زیر را پر کنید.</span>
+                <div className='flex flex-col gap-2'>
+                    <span className='text-h3-bolder'>
+                        <span className='text-robin-egg'>ثبت ملک</span>
+                        &nbsp;
+                        &nbsp;
+                        <span className='text-space-codet'>با دپارتمان اطلس</span>
+                    </span>
+                    <span className='text-ultra-violet'>برای ثبت ملک خود اطلاعات زیر را پر کنید.</span>
+                </div>
 
                 <Input placeholder='مثلا : آپارتمان دوبلکس' label='عنوان ملک' />
 
@@ -46,8 +50,8 @@ export const ClientPage = () => {
             </div>
 
 
-            <div className='col-span-1'>
-
+            <div className='col-span-3 lg:col-span-1 relative p-4 lg:p-2'>
+                <Image src={vector} alt='تصویر خانه' className='object-cover' />
             </div>
 
         </div>
