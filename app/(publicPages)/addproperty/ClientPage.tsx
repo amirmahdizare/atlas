@@ -17,7 +17,7 @@ export const ClientPage = () => {
                         <span className='text-robin-egg'>ثبت ملک</span>
                         &nbsp;
                         &nbsp;
-                        <span className='text-space-codet'>با دپارتمان اطلس</span>
+                        <span className='text-space-codet'>در دپارتمان اطلس</span>
                     </span>
                     <span className='text-ultra-violet'>برای ثبت ملک خود اطلاعات زیر را پر کنید.</span>
                 </div>
@@ -28,7 +28,6 @@ export const ClientPage = () => {
 
                 <TextArea label='توضیحات' placeholder='مثلا : آپارتمان 200 متری دارای پارکینگ و آسانسور و ...'/>
 
-                <textarea placeholder='توضیحات' />
 
                 <div className='flex flex-row p-4 gap-4 items-center justify-between bg-seasalt border-ghost-white border-dashed'>
 
