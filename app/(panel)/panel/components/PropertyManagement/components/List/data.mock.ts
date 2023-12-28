@@ -87,5 +87,33 @@ export const news: PropertyListItemType[] = [
             phoneNumber: '09196442715',
             username: 'amir24'
         }
+    },
+    {
+        id: '1234',
+        img: 'https://www.khanetarh.com/wp-content/uploads/2018/01/Design-a-duplex-villa-1.webp',
+        isSaved: true,
+        location: 'کردان',
+        price: 100000000,
+        title: 'ویلا کردان مناسب بازسازی',
+        agentInfo: {
+            name: 'امیرحسین کشن زارع',
+            avatar: '',
+            phoneNumber: '09196442715',
+            username: 'amir24'
+        }
+    },
+    {
+        id: 'sdf454',
+        img: 'https://cdn.downloadefilm.ir/images/29b04000-596d-11ee-b57a-a5d77f02b41c.jpg',
+        isSaved: true,
+        location: 'لواسان',
+        price: 23000000000,
+        title: 'آپارتمان دوبلکس',
+        agentInfo: {
+            name: 'امیرحسین کشن زارع',
+            avatar: '',
+            phoneNumber: '09196442715',
+            username: 'amir24'
+        }
     }
 ]

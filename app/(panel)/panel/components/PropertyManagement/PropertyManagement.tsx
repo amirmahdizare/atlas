@@ -6,8 +6,8 @@ import { List } from './components/List/List'
 
 export const PropertyManagement = ({ me }: { me: boolean }) => {
     return (
-        <div className='flex flex-col gap-2'>
-            <div className='flex flex-row gap-2 justify-between'>
+        <div className='flex flex-col gap-2 max-h-full'>
+            <div className='flex flex-row gap-2 justify-between '>
 
                 <div className='flex flex-row gap-1 items-center'>
                     <IconFile width={20} height={20} className='text-french-gray' />
