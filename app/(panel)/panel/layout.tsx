@@ -39,7 +39,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
             </div>
 
-            <div className='col-span-4 flex flex-col'>
+            <div className='col-span-4 flex flex-col max-h-screen'>
                 <div className='flex flex-row gap-2 p-2'>
                     <div className='flex flex-row gap-2 items-center justify-between flex-1'>
                         <div className='flex flex-row gap-2 items-center'>
@@ -53,7 +53,7 @@ export default function layout({ children }: { children: ReactNode }) {
                     </div>
 
                 </div>
-                <div className='bg-seasalt p-4 roudned flex-1 flex flex-col'>
+                <div className='bg-seasalt p-4 roudned flex-1 flex flex-col overflow-auto max-h-full' >
                     <div className='bg-white flex-1 p-2 overflow-auto'>
                         {children}
                     </div>
