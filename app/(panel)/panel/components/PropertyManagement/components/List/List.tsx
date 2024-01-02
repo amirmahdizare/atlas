@@ -19,7 +19,7 @@ export const List = () => {
                     <span>لیست آگهی ها</span>
                 </div>
 
-                <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add' })}>ثبت آگهی</Button>
+                <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت آگهی</Button>
 
             </div>
             <div className=' h-fit overflow-auto' id='property-list'>
