@@ -11,13 +11,15 @@ interface PropTypes extends React.DetailedHTMLProps<React.InputHTMLAttributes<HT
     register?: any
 }
 
-export const Input = ({ label, error, errorText, customMinWidthClass, required, register, fullWidth, ...props }: PropTypes) => {
+export const Input = ({ label, error, errorText, customMinWidthClass, required, register, fullWidth , placeholder = '', ...props }: PropTypes) => {
     return (
         <div className={`flex flex-col gap-2 justify-start  items-stretch ${fullWidth ? 'flex-1' : ''}`}>
 
             {!!label && <span className='text-french-gray text-body-2-normal  text-right'>{label} {required && '*'}</span>}
 
-            <input className={`rounded-[4px] py-1.5 px-1 
+            <input 
+            placeholder={placeholder}
+            className={`rounded-[4px] py-1.5 px-1 
             text-body-2-normal
             outline-none
             focus:text-space-codet
