@@ -1,7 +1,5 @@
 'use client'
 import React from 'react'
-import { Button } from '@components'
-import { IconMapPin, IconPlus } from '@tabler/icons-react'
 import { useCitiesSection } from './hooks'
 import { List } from './components/List/List'
 
