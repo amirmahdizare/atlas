@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react'
+import { ClientPage } from './ClientPage'
 
 export const metadata: Metadata = {
     title: 'مدیریت شهر ها'
@@ -7,6 +8,8 @@ export const metadata: Metadata = {
 
 export default function page() {
     return (
-        <div>مدیریت شهرها</div>
+        <>
+            <ClientPage />
+        </>
     )
 }
