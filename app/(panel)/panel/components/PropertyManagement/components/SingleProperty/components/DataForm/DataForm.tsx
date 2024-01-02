@@ -4,6 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { PropertyCUType } from 'types'
 import { Medias } from './components/Medias'
 import { usePropertySection } from '(panel)/panel/components/PropertyManagement/hooks'
+import { Attributes } from './components/Attributes/Attributes'
 
 export const DataForm = () => {
 
@@ -22,7 +23,7 @@ export const DataForm = () => {
         <FormProvider {...methods}>
 
 
-            <div className='flex flex-col gap-4 pb-2'>
+            <div className='flex flex-col gap-6 pb-2'>
 
                 <Input placeholder='مثلا : آپارتمان دوبلکس' label='عنوان ملک' />
 
@@ -87,6 +88,8 @@ export const DataForm = () => {
 
                 <TextArea label='توضیحات' placeholder='مثلا : آپارتمان 200 متری دارای پارکینگ و آسانسور و ...' />
 
+                <Attributes />
+
                 <Medias />
 
 
@@ -106,8 +109,8 @@ export const DataForm = () => {
 
                 <div className='flex flex-row gap-4'>
 
-                    <Button  bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', proprtyId: undefined })} fullWidth>انصراف</Button>
-                    <Button  bgColor='primaryNormal' textColor='white'fullWidth >ثبت </Button>
+                    <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', proprtyId: undefined })} fullWidth>انصراف</Button>
+                    <Button bgColor='primaryNormal' textColor='white' fullWidth >ثبت </Button>
 
                 </div>
             </div>
