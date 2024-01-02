@@ -148,7 +148,7 @@ export interface SocialMediaType {
     icon: typeof IconBabyBottle
 }
 
-export interface PropertyCUType <MT> {
+export interface PropertyCUType<MT> {
     isSaved: boolean,
     title: string,
     location: string,
@@ -159,5 +159,15 @@ export interface PropertyCUType <MT> {
     id?: string,
     labels?: Array<string>
     medias: MT,
-    description:string
+    description: string
+}
+
+export interface AgentListInfo {
+    avatar: string,
+    name: string,
+    id: string,
+    phoneNumber: string,
+    propertyCount: number,
+    lastActivity: number,
+    disabled: boolean
 }
