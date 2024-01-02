@@ -172,7 +172,7 @@ export interface AgentListInfo {
     disabled: boolean
 }
 
-export interface AdviserCUType <AT> {
+export interface AdviserCUType<AT> {
     avatar: AT,
     name: string,
     id: string,
@@ -180,4 +180,11 @@ export interface AdviserCUType <AT> {
     username: string,
     permissions: string[],
     desc?: string
+}
+
+export interface CityCUType {
+    title: string,
+    id?: string,
+    enTitle: string,
+    subLocations: Array<Omit<CityCUType, 'subLocations'>>
 }
