@@ -3,10 +3,13 @@ import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash } from '@tabler/
 import ClickAwayListener from 'react-click-away-listener'
 import ReactSwitch from 'react-switch'
 import { AgentListInfo } from 'types'
+import { useAdvisersSection } from '../../hooks'
 
 export const RowItem = (ad: AgentListInfo) => {
 
     const [more, setMore] = useState<boolean>(false)
+
+    const {dispatch} =useAdvisersSection()
 
     return (
         <div className='grid grid-cols-6 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
@@ -49,7 +52,7 @@ export const RowItem = (ad: AgentListInfo) => {
                         <ClickAwayListener onClickAway={()=>setMore(false)}>
 
                             <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-20 left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Edit')}>
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({mode:'edit' , adviserId:ad.id})}>
                                     <span>ویرایش</span>
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div>

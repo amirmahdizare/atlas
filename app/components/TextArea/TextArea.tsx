@@ -11,7 +11,7 @@ interface PropTypes extends React.DetailedHTMLProps<React.InputHTMLAttributes<HT
     register?: any
 }
 
-export const TextArea = ({ label, error, errorText, customMinWidthClass, required, register, fullWidth, ...props }: PropTypes) => {
+export const TextArea = ({ label, error, errorText, customMinWidthClass, required, register, fullWidth,placeholder ='' ,  ...props }: PropTypes) => {
     return (
         <div className={`flex flex-col gap-2 justify-start  items-stretch ${fullWidth ? 'flex-1' : ''}`}>
 
@@ -32,7 +32,9 @@ export const TextArea = ({ label, error, errorText, customMinWidthClass, require
             ${customMinWidthClass ?? 'lg:min-w-[300px] min-w-[150px]'} `}
                 // placeholder={`${placeholder} `}
                 {...register}
-                {...props} />
+                {...props} 
+                placeholder={placeholder}
+                />
 
             {!!error && !!errorText && <span className='text-body-3-normal text-right text-bittersweet'>{errorText}</span>}
 

@@ -171,3 +171,13 @@ export interface AgentListInfo {
     lastActivity: number,
     disabled: boolean
 }
+
+export interface AdviserCUType <AT> {
+    avatar: AT,
+    name: string,
+    id: string,
+    phoneNumber: string,
+    username: string,
+    permissions: string[],
+    desc?: string
+}
