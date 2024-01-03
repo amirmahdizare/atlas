@@ -4,6 +4,7 @@ import React from 'react'
 import { useCitiesSection } from '../../hooks'
 import { cities } from '../../data.mock'
 import { CityItem } from './CityItem'
+import { AddCity } from './components/AddCity'
 
 export const List = () => {
 
@@ -18,15 +19,7 @@ export const List = () => {
                     لیست شهرها
                 </div>
 
-
-                <Button
-                    icon={IconPlus}
-                    bgColor='primaryNormal'
-                    iconSide='right'
-                    onClick={() => dispatch({ mode: 'add', cityId: undefined })}
-                >
-                    افزودن شهر
-                </Button>
+                <AddCity />
 
             </div>
 
