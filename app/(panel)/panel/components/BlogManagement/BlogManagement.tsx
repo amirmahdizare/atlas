@@ -3,12 +3,13 @@ import { Button } from '@components'
 import { IconFile, IconPlus } from '@tabler/icons-react'
 import React from 'react'
 import { List } from './components/List/List'
-import { usePropertySection } from './hooks'
+import { useBlogsSection } from './hooks'
+import { SingleBlog } from './components/SingleBlog/SingleBlog'
 // import { SingleProperty } from './components/SingleProperty/SingleProperty'
 
 export const BlogManagement = ({ me }: { me: boolean }) => {
 
-    const { mode, proprtyId  , dispatch} = usePropertySection()
+    const { mode , blogId  , dispatch} = useBlogsSection()
 
     return (
         <div className='flex flex-col gap-2 max-h-full'>
@@ -16,7 +17,7 @@ export const BlogManagement = ({ me }: { me: boolean }) => {
 
             {mode == 'list' && <List />}
 
-            {/* {mode != 'list' && <SingleProperty mode={mode} propertyId={proprtyId} />} */}
+            {mode != 'list' && <SingleBlog mode={mode} blogId={blogId} />}
 
         </div>
     )

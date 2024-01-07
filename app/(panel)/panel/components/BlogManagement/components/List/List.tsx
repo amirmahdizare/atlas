@@ -4,12 +4,12 @@ import { PropertyCard } from './components/PropertyCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Button, Spinner } from '@components'
 import { IconClipboard, IconPlus } from '@tabler/icons-react'
-import { usePropertySection } from '../../hooks'
+import { useBlogsSection } from '../../hooks'
 import { BlogCard } from './components/BlogCard'
 
 export const List = () => {
 
-    const { dispatch } = usePropertySection()
+    const { dispatch } = useBlogsSection()
 
     return (
         <>
@@ -20,7 +20,7 @@ export const List = () => {
                     <span>لیست مقالات</span>
                 </div>
 
-                <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت مقاله</Button>
+                <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', blogId: undefined })}>ثبت مقاله</Button>
 
             </div>
             <div className=' h-fit overflow-auto' id='property-list'>
@@ -34,9 +34,7 @@ export const List = () => {
                     style={{ overflow: 'unset' }}
                     scrollableTarget='property-list'
                 >
-                    {blogs?.map(item => 
-                            <BlogCard {...item} />
-                    )}
+                    {blogs?.map(item => <BlogCard {...item} />)}
                 </InfiniteScroll>
             </div>
         </>

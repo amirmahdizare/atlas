@@ -2,10 +2,15 @@ import React from 'react'
 import { Button } from '@components'
 import { IconPencil, IconTrash } from '@tabler/icons-react'
 import { BlogItemType } from 'types'
+import { useBlogsSection } from '../../../hooks'
 
 export const BlogCard = ({ title, createdAt, id, summary, img }: BlogItemType) => {
+
+    const { dispatch } = useBlogsSection()
+
     return (
-        <div className='grid grid-cols-2 lg:grid-cols-4 gap-2 border-b pb-2 '>
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-2 border-b pb-2'>
+
             <div className='col-span-1'>
                 <img src={img} className='rounded object-cover' />
             </div>
@@ -20,9 +25,7 @@ export const BlogCard = ({ title, createdAt, id, summary, img }: BlogItemType) =
 
             <div className='col-span-2 lg:col-span-1 flex flex-row items-start justify-evenly'>
                 <Button icon={IconTrash} bgColor='white' textColor='secondary'>حذف</Button>
-
-                <Button icon={IconPencil} bgColor='primaryLighter' textColor='white'>ویرایش</Button>
-
+                <Button icon={IconPencil} bgColor='primaryLighter' textColor='white' onClick={() => dispatch({ mode: 'edit', blogId: id })}>ویرایش</Button>
             </div>
 
         </div>
