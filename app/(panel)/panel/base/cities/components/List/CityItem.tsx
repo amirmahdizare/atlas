@@ -3,6 +3,7 @@ import { IconChevronDown, IconDotsVertical, IconMapPin, IconPencil, IconPlus, Ic
 import { CityCUType } from 'types'
 import ClickAwayListener from 'react-click-away-listener'
 import { SingleCity } from './components/SingleCity'
+import { SingleArea } from './components/SingleArea'
 
 export const CityItem = ({ enTitle, title, id, subLocations }: CityCUType) => {
 
@@ -30,12 +31,15 @@ export const CityItem = ({ enTitle, title, id, subLocations }: CityCUType) => {
 
                 <div className='flex col-span-1 flex-row gap-2 items-center'>
 
-                    <div className='flex flex-row gap-1 items-center cursor-pointer'>
-                        <div className='rounded-circle text-robin-egg border-robin-egg border '>
-                            <IconPlus width={20} height={20} />
+
+                    <SingleArea mode='add'>
+                        <div className='flex flex-row gap-1 items-center cursor-pointer'>
+                            <div className='rounded-circle text-robin-egg border-robin-egg border '>
+                                <IconPlus width={20} height={20} />
+                            </div>
+                            <span className='text-robin-egg'>افزودن منطقه</span>
                         </div>
-                        <span className='text-robin-egg'>افزودن منطقه</span>
-                    </div>
+                    </SingleArea>
 
 
 
@@ -91,8 +95,8 @@ export const CityItem = ({ enTitle, title, id, subLocations }: CityCUType) => {
                     <span>{s.title} </span>
                     {/* ({s.enTitle}) */}
                     <div className='flex flex-row gap-1'>
-                        <IconTrash width={20} height={20} className='text-ultra-violet' />
-                        <IconPencil width={20} height={20} className='text-robin-egg-lighter' />
+                        <IconTrash width={20} height={20} className='text-ultra-violet cursor-pointer' onClick={() => alert('Delete')} />
+                        <SingleArea mode='edit'><IconPencil width={20} height={20} className='text-robin-egg-lighter cursor-pointer' /></SingleArea>
                     </div>
                 </div>)}
 
