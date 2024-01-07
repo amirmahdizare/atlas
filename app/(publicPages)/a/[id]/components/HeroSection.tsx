@@ -44,7 +44,7 @@ export const HeroSection = () => {
 
             <div className=' col-span-3 md:col-span-1 relative flex flex-row justify-center z-[2] p-4 '>
 
-                <Image alt='درباره ما | دپارتمان املاک اطلس'  src={avatar} className='rounded-lg aspect-square lg:w-full  object-cover  max-h-[250px] max-w-[250px] md:max-w-none md:max-h-none' />
+                <Image alt='درباره ما | دپارتمان املاک اطلس'  src={avatar} className='rounded-lg aspect-square max- w-full lg:w-full  object-cover  max-h-[250px] max-w-[250px] md:max-w-none md:max-h-none' />
 
             </div>
 
