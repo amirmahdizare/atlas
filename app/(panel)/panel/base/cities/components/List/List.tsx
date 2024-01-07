@@ -4,7 +4,7 @@ import React from 'react'
 import { useCitiesSection } from '../../hooks'
 import { cities } from '../../data.mock'
 import { CityItem } from './CityItem'
-import { AddCity } from './components/AddCity'
+import {  SingleCity } from './components/SingleCity'
 
 export const List = () => {
 
@@ -19,7 +19,16 @@ export const List = () => {
                     لیست شهرها
                 </div>
 
-                <AddCity />
+                <SingleCity mode='add' >
+
+                    <Button
+                        icon={IconPlus}
+                        bgColor='primaryNormal'
+                        iconSide='right'
+                    >
+                        افزودن شهر
+                    </Button>
+                </SingleCity>
 
             </div>
 

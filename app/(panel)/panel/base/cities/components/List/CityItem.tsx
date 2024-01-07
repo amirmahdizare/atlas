@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { IconChevronDown, IconDotsVertical, IconMapPin, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react'
 import { CityCUType } from 'types'
+import ClickAwayListener from 'react-click-away-listener'
+import { SingleCity } from './components/SingleCity'
 
 export const CityItem = ({ enTitle, title, id, subLocations }: CityCUType) => {
 
@@ -35,9 +37,36 @@ export const CityItem = ({ enTitle, title, id, subLocations }: CityCUType) => {
                         <span className='text-robin-egg'>افزودن منطقه</span>
                     </div>
 
+
+
                     <div className='border rounded-circle bg-anti-flash-white-lighter cursor-pointer hover:bg-gray-200 transition-all text-raisin-black p-0.5 aspect-square relative' onClick={() => setMore(true)}>
                         <IconDotsVertical width={15} height={15} />
+                        {more &&
+                            <ClickAwayListener onClickAway={() => setMore(false)}>
+
+                                <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full mt-1 bg-white z-20 left-1/2 -transla te-x-1/2 text-body-3-normal'>
+                                    <SingleCity mode='edit' id='flean'>
+                                        <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => { }}>
+                                            <span>ویرایش شهر</span>
+                                            <IconPencil width={20} height={20} className='text-mint-green' />
+                                        </div>
+                                    </SingleCity>
+
+                                    {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
+
+                                    <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
+                                        <span>حذف شهر</span>
+                                        <IconTrash width={20} height={20} className='text-red-500' />
+                                    </div>
+
+                                </div>
+                            </ClickAwayListener>
+                        }
                     </div>
+
+                    {/* <div className='border rounded-circle bg-anti-flash-white-lighter cursor-pointer hover:bg-gray-200 transition-all text-raisin-black p-0.5 aspect-square relative' onClick={() => setMore(true)}>
+                        <IconDotsVertical width={15} height={15} />
+                    </div> */}
 
                 </div>
 
