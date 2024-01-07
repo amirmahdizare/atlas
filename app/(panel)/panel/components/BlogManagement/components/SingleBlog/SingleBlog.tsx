@@ -2,8 +2,7 @@ import React from 'react'
 import { Button } from '@components'
 import { IconArrowBack, IconHome } from '@tabler/icons-react'
 import { useBlogsSection } from '../../hooks'
-import Head from 'next/head'
-// import { DataForm } from './components/DataForm/DataForm'
+import { DataForm } from './components/DataForm'
 
 export const SingleBlog = ({ mode, blogId }: { mode: 'add' | 'edit', blogId?: string }) => {
 
@@ -22,7 +21,7 @@ export const SingleBlog = ({ mode, blogId }: { mode: 'add' | 'edit', blogId?: st
                 <Button icon={IconArrowBack} bgColor='secondary' iconSide='right' onClick={() => dispatch({ mode: 'list' })}>بازگشت</Button>
 
             </div>
-            {/* <DataForm /> */}
+            <DataForm />
 
         </div>
     )
