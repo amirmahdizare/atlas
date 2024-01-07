@@ -188,3 +188,4 @@ export interface CityCUType {
     enTitle: string,
     subLocations: Array<Omit<CityCUType, 'subLocations'>>
 }
+
