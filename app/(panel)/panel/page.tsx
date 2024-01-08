@@ -1,6 +1,6 @@
 import React from 'react'
 import { Metadata } from 'next'
-// import { ClientPage } from './ClientPage'
+import { ClientPage } from './ClientPage'
 
 export const metadata:Metadata ={
     title:'پنل اطلس'
@@ -9,8 +9,7 @@ export const metadata:Metadata ={
 export default function page() {
   return (
     <div>
-        sdfdsf
-        {/* <ClientPage/> */}
+        <ClientPage/>
     </div>
   )
 }
