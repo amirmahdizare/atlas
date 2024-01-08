@@ -13,7 +13,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
     const pathname = usePathname()
     return (
-        <div className='flex flex-col bg-anti-flash-white-lighter h-full'>
+        <div className='flex flex-col bg-anti-flash-white-lighter   max-h-full'>
             <div className='flex flex-col bg-raisin-black'>
                 <div className='flex flex-row gap-2 justify-between p-2 text-french-gray'>
 
@@ -31,7 +31,7 @@ export default function layout({ children }: { children: ReactNode }) {
                         </Link>
 
                         <Link href={'/'} className='bg-space-codet aspect-square rounded-circle p-1  cursor-pointer hover:text-gray-50'>
-                            <IconHome width={15} height={15} />
+                            <IconHome width={20} height={20} />
                         </Link>
 
                     </div>
@@ -47,7 +47,7 @@ export default function layout({ children }: { children: ReactNode }) {
                 </div>
 
             </div>
-            <div className='m-2 lg:m-4 bg-white flex-1 p-2'>
+            <div className='m-2 lg:m-4 bg-white flex-1 flex p-2  h- fit box-border overflow-auto'>
 
             {children}
             </div>
