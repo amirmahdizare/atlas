@@ -189,3 +189,11 @@ export interface CityCUType {
     subLocations: Array<Omit<CityCUType, 'subLocations'>>
 }
 
+export interface RequestItemType {
+    title: string,
+    fullname: string,
+    category: string,
+    city: string,
+    zone: string,
+    id:string
+}
