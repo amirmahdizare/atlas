@@ -197,3 +197,6 @@ export interface RequestItemType {
     zone: string,
     id:string
 }
+
+export interface BlogListItem {
+}
