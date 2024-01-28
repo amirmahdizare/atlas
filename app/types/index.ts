@@ -200,5 +200,14 @@ export interface RequestItemType {
     id:string
 }
 
-export interface BlogListItem {
+export interface BlogDetailType {
+
+    title: string,
+    createdAt: number,
+    description: string,
+    img: string,
+    id: string,
+    duration: number,
+    likes?:number,
+    comments?:number
 }

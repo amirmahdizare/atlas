@@ -6,7 +6,7 @@ import { IconMessage, IconMessages, IconThumbUp } from '@tabler/icons-react'
 export const SingleBlog = ({ id, title, createdAt, duration, img, summary, comments = 4, likes = 2 }: BlogItemType) => {
 
     return (
-        <Link href={`/blog/${id}`} className='flex flex-col gap-1.5'>
+        <Link href={`/blogs/${id}`} className='flex flex-col gap-1.5'>
 
             <img src={img} className='aspect-video rounded w-full object-cover' />
 
