@@ -1,10 +1,7 @@
 
 import React from 'react'
-// import { blogs } from '.././data.mock'
-// import { SingleBlog } from './components/SingleBlog'
-// import { LatestBlogs } from './components/LatestBlogs'
-import blogPhoto from 'images/blogs.svg'
-import Image from 'next/image'
+// import blogPhoto from 'images/blogs.svg'
+// import Image from 'next/image'
 import { RelatedBlogs } from './components/RelatedBlogs'
 import { BlogBody } from './components/BlogBody'
 import { singleBlogDetail } from './data.mock'
