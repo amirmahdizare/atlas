@@ -25,7 +25,9 @@ export interface BlogItemType {
     summary: string,
     img: string,
     id: string,
-    duration: number
+    duration: number,
+    likes?:number,
+    comments?:number
 }
 
 export type pageProps<PT = {}, SP = {}> = {

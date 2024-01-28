@@ -10,7 +10,7 @@ export const ClientPage = () => {
 
             </div>
 
-            <div className='col-span-5 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
+            <div className='col-span-5 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-1'>
                 {blogs.map(item => <div className='col-span-1'><SingleBlog {...item} /></div>)}
             </div>
 
