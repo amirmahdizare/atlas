@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logo from 'images/logo-full-white.svg'
 import Image from 'next/image'
-import avatar from 'images/agents/DADASH.png'
+import avatar from 'images/agents/dadash.png'
 
 export default function layout({ children }: { children: ReactNode }) {
 

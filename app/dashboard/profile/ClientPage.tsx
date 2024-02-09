@@ -2,7 +2,7 @@
 import { Button, Input } from '@components'
 import { IconArticle, IconPaperclip } from '@tabler/icons-react'
 import React from 'react'
-import avatar from 'images/agents/DADASH.png'
+import avatar from 'images/agents/dadash.png'
 import Image from 'next/image'
 export const ClientPage = () => {
     return (
