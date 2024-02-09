@@ -5,11 +5,11 @@ import Link from 'next/link'
 import React from 'react'
 import ReactSwitch from 'react-switch'
 import { PropertyListItemType } from 'types'
-import { usePropertySection } from '../../../hooks'
+import { useBlogsSection } from '../../../hooks'
 
 export const PropertyCard = ({ img, id, price, location, agentInfo, title }: PropertyListItemType) => {
 
-    const { dispatch } = usePropertySection()
+    const { dispatch } = useBlogsSection()
     return (
         <Link className='grid grid-cols-3 gap-1.5 ' href={`/property/${id}`}>
 
@@ -38,7 +38,7 @@ export const PropertyCard = ({ img, id, price, location, agentInfo, title }: Pro
 
             </div>
             <div className='flex flex-row gap-1 justify-evenly col-span-3'>
-                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => {e.preventDefault();  e.stopPropagation() ; dispatch({ mode: 'edit', proprtyId: id })}} icon={IconPencil}>ویرایش</Button>
+                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => {e.preventDefault();  e.stopPropagation() ; dispatch({ mode: 'edit', blogId: id })}} icon={IconPencil}>ویرایش</Button>
                 <Button bgColor='gray' textColor='secondary' icon={IconArrowBigUp}>نردبان</Button>
                 <label className='flex flex-row gap-1 items-center'>
                     <ReactSwitch
