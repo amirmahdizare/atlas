@@ -1,7 +1,7 @@
 import { Divider, Modal } from '@components'
 import { IconArrowRight, IconChevronDown, IconChevronLeft, IconX } from '@tabler/icons-react'
 import React, { useState } from 'react'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../hooks'
 import { cities } from '../SelectCity/data.mock'
 import { LocationType } from 'types'
 

@@ -2,7 +2,7 @@ import { IconChevronDown, IconX } from '@tabler/icons-react'
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import ClickAwayListener from 'react-click-away-listener'
 import { NumericFormat } from 'react-number-format'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../../hooks'
 import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
 import { handleKeyPress, isStringExist } from 'utils'
 

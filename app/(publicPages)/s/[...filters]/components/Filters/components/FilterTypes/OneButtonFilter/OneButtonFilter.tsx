@@ -1,6 +1,6 @@
 import { IconChevronDown, IconX } from '@tabler/icons-react'
 import React, { useEffect, useState } from 'react'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../../hooks'
 import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
 
 export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: CategorySpecialFieldType) => {

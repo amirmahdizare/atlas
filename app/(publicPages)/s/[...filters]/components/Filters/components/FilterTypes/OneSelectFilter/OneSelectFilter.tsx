@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { IconChevronDown, IconX } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../../hooks'
 import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
 
 export const OneSelectFilter = ({ title, suggest , itemKey, hint, unit }: CategorySpecialFieldType) => {

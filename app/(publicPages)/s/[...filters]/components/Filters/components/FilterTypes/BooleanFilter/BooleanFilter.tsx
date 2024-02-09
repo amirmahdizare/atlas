@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactSwitch from 'react-switch'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../../hooks'
 import { CategorySpecialFieldType } from 'types'
 
 export const BooleanFilter = ({ title, itemKey }: CategorySpecialFieldType) => {

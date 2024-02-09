@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { IconArrowLeft, IconArrowRight, IconChevronUp, IconLadder } from '@tabler/icons-react'
 import { categories } from './data.mock'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../hooks'
 
 export const CategoryFilter = () => {
 

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { CategoryFilter, SelectArea, SelectCity, SelectType } from './components'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../hooks/index'
 import { categories } from './components/CategoryFilter/data.mock'
 import { BooleanFilter, OneButtonFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
 
@@ -21,25 +21,25 @@ export const Filters = () => {
       <SelectArea />
       {!!filter?.category
         ? categories.find(i => i.id == filter?.category)?.filters?.map(item => {
-          if (item.type == 'RANGE')
+          if (item.filtertype == 'RANGE')
             return <>
               <Divider />
               <RangeFilter  {...item} />
             </>
 
-          else if (item.type == 'BOOLEAN')
+          else if (item.filtertype == 'BOOLEAN')
             return <>
               <Divider />
               <BooleanFilter {...item} />
             </>
 
-          else if (item.type == 'ONESELECTRANGE')
+          else if (item.filtertype == 'ONESELECTRANGE')
             return <>
               <Divider />
               <OneSelectFilter {...item} />
             </>
 
-          else if (item.type == 'ONEBUTTON')
+          else if (item.filtertype == 'ONEBUTTON')
             return <>
               <Divider />
               <OneButtonFilter {...item} />

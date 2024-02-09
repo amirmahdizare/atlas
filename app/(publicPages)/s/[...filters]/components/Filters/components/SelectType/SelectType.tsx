@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { useSearchProperty } from 's/[...filters]/hooks'
+import { useSearchProperty } from '../../../../hooks'
 
 export const SelectType = () => {
 
