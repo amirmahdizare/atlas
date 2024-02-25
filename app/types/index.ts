@@ -220,7 +220,7 @@ export interface ApiPostRequestType <RD =any , S =any , E = any> {
     }
 }
 
-export interface ApiGetRequestType <PT =any , S =any , E = any> {
+export interface ApiGetRequestType <PT extends object ={} , S =any , E = any> {
     PARAMS:PT 
     RESPONSE :{
         SUCCESS:S,

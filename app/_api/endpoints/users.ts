@@ -6,5 +6,5 @@ export const AuthEndpoints = Object.freeze({
 
 
 export interface UsersEndpointType {
-    GET_USERS : ApiGetRequestType <unknown , Array<UserType>>
+    GET_USERS: ApiGetRequestType<{}, Array<UserType>>
 }
