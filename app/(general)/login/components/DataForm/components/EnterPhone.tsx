@@ -13,13 +13,13 @@ export const EnterPhone = () => {
 
     const { dispatch } = useLoginPage()
 
-    const { register, handleSubmit , formState  :{errors}} = useForm<{ phoneNumber: string }>()
+    const { register, handleSubmit, formState: { errors } } = useForm<{ phoneNumber: string }>()
 
     const { data, mutate, isLoading } = useCustomMutation<AuthEndpointType['SEND_OTP']>({
         mutationFn: (data) => api.post(AuthEndpoints.SEND_OTP, data),
-        onSuccess: () => {
+        onSuccess: (data, { phoneNumber }) => {
             toast.success(`کد احراز هویت برای شما ارسال شد. ${data?.data?.code?.code}`)
-            dispatch({ step: 'verify' })
+            dispatch({ step: 'verify', phoneNumber })
         },
         onError: () => {
             toast.error('خطا در ارسال کد احراز هویت.. دوباره تلاش نمایید.')
@@ -27,7 +27,7 @@ export const EnterPhone = () => {
     })
 
     const handleEnter = (data: { phoneNumber: string }) => {
-        mutate({phoneNumber:generateTenDigitOfPhoneNumber(data.phoneNumber)})
+        mutate({ phoneNumber: generateTenDigitOfPhoneNumber(data.phoneNumber) })
     }
 
     return (
