@@ -20,3 +20,24 @@ export const handleKeyPress = (onEnter: React.KeyboardEventHandler<HTMLInputElem
 export const isStringExist = (string?: string) => typeof string == 'string' && string?.length > 0
 
 export const generateTenDigitOfPhoneNumber = (phoneNumber: string) => phoneNumber.substring(phoneNumber.length - 10)
+
+
+const cookieValue = (item: 'access_token') => document?.cookie
+  .split("; ")
+  .find((row) => row.startsWith(item + "="))
+  ?.split("=")[1];
+
+
+export const storeToken = ( access_token :string) => {
+  document.cookie = `access_token=${access_token}; path=/;`
+
+
+}
+
+
+
+export const clearToken = () => {
+  document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+export const getToken = () =>cookieValue('access_token')
