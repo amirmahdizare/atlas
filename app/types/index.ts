@@ -212,7 +212,7 @@ export interface BlogDetailType {
     comments?:number
 }
 
-export interface ApiRequestType <RD =any , S =any , E = any> {
+export interface ApiPostRequestType <RD =any , S =any , E = any> {
     REQUEST:RD
     RESPONSE :{
         SUCCESS:S,

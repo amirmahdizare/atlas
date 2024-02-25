@@ -1,4 +1,4 @@
-import { ApiRequestType } from "types"
+import { ApiPostRequestType } from "types"
 
 export const AuthEndpoints = Object.freeze({
     SEND_OTP: '/auth/sendOTP',
@@ -8,7 +8,7 @@ export const AuthEndpoints = Object.freeze({
 
 
 export interface AuthEndpointType {
-    SEND_OTP: ApiRequestType<
+    SEND_OTP: ApiPostRequestType<
         {
             phoneNumber: string
         }, {
@@ -22,7 +22,7 @@ export interface AuthEndpointType {
             }
         }>,
 
-    VERIFY: ApiRequestType<
+    VERIFY: ApiPostRequestType<
         {
             phoneNumber: string,
             code: string
