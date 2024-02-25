@@ -1,7 +1,8 @@
 import { ApiRequestType } from "types"
 
 export const AuthEndpoints = Object.freeze({
-    SEND_OTP: '/auth/sendOTP'
+    SEND_OTP: '/auth/sendOTP',
+    VERIFY: '/auth/verify',
 })
 
 
@@ -19,5 +20,14 @@ export interface AuthEndpointType {
                 created_at: string,
                 updated_at: string
             }
+        }>,
+
+    VERIFY: ApiRequestType<
+        {
+            phoneNumber: string,
+            code: string
+        },
+        {
+            access_token: string
         }>
 }
