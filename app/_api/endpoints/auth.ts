@@ -1,4 +1,4 @@
-import { ApiPostRequestType } from "types"
+import { ApiGetRequestType, ApiPostRequestType, UserType } from "types"
 
 export const AuthEndpoints = Object.freeze({
     SEND_OTP: '/auth/sendOTP',
@@ -31,3 +31,5 @@ export interface AuthEndpointType {
             access_token: string
         }>
 }
+
+

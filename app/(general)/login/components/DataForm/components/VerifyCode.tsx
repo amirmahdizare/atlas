@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 
 import { Button, Input } from '@components'
 import { api } from '_api/config';
-import { AuthEndpointType, AuthEndpoints } from '_api/endpoints';
+import { AuthEndpointType, AuthEndpoints } from '_api/endpoints/auth';
 import { useCustomMutation } from 'hooks';
 import Countdown from 'react-countdown';
 import { useForm } from 'react-hook-form'

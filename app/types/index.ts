@@ -219,3 +219,18 @@ export interface ApiPostRequestType <RD =any , S =any , E = any> {
         ERROR:E
     }
 }
+
+export interface ApiGetRequestType <PT =any , S =any , E = any> {
+    PARAMS:PT 
+    RESPONSE :{
+        SUCCESS:S,
+        ERROR:E
+    }
+}
+
+export interface UserType {
+    id:string,
+    firstName:string,
+    lastName:string,
+    phoneNumber:string
+}
