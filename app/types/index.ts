@@ -211,3 +211,11 @@ export interface BlogDetailType {
     likes?:number,
     comments?:number
 }
+
+export interface ApiRequestType <RD =any , S =any , E = any> {
+    REQUEST:RD
+    RESPONSE :{
+        SUCCESS:S,
+        ERROR:E
+    }
+}
