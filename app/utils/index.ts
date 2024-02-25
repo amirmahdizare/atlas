@@ -19,3 +19,4 @@ export const handleKeyPress = (onEnter: React.KeyboardEventHandler<HTMLInputElem
 
 export const isStringExist = (string?: string) => typeof string == 'string' && string?.length > 0
 
+export const generateTenDigitOfPhoneNumber = (phoneNumber: string) => phoneNumber.substring(phoneNumber.length - 10)

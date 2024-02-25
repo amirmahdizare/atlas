@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
 import { ContactSummary } from 'components/landingPage';
+import { ClientLayout } from 'ClientLayout';
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="fa" dir='rtl' className='text-mobile lg:text-desktop '>
       <body className={`${IRANYekan.className} ${IRANYekanNumber.className} flex flex-col text-body-2-normal px-2 container mx-auto max-w-[1300px]  `}>
+       <ClientLayout>
         {children}
+       </ClientLayout>
         </body>
     </html>
   )
