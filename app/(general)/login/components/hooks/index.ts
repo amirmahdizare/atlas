@@ -2,6 +2,7 @@ import { create } from 'zustand'
 
 interface DataType {
     step: 'enter' | 'verify',
+    phoneNumber?:string
 }
 
 interface StoreType extends DataType {
@@ -10,5 +11,6 @@ interface StoreType extends DataType {
 
 export const useLoginPage = create<StoreType>((set) => ({
     step: 'enter',
+    // phoneNumber:'',
     dispatch: (data) => set((state) => ({ ...state, ...data }))
 }))
