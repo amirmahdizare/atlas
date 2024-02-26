@@ -7,6 +7,7 @@ import { Menu } from '../Menu/Menu'
 import { IconArrowBack, IconX } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener';
 import logo from 'images/atlaslight.svg'
+import Link from 'next/link'
 
 export const StickyMobileHeader = () => {
 
@@ -16,7 +17,7 @@ export const StickyMobileHeader = () => {
         <div className='flex flex-row gap-4 shadow items-center p-1.5 justify-around fixed lg:hidden top-0 right-0 w-full bg-white z-20'>
 
             <div className='cursor-pointer   p-0.1' onClick={() => setIsOpen(!isOpen)}> <MenuIcon /></div>
-            <Image src={logofull} className='h-6' alt='لوگوی دپارتمان املاک اطلس' />
+            <Link href={'/'}><Image src={logofull} className='h-6' alt='لوگوی دپارتمان املاک اطلس' /></Link>
             <div className='cursor-pointer hover:bg-gray-50 rounded-circle opacity-0 -z-10'> <MenuIcon /></div>
 
             <div className={`h-screen w-screen backdrop-brightness-50 fixed top-0 left-0 z-[2] ${isOpen ?  'opacity-1' : 'opacity-0 pointer-events-none'}`}>
