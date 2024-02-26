@@ -5,7 +5,7 @@ import { AdviserType } from 'types'
 
 export const AdviserCard = ({ img, name, phoneNumber, username, title }: AdviserType) => {
     return (
-        <Link className='flex flex-col rounded gap-2 overflow-hidden items-stretch bg-white hover:shadow my-0.5 relative' href={`/adviser/${username}`}>
+        <Link className='flex flex-col rounded gap-2 overflow-hidden items-stretch bg-white hover:shadow my-0.5 relative' href={`/a/${username}`}>
 
             <div className='relative'>
                 <img src={img.src} className='aspect-square w-full object-cover' />
