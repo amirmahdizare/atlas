@@ -2,6 +2,7 @@ import React from 'react'
 import { Announcement, Building } from '@icons'
 import { IconArrowDownLeft } from '@tabler/icons-react'
 import { Slider } from './components/Slider/Slider'
+import Link from 'next/link'
 
 export const MostViewed = () => {
     return (
@@ -15,10 +16,10 @@ export const MostViewed = () => {
 
 
 
-                <div className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
+                <Link href={'/s/sdfds'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden z-[1]'>
                     <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                     <IconArrowDownLeft width={15} height={15} />
-                </div>
+                </Link>
             </div>
 
             <div className='flex flex-col p-2 lg:p-4 bg-seasalt gap-2 overflow-hidden'>
@@ -39,10 +40,10 @@ export const MostViewed = () => {
 
                     </div>
 
-                    <div className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
+                    <Link href={'/s/sfsd'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex z-[2]'>
                         <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                         <IconArrowDownLeft width={15} height={15} />
-                    </div>
+                    </Link>
 
                 </div>
 

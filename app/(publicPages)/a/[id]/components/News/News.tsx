@@ -2,6 +2,7 @@ import React from 'react'
 import { Announcement, Building } from '@icons'
 import { IconArrowDownLeft } from '@tabler/icons-react'
 import { Properties } from './components/Properties'
+import Link from 'next/link'
 
 export const News = () => {
     return (
@@ -15,10 +16,10 @@ export const News = () => {
 
 
 
-                <div className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
+                <Link href={'/s/sdf'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
                     <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                     <IconArrowDownLeft width={15} height={15} />
-                </div>
+                </Link>
             </div>
 
             <div className='flex flex-col p-1 bg-seasalt gap-2 overflow-hidden'>
