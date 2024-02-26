@@ -10,14 +10,14 @@ export const PropertyListCard = ({ id, img, isSaved, location, price, subLocatio
 
 
     return (
-        <Link href={`/property/${id}`} className='flex flex-col p-2 bg-white items-stretch rounded-[2px] gap-2 hover:shadow ' prefetch={false}>
+        <Link href={`/property/${id}`} className='flex flex-col p-2 bg-white items-stretch rounded-[2px] gap-2 hover:shadow h-auto ' prefetch={false}>
 
             <div className='flex flex-row justify-center'>
 
 
-                <div className='relative aspect-square lg:aspect-[3/2] w- [170px] lg:w-[ 200px] flex-1 w - full rounded-sm overflow-hidden'>
+                <div className='relative aspect-square lg:aspect-[3/2] w-[200px] lg:w-[200px] flex -1 w- full rounded-sm overflow-hidden  h-auto'>
 
-                    <Image src={img} alt={`${title} | دپارتمان املاک اطلس`} title={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect-square lg:aspect-[3/2] ' />
+                    <Image src={img} alt={`${title} | دپارتمان املاک اطلس`} title={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect- square  h-[100px] w- full lg:aspect-[3/2] ' />
 
                     <div className='absolute aspect-square bg-white rounded shadow left-1 top-1 p-1'>
                         <BookmarkStatus isSaved={isSaved} />
