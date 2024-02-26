@@ -12,7 +12,7 @@ import { ActionButtons } from './components/ActionButtons/ActionButtons'
 export const DesktopHeader = () => {
     return (
         <div className='lg:flex flex-row gap-4 items-center justify-between p-2 text-body-3-bolder text-ultra-violet hidden'>
-            <Image src={fullLogo} alt='لوگوی دپارتمان اطلس' className='h-5' />
+            <Link href={'/'}><Image src={fullLogo} alt='لوگوی دپارتمان اطلس' className='h-5' /></Link>
 
             <div className='flex flex-row gap-5 items-center justify-between'>
 
@@ -56,7 +56,7 @@ export const DesktopHeader = () => {
                         }
                     ]} />
 
-                <Link href={'#'} className='hover:text-coral'>اخبار و مقالات</Link>
+                <Link href={'/blogs'} className='hover:text-coral'>اخبار و مقالات</Link>
 
             </div>
             <div className='flex flex-row gap-4 items-center'>
