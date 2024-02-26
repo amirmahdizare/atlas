@@ -6,9 +6,9 @@ export const Menu = ({onClickLink}:{onClickLink?:Function}) => {
     <div className='flex flex-col gap-4'>
 
         <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link>
-        <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link>
-        <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link>
-        <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link>
+        <Link className='hover:text-coral' href={'/login'}>ورود / ثبت نام</Link>
+        {/* <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link> */}
+        {/* <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link> */}
 
 
     </div>
