@@ -16,7 +16,7 @@ export const Advisers = () => {
                 <span className='text-body-2-bolder text-ultra-violet text-center'>خانه دلخواه تان را به کمک مشاورین متخصص اطلس پیدا کنید.</span>
             </div>
 
-            <div className='w-[calc(100%+80px)] '>
+            <div className='w-full [calc(100%+80px)] '>
 
                 <Swiper
                     // spaceBetween={30}                    

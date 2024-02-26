@@ -21,7 +21,7 @@ export const DesktopHeader = () => {
                     <div className='w-3/4 bg-robin-egg-lighter h-[1px] top-full mt-1 right-1/2 translate-x-1/2 absolute'></div>
                 </Link>
 
-                <AccordionMenu
+                {/* <AccordionMenu
                     title='خرید'
                     items={[
                         {
@@ -36,10 +36,10 @@ export const DesktopHeader = () => {
                             link: '#',
                             title: 'خرید ویلا در هشتگرد'
                         }
-                    ]} />
+                    ]} /> */}
 
 
-                <AccordionMenu
+                {/* <AccordionMenu
                     title='رهن و اجاره'
                     items={[
                         {
@@ -54,9 +54,11 @@ export const DesktopHeader = () => {
                             link: '#',
                             title: 'اجاره ویلا در هشتگرد'
                         }
-                    ]} />
+                    ]} /> */}
 
                 <Link href={'/blogs'} className='hover:text-coral'>اخبار و مقالات</Link>
+                <Link href={'/blogs'} className='hover:text-coral'>درباره ما</Link>
+                <Link href={'/blogs'} className='hover:text-coral'>تماس با ما</Link>
 
             </div>
             <div className='flex flex-row gap-4 items-center'>
