@@ -7,8 +7,8 @@ export const Menu = ({onClickLink}:{onClickLink?:Function}) => {
 
         <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link>
         <Link className='hover:text-coral' href={'/login'}>ورود / ثبت نام</Link>
-        {/* <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link> */}
-        {/* <Link className='hover:text-coral' href={'#'}>بازگشت به صفحه اصلی</Link> */}
+        <Link className='hover:text-coral' href={'/addproperty'}>فروش ملک</Link>
+        <Link className='hover:text-coral' href={'/requestproperty'}>درخواست ملک</Link>
 
 
     </div>
