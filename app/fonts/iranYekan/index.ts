@@ -20,7 +20,7 @@ export const IRANYekan= localFont({
             weight: '400'
         },
         {
-            path: './IRANYekanX-Medium.ttf',
+            path: './IRANYekanX-Regular.ttf',
             weight: '500'
         },
         {
