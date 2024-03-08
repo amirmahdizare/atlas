@@ -66,7 +66,7 @@ export const RowItem = (ad: UserListType) => {
                                 {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
-                                    <span>حذف مشاور</span>
+                                    <span>حذف کاربر</span>
                                     <IconTrash width={20} height={20} className='text-red-500' />
                                 </div>
 
