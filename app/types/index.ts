@@ -26,8 +26,8 @@ export interface BlogItemType {
     img: string,
     id: string,
     duration: number,
-    likes?:number,
-    comments?:number
+    likes?: number,
+    comments?: number
 }
 
 export type pageProps<PT = {}, SP = {}> = {
@@ -197,7 +197,7 @@ export interface RequestItemType {
     category: string,
     city: string,
     zone: string,
-    id:string
+    id: string
 }
 
 export interface BlogDetailType {
@@ -208,29 +208,43 @@ export interface BlogDetailType {
     img: string,
     id: string,
     duration: number,
-    likes?:number,
-    comments?:number
+    likes?: number,
+    comments?: number
 }
 
-export interface ApiPostRequestType <RD =any , S =any , E = any> {
-    REQUEST:RD
-    RESPONSE :{
-        SUCCESS:S,
-        ERROR:E
+export interface ApiPostRequestType<RD = any, S = any, E = any> {
+    REQUEST: RD
+    RESPONSE: {
+        SUCCESS: S,
+        ERROR: E
     }
 }
 
-export interface ApiGetRequestType <PT extends object ={} , S =any , E = any> {
-    PARAMS:PT 
-    RESPONSE :{
-        SUCCESS:S,
-        ERROR:E
+export interface ApiGetRequestType<PT extends object = {}, S = any, E = any> {
+    PARAMS: PT
+    RESPONSE: {
+        SUCCESS: S,
+        ERROR: E
     }
 }
 
-export interface UserType {
-    id:string,
-    firstName:string,
-    lastName:string,
-    phoneNumber:string
+// export interface UserType {
+//     id: string,
+//     firstName: string,
+//     lastName: string,
+//     phoneNumber: string
+// }
+
+export type RoleType = 'user' | 'superAdmin' | 'adviser'
+
+export interface UserListType {
+    id: number,
+    firstName: string,
+    lastName: string,
+    userName: null | string,
+    phoneNumber: number, //Without Zero
+    role: {
+        id: number,
+        name: RoleType
+    } | null
 }

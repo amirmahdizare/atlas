@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 import { useAdvisersSection } from './hooks'
-import { List } from './components/List/List'
 import { SingleUser } from './components/SingleUser/SingleUser'
+import { ListSection } from './components/List/ListSection'
 
 export const ClientPage = () => {
 
@@ -11,7 +11,7 @@ export const ClientPage = () => {
     return (
         <div className='flex flex-col gap-2'>
 
-            {mode == 'list' && <List />}
+            {mode == 'list' && <ListSection />}
 
             {mode != 'list' && <SingleUser />}
 
