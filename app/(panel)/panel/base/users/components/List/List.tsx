@@ -47,7 +47,7 @@ export const List = () => {
             </div>
         )
     else if (isError)
-        return <span>خطا در دریافت اطلاعات</span>
+        return <div className='flex flex-col gap-2 items-center justify-center text-red-500 h-full w-full'>خطا در دریافت اطلاعات</div>
 
     return <>
         {Array.from(new Array(10)).map(i => <UserSkeleton />)}
