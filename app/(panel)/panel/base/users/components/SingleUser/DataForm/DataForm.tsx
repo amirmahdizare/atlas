@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useAdvisersSection, useUserList } from '../../../hooks'
 // import imageSample from 'images/image.svg'
 // import { accesses } from '(panel)/panel/data.mock'
-import { useCustomMutation } from 'hooks'
+import { useCustomMutation, useCustomQuery } from 'hooks'
 import { api } from '_api/config'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { toast } from 'react-toastify'
@@ -14,7 +14,8 @@ export const DataForm = () => {
 
     const { dispatch, userId, mode } = useAdvisersSection()
 
-    const { refetch } = useUserList()
+    const { refetch, data: usersData } = useUserList()
+
 
     const { mutate, isLoading } = useCustomMutation<UsersEndpointType['CREATE_USER']>({
         mutationFn: (data) => api.post(UsersEndpoints.CREATE_USER, data),
@@ -28,7 +29,9 @@ export const DataForm = () => {
 
     const methods = useForm<UsersEndpointType['CREATE_USER']['REQUEST']>()
 
-    const { register, formState: { errors }, watch, getValues, handleSubmit } = methods
+    const { register, formState: { errors }, watch, getValues, setValue, handleSubmit, reset } = methods
+
+
 
     // watch('avatar')
 
@@ -36,7 +39,10 @@ export const DataForm = () => {
 
 
     useEffect(() => {
-        // fetch with id
+        if (usersData?.data.find(i => i.id == userId)) {
+            reset(usersData?.data.find(i => i.id == userId))
+        }
+
     }, [userId])
 
 

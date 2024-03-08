@@ -8,7 +8,7 @@ import { create } from 'zustand'
 
 interface DataType {
     mode: 'list' | 'add' | 'edit',
-    userId?: string
+    userId?: number
 }
 
 

@@ -242,7 +242,7 @@ export interface UserListType {
     firstName: string,
     lastName: string,
     userName: null | string,
-    phoneNumber: number, //Without Zero
+    phoneNumber: string, //Without Zero
     role: {
         id: number,
         name: RoleType
