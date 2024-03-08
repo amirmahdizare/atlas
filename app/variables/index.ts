@@ -10,6 +10,9 @@ export const COORDINATE = {
 export const NESHAN_SHORTCUT = "https://nshn.ir/_bv0-UOxSRKg"
 
 export const CONTACT_INFO = {
-    email:'amlakatlas@gmail.com',
-    phone:'02644250952'
+    email: 'amlakatlas@gmail.com',
+    phone: '02644250952'
 }
+
+
+export const NEW_USER_DEFAULT_NAME = '-- کاربر جدید --'
