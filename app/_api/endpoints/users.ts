@@ -1,6 +1,6 @@
-import { ApiGetRequestType, ApiPostRequestType, UserType } from "types"
+import { ApiGetRequestType, ApiPostRequestType, UserListType } from "types"
 
-export const AuthEndpoints = Object.freeze({
+export const UsersEndpoints = Object.freeze({
     GET_USERS: '/users',
     CREATE_USER: '/users/create',
     UPDATE_USER_ROLE: (id: string) => `/users/${id}/role`
@@ -8,7 +8,7 @@ export const AuthEndpoints = Object.freeze({
 
 
 export interface UsersEndpointType {
-    GET_USERS: ApiGetRequestType<{}, Array<UserType>>,
+    GET_USERS: ApiGetRequestType<{}, Array<UserListType>>,
     CREATE_USER: ApiPostRequestType<{ firstName: string, lastName: string, phoneNumber: string }, {
         firstName: string,
         lastName: string,
