@@ -1,40 +1,85 @@
 import { Button, Input, TextArea } from '@components'
-import Image from 'next/image'
+// import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { AdviserCUType } from 'types'
-import { useAdvisersSection } from '../../../hooks'
-import imageSample from 'images/image.svg'
-import { accesses } from '(panel)/panel/data.mock'
+import { useAdvisersSection, useUserList } from '../../../hooks'
+// import imageSample from 'images/image.svg'
+// import { accesses } from '(panel)/panel/data.mock'
+import { useCustomMutation } from 'hooks'
+import { api } from '_api/config'
+import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
+import { toast } from 'react-toastify'
 
 export const DataForm = () => {
 
-    const { dispatch, adviserId , mode } = useAdvisersSection()
+    const { dispatch, userId, mode } = useAdvisersSection()
 
-    const methods = useForm<AdviserCUType<File[]>>()
+    const { refetch } = useUserList()
 
-    const { register, formState: { errors }, watch, getValues } = methods
+    const { mutate, isLoading } = useCustomMutation<UsersEndpointType['CREATE_USER']>({
+        mutationFn: (data) => api.post(UsersEndpoints.CREATE_USER, data),
+        mutationKey: 'addUser',
+        onSuccess: (data, { firstName }) => {
+            dispatch({ mode: 'list' });
+            refetch();
+            toast.success(`کاربر ${firstName} با موفقیت اضافه شد.`)
+        }
+    })
 
-    watch('avatar')
+    const methods = useForm<UsersEndpointType['CREATE_USER']['REQUEST']>()
 
-    const avatarImg = () => getValues('avatar')?.[0] ? URL?.createObjectURL(getValues('avatar')?.[0]) : imageSample.src
+    const { register, formState: { errors }, watch, getValues, handleSubmit } = methods
+
+    // watch('avatar')
+
+    // const avatarImg = () => getValues('avatar')?.[0] ? URL?.createObjectURL(getValues('avatar')?.[0]) : imageSample.src
 
 
     useEffect(() => {
         // fetch with id
-    }, [adviserId])
+    }, [userId])
+
+
+    const handleMutateUser = (data: UsersEndpointType['CREATE_USER']['REQUEST']) => {
+        mutate(data)
+    }
 
     return (
         <FormProvider {...methods}>
-            <div className='flex flex-col gap-4'>
+            <form className='flex flex-col gap-4' onSubmit={handleSubmit(handleMutateUser)}>
 
-                <Input label='نام و نام خانوادگی مشاور' register={register('name')} />
+                <Input label='نام ' register={register('firstName', {
+                    required: {
+                        value: true,
+                        message: 'شماره تلفن ضروری است.'
+                    }
+                })} />
 
-                <Input label='نام کاربری' register={register('username')} />
+                <Input label='نام خانوادگی ' register={register('lastName', {
+                    required: {
+                        value: true,
+                        message: 'شماره تلفن ضروری است.'
+                    }
+                })} />
 
-                <TextArea label='درباره مشاور' register={register('desc')} />
+                <Input type='tel' label='شماره تلفن' register={register('phoneNumber',
+                    {
+                        pattern: {
+                            value: /^09\d{9}/g,
+                            message: 'شماره تلفن به درستی وارد نشده است.'
+                        },
+                        required: {
+                            value: true,
+                            message: 'شماره تلفن ضروری است.'
+                        }
+                    })}
+                    error={!!errors?.phoneNumber}
+                    errorText={errors?.phoneNumber?.message}
+                />
 
-                <div className='flex flex-col gap-2'>
+                {/* <TextArea label='درباره مشاور' register={register('desc')} /> */}
+
+                {/* <div className='flex flex-col gap-2'>
                     <span className='text-body-3-bolder text-ultra-violet'>تصویر پروفایل مشاور</span>
                     <label className='border border-dashed border-ghost-white rounded flex flex-row gap-2 justify-between cursor-pointer p-2 items-center' htmlFor='adviser-avatar'>
                         <div className='flex flex-row gap-2 items-center'>
@@ -53,10 +98,10 @@ export const DataForm = () => {
 
                     </label>
 
-                </div>
+                </div> */}
 
 
-                <div className='flex flex-col gap-3'>
+                {/* <div className='flex flex-col gap-3'>
                     <span className='text-body-3-bolder text-ultra-violet '>دسترسی های مشاور</span>
                     {accesses.map(item => <label className='flex flex-row gap-1 cursor-pointer items-start ' htmlFor={item.route}>
                         <input type='checkbox' className='mt-0.5 accent-mint-green' id={item.route} />
@@ -65,17 +110,17 @@ export const DataForm = () => {
                             <span className='text-body-3-normal leading-3 text-gray-500'>{item.hint}</span>
                         </div>
                     </label>)}
-                </div>
+                </div> */}
                 <div className='flex flex-row gap-4'>
 
-                    <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', adviserId: undefined })} fullWidth>انصراف</Button>
-                    <Button bgColor='primaryNormal' textColor='white' fullWidth >ثبت {mode=='add' ? '' : 'تغییرات'}</Button>
+                    <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', userId: undefined })} fullWidth>انصراف</Button>
+                    <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading}>ثبت {mode == 'add' ? '' : 'تغییرات'}</Button>
 
                 </div>
 
 
 
-            </div>
+            </form>
         </FormProvider>
     )
 }

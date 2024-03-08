@@ -1,7 +1,7 @@
 import { Button } from '@components'
 import { IconPlus, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import { useAdvisersSection } from '../../hooks'
+import { useAdvisersSection, useUserList } from '../../hooks'
 import { advisers } from '../../data.mock'
 import ReactSwitch from 'react-switch'
 import { RowItem } from './RowItem'
@@ -16,15 +16,7 @@ export const List = () => {
 
     const { dispatch } = useAdvisersSection()
 
-    const { data, isLoading, isError } = useCustomQuery<UsersEndpointType['GET_USERS']>({
-        queryKey: 'getUsers',
-        queryFn: () => api.get(UsersEndpoints.GET_USERS),
-        onError: () => toast.error('خطا در دریافت لیست کاربران')
-    })
-
-    console.log(data?.data)
-
-
+    const { data, isLoading, isError } = useUserList()
 
 
     if (data?.data)
