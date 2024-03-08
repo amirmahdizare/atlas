@@ -10,6 +10,7 @@ import { api } from '_api/config'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { useCustomQuery } from 'hooks'
 import { toast } from 'react-toastify'
+import { UserSkeleton } from './components/UserSkeleton'
 
 export const List = () => {
 
@@ -22,6 +23,7 @@ export const List = () => {
     })
 
     console.log(data?.data)
+
 
 
 
@@ -40,11 +42,16 @@ export const List = () => {
 
                 {data?.data.map(i => <RowItem {...i} />)}
 
+
+
             </div>
         )
     else if (isError)
         return <span>خطا در دریافت اطلاعات</span>
-    return <span>دریافت اطلاعات</span>
+
+    return <>
+        {Array.from(new Array(10)).map(i => <UserSkeleton />)}
+    </>
 }
 
 //     <div className='flex flex-row gap-2 justify-between '>
