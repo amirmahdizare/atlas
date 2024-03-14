@@ -23,11 +23,12 @@ export const List = () => {
         return (
             <div className='flex flex-col gap-2'>
 
-                <div className='grid grid-cols-4 gap-2 bg-seasalt p-2 text-ultra-violet text-body-3-normal'>
+                <div className='grid grid-cols-5 gap-2 bg-seasalt p-2 text-ultra-violet text-body-3-normal'>
                     <div className='col-span-2'>نام کاربر</div>
                     {/* <div className='col-span-1'>آگهی فعال</div> */}
                     {/* <div className='col-span-1'>زمان آخرین آگهی</div> */}
                     <div className='col-span-1'>شماره موبایل</div>
+                    <div className='col-span-1'>نقش</div>
                     <div className='col-span-1 text-center'>عملیات</div>
 
                 </div>
