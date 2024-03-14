@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash } from '@tabler/icons-react'
+import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash, IconUser } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
 import ReactSwitch from 'react-switch'
 import { AgentListInfo, UserListType } from 'types'
@@ -63,6 +63,12 @@ export const RowItem = (ad: UserListType) => {
                                     <span>ویرایش</span>
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div> */}
+
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', userId: ad.id })}>
+                                    <span>تغییر نقش کاربر</span>
+                                    <IconUser width={20} height={20} className='text-mint-green' />
+                                </div>
+
 
                                 {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
 
