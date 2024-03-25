@@ -23,8 +23,8 @@ export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRol
 
   const { mutate, isLoading: mutateLoading } = useCustomMutation({
     mutationFn: () => api.patch(UsersEndpoints.UPDATE_USER_ROLE(userId.toString())),
-    onError: () => {
-      toast.error('الصاق نقش با خطا مواجه شد.')
+    onError: (data) => {
+      toast.error(data.response?.data?.message)
     },
     onSuccess: () => {
       toast.success('نقش با موفقیت الصاق شد.')

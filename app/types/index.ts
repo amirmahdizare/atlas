@@ -212,7 +212,7 @@ export interface BlogDetailType {
     comments?: number
 }
 
-export interface ApiPostRequestType<RD = any, S = any, E = any> {
+export interface ApiPostRequestType<RD = any, S = any, E = ErrorResponseType> {
     REQUEST: RD
     RESPONSE: {
         SUCCESS: S,
@@ -220,7 +220,7 @@ export interface ApiPostRequestType<RD = any, S = any, E = any> {
     }
 }
 
-export interface ApiGetRequestType<PT extends object = {}, S = any, E = any> {
+export interface ApiGetRequestType<PT extends object = {}, S = any, E = ErrorResponseType> {
     PARAMS: PT
     RESPONSE: {
         SUCCESS: S,
@@ -228,12 +228,11 @@ export interface ApiGetRequestType<PT extends object = {}, S = any, E = any> {
     }
 }
 
-// export interface UserType {
-//     id: string,
-//     firstName: string,
-//     lastName: string,
-//     phoneNumber: string
-// }
+export interface ErrorResponseType {
+    message: string,
+    error: string,
+    statusCode: number
+}
 
 export type RoleTypeName = 'user' | 'superAdmin' | 'adviser'
 
