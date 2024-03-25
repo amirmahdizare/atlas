@@ -1,11 +1,14 @@
-import { Modal } from '@components'
+import React, { useState } from 'react'
+
+import { Modal, Spinner } from '@components'
 import { IconUser } from '@tabler/icons-react'
 import { api } from '_api/config'
 import { RoleEndPoints, RoleEndPointsType } from '_api/endpoints/roles'
-import { Axios } from 'axios'
-import { useCustomQuery } from 'hooks'
-import React, { useState } from 'react'
-import { RoleType } from 'types'
+import { UsersEndpoints } from '_api/endpoints/users'
+import { useCustomMutation, useCustomQuery } from 'hooks'
+import { toast } from 'react-toastify'
+import { captilizeFirstLetter } from 'utils'
+import { useUserList } from '../../../hooks'
 
 export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRoleId?: number }) => {
 
@@ -13,7 +16,21 @@ export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRol
 
   const { data, isLoading } = useCustomQuery<RoleEndPointsType['GET_ROLES']>({
     queryFn: () => api.get(RoleEndPoints.GET_ROLES),
-    queryKey:'getAllRoles',
+    queryKey: 'getAllRoles',
+  })
+
+  const { refetch } = useUserList()
+
+  const { mutate, isLoading: mutateLoading } = useCustomMutation({
+    mutationFn: () => api.patch(UsersEndpoints.UPDATE_USER_ROLE(userId.toString())),
+    onError: () => {
+      toast.error('الصاق نقش با خطا مواجه شد.')
+    },
+    onSuccess: () => {
+      toast.success('نقش با موفقیت الصاق شد.')
+      refetch()
+      return setIsModalOpen(false)
+    }
   })
 
   return (
@@ -26,26 +43,21 @@ export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRol
       <Modal
         open={isModalOpen}
         setOpen={setIsModalOpen}
-
+        fitHeight
       >
-        <div className='flex flex-col gap-2 '>
-          <span>نقش دادن به کاربر</span>
+        <div className='flex flex-col gap-2 p-2'>
 
-          {data?.data.map(item => <label className='cursor-pointer flex flex-row gap-2 items-center'>
-            <input type='checkbox' />
-            <span>{item.name}</span>
+          <span className='font-bold text-md'>نقش دادن به کاربر</span>
+
+          {data?.data.map(item => <label onClick={() => userRoleId == item.id ? null : mutate(item.id)} htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-1 justify-center items-center p-2 border rounded text-center hover:bg-gray-50 ${userRoleId == item.id ? 'bg-blue-300 border-mint-green' : ''}`}>
+            <span>{captilizeFirstLetter(item.name)}</span>
           </label>)}
+
+          {(isLoading || mutateLoading) && <Spinner />}
 
         </div>
 
       </Modal>
-
-      {/* {isModalOpen && createPortal(<div className='fixed top-0 left-0 w-full h-full backdrop-brightness-50 z-20 flex flex-row justify-center items-center'>
-
-
-
-      </div>, document.body)} */}
-
 
     </>
   )
