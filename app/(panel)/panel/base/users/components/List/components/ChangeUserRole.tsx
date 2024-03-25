@@ -49,7 +49,7 @@ export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRol
 
           <span className='font-bold text-md'>نقش دادن به کاربر</span>
 
-          {data?.data.map(item => <label onClick={() => userRoleId == item.id ? null : mutate(item.id)} htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-1 justify-center items-center p-2 border rounded text-center hover:bg-gray-50 ${userRoleId == item.id ? 'bg-blue-300 border-mint-green' : ''}`}>
+          {data?.data.map(item => <label onClick={() => userRoleId == item.id ? null : mutate(item.id)} htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-1 justify-center items-center p-2 border-2 rounded text-center hover:bg-gray-50 ${userRoleId == item.id ? 'bg-blue-50 border-mint-green' : ''}`}>
             <span>{captilizeFirstLetter(item.name)}</span>
           </label>)}
 
