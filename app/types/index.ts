@@ -235,7 +235,7 @@ export interface ApiGetRequestType<PT extends object = {}, S = any, E = any> {
 //     phoneNumber: string
 // }
 
-export type RoleType = 'user' | 'superAdmin' | 'adviser'
+export type RoleTypeName = 'user' | 'superAdmin' | 'adviser'
 
 export interface UserListType {
     id: number,
@@ -245,6 +245,11 @@ export interface UserListType {
     phoneNumber: string, //Without Zero
     role: {
         id: number,
-        name: RoleType
+        name: RoleTypeName
     } | null
+}
+
+export interface RoleType {
+    id: number,
+    name: RoleTypeName
 }
