@@ -5,6 +5,7 @@ import ReactSwitch from 'react-switch'
 import { AgentListInfo, UserListType } from 'types'
 import { useAdvisersSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
+import { ChangeUserRole } from './components/ChangeUserRole'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -58,19 +59,14 @@ export const RowItem = (ad: UserListType) => {
                     {more &&
                         <ClickAwayListener onClickAway={() => setMore(false)}>
 
-                            <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-20 left-1/2 -transla te-x-1/2 text-body-3-normal'>
+                            <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-10 left-1/2 -transla te-x-1/2 text-body-3-normal'>
                                 {/* <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', userId: ad.id })}>
                                     <span>ویرایش</span>
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div> */}
 
-                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', userId: ad.id })}>
-                                    <span>تغییر نقش کاربر</span>
-                                    <IconUser width={20} height={20} className='text-mint-green' />
-                                </div>
+                                <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/>
 
-
-                                {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
                                     <span>حذف کاربر</span>
