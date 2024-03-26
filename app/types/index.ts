@@ -252,3 +252,12 @@ export interface RoleType {
     id: number,
     name: RoleTypeName
 }
+
+export interface PermissionType <IT> {
+    id: IT,
+    route: number,
+    title: string,
+    isMenuItem: boolean,
+    hint: string,
+    action: string
+}
