@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 
 import { IconDotsVertical, IconPhoneCall, IconTrash } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
-import {  UserListType } from 'types'
+import {  PermissionType } from 'types'
 import { usePermissionsSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
+import { captilizeFirstLetter } from 'utils'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -15,7 +16,7 @@ const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: st
 }
 
 
-export const RowItem = (ad: UserListType) => {
+export const RowItem = (ad: PermissionType<string>) => {
 
     const [more, setMore] = useState<boolean>(false)
 
@@ -24,16 +25,11 @@ export const RowItem = (ad: UserListType) => {
     return (
         <div className='grid grid-cols-5 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
             <div className='col-span-2 flex flex-row gap-1 items-center'>
-                {/* <img src={ad.avatar} className='rounded-circle w-5 aspect-square object-cover' /> */}
-                <RenderName firstName={ad?.firstName} lastName={ad?.lastName} />
+                {captilizeFirstLetter(ad.title)}
             </div>
-            {/* <div className='col-span-1'>{ad.propertyCount.toLocaleString()}</div> */}
-            {/* <div className='col-span-1'>{(new Date()).toLocaleDateString('fa-ir')}</div> */}
-            <a href={`tel:${ad.phoneNumber}`} title='تماس' className='col-span-1 hover:text-coral flex flex-row items-center gap-0.5'>
-                {ad.phoneNumber}
-                <IconPhoneCall width={15} height={15} className='text-french-gray' />
-            </a>
-            <span >{ad?.role?.name ? ad?.role?.name[0].toUpperCase().concat(ad?.role?.name.substring(1)) : '-'}</span>
+            <div className='col-span-1'>{ad.route}</div>
+            <div className='col-span-1'>{ad.action}</div>
+
             <div className='col-span-1 flex flex-row gap-2 justify-center'>
 
 
@@ -65,7 +61,7 @@ export const RowItem = (ad: UserListType) => {
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div> */}
 
-                                <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/>
+                                {/* <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/> */}
 
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
