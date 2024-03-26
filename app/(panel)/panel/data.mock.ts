@@ -32,6 +32,12 @@ export const accesses: AccessType[] = [
         hint: 'با این دسترسی امکان ویرایش/اضافه/حذف کاربران به کاربر داده می شود.'
     },
     {
+        route: 'base/permissions',
+        title: 'مدیریت دسترسی ها',
+        isMenuItem: true,
+        hint: 'با این دسترسی امکان افزودن / ویرایش / حذف دسترسی ها به کاربر داده می شود.'
+    },
+    {
         route: 'base/info',
         title: 'مدیریت اطلاعات دپارتمان',
         isMenuItem: true,
