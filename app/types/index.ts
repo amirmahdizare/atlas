@@ -253,11 +253,18 @@ export interface RoleType {
     name: RoleTypeName
 }
 
-export interface PermissionType <IT> {
+export interface PermissionType<IT> {
     id: IT,
     route: number,
     title: string,
     isMenuItem: boolean,
     hint: string,
-    action:  keyof typeof PermissionBackendRoutes
+    action: keyof typeof PermissionBackendRoutes
+}
+
+export interface CityType {
+    name: string,
+    id: number,
+    createTime: string /// 2024-03-05,
+    updateTime: string /// 2024-03-05
 }
