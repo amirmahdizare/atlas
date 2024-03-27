@@ -1,16 +1,13 @@
-import { Button, Spinner } from '@components'
-import { IconMapPin, IconPlus } from '@tabler/icons-react'
 import React from 'react'
 import { useCities, useCitiesSection } from '../../hooks'
 import { CityItem } from './CityItem'
-import { SingleCity } from './components/SingleCity'
+import { Skeleton } from './components/Skeleton'
 
 export const List = () => {
 
     const { dispatch } = useCitiesSection()
 
     const { data, isError } = useCities()
-
 
 
     if (data?.data) {
@@ -43,5 +40,5 @@ export const List = () => {
 
 
     else
-        return <Spinner />
+        return <>   {Array.from(new Array(10)).map(i => <Skeleton />)}</>
 }
