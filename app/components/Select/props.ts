@@ -1,6 +1,6 @@
 interface SelectProps {
     items:Array<{lable:string , value:string}> ,
-    onChange:(id:string)=>void,
+    onChange:(id:any)=>void,
     value:string | number,
     fullWidth?:boolean,
     placeHolder?:string,

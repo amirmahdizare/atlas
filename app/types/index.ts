@@ -1,5 +1,5 @@
 import { IconBabyBottle } from '@tabler/icons-react'
-import { CategorySpecialField, PropertyType } from 'enums'
+import { CategorySpecialField, PermissionBackendRoutes, PropertyType } from 'enums'
 import { StaticImageData } from 'next/image'
 
 export interface PropertyListItemType {
@@ -259,5 +259,5 @@ export interface PermissionType <IT> {
     title: string,
     isMenuItem: boolean,
     hint: string,
-    action: string
+    action:  keyof typeof PermissionBackendRoutes
 }

@@ -1,15 +1,13 @@
-import { Button, Input, TextArea } from '@components'
-// import Image from 'next/image'
 import React, { useEffect } from 'react'
+
+import { Button, Input, Select } from '@components'
 import { FormProvider, useForm } from 'react-hook-form'
-import { usePermissionList , usePermissionsSection } from '../../../hooks'
-// import imageSample from 'images/image.svg'
-// import { accesses } from '(panel)/panel/data.mock'
+import { usePermissionList, usePermissionsSection } from '../../../hooks'
 import { useCustomMutation, useCustomQuery } from 'hooks'
 import { api } from '_api/config'
-import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { toast } from 'react-toastify'
-import { PermissionEndPointsType } from '_api/endpoints/permission'
+import { PermissionEndPoints, PermissionEndPointsType } from '_api/endpoints/permission'
+import { PermissionBackendRoutes } from 'enums'
 
 export const DataForm = () => {
 
@@ -19,25 +17,24 @@ export const DataForm = () => {
 
 
     const { mutate, isLoading } = useCustomMutation<PermissionEndPointsType['CREATE']>({
-        mutationFn: (data) => api.post(UsersEndpoints.CREATE_USER, data),
-        mutationKey: 'addUser',
-        onSuccess: (data, {  }) => {
+        mutationFn: (data) => api.post(PermissionEndPoints.CREATE, data),
+        mutationKey: 'addPermission',
+        onSuccess: (data, { }) => {
             dispatch({ mode: 'list' });
             refetch();
-            toast.success(`کاربر ${''} با موفقیت اضافه شد.`)
+            toast.success(`دسترسی ${data?.data?.title} با موفقیت اضافه شد.`)
+        },
+        onError:(data)=>{
+            toast.error(data.response?.data?.message)
         }
     })
 
-    const methods = useForm<UsersEndpointType['CREATE_USER']['REQUEST']>()
+    const methods = useForm<PermissionEndPointsType['CREATE']['REQUEST']>()
 
     const { register, formState: { errors }, watch, getValues, setValue, handleSubmit, reset } = methods
 
 
-
-    // watch('avatar')
-
-    // const avatarImg = () => getValues('avatar')?.[0] ? URL?.createObjectURL(getValues('avatar')?.[0]) : imageSample.src
-
+    watch('action')
 
     useEffect(() => {
         // if (permissionData?.data.find(i => i.id == permissionId)) {
@@ -47,42 +44,55 @@ export const DataForm = () => {
     }, [permissionId])
 
 
-    const handleMutateUser = (data: UsersEndpointType['CREATE_USER']['REQUEST']) => {
-        // mutate(data)
+    const handleMutateUser = (data: PermissionEndPointsType['CREATE']['REQUEST']) => {
+        mutate({ ...data })
     }
 
     return (
         <FormProvider {...methods}>
             <form className='flex flex-col gap-4' onSubmit={handleSubmit(handleMutateUser)}>
 
-                <Input label='نام ' register={register('firstName', {
+                <Input label='عنوان' register={register('title', {
                     required: {
                         value: true,
-                        message: 'شماره تلفن ضروری است.'
+                        message: 'عنوان ضروری است.'
                     }
                 })} />
 
-                <Input label='نام خانوادگی ' register={register('lastName', {
+                <Select
+                    items={Object.keys(PermissionBackendRoutes).map((i, index, arr) => ({ lable: i, value: Object.values(PermissionBackendRoutes)[index] }))}
+                    onChange={(value: keyof typeof PermissionBackendRoutes) => setValue('action', value)}
+                    value={getValues('action')}
+                />
+
+
+                <Input label='مسیر' register={register('route', {
                     required: {
                         value: true,
-                        message: 'شماره تلفن ضروری است.'
-                    }
-                })} />
+                        message: 'مسیر ضروری است.'
+                    },
+                    
+                })} 
+                dir='ltr'
+                placeholder='مثال : /base/users'
+                />
 
-                <Input type='tel' label='شماره تلفن' register={register('phoneNumber',
+                <Input label='راهنما / توضیح' register={register('hint',
                     {
-                        pattern: {
-                            value: /^09\d{9}/g,
-                            message: 'شماره تلفن به درستی وارد نشده است.'
-                        },
                         required: {
                             value: true,
-                            message: 'شماره تلفن ضروری است.'
+                            message: 'توضیح ضروری است.'
                         }
                     })}
-                    error={!!errors?.phoneNumber}
-                    errorText={errors?.phoneNumber?.message}
+                    error={!!errors?.hint}
+                    errorText={errors?.hint?.message}
                 />
+
+                <label className='flex flex-row gap-1 items-center'>
+                    <input type='checkbox' {...register('isMenuItem')} />
+                    <span>آیا منو می باشد؟</span>
+                </label>
+
 
                 {/* <TextArea label='درباره مشاور' register={register('desc')} /> */}
 

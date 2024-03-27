@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import {  usePermissionsSection } from './hooks'
-import { SingleUser } from './components/SingleUser/SingleUser'
+import { Single } from './components/Single/Single'
 import { ListSection } from './components/List/ListSection'
 
 export const ClientPage = () => {
@@ -13,7 +13,7 @@ export const ClientPage = () => {
 
             {mode == 'list' && <ListSection />}
 
-            {mode != 'list' && <SingleUser />}
+            {mode != 'list' && <Single />}
 
         </div>
     )
