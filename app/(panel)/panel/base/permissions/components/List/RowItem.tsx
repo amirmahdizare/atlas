@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 
 import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
-import {  PermissionType } from 'types'
+import { PermissionType } from 'types'
 import { usePermissionsSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
 import { captilizeFirstLetter } from 'utils'
+import { DeletePermission } from './components/DeletePermission'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -61,13 +62,8 @@ export const RowItem = (ad: PermissionType<string>) => {
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div>
 
-                                {/* <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/> */}
+                                <DeletePermission id={ad.id} title={ad.title} />
 
-
-                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
-                                    <span>حذف کاربر</span>
-                                    <IconTrash width={20} height={20} className='text-red-500' />
-                                </div>
 
                             </div>
                         </ClickAwayListener>

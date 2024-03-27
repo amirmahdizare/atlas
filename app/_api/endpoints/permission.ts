@@ -11,5 +11,6 @@ export interface PermissionEndPointsType {
     CREATE: ApiPostRequestType<PermissionType<string>, PermissionType<string>>,
     GET_LIST: ApiGetRequestType<{}, PermissionType<string>[]>
     GET_SINGLE: ApiGetRequestType<{}, { id: number, name: string }>,
-    UPDATE_PERMISSION: ApiGetRequestType<PermissionType<string>>
+    UPDATE_PERMISSION: ApiGetRequestType<PermissionType<string>>,
+    DELETE_PERMISSION: ApiPostRequestType<{}>
 }
