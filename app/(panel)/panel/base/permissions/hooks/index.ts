@@ -8,7 +8,7 @@ import { create } from 'zustand'
 
 interface DataType {
     mode: 'list' | 'add' | 'edit',
-    permissionId?: number
+    permissionId?: string | number
 }
 
 

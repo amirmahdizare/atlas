@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { IconDotsVertical, IconPhoneCall, IconTrash } from '@tabler/icons-react'
+import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
 import {  PermissionType } from 'types'
 import { usePermissionsSection } from '../../hooks'
@@ -56,10 +56,10 @@ export const RowItem = (ad: PermissionType<string>) => {
                         <ClickAwayListener onClickAway={() => setMore(false)}>
 
                             <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-10 left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                {/* <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', userId: ad.id })}>
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', permissionId: ad.id.toString() })}>
                                     <span>ویرایش</span>
                                     <IconPencil width={20} height={20} className='text-mint-green' />
-                                </div> */}
+                                </div>
 
                                 {/* <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/> */}
 

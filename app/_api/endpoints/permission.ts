@@ -8,8 +8,8 @@ export const PermissionEndPoints = Object.freeze({
 })
 
 export interface PermissionEndPointsType {
-    CREATE: ApiPostRequestType<PermissionType<undefined>, PermissionType<string>>,
-    GET_LIST: ApiGetRequestType<{}, RoleType[]>
+    CREATE: ApiPostRequestType<PermissionType<string>, PermissionType<string>>,
+    GET_LIST: ApiGetRequestType<{}, PermissionType<string>[]>
     GET_SINGLE: ApiGetRequestType<{}, { id: number, name: string }>,
     UPDATE_PERMISSION: ApiGetRequestType<PermissionType<string>>
 }
