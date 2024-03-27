@@ -13,3 +13,29 @@ export enum CategorySpecialField {
     "ONEBUTTON"='ONEBUTTON',
 
 }
+
+
+export enum PermissionBackendRoutes {
+    PRODUCT_CREATE = "create_product",
+    PRODUCT_READ = "read_product",
+    PRODUCT_UPDATE = "update_product",
+    PRODUCT_DELETE = "delete_product",
+
+
+    BLOG_CREATE = "create_blog",
+    BLOG_READ = "read_blog",
+    BLOG_UPDATE = "update_blog",
+    BLOG_DELETE = "delete_blog",
+
+    ROLE_CREATE = 'create_role',
+    ROLE_READ = 'read_role',
+    ROLE_UPDATE = 'update_role',
+    ROLE_DELETE = 'delete_role',
+
+
+    USER_CREATE = 'create_user',
+    USER_READ = 'read_user',
+    USER_UPDATE = 'update_user',
+    USER_DELETE = 'delete_user',
+
+}
