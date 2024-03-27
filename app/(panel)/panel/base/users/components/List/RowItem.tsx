@@ -6,6 +6,7 @@ import { AgentListInfo, UserListType } from 'types'
 import { useAdvisersSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
+import { ChangeUserPermissions } from './components/ChangeUserPermissions'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -66,6 +67,8 @@ export const RowItem = (ad: UserListType) => {
                                 </div> */}
 
                                 <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/>
+
+                                <ChangeUserPermissions userId={ad.id}  />
 
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
