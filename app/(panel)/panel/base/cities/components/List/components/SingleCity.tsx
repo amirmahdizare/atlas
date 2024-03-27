@@ -1,12 +1,63 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { Button, Input, Modal } from '@components'
-import { IconMapPin, IconMapPin2, IconPlus, IconX } from '@tabler/icons-react'
+import {  IconMapPin2, IconX } from '@tabler/icons-react'
 import cityPhoto from 'images/city.svg'
 import Image from 'next/image'
+import { useCustomMutation } from 'hooks'
+import { api } from '_api/config'
+import { LocationEndPoints } from '_api/endpoints/location'
+import { toast } from 'react-toastify'
+import { useCities, useCitiesSection } from '../../../hooks'
+import { useForm } from 'react-hook-form'
 
 export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: string, children: ReactNode }) => {
 
     const [addModal, setAddModal] = useState<boolean>(false)
+
+
+    const { dispatch } = useCitiesSection()
+
+    const { refetch , data} = useCities()
+
+    const { register, handleSubmit, formState: { errors }  , reset} = useForm<{ name: string }>()
+
+    const { mutate  , isLoading} = useCustomMutation({
+        mutationFn: () => api.post(LocationEndPoints.CREATE_CITY),
+        onSuccess: () => {
+            toast.success('شهر با موفقیت اضافه شد.')
+            refetch()
+            dispatch({ mode: 'list' })
+        },
+        onError: (d) => {
+            toast.error(d?.response?.data?.message)
+        }
+    })
+
+    const { mutate: editMutate  ,isLoading:mutateLoading} = useCustomMutation({
+        mutationFn: () => id ? api.patch(LocationEndPoints.SINGLE(id?.toString())) : Promise.reject(),
+        onSuccess: () => {
+            toast.success('شهر با موفقیت به روز رسانی شد.')
+            refetch()
+            dispatch({ mode: 'list' })
+        },
+        onError: (d) => {
+            toast.error(d?.response?.data?.message)
+        }
+    })
+
+    const handleSubmitCity = (data: { name: string }) => {
+        if (mode == 'add')
+            mutate(data)
+        else if (mode == 'edit' && id)
+            editMutate(data)
+    }
+
+    useEffect(() => {
+        if (data?.data.find(i => i.id.toString() == id)) {
+            reset(data?.data.find(i => i.id.toString() == id))
+        }
+
+    }, [id])
 
 
     return (
@@ -36,7 +87,7 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                     </div>
 
 
-                    <div className='col-span-2 lg:col-span-1 flex flex-col gap-4'>
+                    <form className='col-span-2 lg:col-span-1 flex flex-col gap-4' onSubmit={handleSubmit(handleSubmitCity)}>
 
                         <div className='flex flex-col gap-2'>
                             <span className='text-h6-bolder text-right'>
@@ -48,19 +99,30 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                         </div>
 
 
-                        <Input label='نام شهر' placeholder='مثلا : تهران' />
+                        <Input label='نام شهر' placeholder='مثلا : تهران' register={register('name', {
+                            required: {
+                                value: true,
+                                message: 'وارد کردن شهر اجباری است.'
+                            }
+                        }
 
-                        <Input label='نام انگلیسی شهر' placeholder='مثلا : tehran' />
+                        )}
+
+                            error={!!errors.name}
+                            errorText={errors.name?.message}
+                        />
+
+                        {/* <Input label='نام انگلیسی شهر' placeholder='مثلا : tehran' /> */}
 
 
                         <div className='flex flex-row gap-2'>
 
-                            <Button bgColor='gray' textColor='dark' onClick={() => setAddModal(false)} fullWidth>انصراف</Button>
-                            <Button bgColor='primaryNormal' textColor='white' fullWidth >ثبت {mode=='edit' ? 'تغییرات' : ''} شهر</Button>
+                            <Button type='button' bgColor='gray' textColor='dark' onClick={() => setAddModal(false)} fullWidth>انصراف</Button>
+                            <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading || mutateLoading} >ثبت {mode == 'edit' ? 'تغییرات' : ''} شهر</Button>
 
                         </div>
 
-                    </div>
+                    </form>
 
                     <div className='col-span-2 lg:col-span-1 p-4 max-w-8  aspect-square  relative lg:flex flex-row justify-center items-center hidden'>
                         <Image src={cityPhoto} alt='تصویر شهر' width={280} height={280} />
