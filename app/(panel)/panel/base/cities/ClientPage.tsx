@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useCitiesSection } from './hooks'
-import { List } from './components/List/List'
+import { ListSection } from './components/ListSection'
 
 export const ClientPage = () => {
 
@@ -10,7 +10,7 @@ export const ClientPage = () => {
     return (
         <div className='flex flex-col gap-2'>
 
-            {mode == 'list' ? <List /> : <>Single City</>}
+            {mode == 'list' ? <ListSection /> : <>Single City</>}
 
         </div>
     )
