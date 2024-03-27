@@ -31,7 +31,7 @@ export const DataForm = () => {
 
 
     const { mutate: editMutate, isLoading: editLoading } = useCustomMutation<PermissionEndPointsType['CREATE']>({
-        mutationFn: (data) => permissionId ? api.post(PermissionEndPoints.UPDATE_PERMISSION(permissionId.toString()), data) : Promise.reject(),
+        mutationFn: (data) => permissionId ? api.patch(PermissionEndPoints.UPDATE_PERMISSION(permissionId.toString()), data) : Promise.reject(),
         mutationKey: 'editPermission',
         onSuccess: (data, { }) => {
             dispatch({ mode: 'list' });
