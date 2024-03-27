@@ -4,8 +4,9 @@ import { CityCUType, CityType } from 'types'
 import ClickAwayListener from 'react-click-away-listener'
 import { SingleCity } from './components/SingleCity'
 import { SingleArea } from './components/SingleArea'
+import { DeleteCity } from './components/DeleteCity'
 
-export const CityItem = ({  id,name ,createTime}: CityType) => {
+export const CityItem = ({ id, name, createTime }: CityType) => {
 
     const [more, setMore] = useState<boolean>(false)
 
@@ -58,10 +59,7 @@ export const CityItem = ({  id,name ,createTime}: CityType) => {
 
                                     {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
 
-                                    <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
-                                        <span>حذف شهر</span>
-                                        <IconTrash width={20} height={20} className='text-red-500' />
-                                    </div>
+                                    <DeleteCity  id={id.toString()} title={name}/>
 
                                 </div>
                             </ClickAwayListener>

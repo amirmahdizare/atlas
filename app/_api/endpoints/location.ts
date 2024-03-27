@@ -9,6 +9,6 @@ export const LocationEndPoints = Object.freeze({
 export interface LocationEndPointsType {
     CREATE_ROLE: ApiPostRequestType<{ name: string }, CityType>,
     GET_LIST: ApiGetRequestType<{}, CityType[]>
-    EDIT_SINGLE: ApiGetRequestType<CityType, CityType>
-    DELETE_SINGLE: ApiGetRequestType<{}>
+    EDIT_SINGLE: ApiPostRequestType<CityType, CityType>
+    DELETE_SINGLE: ApiPostRequestType<{}>
 }
