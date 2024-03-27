@@ -58,7 +58,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
         <>
             <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1 z-0' onClick={() => setIsModalOpen(true)}>
                 <span>تغییر دسترسی های کاربر</span>
-                <IconKey width={20} height={20} className='text-mint-green' />
+                <IconKey width={20} height={20} className='text-blue-800' />
             </div>
 
             <Modal
@@ -68,7 +68,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
             >
                 <form className='flex flex-col gap-2 p-2 max-h-[80vh] overflow-auto' onSubmit={handleSubmit(handleSubmitPermissions)}>
 
-                    <span className='font-bold text-md'>نقش دادن به کاربر</span>
+                    <span className='font-bold text-md'>تعیین دسترسی های کاربر</span>
 
                     {data?.data.map((item, index) => <label htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-2 justify-center items-center p-2 border-2 rounded text-center hover:bg-gray-50 ${userRoleId == item.id ? 'bg-blue-50 border-mint-green' : ''}`}>
 
