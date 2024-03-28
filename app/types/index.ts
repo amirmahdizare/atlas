@@ -276,3 +276,9 @@ export interface CategoryType_API<T = undefined> {
     id: T
 }
 
+
+export interface SubCategoryType<IDT, CT> extends CategoryType_API<IDT> {
+    category: CategoryType_API<CT>,
+    products?: Array<any>
+    filters?: Array<any>
+}
