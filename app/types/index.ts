@@ -268,3 +268,11 @@ export interface CityType {
     createTime: string /// 2024-03-05,
     updateTime: string /// 2024-03-05
 }
+
+
+export interface CategoryType_API<T = undefined> {
+    title: string,
+    enTitle: string,
+    id: T
+}
+
