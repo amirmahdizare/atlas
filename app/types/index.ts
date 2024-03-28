@@ -292,5 +292,6 @@ export interface FilterRecordType <T> {
     itemKey:keyof PropertyListFilterType,
     unit:string,
     isPrimary:boolean,
-    subCategoryId:T
+    subCategoryId:T,
+    suggests?:[]
 }
