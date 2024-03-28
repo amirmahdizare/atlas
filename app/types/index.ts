@@ -269,6 +269,20 @@ export interface CityType {
     updateTime: string /// 2024-03-05
 }
 
+export interface SubLocationBaseType { 
+    name:string
+}
+
+export  interface SubLocationMutationType extends SubLocationBaseType {
+    parentLocationId:string
+}
+
+export  interface SubLocationReadType extends SubLocationBaseType {
+    parentLocation:CityType,
+    createTime:string,
+    updateTime:string
+}
+
 
 export interface CategoryType_API<T = undefined> {
     title: string,
