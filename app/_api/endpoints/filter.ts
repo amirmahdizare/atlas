@@ -1,4 +1,4 @@
-import { ApiGetRequestType, ApiPostRequestType, CategoryType_API, FilterRecordType, SubCategoryType } from "types"
+import { ApiGetRequestType, ApiPostRequestType, CategoryType_API, FilterMutateType, FilterReadType, FilterRecordType, SubCategoryType } from "types"
 
 export const FilterEndPoints = Object.freeze({
     CREATE: '/filters/create',
@@ -7,8 +7,8 @@ export const FilterEndPoints = Object.freeze({
 })
 
 export interface FilterEndPointsType {
-    CREATE_ROLE: ApiPostRequestType<FilterRecordType<number>,FilterRecordType<SubCategoryType<string, CategoryType_API<string>>>>,
-    LIST: ApiGetRequestType<{}, FilterRecordType<SubCategoryType<string, CategoryType_API<string>>>[]>
-    UPDATE_SINGLE: ApiGetRequestType<FilterRecordType<number>,FilterRecordType<SubCategoryType<string, CategoryType_API<string>>>>,
+    CREATE_ROLE: ApiPostRequestType<FilterMutateType,FilterRecordType>,
+    LIST: ApiGetRequestType<{}, FilterReadType[]>
+    UPDATE_SINGLE: ApiGetRequestType<FilterMutateType , FilterReadType>,
     DELETE_SINGLE: ApiPostRequestType<{}>
 }

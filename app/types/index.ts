@@ -284,14 +284,37 @@ export interface SubCategoryType<IDT, CT> extends CategoryType_API<IDT> {
 }
 
 
-export interface FilterRecordType <T> {
-    title:string,
-    filterType:keyof typeof CategorySpecialField,
-    hint:string,
+export interface FilterRecordType {
+    title: string,
+    filterType: keyof typeof CategorySpecialField,
+    hint: string,
     type: 'string' | 'number' | 'boolean',
-    itemKey:keyof PropertyListFilterType,
-    unit:string,
-    isPrimary:boolean,
-    subCategoryId:T,
-    suggests?:[]
+    itemKey: keyof PropertyListFilterType,
+    unit: string,
+    isPrimary: boolean,
+    suggests?: []
 }
+export interface FilterMutateType extends FilterRecordType { subCategoryId: string }
+export interface FilterReadType extends FilterRecordType { subCategory: SubCategoryType<string, CategoryType_API<string>> }
+
+
+
+
+///Suggest 
+
+export interface SuggestBaseType {
+    title:string
+}
+
+
+export interface SuggestMutateType extends SuggestBaseType {
+    filterId: number
+}
+
+
+
+export interface SuggestReadType extends SuggestBaseType {
+    filter: FilterReadType
+    id: string
+}
+
