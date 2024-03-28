@@ -282,3 +282,15 @@ export interface SubCategoryType<IDT, CT> extends CategoryType_API<IDT> {
     products?: Array<any>
     filters?: Array<any>
 }
+
+
+export interface FilterRecordType <T> {
+    title:string,
+    filterType:keyof typeof CategorySpecialField,
+    hint:string,
+    type: 'string' | 'number' | 'boolean',
+    itemKey:keyof PropertyListFilterType,
+    unit:string,
+    isPrimary:boolean,
+    subCategoryId:T
+}
