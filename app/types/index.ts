@@ -303,7 +303,7 @@ export interface FilterReadType extends FilterRecordType { subCategory: SubCateg
 ///Suggest 
 
 export interface SuggestBaseType {
-    title:string
+    title: string
 }
 
 
@@ -318,3 +318,17 @@ export interface SuggestReadType extends SuggestBaseType {
     id: string
 }
 
+///Items 
+
+export interface ItemsBaseType {
+    title: string,
+    value: string
+}
+
+export interface ItemsMutateType {
+    suggestId: string
+}
+
+export interface ItemsReadType {
+    suggest: SuggestReadType
+}
