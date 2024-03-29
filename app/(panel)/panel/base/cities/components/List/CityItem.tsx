@@ -6,6 +6,7 @@ import { SingleCity } from './components/SingleCity'
 import { SingleArea } from './components/SingleArea'
 import { DeleteCity } from './components/DeleteCity'
 import { useCitiesSection, useSubCities } from '../../hooks'
+import { DeleteArea } from './components/DeleteArea'
 
 export const CityItem = ({ id, name, createTime }: CityType) => {
 
@@ -100,7 +101,8 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
                 {subLocations?.map(s => <div className='col-span-1 bg-white flex flex-row gap-1 items-center justify-between p-1 text-space-codet text-body-3-normal'>
                     <span>{s.name} </span>
                     <div className='flex flex-row gap-1'>
-                        <IconTrash width={20} height={20} className='text-ultra-violet cursor-pointer' onClick={() => alert('Delete')} />
+                        <DeleteArea id={s.id} title={s.name} />
+                        {/* <IconTrash width={20} height={20} className='text-ultra-violet cursor-pointer' onClick={() => alert('Delete')} /> */}
                         <SingleArea cityId={id} cityTitle={name} mode='edit' id={s.id}><IconPencil width={20} height={20} className='text-robin-egg-lighter cursor-pointer' /></SingleArea>
                     </div>
                 </div>)}
