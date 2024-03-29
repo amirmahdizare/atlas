@@ -41,10 +41,10 @@ export const RowItem = (ad: CategoryType_API<string>) => {
                         <ClickAwayListener onClickAway={() => setMore(false)}>
 
                             <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-10 left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                {/* <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', userId: ad.id })}>
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', catId: Number(ad.id) })}>
                                     <span>ویرایش</span>
                                     <IconPencil width={20} height={20} className='text-mint-green' />
-                                </div> */}
+                                </div>
 
                                 {/* <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/> */}
 
@@ -52,7 +52,7 @@ export const RowItem = (ad: CategoryType_API<string>) => {
 
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
-                                    <span>حذف کاربر</span>
+                                    <span>حذف </span>
                                     <IconTrash width={20} height={20} className='text-red-500' />
                                 </div>
 

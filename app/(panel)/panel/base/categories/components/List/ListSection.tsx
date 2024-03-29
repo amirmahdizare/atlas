@@ -17,7 +17,7 @@ export const ListSection = () => {
         </div>
 
 
-        <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', userId: undefined })}>افزودن دسته بندی</Button>
+        <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', catId: undefined })}>افزودن دسته بندی</Button>
 
       </div>
 

@@ -11,7 +11,7 @@ import { create } from 'zustand'
 
 interface DataType {
     mode: 'list' | 'add' | 'edit',
-    userId?: number
+    catId?: number
 }
 
 

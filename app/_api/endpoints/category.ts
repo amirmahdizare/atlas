@@ -7,7 +7,7 @@ export const CategoryEndPoints = Object.freeze({
 })
 
 export interface CategoryEndPointsType {
-    CREATE_ROLE: ApiPostRequestType<CategoryType_API<undefined>, CategoryType_API<string>>,
+    CREATE: ApiPostRequestType<CategoryType_API<undefined>, CategoryType_API<string>>,
     LIST: ApiGetRequestType< {},CategoryType_API<string>[]>
     UPDATE_SINGLE: ApiGetRequestType<CategoryType_API<string>, CategoryType_API<string>>,
     DELETE_SINGLE : ApiPostRequestType<{}>
