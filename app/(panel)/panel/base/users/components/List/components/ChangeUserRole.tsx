@@ -22,7 +22,7 @@ export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRol
   const { refetch } = useUserList()
 
   const { mutate, isLoading: mutateLoading } = useCustomMutation({
-    mutationFn: () => api.patch(UsersEndpoints.UPDATE_USER_ROLE(userId.toString())),
+    mutationFn: (data:string) => api.patch(UsersEndpoints.UPDATE_USER_ROLE(userId.toString()),{roleId:data}),
     onError: (data) => {
       toast.error(data.response?.data?.message)
     },
