@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import ClickAwayListener from 'react-click-away-listener'
 import { SubCategoryType } from 'types'
 import { MutateSubcategory } from './MutateSubcategory'
+import { DeleteSubcategory } from './DeleteSubCategory'
 
 export const SingleSubcategory = ({ title, enTitle , id , category: {title:catTitle , id:catId} }: SubCategoryType<string, string>) => {
 
@@ -27,7 +28,7 @@ export const SingleSubcategory = ({ title, enTitle , id , category: {title:catTi
                     {more &&
                         <ClickAwayListener onClickAway={() => setMore(false)}>
 
-                            <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-10 left-1/2 -transla te-x-1/2 text-body-3-normal'>
+                            <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-[20] left-1/2 -transla te-x-1/2 text-body-3-normal'>
                                 <MutateSubcategory catId={catId} catTitle={catTitle}  mode='edit' subcatId={Number(id)}>
                                     <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' >
                                         <span>ویرایش</span>
@@ -35,7 +36,7 @@ export const SingleSubcategory = ({ title, enTitle , id , category: {title:catTi
                                     </div>
                                 </MutateSubcategory>
 
-                                {/* <DeleteCategory id={ad.id} title={ad.title} /> */}
+                                <DeleteSubcategory id={id} title={title} />
 
                             </div>
                         </ClickAwayListener>
