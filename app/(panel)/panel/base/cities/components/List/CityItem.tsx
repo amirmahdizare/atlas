@@ -5,10 +5,13 @@ import ClickAwayListener from 'react-click-away-listener'
 import { SingleCity } from './components/SingleCity'
 import { SingleArea } from './components/SingleArea'
 import { DeleteCity } from './components/DeleteCity'
+import { useCitiesSection } from '../../hooks'
 
 export const CityItem = ({ id, name, createTime }: CityType) => {
 
     const [more, setMore] = useState<boolean>(false)
+
+    const { dispatch } = useCitiesSection()
 
     return (
         <div className='flex flex-col gap-1 p-1 bg-seasalt'>
@@ -50,8 +53,8 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
                             <ClickAwayListener onClickAway={() => setMore(false)}>
 
                                 <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full mt-1 bg-white z-20 left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                    <SingleCity mode='edit' id='flean'>
-                                        <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => { }}>
+                                    <SingleCity mode='edit' id={id.toString()}>
+                                        <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' >
                                             <span>ویرایش شهر</span>
                                             <IconPencil width={20} height={20} className='text-mint-green' />
                                         </div>
@@ -59,7 +62,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
 
                                     {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
 
-                                    <DeleteCity  id={id.toString()} title={name}/>
+                                    <DeleteCity id={id.toString()} title={name} />
 
                                 </div>
                             </ClickAwayListener>
