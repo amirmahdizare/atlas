@@ -27,7 +27,7 @@ export const EnterPhone = () => {
     })
 
     const handleEnter = (data: { phoneNumber: string }) => {
-        mutate({ phoneNumber: generateTenDigitOfPhoneNumber(data.phoneNumber) })
+        mutate({ phoneNumber: data.phoneNumber })
     }
 
     return (
