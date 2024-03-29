@@ -7,7 +7,7 @@ import { SingleCity } from './List/components/SingleCity'
 
 export const ListSection = () => {
 
-    const { dispatch } = useCitiesSection()
+    const { mode } = useCitiesSection()
 
     return (
         <div className='flex flex-col gap-2'>

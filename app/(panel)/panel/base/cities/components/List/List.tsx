@@ -19,9 +19,9 @@ export const List = () => {
 
 
 
-                <div className='gap-2 bg-seasalt grid grid-cols-4 p-2 text-center text-body-3-normal text-ultra-violet'>
+                <div className='gap-2 bg-seasalt grid grid-cols-5 p-2 text-center text-body-3-normal text-ultra-violet'>
 
-                    <span className='col-span-1'>نام شهر</span>
+                    <span className='col-span-2'>نام شهر</span>
                     <span className='col-span-1'>تاریخ ثبت</span>
                     <span className='col-span-1'>تعداد مناطق</span>
 

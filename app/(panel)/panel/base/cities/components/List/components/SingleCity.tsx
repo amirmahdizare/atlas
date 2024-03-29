@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { Button, Input, Modal } from '@components'
-import {  IconMapPin2, IconX } from '@tabler/icons-react'
+import { IconMapPin2, IconX } from '@tabler/icons-react'
 import cityPhoto from 'images/city.svg'
 import Image from 'next/image'
 import { useCustomMutation } from 'hooks'
@@ -17,28 +17,30 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
 
     const { dispatch } = useCitiesSection()
 
-    const { refetch , data} = useCities()
+    const { refetch, data } = useCities()
 
-    const { register, handleSubmit, formState: { errors }  , reset} = useForm<{ name: string }>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<{ name: string }>()
 
-    const { mutate  , isLoading} = useCustomMutation({
-        mutationFn: () => api.post(LocationEndPoints.CREATE_CITY),
+    const { mutate, isLoading } = useCustomMutation({
+        mutationFn: (data) => api.post(LocationEndPoints.CREATE_CITY, data),
         onSuccess: () => {
             toast.success('شهر با موفقیت اضافه شد.')
             refetch()
             dispatch({ mode: 'list' })
+            setAddModal(false)
         },
         onError: (d) => {
             toast.error(d?.response?.data?.message)
         }
     })
 
-    const { mutate: editMutate  ,isLoading:mutateLoading} = useCustomMutation({
-        mutationFn: () => id ? api.patch(LocationEndPoints.SINGLE(id?.toString())) : Promise.reject(),
+    const { mutate: editMutate, isLoading: mutateLoading } = useCustomMutation({
+        mutationFn: (data) => id ? api.patch(LocationEndPoints.SINGLE(id?.toString()),data) : Promise.reject(),
         onSuccess: () => {
             toast.success('شهر با موفقیت به روز رسانی شد.')
             refetch()
             dispatch({ mode: 'list' })
+            setAddModal(false)
         },
         onError: (d) => {
             toast.error(d?.response?.data?.message)

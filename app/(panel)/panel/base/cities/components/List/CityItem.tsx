@@ -14,15 +14,15 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
         <div className='flex flex-col gap-1 p-1 bg-seasalt'>
 
 
-            <div className='grid grid-cols-4 lg:grid-cols-4 gap-2 items-center text-center text-body-2-normal'>
+            <div className='grid grid-cols-4 lg:grid-cols-5 gap-2 items-center text-center text-body-2-normal'>
 
-                <div className='flex flex-row gap-2 col-span- items-center'>
+                <div className='flex flex-row gap-1 col-span-2 items-center'>
 
                     <div className='bg-anti-flash-white-lighter rounded-circle p-1'>
                         <IconMapPin className='text-french-gray' width={20} height={20} />
                     </div>
 
-                    <span>{name} </span>
+                    <span className='leading-6'>{name} </span>
 
                 </div>
 
