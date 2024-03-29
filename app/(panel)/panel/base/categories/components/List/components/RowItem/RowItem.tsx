@@ -3,7 +3,7 @@ import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash, IconUser } from
 import ClickAwayListener from 'react-click-away-listener'
 import ReactSwitch from 'react-switch'
 import { AgentListInfo, UserListType } from 'types'
-import { useAdvisersSection } from '../../hooks'
+import { useAdvisersSection } from '../../../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
 import { ChangeUserPermissions } from './components/ChangeUserPermissions'

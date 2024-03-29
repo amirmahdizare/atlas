@@ -8,7 +8,7 @@ import { UsersEndpoints } from '_api/endpoints/users'
 import { useCustomMutation, useCustomQuery } from 'hooks'
 import { toast } from 'react-toastify'
 import { captilizeFirstLetter } from 'utils'
-import { useUserList } from '../../../hooks'
+import { useUserList } from '../../../../../hooks'
 
 export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRoleId?: number }) => {
 

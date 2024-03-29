@@ -4,13 +4,13 @@ import React from 'react'
 import { useAdvisersSection, useUserList } from '../../hooks'
 import { advisers } from '../../data.mock'
 import ReactSwitch from 'react-switch'
-import { RowItem } from './RowItem'
+import { RowItem } from './components/RowItem/RowItem'
 import { useQueries, useQuery } from 'react-query'
 import { api } from '_api/config'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { useCustomQuery } from 'hooks'
 import { toast } from 'react-toastify'
-import { UserSkeleton } from './components/UserSkeleton'
+import { UserSkeleton } from './components/RowItem/components/UserSkeleton'
 
 export const List = () => {
 
@@ -33,7 +33,7 @@ export const List = () => {
 
                 </div>
 
-                {data?.data.map(i => <RowItem {...i} />)}
+                {/* {data?.data.map(i => <RowItem {...i} />)} */}
 
 
 

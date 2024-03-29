@@ -8,7 +8,7 @@ import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { useCustomMutation, useCustomQuery } from 'hooks'
 import { toast } from 'react-toastify'
 import { captilizeFirstLetter } from 'utils'
-import { useUserList } from '../../../hooks'
+import { useUserList } from '../../../../../hooks'
 import { PermissionEndPoints, PermissionEndPointsType } from '_api/endpoints/permission'
 import { useFieldArray, useForm } from 'react-hook-form'
 

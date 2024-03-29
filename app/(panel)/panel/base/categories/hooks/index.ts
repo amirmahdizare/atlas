@@ -1,4 +1,5 @@
 import { api } from '_api/config'
+import { CategoryEndPointsType } from '_api/endpoints/category'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { useCustomQuery } from 'hooks'
 import { UseQueryOptions } from 'react-query'
@@ -21,7 +22,7 @@ export const useAdvisersSection = create<StoreType>((set) => ({
     dispatch: (newState) => set((state) => ({ ...state, ...newState }))
 }))
 
-export const useUserList = (data?: UseQueryOptions) => useCustomQuery<UsersEndpointType['GET_USERS']>({
+export const useUserList = (data?: UseQueryOptions) => useCustomQuery<CategoryEndPointsType['LIST']>({
     queryKey: 'getCategories',
     queryFn: () => api.get(UsersEndpoints.GET_USERS),
     onError: () => toast.error('خطا در دریافت لیست کاربران'),
