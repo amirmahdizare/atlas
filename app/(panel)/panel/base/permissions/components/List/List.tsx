@@ -1,7 +1,7 @@
 import { Button } from '@components'
 import { IconPlus, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import { usePermissionList , usePermissionsSection } from '../../hooks'
+import { usePermissionList, usePermissionsSection } from '../../hooks'
 import ReactSwitch from 'react-switch'
 import { RowItem } from './RowItem'
 import { useQueries, useQuery } from 'react-query'
@@ -17,6 +17,7 @@ export const List = () => {
 
     const { data, isLoading, isError } = usePermissionList()
 
+    console.log(data?.data)
 
     if (data?.data)
         return (
@@ -30,7 +31,7 @@ export const List = () => {
 
                 </div>
 
-                {/* {data?.data.map(i => <RowItem {...i} />)} */}
+                {data?.data.map(i => <RowItem key={i.id} {...i} />)}
 
 
 

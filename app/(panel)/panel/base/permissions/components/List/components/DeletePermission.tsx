@@ -15,7 +15,7 @@ export const DeletePermission = ({ id, title }: { id: string, title: string }) =
     const { refetch } = usePermissionList()
 
 
-    const { mutate , isLoading } = useCustomMutation<PermissionEndPointsType['DELETE_PERMISSION']>({
+    const { mutate, isLoading } = useCustomMutation<PermissionEndPointsType['DELETE_PERMISSION']>({
         mutationFn: () => api.delete(PermissionEndPoints.UPDATE_PERMISSION(id)),
         onSuccess: () => {
             toast.success('دسترسی با موفقیت پاک شد.')
@@ -29,17 +29,14 @@ export const DeletePermission = ({ id, title }: { id: string, title: string }) =
 
 
     const handleDeletePermission = () => {
-        if (prompt(`آیا مایل به حذف دسترسی ${title} هستید`))
-        {
+        if (prompt(`آیا مایل به حذف دسترسی ${title} هستید`, 'بله')) {
             mutate({})
         }
     }
     return (
         <>
 
-            <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => {
-                prompt
-            }}>
+            <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => handleDeletePermission()}>
                 <span>حذف دسترسی</span>
                 {isLoading ? <Spinner /> : <IconTrash width={20} height={20} className='text-red-500' />}
             </div>
