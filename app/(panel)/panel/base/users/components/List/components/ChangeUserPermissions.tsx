@@ -24,7 +24,10 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
 
-    const { register, handleSubmit, control } = useForm<FormValues>()
+    const { register, handleSubmit, control, watch } = useForm<FormValues>()
+
+
+    console.log(watch())
 
 
     const { data, isLoading } = useCustomQuery<PermissionEndPointsType['GET_LIST']>({
@@ -35,7 +38,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     const { refetch } = useUserList()
 
     const { mutate, isLoading: mutateLoading } = useCustomMutation<UsersEndpointType['UPADTE_USER_PERMISSION']>({
-        mutationFn: () => api.patch(UsersEndpoints.UPADTE_USER_PERMISSION(userId.toString())),
+        mutationFn: (data) => api.patch(UsersEndpoints.UPADTE_USER_PERMISSION(userId.toString()), data ),
         onError: (data) => {
             toast.error(data.response?.data?.message)
         },
@@ -70,15 +73,15 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
 
                     <span className='font-bold text-md'>تعیین دسترسی های کاربر</span>
 
-                    {data?.data.map((item, index) => <label htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-2 justify-center items-center p-2 border-2 rounded text-center hover:bg-gray-50 ${userRoleId == item.id ? 'bg-blue-50 border-mint-green' : ''}`}>
+                    {data?.data.map((item, index) => <label htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-2 justify-center items-center p-2 border-2 rounded text-center hover:bg-gray-50 ${false ? 'bg-blue-50 border-mint-green' : ''}`}>
 
-                        <input type='checkbox' checked={false} id={item.id.toString()} key={item.id} {...register(`${item.id}`)} />
+                        <input type='checkbox' id={item.id.toString()} key={item.id} {...register(`${item.id}`)} />
 
-                        <span>{captilizeFirstLetter(item.name)}</span>
+                        <span>{captilizeFirstLetter(item.title)}</span>
 
                     </label>)}
 
-                    {isLoading  && <Spinner />}
+                    {isLoading && <Spinner />}
 
                     <Button loading={mutateLoading}>ثبت تغییرات</Button>
 
