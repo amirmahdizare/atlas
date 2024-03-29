@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
-import { IconDotsVertical, IconPencil } from '@tabler/icons-react'
+import { IconChevronDown, IconDotsVertical, IconPencil } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
 import { CategoryType_API } from 'types'
 import { useCategorySection } from '../../../../hooks'
 import { DeleteCategory } from './components/DeleteCategory'
+import { SubCategories } from '../SubCategories/SubCategories'
 
 
 
@@ -12,12 +13,15 @@ export const RowItem = (ad: CategoryType_API<string>) => {
 
     const [more, setMore] = useState<boolean>(false)
 
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+
     const { dispatch } = useCategorySection()
 
     return (
-        <div className='grid grid-cols-5 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
+        <div className={`grid grid-cols-5  p-1.5 text-space-codet text-body-2-normal items-center translate-all duration-300 bg-gray-50 ${isOpen ? 'gap-3' : ''}`}>
 
-            <span className='col-span-2'>
+            <span className='col-span-2 flex flex-row gap-1 items-center cursor-pointer' onClick={() => setIsOpen(!isOpen)}>
+                <IconChevronDown className={`transition-all duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                 {ad.title}
             </span>
 
@@ -38,13 +42,17 @@ export const RowItem = (ad: CategoryType_API<string>) => {
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div>
 
-                                <DeleteCategory id={ad.id} title={ad.title}/>
+                                <DeleteCategory id={ad.id} title={ad.title} />
 
                             </div>
                         </ClickAwayListener>
                     }
                 </div>
 
+            </div>
+
+            <div className={`col-span-5 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[1000px]' : 'max-h-0 opacity-0'}`}>
+                <SubCategories catId={ad.id} />
             </div>
 
         </div>

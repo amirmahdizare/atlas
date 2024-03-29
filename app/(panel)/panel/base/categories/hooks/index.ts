@@ -1,11 +1,12 @@
 import { api } from '_api/config'
 import { CategoryEndPoints, CategoryEndPointsType } from '_api/endpoints/category'
 import { SubLocationEndPointsType } from '_api/endpoints/location'
+import { SubcategoryEndPoints, SubcategoryEndPointsType } from '_api/endpoints/subcategory'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { useCustomQuery } from 'hooks'
 import { UseQueryOptions } from 'react-query'
 import { toast } from 'react-toastify'
-import { SubLocationReadType } from 'types'
+import { CategoryType_API, SubCategoryType, SubLocationReadType } from 'types'
 import { create } from 'zustand'
 
 
@@ -31,8 +32,8 @@ export const useCategoryList = (data?: UseQueryOptions) => useCustomQuery<Catego
 })
 
 
-export const useSubCategoryList = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
+export const useSubCategoryList = (data?: UseQueryOptions) => useCustomQuery<SubcategoryEndPointsType['LIST']>({
     queryKey: 'getSubCategories',
-    queryFn: () => api.get(CategoryEndPoints.LIST),
+    queryFn: () => api.get(SubcategoryEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست زیردسته بندی ها'),
 })
