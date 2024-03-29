@@ -5,13 +5,17 @@ import ClickAwayListener from 'react-click-away-listener'
 import { SingleCity } from './components/SingleCity'
 import { SingleArea } from './components/SingleArea'
 import { DeleteCity } from './components/DeleteCity'
-import { useCitiesSection } from '../../hooks'
+import { useCitiesSection, useSubCities } from '../../hooks'
 
 export const CityItem = ({ id, name, createTime }: CityType) => {
 
     const [more, setMore] = useState<boolean>(false)
 
     const { dispatch } = useCitiesSection()
+
+    const { data } = useSubCities()
+
+    const subLocations = data?.data?.filter(i => i?.parentLocation?.id == id)
 
     return (
         <div className='flex flex-col gap-1 p-1 bg-seasalt'>
@@ -31,7 +35,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
 
                 <div className='col-span-1'>{createTime}</div>
 
-                <div className='col-span-1'>{4} منطقه</div>
+                <div className='col-span-1'>{subLocations?.length} منطقه</div>
 
                 <div className='flex col-span-1 flex-row gap-2 items-center'>
 
@@ -91,10 +95,10 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
             </div>
 
 
-            {/* 
-            <div className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-2'>
-                {subLocations.map(s => <div className='col-span-1 bg-white flex flex-row gap-1 items-center justify-between p-1 text-space-codet text-body-3-normal'>
-                    <span>{s.title} </span>
+
+            {subLocations && subLocations?.length > 0 ? <div className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-2'>
+                {subLocations?.map(s => <div className='col-span-1 bg-white flex flex-row gap-1 items-center justify-between p-1 text-space-codet text-body-3-normal'>
+                    <span>{s.name} </span>
                     <div className='flex flex-row gap-1'>
                         <IconTrash width={20} height={20} className='text-ultra-violet cursor-pointer' onClick={() => alert('Delete')} />
                         <SingleArea mode='edit'><IconPencil width={20} height={20} className='text-robin-egg-lighter cursor-pointer' /></SingleArea>
@@ -103,7 +107,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
 
 
 
-            </div>  */}
+            </div> : <span className='text-gray-400 text-center my-1'>منطقه ای موجود نیست.</span>}
 
 
 

@@ -1,5 +1,5 @@
 import { api } from '_api/config'
-import { LocationEndPoints, LocationEndPointsType } from '_api/endpoints/location'
+import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from '_api/endpoints/location'
 import { useCustomQuery } from 'hooks'
 import { UseQueryOptions } from 'react-query'
 import { toast } from 'react-toastify'
@@ -26,3 +26,12 @@ export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndP
     queryFn: () => api.get(LocationEndPoints.GET_LIST),
     onError: () => toast.error('خطا در دریافت لیست شهرها'),
 })
+
+
+export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
+    queryKey: 'getSubCities',
+    queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
+    onError: () => toast.error('خطا در دریافت لیست مناطق'),
+})
+
+
