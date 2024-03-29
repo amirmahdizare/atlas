@@ -7,7 +7,7 @@ export const SubcategoryEndPoints = Object.freeze({
 })
 
 export interface SubcategoryEndPointsType {
-    CREATE_ROLE: ApiPostRequestType<SubCategoryType<undefined, string>, SubCategoryType<string, string>>,
+    CREATE: ApiPostRequestType<SubCategoryType<undefined, string>, SubCategoryType<string, string>>,
     LIST: ApiGetRequestType<{}, SubCategoryType<string, string>[]>
     UPDATE_SINGLE: ApiGetRequestType<SubCategoryType<undefined, string>, SubCategoryType<string, string>>,
     DELETE_SINGLE: ApiPostRequestType<{}>

@@ -1,0 +1,89 @@
+import { useSubCategoryList } from '(panel)/panel/base/categories/hooks'
+import { Button, Input, Modal } from '@components'
+import { IconChevronLeft } from '@tabler/icons-react'
+import { api } from '_api/config'
+import { SubLocationEndPointsType } from '_api/endpoints/location'
+import { SubcategoryEndPoints, SubcategoryEndPointsType } from '_api/endpoints/subcategory'
+import { useCustomMutation } from 'hooks'
+import React, { ReactNode, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
+export const MutateSubcategory = ({ children, mode, catId, subcatId  , catTitle}: { catId: string, mode: 'add' | 'edit', subcatId?: number, children: ReactNode , catTitle:string }) => {
+
+    const [show, setShow] = useState<boolean>(false)
+
+    const {refetch} = useSubCategoryList()
+
+    const { register, formState: { errors }, handleSubmit } = useForm<SubcategoryEndPointsType['CREATE']['REQUEST']>()
+
+
+    const modeTitle = mode=='edit' ? 'ویرایش' : 'ایجاد'
+
+    const { mutate, isLoading } = useCustomMutation<SubcategoryEndPointsType['CREATE']>({
+        mutationFn: (data) => subcatId && mode=='edit' ?  api.patch(SubcategoryEndPoints.CREATE, {...data, categoryId:catId}):  api.post(SubcategoryEndPoints.CREATE, {...data, categoryId:catId}),
+        onSuccess: () => {
+            toast.success(`شهر با موفقیت ${modeTitle} شد.`)
+            refetch()
+            // dispatch({ mode: 'list' })
+            setShow(false)
+        },
+        onError: (d) => {
+            toast.error(d?.response?.data?.message)
+        },
+        mutationKey:[modeTitle , catId , catTitle]
+    })
+
+
+
+
+    return (
+        <>
+            <div onClick={() => setShow(true)}>
+                {children}
+            </div>
+
+            <Modal
+                open={show}
+                setOpen={setShow}
+                fitHeight
+                fitWidth
+            >
+                <form className='flex flex-col gap-2  p-2' onSubmit={handleSubmit((d)=>mutate(d))}>
+                    <span className='flex flex-row gap-0.5 items-center'>{catTitle} <IconChevronLeft width={20} height={20}/> {modeTitle} زیرگروه</span>
+
+                    <Input label='نام ' placeholder='مثلا : مسکن مهر' register={register('title', {
+                        required: {
+                            value: true,
+                            message: 'وارد کردن نام اجباری است.'
+                        }
+                    }
+
+                    )}
+
+                        error={!!errors.title}
+                        errorText={errors.title?.message}
+                    />
+
+                    <Input label='نام انگلیسی' placeholder='مثلا : house' register={register('enTitle', {
+                        required: {
+                            value: true,
+                            message: 'وارد کردن نام انگلیسی اجباری است.'
+                        }
+                    })}
+
+                        error={!!errors.enTitle}
+                        errorText={errors.enTitle?.message}
+                    />
+
+                    <div className='flex flex-row gap-2'>
+                        <Button type='button' bgColor='gray' textColor='dark' onClick={() => setShow(false)} fullWidth>انصراف</Button>
+                        <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading} >ثبت {mode == 'edit' ? 'تغییرات' : ''} زیرگروه</Button>
+
+                    </div>
+                </form>
+
+            </Modal>
+        </>
+    )
+}
