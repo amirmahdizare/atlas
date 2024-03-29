@@ -1,12 +1,66 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { Button, Input, Modal } from '@components'
 import { IconMapPin, IconMapPin2, IconPlus, IconX } from '@tabler/icons-react'
 import cityPhoto from 'images/city.svg'
 import Image from 'next/image'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { useCustomMutation } from 'hooks'
+import { api } from '_api/config'
+import { SubLocationEndPoints } from '_api/endpoints/location'
+import { useSubCities } from '../../../hooks'
 
-export const SingleArea = ({ mode, id, children  , cityInfo}: { mode: 'add' | 'edit', id?: string, children: ReactNode , cityInfo?:object }) => {
+export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'add' | 'edit', id?: string, children: ReactNode, cityTitle: string, cityId: number }) => {
 
     const [addModal, setAddModal] = useState<boolean>(false)
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<{ name: string }>()
+
+    const { refetch, data: subLocationData } = useSubCities()
+
+
+
+
+    const { mutate, isLoading } = useCustomMutation({
+        mutationFn: (data) => api.post(SubLocationEndPoints.CREATE_CITY, { ...data, parentLocationId: cityId }),
+        onSuccess: () => {
+            toast.success('منطقه با موفقیت اضافه شد.')
+            refetch()
+            // dispatch({ mode: 'list' })
+            setAddModal(false)
+        },
+        onError: (d) => {
+            toast.error(d?.response?.data?.message)
+        }
+    })
+
+    const { mutate: editMutate, isLoading: mutateLoading } = useCustomMutation({
+        mutationFn: (data) => id ? api.patch(SubLocationEndPoints.SINGLE(id?.toString()), { ...data, parentLocationId: cityId }) : Promise.reject(),
+        onSuccess: () => {
+            toast.success('منطقه با موفقیت به روز رسانی شد.')
+            refetch()
+            // dispatch({ mode: 'list' })
+            setAddModal(false)
+        },
+        onError: (d) => {
+            toast.error(d?.response?.data?.message)
+        }
+    })
+
+    const handleSubmitSubCity = (data: { name: string }) => {
+        if (mode == 'add')
+            mutate(data)
+        else if (mode == 'edit' && id)
+            editMutate(data)
+    }
+    
+    useEffect(() => {
+        
+        if (subLocationData?.data.find(i => i.id == id)) {
+            reset(subLocationData?.data.find(i => i.id == id))
+        }
+
+    }, [subLocationData?.data])
 
     return (
         <>
@@ -35,31 +89,38 @@ export const SingleArea = ({ mode, id, children  , cityInfo}: { mode: 'add' | 'e
                     </div>
 
 
-                    <div className='col-span-2 lg:col-span-2 flex flex-col gap-4'>
+                    <form className='col-span-2 lg:col-span-2 flex flex-col gap-4' onSubmit={handleSubmit(handleSubmitSubCity)}>
 
                         <div className='flex flex-col gap-2'>
                             <span className='text-h6-bolder text-right'>
                                 <span className='text-robin-egg '>{mode == 'add' ? 'افزودن' : 'ویرایش'} منطقه</span>
                                 &nbsp;
                                 &nbsp;
-                                {mode == 'add' && <span className='text-space-codet'>به شهر هشتگرد</span>}
+                                {mode == 'add' && <span className='text-space-codet'>به {cityTitle}</span>}
                             </span>
                         </div>
 
 
-                        <Input label='نام منطقه' placeholder='مثلا : تهران' />
+                        <Input label='نام منطقه' placeholder='مثلا : منطقه 1' register={register('name', {
+                            required: {
+                                value: true, message: 'وارد کردن منطقه ضروری می باشد.'
+                            }
+                        })}
+                            error={!!errors?.name}
+                            errorText={errors.name?.message}
+                        />
 
-                        <Input label='نام انگلیسی منطقه' placeholder='مثلا : tehran' />
+                        {/* <Input label='نام انگلیسی منطقه' placeholder='مثلا : tehran' /> */}
 
 
                         <div className='flex flex-row gap-2'>
 
-                            <Button bgColor='gray' textColor='dark' onClick={() => setAddModal(false)} fullWidth>انصراف</Button>
-                            <Button bgColor='primaryNormal' textColor='white' fullWidth >ثبت {mode=='edit' ? 'تغییرات' : ''} منطقه</Button>
+                            <Button type='button' bgColor='gray' textColor='dark' onClick={() => setAddModal(false)} fullWidth>انصراف</Button>
+                            <Button loading={mutateLoading || isLoading} bgColor='primaryNormal' textColor='white' fullWidth >ثبت {mode == 'edit' ? 'تغییرات' : ''} منطقه</Button>
 
                         </div>
 
-                    </div>
+                    </form>
 
                     {/* <div className='col-span-2 lg:col-span-1 p-4 max-w-8  aspect-square  relative lg:flex flex-row justify-center items-center hidden'>
                         <Image src={cityPhoto} alt='تصویر منطقه' width={280} height={280} />

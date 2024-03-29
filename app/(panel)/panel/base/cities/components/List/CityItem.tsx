@@ -40,7 +40,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
                 <div className='flex col-span-1 flex-row gap-2 items-center'>
 
 
-                    <SingleArea mode='add'>
+                    <SingleArea cityId={id} mode='add' cityTitle={name}>
                         <div className='flex flex-row gap-1 items-center cursor-pointer'>
                             <div className='rounded-circle text-robin-egg border-robin-egg border '>
                                 <IconPlus width={20} height={20} />
@@ -101,7 +101,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
                     <span>{s.name} </span>
                     <div className='flex flex-row gap-1'>
                         <IconTrash width={20} height={20} className='text-ultra-violet cursor-pointer' onClick={() => alert('Delete')} />
-                        <SingleArea mode='edit'><IconPencil width={20} height={20} className='text-robin-egg-lighter cursor-pointer' /></SingleArea>
+                        <SingleArea cityId={id} cityTitle={name} mode='edit' id={s.id}><IconPencil width={20} height={20} className='text-robin-egg-lighter cursor-pointer' /></SingleArea>
                     </div>
                 </div>)}
 
