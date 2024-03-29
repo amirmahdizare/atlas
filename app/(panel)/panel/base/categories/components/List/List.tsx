@@ -1,14 +1,8 @@
 import { Button } from '@components'
 import { IconPlus, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import { useAdvisersSection, useUserList } from '../../hooks'
-import { advisers } from '../../data.mock'
-import ReactSwitch from 'react-switch'
+import { useAdvisersSection, useCategoryList } from '../../hooks'
 import { RowItem } from './components/RowItem/RowItem'
-import { useQueries, useQuery } from 'react-query'
-import { api } from '_api/config'
-import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
-import { useCustomQuery } from 'hooks'
 import { toast } from 'react-toastify'
 import { UserSkeleton } from './components/RowItem/components/UserSkeleton'
 
@@ -16,7 +10,7 @@ export const List = () => {
 
     const { dispatch } = useAdvisersSection()
 
-    const { data, isLoading, isError } = useUserList()
+    const { data, isLoading, isError } = useCategoryList()
 
 
     if (data?.data)
@@ -24,16 +18,15 @@ export const List = () => {
             <div className='flex flex-col gap-2'>
 
                 <div className='grid grid-cols-5 gap-2 bg-seasalt p-2 text-ultra-violet text-body-3-normal'>
-                    <div className='col-span-2'>نام دسته بندی</div>
-                    {/* <div className='col-span-1'>آگهی فعال</div> */}
-                    {/* <div className='col-span-1'>زمان آخرین آگهی</div> */}
-                    <div className='col-span-1'>شماره موبایل</div>
-                    <div className='col-span-1'>نقش</div>
+                    <div className='col-span-2'>نام </div>
+
+                    <div className='col-span-2'>نام انگلیسی</div>
+
                     <div className='col-span-1 text-center'>عملیات</div>
 
                 </div>
 
-                {/* {data?.data.map(i => <RowItem {...i} />)} */}
+                {data?.data.map(i => <RowItem {...i} />)}
 
 
 

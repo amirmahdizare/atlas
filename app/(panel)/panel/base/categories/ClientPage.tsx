@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useAdvisersSection } from './hooks'
-import { SingleUser } from './components/SingleUser/SingleCategory'
+import { SingleUser } from './components/SingleCategory/SingleCategory'
 import { ListSection } from './components/List/ListSection'
 
 export const ClientPage = () => {
