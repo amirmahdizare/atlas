@@ -1,24 +1,24 @@
-import { Button, Input } from '@components'
 import React, { useEffect } from 'react'
+
+import { Button, Input } from '@components'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useAdvisersSection, useCategoryList } from '../../../hooks'
 import { useCustomMutation } from 'hooks'
 import { api } from '_api/config'
-import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { toast } from 'react-toastify'
-import { CategoryType_API } from 'types'
 import { CategoryEndPoints, CategoryEndPointsType } from '_api/endpoints/category'
+import { CategoryType_API } from 'types'
 
 export const DataForm = () => {
 
-    const { dispatch, mode } = useAdvisersSection()
+    const { dispatch, mode, catId } = useAdvisersSection()
 
-    const { refetch, data: usersData } = useCategoryList()
+    const { refetch, data: categoriesData } = useCategoryList()
 
 
     const { mutate, isLoading } = useCustomMutation<CategoryEndPointsType['CREATE']>({
-        mutationFn: (data) => api.post(CategoryEndPoints.CREATE, data),
-        mutationKey: 'addUser',
+        mutationFn: (data) => mode == 'edit' && catId ? api.patch(CategoryEndPoints.SINGLE(catId.toString()),data) : api.post(CategoryEndPoints.CREATE, data),
+        mutationKey: [mode == 'add' ? 'addCategory' : 'editCategory', catId],
         onSuccess: (data, { title }) => {
             dispatch({ mode: 'list' });
             refetch();
@@ -30,9 +30,18 @@ export const DataForm = () => {
 
     const { register, formState: { errors }, watch, getValues, setValue, handleSubmit, reset } = methods
 
+    useEffect(() => {
+
+        const selectedCat = categoriesData?.data.find(i => i.id == catId?.toString())
+        if (selectedCat) {
+            const { id, ...items } = selectedCat
+            reset(items)
+        }
+
+    }, [catId])
 
 
-    const handleMutateUser = (data:CategoryEndPointsType['CREATE']['REQUEST']) => {
+    const handleMutateUser = (data: CategoryEndPointsType['CREATE']['REQUEST']) => {
         mutate(data)
     }
 
@@ -46,8 +55,8 @@ export const DataForm = () => {
                         message: 'نام ضروری است.'
                     }
                 })}
-                error={!!errors.title}
-                errorText={errors.title?.message}
+                    error={!!errors.title}
+                    errorText={errors.title?.message}
                 />
 
                 <Input label='نام انگلیسی' register={register('enTitle', {
@@ -55,9 +64,9 @@ export const DataForm = () => {
                         value: true,
                         message: 'نام انگلیسی ضروری است.'
                     }
-                })} 
-                error={!!errors.enTitle}
-                errorText={errors.enTitle?.message}
+                })}
+                    error={!!errors.enTitle}
+                    errorText={errors.enTitle?.message}
                 />
 
                 <div className='flex flex-row gap-4'>
