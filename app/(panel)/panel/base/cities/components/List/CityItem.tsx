@@ -14,7 +14,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
         <div className='flex flex-col gap-1 p-1 bg-seasalt'>
 
 
-            <div className='grid grid-cols-2 lg:grid-cols-4 gap-2 items-center text-center text-body-2-normal'>
+            <div className='grid grid-cols-4 lg:grid-cols-4 gap-2 items-center text-center text-body-2-normal'>
 
                 <div className='flex flex-row gap-2 col-span- items-center'>
 
@@ -28,7 +28,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
 
                 <div className='col-span-1'>{createTime}</div>
 
-                {/* <div className='col-span-1'>{subLocations.length} منطقه</div> */}
+                <div className='col-span-1'>{4} منطقه</div>
 
                 <div className='flex col-span-1 flex-row gap-2 items-center'>
 
