@@ -22,14 +22,14 @@ export const DeleteCity = ({ id, title }: { id: string, title: string }) => {
             refetch()
             dispatch({ mode: 'list' })
         },
-        onError: () => {
-            toast.error('حذف شهر با خطا روبرو شد.')
+        onError: (data) => {
+            toast.error( data.response?.data?.message ?? data?.message )
         }
     })
 
 
-    const handleDeletePermission = () => {
-        if (prompt(`آیا مایل به حذف شهر ${title} هستید`))
+    const handleDeleteCity = () => {
+        if (prompt(`آیا مایل به حذف شهر ${title} هستید`,'بله'))
         {
             mutate({})
         }
@@ -37,9 +37,7 @@ export const DeleteCity = ({ id, title }: { id: string, title: string }) => {
     return (
         <>
 
-            <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => {
-                prompt
-            }}>
+            <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() =>handleDeleteCity()}>
                 <span>حذف شهر</span>
                 {isLoading ? <Spinner /> : <IconTrash width={20} height={20} className='text-red-500' />}
             </div>
