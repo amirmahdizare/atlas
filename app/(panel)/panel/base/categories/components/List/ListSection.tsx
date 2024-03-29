@@ -1,12 +1,12 @@
 import { Button } from '@components'
 import { IconPlus, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import { useAdvisersSection } from '../../hooks'
+import { useCategorySection } from '../../hooks'
 import { List } from './List'
 
 export const ListSection = () => {
 
-  const { dispatch } = useAdvisersSection()
+  const { dispatch } = useCategorySection()
 
   return (
     <div className='flex flex-col gap-2'>

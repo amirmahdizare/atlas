@@ -19,7 +19,7 @@ interface StoreType extends DataType {
     dispatch: (state: DataType) => void
 }
 
-export const useAdvisersSection = create<StoreType>((set) => ({
+export const useCategorySection = create<StoreType>((set) => ({
     mode: 'list',
     dispatch: (newState) => set((state) => ({ ...state, ...newState }))
 }))

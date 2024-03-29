@@ -1,14 +1,14 @@
 import { Button } from '@components'
 import { IconPlus, IconUsers } from '@tabler/icons-react'
 import React from 'react'
-import { useAdvisersSection, useCategoryList } from '../../hooks'
+import {  useCategoryList, useCategorySection } from '../../hooks'
 import { RowItem } from './components/RowItem/RowItem'
 import { toast } from 'react-toastify'
 import { UserSkeleton } from './components/RowItem/components/UserSkeleton'
 
 export const List = () => {
 
-    const { dispatch } = useAdvisersSection()
+    const { dispatch } = useCategorySection()
 
     const { data, isLoading, isError } = useCategoryList()
 

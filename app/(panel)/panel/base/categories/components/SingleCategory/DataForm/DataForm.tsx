@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import { Button, Input } from '@components'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useAdvisersSection, useCategoryList } from '../../../hooks'
+import { useCategorySection, useCategoryList } from '../../../hooks'
 import { useCustomMutation } from 'hooks'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
@@ -11,7 +11,7 @@ import { CategoryType_API } from 'types'
 
 export const DataForm = () => {
 
-    const { dispatch, mode, catId } = useAdvisersSection()
+    const { dispatch, mode, catId } = useCategorySection()
 
     const { refetch, data: categoriesData } = useCategoryList()
 
