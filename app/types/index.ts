@@ -340,10 +340,10 @@ export interface ItemsBaseType {
     value: string
 }
 
-export interface ItemsMutateType {
+export interface ItemsMutateType extends ItemsBaseType {
     suggestId: string
 }
 
-export interface ItemsReadType {
+export interface ItemsReadType extends ItemsBaseType {
     suggest: SuggestReadType
 }
