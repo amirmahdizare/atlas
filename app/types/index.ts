@@ -301,12 +301,12 @@ export interface SubCategoryType<IDT, CT> extends CategoryType_API<IDT> {
 
 export interface FilterRecordType {
     title: string,
-    filterType: keyof typeof CategorySpecialField,
+    filtertype: keyof typeof CategorySpecialField,
     hint: string,
     type: 'string' | 'number' | 'boolean',
     itemKey: keyof PropertyListFilterType,
     unit: string,
-    isPrimary: boolean,
+    isPrimary: 'false' | 'true',
     suggests?: []
 }
 export interface FilterMutateType extends FilterRecordType { subCategoryId: string }

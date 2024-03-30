@@ -4,9 +4,12 @@ import ClickAwayListener from 'react-click-away-listener'
 import { SubCategoryType } from 'types'
 import { MutateSubcategory } from './MutateSubcategory'
 import { DeleteSubcategory } from './DeleteSubCategory'
+import { Filters } from '../../Filters/Filters'
 
-export const SingleSubcategory = ({ title, enTitle , id , category: {title:catTitle , id:catId} }: SubCategoryType<string, string>) => {
+export const SingleSubcategory = (subcategory: SubCategoryType<string, string>) => {
 
+
+    const { title, enTitle , id , category: {title:catTitle , id:catId} }  = subcategory
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const [more, setMore] = useState<boolean>(false)
@@ -45,7 +48,7 @@ export const SingleSubcategory = ({ title, enTitle , id , category: {title:catTi
             </span>
 
             <div className={`col-span-3 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[1000px]' : 'max-h-0 opacity-0'}`}>
-                Suggest
+                <Filters subCategory={subcategory} />
             </div>
         </div>
     )
