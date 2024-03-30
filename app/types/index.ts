@@ -310,7 +310,7 @@ export interface FilterRecordType {
     suggests?: []
 }
 export interface FilterMutateType extends FilterRecordType { subCategoryId: string }
-export interface FilterReadType extends FilterRecordType { subCategory: SubCategoryType<string, CategoryType_API<string>> }
+export interface FilterReadType extends FilterRecordType { subCategory: SubCategoryType<string, CategoryType_API<string>>  , id:string}
 
 
 

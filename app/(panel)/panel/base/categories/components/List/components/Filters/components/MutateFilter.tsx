@@ -16,11 +16,11 @@ import { FilterMutateType, FilterReadType, FilterRecordType } from 'types'
 
  interface FormType extends Omit<FilterRecordType ,'subCategoryId'> {}
 
-export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }: { parentId: string, mode: 'add' | 'edit', recordId?: number, children: ReactNode, parentTitle: string }) => {
+export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }: { parentId: string, mode: 'add' | 'edit', recordId?: string, children: ReactNode, parentTitle: string }) => {
 
     const [show, setShow] = useState<boolean>(false)
 
-    const { refetch } = useFiltersList()
+    const { refetch , data } = useFiltersList()
 
     const { register, formState: { errors }, handleSubmit, reset, getValues, setValue, watch } = useForm<FormType>()
 
@@ -42,15 +42,15 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
     })
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     const targetSubgroup = data?.data.find(i => i.id == recordId?.toString())
-    //     if (targetSubgroup) {
-    //         const { enTitle, title } = targetSubgroup
-    //         reset({ enTitle, title })
-    //     }
+        const targetFilter = data?.data.find(i => i.id == recordId?.toString())
+        if (targetFilter) {
+            const { id  , ...items} = targetFilter
+            reset(items)
+        }
 
-    // }, [recordId])
+    }, [recordId])
 
 
     const FormItem = <T extends keyof FormType,>({ label, placeHolder, itemKey, inputType, options }: { label: string, placeHolder: string, itemKey: keyof FormType, inputType?: string, options?: RegisterOptions<FormType> | undefined }) => <Input label={label} placeholder={placeHolder} 
