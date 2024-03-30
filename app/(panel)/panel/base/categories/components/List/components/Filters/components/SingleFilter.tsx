@@ -17,10 +17,10 @@ export const SingleFilter = (filter: FilterReadType & { index: number }) => {
     const { filtertype, hint, isPrimary, itemKey, subCategory, title, type, unit, suggests, index } = filter
 
     return (
-        <div className='grid grid-cols-3 gap-2 border-r-2 pr-1  border-r-blue-600'>
+        <div className='grid grid-cols-3 gap-2 border-r-2 border pr-1 border-blue-400 border-r-blue-600  p-1 rounded'>
 
             <Cell colSpan={3} title={'نام'} value={title} className='cursor-pointer' onClick={()=>setIsOpen(!isOpen)}>
-                <span className='flex bg-blue-600 text-white rounded-circle w-2 h-2 justify-center items-center'>{index}</span>
+                <span className='flex bg-blue-600 text-white rounded-circle w-2 h-2 justify-center items-center align-middle'>{index}</span>
                 <IconChevronDown width={20} height={20} className={`transition-all duration-300 ${isOpen ? 'rotate-180' : ''}`} />
             </Cell>
 
