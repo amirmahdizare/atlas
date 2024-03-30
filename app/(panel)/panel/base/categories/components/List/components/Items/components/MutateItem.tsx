@@ -47,8 +47,8 @@ export const MutateItem = ({ children, mode, parentId, recordId, parentTitle }: 
 
         const targetItem = data?.data.find(i => i.id == recordId?.toString())
         if (targetItem) {
-            const { title } = targetItem
-            reset({ title })
+            const { title , value} = targetItem
+            reset({ title, value })
         }
 
     }, [recordId])
