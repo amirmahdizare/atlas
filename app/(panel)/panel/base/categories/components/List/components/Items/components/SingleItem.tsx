@@ -1,9 +1,10 @@
-import { IconChevronDown, IconDotsVertical } from '@tabler/icons-react';
+import { IconChevronDown, IconDotsVertical, IconPencil } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import ClickAwayListener from 'react-click-away-listener';
 import { ItemsReadType } from 'types'
+import { MutateItem } from './MutateItem';
 
-export const SingleItem = ({ suggest, title, value, index }: ItemsReadType & { index: number }) => {
+export const SingleItem = ({ suggest, title, value, index  , id:itemId}: ItemsReadType & { index: number }) => {
 
 
     const [open, setOpen] = useState<boolean>(false)
@@ -24,7 +25,7 @@ export const SingleItem = ({ suggest, title, value, index }: ItemsReadType & { i
                     </span>
                 </div>
 
-                <span>
+                <span onClick={() => setOpen(!open)}>
                     <span className='text-gray-400'>مقدار : </span>
                     {value}</span>
 
@@ -34,14 +35,14 @@ export const SingleItem = ({ suggest, title, value, index }: ItemsReadType & { i
                         <ClickAwayListener onClickAway={() => setMore(false)}>
 
                             <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-[20] left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                {/* <MutateSuggest parentId={filter.id} parentTitle={filter.title} mode='edit' recordId={id.toString()}>
+                               <MutateItem parentId={suggest.id} parentTitle={suggest.title} mode='edit' recordId={itemId.toString()}>
                                     <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' >
                                         <span>ویرایش</span>
                                         <IconPencil width={20} height={20} className='text-mint-green' />
                                     </div>
-                                </MutateSuggest>
+                                </MutateItem>
 
-                                <DeleteSuggest id={id} title={title} /> */}
+                                  {/*<DeleteSuggest id={id} title={title} /> */}
 
                             </div>
                         </ClickAwayListener>
