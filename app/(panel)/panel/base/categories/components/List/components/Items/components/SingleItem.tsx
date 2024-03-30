@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import ClickAwayListener from 'react-click-away-listener';
 import { ItemsReadType } from 'types'
 import { MutateItem } from './MutateItem';
+import { DeleteItems } from './DeleteItems';
 
 export const SingleItem = ({ suggest, title, value, index  , id:itemId}: ItemsReadType & { index: number }) => {
 
@@ -42,7 +43,7 @@ export const SingleItem = ({ suggest, title, value, index  , id:itemId}: ItemsRe
                                     </div>
                                 </MutateItem>
 
-                                  {/*<DeleteSuggest id={id} title={title} /> */}
+                                  <DeleteItems id={itemId} title={title} />
 
                             </div>
                         </ClickAwayListener>
