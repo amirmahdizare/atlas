@@ -4,6 +4,7 @@ import ClickAwayListener from 'react-click-away-listener'
 import { FilterReadType } from 'types'
 import { MutateFilter } from './MutateFilter'
 import { DeleteFilter } from './DeleteFilter'
+import { Suggests } from '../../Suggests/Suggests'
 
 const Cell = ({ colSpan, title, value, className, children, ...props }: { colSpan: number, value: any, title: string } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) =>
     <div className={`col-span-3 lg:col-span-${colSpan} flex items-center flex-row gap-1 ${className}`} {...props}>
@@ -60,7 +61,13 @@ export const SingleFilter = (filter: FilterReadType & { index: number }) => {
 
                 <Cell colSpan={1} title={'واحد'} value={unit} />
 
-                <Cell colSpan={3} title={'راهنما'} value={hint} /></>}
+                <Cell colSpan={3} title={'راهنما'} value={hint} />
+
+                <div className='col-span-3'>
+                    <Suggests {...filter} />
+
+                </div>
+                </>}
 
 
 

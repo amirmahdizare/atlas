@@ -3,6 +3,7 @@ import { CategoryEndPoints, CategoryEndPointsType } from '_api/endpoints/categor
 import { FilterEndPoints, FilterEndPointsType } from '_api/endpoints/filter'
 import { SubLocationEndPointsType } from '_api/endpoints/location'
 import { SubcategoryEndPoints, SubcategoryEndPointsType } from '_api/endpoints/subcategory'
+import { SuggestEndPoints, SuggestEndPointsType } from '_api/endpoints/suggest'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { useCustomQuery } from 'hooks'
 import { UseQueryOptions } from 'react-query'
@@ -44,5 +45,14 @@ export const useSubCategoryList = (data?: UseQueryOptions) => useCustomQuery<Sub
 export const useFiltersList = (data?: UseQueryOptions) => useCustomQuery<FilterEndPointsType['LIST']>({
     queryKey: 'getFilters',
     queryFn: () => api.get(FilterEndPoints.LIST),
-    onError: () => toast.error('خطا در دریافت لیست فیلتر ها ( فیلد ها) '),
+    onError: () => toast.error('خطا در دریافت لیست ویژگی ها ( فیلد ها) '),
+})
+
+
+
+
+export const useSuggestList = (data?: UseQueryOptions) => useCustomQuery<SuggestEndPointsType['LIST']>({
+    queryKey: 'getSuggests',
+    queryFn: () => api.get(SuggestEndPoints.LIST),
+    onError: () => toast.error('خطا در دریافت لیست پیشنهاد ها '),
 })
