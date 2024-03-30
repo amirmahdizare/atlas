@@ -29,7 +29,7 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
     const modeTitle = mode == 'edit' ? 'ویرایش' : 'ایجاد'
 
     const { mutate, isLoading } = useCustomMutation<SuggestEndPointsType['CREATE']>({
-        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(SuggestEndPoints.SINGLE(recordId.toString()), { ...data, filterId: parentId }) : api.post(SuggestEndPoints.CREATE, { ...data, filterId: parentId }),
+        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(SuggestEndPoints.SINGLE(recordId.toString()), { ...data}) : api.post(SuggestEndPoints.CREATE, { ...data }),
         onSuccess: (d, { title }) => {
             toast.success(`پیشنهاد ${title} با موفقیت ${modeTitle} شد.`)
             refetch()
@@ -44,10 +44,10 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
 
     useEffect(() => {
 
-        const targetFilter = data?.data.find(i => i.id == recordId?.toString())
-        if (targetFilter) {
-            const { id, ...items } = targetFilter
-            reset(items)
+        const targetSuggest = data?.data.find(i => i.id == recordId?.toString())
+        if (targetSuggest) {
+            const {  title } = targetSuggest
+            reset({ title })
         }
 
     }, [recordId])
@@ -80,7 +80,7 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
                 fitHeight
             // fitWidth
             >
-                <form className='flex flex-col gap-2  p-2' onSubmit={handleSubmit((d) => mutate({ ...d, filterId: parentId.toString() }))}>
+                <form className='flex flex-col gap-2  p-2' onSubmit={handleSubmit((d) => mutate({ ...d }))}>
                     <span className='flex flex-row gap-0.5 items-center'>{parentTitle} <IconChevronLeft width={20} height={20} /> {modeTitle} پیشنهاد</span>
 
                     <FormItem

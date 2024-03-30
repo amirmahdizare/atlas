@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
-import { IconChevronDown, IconDotsVertical } from '@tabler/icons-react'
+import { IconChevronDown, IconDotsVertical, IconPencil } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener'
 
 import { SuggestReadType } from 'types'
+import { MutateSuggest } from './MutateSuggest'
 
 export const SingleSuggest = (suggest: SuggestReadType & { index: number }) => {
 
@@ -27,21 +28,20 @@ export const SingleSuggest = (suggest: SuggestReadType & { index: number }) => {
                     </span>
                 </div>
 
-                <div className='border rounded-circle  bg-anti-flash-white-lighter cursor-pointer hover:bg-gray-200 transition-all text-raisin-black p-0.5  w-fit ' onClick={(e) => { e.stopPropagation(); setMore(true) }}>
+                <div className='border rounded-circle shrink-0 relative bg-anti-flash-white-lighter cursor-pointer hover:bg-gray-200 transition-all text-raisin-black p-0.5  w-fit ' onClick={(e) => { e.stopPropagation(); setMore(true) }}>
                     <IconDotsVertical width={15} height={15} />
                     {more &&
                         <ClickAwayListener onClickAway={() => setMore(false)}>
 
                             <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-[20] left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                df
-                                {/* <MutateFilter parentId={subId} parentTitle={subTitle}  mode='edit' recordId={filter.id.toString()}>
+                                <MutateSuggest parentId={filter.id} parentTitle={filter.title} mode='edit' recordId={id.toString()}>
                                     <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' >
-                                    <span>ویرایش</span>
-                                    <IconPencil width={20} height={20} className='text-mint-green' />
+                                        <span>ویرایش</span>
+                                        <IconPencil width={20} height={20} className='text-mint-green' />
                                     </div>
-                                    </MutateFilter>
-                                    
-                                <DeleteFilter id={id} title={title} /> */}
+                                </MutateSuggest>
+
+                                {/* <DeleteFilter id={id} title={title} /> */}
 
                             </div>
                         </ClickAwayListener>
