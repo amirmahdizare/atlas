@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import ClickAwayListener from 'react-click-away-listener'
 import { FilterReadType } from 'types'
 import { MutateFilter } from './MutateFilter'
+import { DeleteFilter } from './DeleteFilter'
 
 const Cell = ({ colSpan, title, value, className, children, ...props }: { colSpan: number, value: any, title: string } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>) =>
     <div className={`col-span-3 lg:col-span-${colSpan} flex items-center flex-row gap-1 ${className}`} {...props}>
@@ -16,7 +17,8 @@ export const SingleFilter = (filter: FilterReadType & { index: number }) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const { filtertype, hint, isPrimary, itemKey, subCategory :{title :subTitle , id:subId}, title, type, unit, suggests, index } = filter
+    const { filtertype, hint, isPrimary, itemKey, subCategory :{title :subTitle , id:subId}, title, type, unit, suggests, index , id} = filter
+    
     const [more, setMore] = useState<boolean>(false)
 
 
@@ -40,7 +42,7 @@ export const SingleFilter = (filter: FilterReadType & { index: number }) => {
                                     </div>
                                 </MutateFilter>
 
-                                {/* <DeleteSubcategory id={id} title={title} /> */}
+                                <DeleteFilter id={id} title={title} />
 
                             </div>
                         </ClickAwayListener>
