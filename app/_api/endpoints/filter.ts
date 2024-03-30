@@ -7,7 +7,7 @@ export const FilterEndPoints = Object.freeze({
 })
 
 export interface FilterEndPointsType {
-    CREATE_ROLE: ApiPostRequestType<FilterMutateType,FilterRecordType>,
+    CREATE: ApiPostRequestType<FilterMutateType,FilterRecordType>,
     LIST: ApiGetRequestType<{}, FilterReadType[]>
     UPDATE_SINGLE: ApiGetRequestType<FilterMutateType , FilterReadType>,
     DELETE_SINGLE: ApiPostRequestType<{}>

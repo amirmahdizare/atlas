@@ -3,6 +3,7 @@ import { IconPlus } from '@tabler/icons-react'
 import React from 'react'
 import { SubCategoryType } from 'types'
 import { SingleFilter } from './components/SingleFilter'
+import { MutateFilter } from './components/MutateFilter'
 
 export const Filters = ({ subCategory: { id: subId, title: subTitle } }: { subCategory: SubCategoryType<string, string> }) => {
 
@@ -16,16 +17,18 @@ export const Filters = ({ subCategory: { id: subId, title: subTitle } }: { subCa
 
         <span className='text-gray-500 text-body-3-normal'>لیست ویژگی ها (اختصاصی این زیردسته بندی)</span>
 
-        <div className='flex flex-row gap-0.5 items-center text-blue-600 cursor-pointer'>
-          <IconPlus />
-          <span>
-            افزودن
-          </span>
-        </div>
+        <MutateFilter parentTitle={subTitle} mode='add' parentId={subId}>
+          <div className='flex flex-row gap-0.5 items-center text-blue-600 cursor-pointer'>
+            <IconPlus />
+            <span>
+              افزودن
+            </span>
+          </div>
+        </MutateFilter>
 
       </div>
 
-      {targetFilters?.map((i ,index) => <SingleFilter index={index+1} {...i} />)}
+      {targetFilters?.map((i, index) => <SingleFilter index={index + 1} {...i} />)}
     </div>
   )
 }
