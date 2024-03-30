@@ -345,5 +345,6 @@ export interface ItemsMutateType extends ItemsBaseType {
 }
 
 export interface ItemsReadType extends ItemsBaseType {
-    suggest: SuggestReadType
+    suggest: SuggestReadType,
+    id:string
 }

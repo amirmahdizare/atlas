@@ -7,7 +7,7 @@ export const ItemsEndPoints = Object.freeze({
 })
 
 export interface ItemsEndPointsType {
-    CREATE_ROLE: ApiPostRequestType<ItemsMutateType, ItemsReadType>,
+    CREATE: ApiPostRequestType<ItemsMutateType, ItemsReadType>,
     LIST: ApiGetRequestType<{}, ItemsReadType[]>
     UPDATE_SINGLE: ApiGetRequestType<ItemsMutateType, ItemsReadType>,
     DELETE_SINGLE: ApiPostRequestType<{}>

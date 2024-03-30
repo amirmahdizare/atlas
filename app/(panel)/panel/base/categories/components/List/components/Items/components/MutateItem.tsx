@@ -1,8 +1,9 @@
-import { useFiltersList, useSuggestList } from '(panel)/panel/base/categories/hooks'
+import { useFiltersList, useItemsList, useSuggestList } from '(panel)/panel/base/categories/hooks'
 import { Button, Input, Modal, Select } from '@components'
 import { IconChevronLeft } from '@tabler/icons-react'
 import { api } from '_api/config'
 import { FilterEndPoints, FilterEndPointsType } from '_api/endpoints/filter'
+import { ItemsEndPoints, ItemsEndPointsType } from '_api/endpoints/items'
 import { SuggestEndPoints, SuggestEndPointsType } from '_api/endpoints/suggest'
 import { CategorySpecialField, FilterBaseType } from 'enums'
 import { useCustomMutation } from 'hooks'
@@ -11,27 +12,27 @@ import React, { ReactNode, useEffect, useState } from 'react'
 
 import { RegisterOptions, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { FilterMutateType, FilterReadType, FilterRecordType, SuggestMutateType } from 'types'
+import { ItemsMutateType, SuggestMutateType } from 'types'
 
 
 
-interface FormType extends Omit<SuggestMutateType, 'subCategoryId'> { }
+interface FormType extends Omit<ItemsMutateType, 'subCategoryId'> { }
 
-export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle }: { parentId: string, mode: 'add' | 'edit', recordId?: string, children: ReactNode, parentTitle: string }) => {
+export const MutateItem = ({ children, mode, parentId, recordId, parentTitle }: { parentId: string, mode: 'add' | 'edit', recordId?: string, children: ReactNode, parentTitle: string }) => {
 
     const [show, setShow] = useState<boolean>(false)
 
-    const { refetch, data } = useSuggestList()
+    const { refetch, data } = useItemsList()
 
-    const { register, formState: { errors }, handleSubmit, reset, getValues, setValue, watch } = useForm<FormType>()
+    const { register, formState: { errors }, handleSubmit, reset} = useForm<FormType>()
 
 
     const modeTitle = mode == 'edit' ? 'ویرایش' : 'ایجاد'
 
-    const { mutate, isLoading } = useCustomMutation<SuggestEndPointsType['CREATE']>({
-        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(SuggestEndPoints.SINGLE(recordId.toString()), { ...data}) : api.post(SuggestEndPoints.CREATE, { ...data }),
+    const { mutate, isLoading } = useCustomMutation<ItemsEndPointsType['CREATE']>({
+        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(ItemsEndPoints.SINGLE(recordId.toString()), { ...data , suggestId:parentId}) : api.post(ItemsEndPoints.CREATE, { ...data  , suggestId:parentId}),
         onSuccess: (d, { title }) => {
-            toast.success(`پیشنهاد ${title} با موفقیت ${modeTitle} شد.`)
+            toast.success(`آیتم ${title} با موفقیت ${modeTitle} شد.`)
             refetch()
             setShow(false)
         },
@@ -44,9 +45,9 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
 
     useEffect(() => {
 
-        const targetSuggest = data?.data.find(i => i.id == recordId?.toString())
-        if (targetSuggest) {
-            const {  title } = targetSuggest
+        const targetItem = data?.data.find(i => i.id == recordId?.toString())
+        if (targetItem) {
+            const { title } = targetItem
             reset({ title })
         }
 
@@ -81,12 +82,18 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
             // fitWidth
             >
                 <form className='flex flex-col gap-2  p-2' onSubmit={handleSubmit((d) => mutate({ ...d }))}>
-                    <span className='flex flex-row gap-0.5 items-center'>{parentTitle} <IconChevronLeft width={20} height={20} /> {modeTitle} پیشنهاد</span>
+                    <span className='flex flex-row gap-0.5 items-center'>{parentTitle} <IconChevronLeft width={20} height={20} /> {modeTitle} آیتم</span>
 
                     <FormItem
                         itemKey='title'
                         label='نام'
-                        placeHolder='مثلا :  حداقل '
+                        placeHolder='مثلا : هفتاد و پنج میلیون '
+                    />
+
+                    <FormItem
+                        itemKey='value'
+                        label='مقدار'
+                        placeHolder='مثلا : 75000 '
                     />
 
 
@@ -95,7 +102,7 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
 
                     <div className='flex flex-row gap-2'>
                         <Button type='button' bgColor='gray' textColor='dark' onClick={() => setShow(false)} fullWidth>انصراف</Button>
-                        <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading} className='leading-3'>ثبت {mode == 'edit' ? 'تغییرات' : ''} پیشنهاد</Button>
+                        <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading} className='leading-3'>ثبت {mode == 'edit' ? 'تغییرات' : ''} آیتم</Button>
 
                     </div>
                 </form>

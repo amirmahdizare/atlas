@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ClickAwayListener from 'react-click-away-listener';
 import { ItemsReadType } from 'types'
 
-export const SingleItem = ({ suggest, title, value , index }: ItemsReadType & { index: number }) => {
+export const SingleItem = ({ suggest, title, value, index }: ItemsReadType & { index: number }) => {
 
 
     const [open, setOpen] = useState<boolean>(false)
@@ -24,7 +24,9 @@ export const SingleItem = ({ suggest, title, value , index }: ItemsReadType & { 
                     </span>
                 </div>
 
-                <span>مقدار : {value}</span>
+                <span>
+                    <span className='text-gray-400'>مقدار : </span>
+                    {value}</span>
 
                 <div className='border rounded-circle shrink-0 relative bg-anti-flash-white-lighter cursor-pointer hover:bg-gray-200 transition-all text-raisin-black p-0.5  w-fit ' onClick={(e) => { e.stopPropagation(); setMore(true) }}>
                     <IconDotsVertical width={15} height={15} />

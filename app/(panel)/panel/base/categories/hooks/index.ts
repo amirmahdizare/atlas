@@ -1,7 +1,7 @@
 import { api } from '_api/config'
 import { CategoryEndPoints, CategoryEndPointsType } from '_api/endpoints/category'
 import { FilterEndPoints, FilterEndPointsType } from '_api/endpoints/filter'
-import { ItemsEndPointsType } from '_api/endpoints/items'
+import { ItemsEndPoints, ItemsEndPointsType } from '_api/endpoints/items'
 import { SubLocationEndPointsType } from '_api/endpoints/location'
 import { SubcategoryEndPoints, SubcategoryEndPointsType } from '_api/endpoints/subcategory'
 import { SuggestEndPoints, SuggestEndPointsType } from '_api/endpoints/suggest'
@@ -61,6 +61,6 @@ export const useSuggestList = (data?: UseQueryOptions) => useCustomQuery<Suggest
 
 export const useItemsList = (data?: UseQueryOptions) => useCustomQuery<ItemsEndPointsType['LIST']>({
     queryKey: 'getItems',
-    queryFn: () => api.get(SuggestEndPoints.LIST),
+    queryFn: () => api.get(ItemsEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست آیتم های پیشنهاد '),
 })
