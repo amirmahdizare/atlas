@@ -5,15 +5,20 @@ export const PropertyType = {
 }
 
 export enum CategorySpecialField {
-    "NUMBER"  = "NUMBER",
-    "RANGE"  = "RANGE",
+    "NUMBER" = "NUMBER",
+    "RANGE" = "RANGE",
     "BOOLEAN" = "BOOLEAN",
     "STRING" = "STRING",
-    "ONESELECTRANGE"='ONESELECTRANGE',
-    "ONEBUTTON"='ONEBUTTON',
+    "ONESELECTRANGE" = 'ONESELECTRANGE',
+    "ONEBUTTON" = 'ONEBUTTON',
 
 }
 
+export enum FilterBaseType {
+    "STRING" = 'string',
+    "NUMBER" = 'number',
+    "BOOLEAN" = 'boolean'
+}
 
 export enum PermissionBackendRoutes {
     PRODUCT_CREATE = "create_product",
