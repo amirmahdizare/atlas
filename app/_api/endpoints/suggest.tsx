@@ -7,7 +7,7 @@ export const SuggestEndPoints = Object.freeze({
 })
 
 export interface SuggestEndPointsType {
-    CREATE_ROLE: ApiPostRequestType<SuggestMutateType ,SuggestReadType>,
+    CREATE: ApiPostRequestType<SuggestMutateType ,SuggestReadType>,
     LIST: ApiGetRequestType<{}, SuggestReadType[]>
     UPDATE_SINGLE: ApiGetRequestType<SuggestMutateType , SuggestReadType>,
     DELETE_SINGLE: ApiPostRequestType<{}>

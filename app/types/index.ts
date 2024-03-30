@@ -323,7 +323,7 @@ export interface SuggestBaseType {
 
 
 export interface SuggestMutateType extends SuggestBaseType {
-    filterId: number
+    filterId: string
 }
 
 
