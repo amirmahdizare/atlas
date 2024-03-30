@@ -5,6 +5,7 @@ import ClickAwayListener from 'react-click-away-listener'
 
 import { SuggestReadType } from 'types'
 import { MutateSuggest } from './MutateSuggest'
+import { DeleteSuggest } from './DeleteSuggest'
 
 export const SingleSuggest = (suggest: SuggestReadType & { index: number }) => {
 
@@ -41,7 +42,7 @@ export const SingleSuggest = (suggest: SuggestReadType & { index: number }) => {
                                     </div>
                                 </MutateSuggest>
 
-                                {/* <DeleteFilter id={id} title={title} /> */}
+                                <DeleteSuggest id={id} title={title} />
 
                             </div>
                         </ClickAwayListener>
