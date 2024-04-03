@@ -269,19 +269,19 @@ export interface CityType {
     updateTime: string /// 2024-03-05
 }
 
-export interface SubLocationBaseType { 
-    name:string
+export interface SubLocationBaseType {
+    name: string
 }
 
-export  interface SubLocationMutationType extends SubLocationBaseType {
-    parentLocationId:string
+export interface SubLocationMutationType extends SubLocationBaseType {
+    parentLocationId: string
 }
 
-export  interface SubLocationReadType extends SubLocationBaseType {
-    parentLocation:CityType,
-    createTime:string,
-    updateTime:string,
-    id:string
+export interface SubLocationReadType extends SubLocationBaseType {
+    parentLocation: CityType,
+    createTime: string,
+    updateTime: string,
+    id: string
 }
 
 
@@ -310,7 +310,7 @@ export interface FilterRecordType {
     suggests?: []
 }
 export interface FilterMutateType extends FilterRecordType { subCategoryId: string }
-export interface FilterReadType extends FilterRecordType { subCategory: SubCategoryType<string, CategoryType_API<string>>  , id:string}
+export interface FilterReadType extends FilterRecordType { subCategory: SubCategoryType<string, CategoryType_API<string>>, id: string }
 
 
 
@@ -346,5 +346,18 @@ export interface ItemsMutateType extends ItemsBaseType {
 
 export interface ItemsReadType extends ItemsBaseType {
     suggest: SuggestReadType,
-    id:string
+    id: string
 }
+
+export interface CategoryFullType extends CategoryType_API<string> {
+    subCategories: (SubCategoryType<string, string> &
+    {
+        filters: (FilterReadType & {
+            suggests: (SuggestReadType & {
+                items: ItemsReadType[]
+            })[]
+        })[]
+    })[]
+}
+
+
