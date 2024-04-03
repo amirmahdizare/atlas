@@ -68,6 +68,6 @@ export const CategoryFilter = () => {
         return <span className='text-center text-red-500'>خطا در دریافت اطلاعات</span>
 
     return <div className='flex flex-col gap-2'>
-        {[1, 2, 3, 4, 5].map(f => <div className='bg-gray-100 h-6 w-full animate-pulse'></div>)}
+        {[1, 2, 3, 4, 5].map(f => <div className='bg-gray-100 h-3 w-full animate-pulse'></div>)}
     </div>
 }
