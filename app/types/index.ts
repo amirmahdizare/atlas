@@ -88,7 +88,7 @@ export interface CategorySpecialFieldType {
     title: string,
     hint?: string,
     unit?: string,
-    isPrimary?: boolean,
+    isPrimary?: 'true' | 'false',
     suggest?: Array<
         {
             // itemKey: keyof PropertyListFilterType
@@ -101,6 +101,7 @@ export interface CategorySpecialFieldType {
 export interface PropertyListFilterType {
     type: keyof typeof PropertyType,
     category?: string,
+    subCategory?: string
     city?: Array<{ value: string, title: string }>,
     zone?: Array<{ value: string, title: string }>,
     price?: string
@@ -349,8 +350,13 @@ export interface ItemsReadType extends ItemsBaseType {
     id: string
 }
 
+
+export interface FullFilterType extends Omit<FilterReadType, 'suggests'> {
+    suggests: (Omit<SuggestReadType, 'items'> & { items: ItemsReadType[] })[]
+}
+
 export interface CategoryFullType extends CategoryType_API<string> {
-    subCategories: (SubCategoryType<string, string> &
+    subCategories: (Omit<SubCategoryType<string, string>, 'filters'> &
     {
         filters: (FilterReadType & {
             suggests: (SuggestReadType & {

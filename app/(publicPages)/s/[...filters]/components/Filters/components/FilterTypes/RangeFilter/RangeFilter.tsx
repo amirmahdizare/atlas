@@ -3,10 +3,10 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import ClickAwayListener from 'react-click-away-listener'
 import { NumericFormat } from 'react-number-format'
 import { useSearchProperty } from '../../../../../hooks'
-import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
+import { CategorySpecialFieldType, FullFilterType, PropertyListFilterType } from 'types'
 import { handleKeyPress, isStringExist } from 'utils'
 
-export const RangeFilter = ({ title, type, hint, unit, itemKey, suggest }: CategorySpecialFieldType) => {
+export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests }: FullFilterType) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -58,7 +58,7 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggest }: Categ
 
             <div className={`flex flex-col gap-2.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                {suggest?.map((item, index) => <div className='flex flex-col gap-1.5 w-full'>
+                {suggests?.map((item, index) => <div className='flex flex-col gap-1.5 w-full'>
 
                     <span className='text-body-3-bolder text-ultra-violet'>{item.title}</span>
 
