@@ -5,7 +5,7 @@ export const SubcategoryEndPoints = Object.freeze({
     LIST: '/sub-categories',
     SINGLE: (id: string) => `/sub-categories/${id}`,
     SINGLE_FULL: (catId: string) => `/sub-categories/${catId}/with-relations`,
-    ALL_WITH_RELATION: (catId: string) => `/sub-categories/relations`,
+    ALL_WITH_RELATION:  `/sub-categories/relations`,
 })
 
 export interface SubcategoryEndPointsType {
