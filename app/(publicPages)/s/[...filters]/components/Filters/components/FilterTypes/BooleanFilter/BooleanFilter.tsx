@@ -22,7 +22,7 @@ export const BooleanFilter = ({ title, itemKey }: CategorySpecialFieldType) => {
                     <div className='flex flex-row gap-2 items-center'>
 
 
-                    <ReactSwitch checkedIcon={false} uncheckedIcon={false} handleDiameter={15} height={22} width={42} onChange={(checked) => dispatchFilter({ [itemKey]: checked ? true : undefined })} checked={!![itemKey]} offColor='#EBEBF0' onColor='#05BAC6' />
+                    <ReactSwitch checkedIcon={false} uncheckedIcon={false} handleDiameter={15} height={22} width={42} onChange={(checked) => dispatchFilter({ [itemKey]: checked ? true : undefined })} checked={!!filter?.[itemKey]} offColor='#EBEBF0' onColor='#05BAC6' />
 
                     </div>
                 </div>
