@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,7 +22,6 @@
         "name": "next"
       }
     ],
-
     "baseUrl": "app",
     "paths": {
       "@config": [
@@ -28,16 +31,29 @@
         "api/*"
       ],
       "@components": [
-        "components/*","components/index"
+        "components/*",
+        "components/index"
       ],
       "@images/*": [
         "images/*"
       ],
       "@icons": [
-        "icons/*","icons/index"
-      ]
+        "icons/*",
+        "icons/index"
+      ],
+      "@hooks": [
+        "hooks/*",
+        "hooks/index"
+      ],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
