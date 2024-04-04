@@ -2,10 +2,15 @@ import { Divider, Modal } from '@components'
 import { IconArrowRight, IconChevronDown, IconChevronLeft, IconX } from '@tabler/icons-react'
 import React, { useState } from 'react'
 import { useSearchProperty } from '../../../../hooks'
-import { cities } from '../SelectCity/data.mock'
-import { LocationType } from 'types'
+// import { cities } from '../SelectCity/data.mock'
+import { LocationType, SubLocationReadType } from 'types'
+import { useSubCities } from '@hooks'
 
 export const SelectArea = () => {
+
+    const { data, isLoading, isError } = useSubCities()
+
+    const subCities = data?.data
 
     const { filter, dispatchFilter } = useSearchProperty()
 
@@ -13,17 +18,17 @@ export const SelectArea = () => {
 
     const [modal, setModal] = useState<boolean>(false)
 
-    const handleToggleCity = (city: LocationType) => {
+    const handleToggleCity = (city: SubLocationReadType) => {
         if (filter.zone?.find(i => i.value == city.id))
             dispatchFilter({ zone: filter.zone.filter(i => i.value != city.id) })
         else
-            dispatchFilter({ zone: [...(filter?.zone ?? []), { title: city.title, value: city.id }] })
+            dispatchFilter({ zone: [...(filter?.zone ?? []), { title: city.name, value: city.id }] })
     }
 
     const isLocationInclude = (cityId: string) => filter.zone && filter.zone?.findIndex(i => i.value == cityId) != -1
 
 
-    if (filter.city?.length == 1)
+    if (filter.city?.length == 1 && subCities)
 
         return (
             <>
@@ -31,7 +36,7 @@ export const SelectArea = () => {
 
                 <div className='flex flex-col gap-2'>
 
-                    <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen  ?  'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
+                    <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen ? 'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                         <div className='flex flex-row gap-1 items-center'>
                             <span className='text-body-2-bolder'>محله</span>
                             {!!filter.zone?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
@@ -59,9 +64,9 @@ export const SelectArea = () => {
                             همه محله ها
                         </div>}
 
-                        {cities.filter(i=>i.parentId == filter?.city?.[0].value).map(item => <label htmlFor={item.id} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
+                        {subCities.filter(i => i.parentLocation?.id.toString() == filter?.city?.[0].value).map(item => <label htmlFor={item.id} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
                             <input checked={isLocationInclude(item.id)} type='checkbox' className='accent-mint-green' id={item.id} onChange={() => handleToggleCity(item)} />
-                            <span className='text-body-3-bolder text-ultra-violet'>{item.title}</span>
+                            <span className='text-body-3-bolder text-ultra-violet'>{item.name}</span>
                         </label>)}
                     </div>
 
@@ -72,9 +77,9 @@ export const SelectArea = () => {
                                 <span className='text-h5-bolder'>انتخاب محله</span>
                                 <IconX className='cursor-pointer text-gray-500' onClick={() => setModal(false)} />
                             </div>
-                            {cities.map(item => <label htmlFor={item.id} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
+                            {subCities.map(item => <label htmlFor={item.id} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
                                 <input checked={isLocationInclude(item.id)} type='checkbox' id={item.id} onChange={() => handleToggleCity(item)} />
-                                <span>{item.title}</span>
+                                <span>{item.name}</span>
                             </label>)}
                         </div>
 
@@ -85,4 +90,9 @@ export const SelectArea = () => {
                 </div>
             </>
         )
+
+    else if (filter.city?.length != 1)
+        return <></>
+    return <div className='h-3 w-full animate-pulse bg-gray-100'></div>
+
 }

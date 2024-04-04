@@ -279,7 +279,7 @@ export interface SubLocationMutationType extends SubLocationBaseType {
 }
 
 export interface SubLocationReadType extends SubLocationBaseType {
-    parentLocation: CityType,
+    parentLocation: CityType | null,
     createTime: string,
     updateTime: string,
     id: string
