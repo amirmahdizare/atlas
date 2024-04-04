@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { useCustomMutation } from 'hooks'
 import { api } from '_api/config'
 import { SubLocationEndPoints } from '_api/endpoints/location'
-import { useSubCities } from '../../../hooks'
+import { useSubCities } from '@hooks'
 
 export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'add' | 'edit', id?: string, children: ReactNode, cityTitle: string, cityId: number }) => {
 

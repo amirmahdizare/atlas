@@ -3,11 +3,11 @@ import { Button, Input, Modal } from '@components'
 import { IconMapPin2, IconX } from '@tabler/icons-react'
 import cityPhoto from 'images/city.svg'
 import Image from 'next/image'
-import { useCustomMutation } from 'hooks'
+import { useCities, useCustomMutation } from 'hooks'
 import { api } from '_api/config'
 import { LocationEndPoints } from '_api/endpoints/location'
 import { toast } from 'react-toastify'
-import { useCities, useCitiesSection } from '../../../hooks'
+import { useCitiesSection } from '../../../hooks'
 import { useForm } from 'react-hook-form'
 
 export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: string, children: ReactNode }) => {

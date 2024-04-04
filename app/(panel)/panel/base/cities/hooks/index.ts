@@ -21,17 +21,17 @@ export const useCitiesSection = create<StoreType>((set) => ({
     dispatch: (newState) => set((state) => ({ ...state , ...newState }))
 }))
 
-export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndPointsType['GET_LIST']>({
-    queryKey: 'getCities',
-    queryFn: () => api.get(LocationEndPoints.GET_LIST),
-    onError: () => toast.error('خطا در دریافت لیست شهرها'),
-})
+// export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndPointsType['GET_LIST']>({
+//     queryKey: 'getCities',
+//     queryFn: () => api.get(LocationEndPoints.GET_LIST),
+//     onError: () => toast.error('خطا در دریافت لیست شهرها'),
+// })
 
 
-export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
-    queryKey: 'getSubCities',
-    queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
-    onError: () => toast.error('خطا در دریافت لیست مناطق'),
-})
+// export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
+//     queryKey: 'getSubCities',
+//     queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
+//     onError: () => toast.error('خطا در دریافت لیست مناطق'),
+// })
 
 

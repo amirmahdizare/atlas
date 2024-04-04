@@ -1,7 +1,8 @@
 import React from 'react'
-import { useCities, useCitiesSection } from '../../hooks'
+import {  useCitiesSection } from '../../hooks'
 import { CityItem } from './CityItem'
 import { Skeleton } from './components/Skeleton'
+import { useCities } from '@hooks'
 
 export const List = () => {
 

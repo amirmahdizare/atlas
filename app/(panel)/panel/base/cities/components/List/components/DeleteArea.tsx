@@ -2,10 +2,10 @@ import React from 'react'
 
 import { IconTrash } from '@tabler/icons-react'
 import { api } from '_api/config'
-import { useCustomMutation } from 'hooks'
+import { useCustomMutation, useSubCities } from 'hooks'
 import { toast } from 'react-toastify'
 import { Spinner } from '@components'
-import { useCities, useCitiesSection, useSubCities } from '../../../hooks'
+import { useCitiesSection } from '../../../hooks'
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from '_api/endpoints/location'
 
 export const DeleteArea = ({ id, title }: { id: string, title: string }) => {

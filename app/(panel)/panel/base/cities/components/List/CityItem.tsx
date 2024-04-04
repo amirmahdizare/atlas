@@ -5,8 +5,9 @@ import ClickAwayListener from 'react-click-away-listener'
 import { SingleCity } from './components/SingleCity'
 import { SingleArea } from './components/SingleArea'
 import { DeleteCity } from './components/DeleteCity'
-import { useCitiesSection, useSubCities } from '../../hooks'
+import { useCitiesSection } from '../../hooks'
 import { DeleteArea } from './components/DeleteArea'
+import { useSubCities } from '@hooks'
 
 export const CityItem = ({ id, name, createTime }: CityType) => {
 

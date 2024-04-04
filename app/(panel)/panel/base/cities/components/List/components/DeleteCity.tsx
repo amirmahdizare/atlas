@@ -2,10 +2,10 @@ import React from 'react'
 
 import { IconTrash } from '@tabler/icons-react'
 import { api } from '_api/config'
-import { useCustomMutation } from 'hooks'
+import { useCities, useCustomMutation } from 'hooks'
 import { toast } from 'react-toastify'
 import { Spinner } from '@components'
-import { useCities, useCitiesSection } from '../../../hooks'
+import {  useCitiesSection } from '../../../hooks'
 import { LocationEndPoints, LocationEndPointsType } from '_api/endpoints/location'
 
 export const DeleteCity = ({ id, title }: { id: string, title: string }) => {
