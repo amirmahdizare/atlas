@@ -367,3 +367,15 @@ export interface CategoryFullType extends CategoryType_API<string> {
 }
 
 
+
+export interface BlogItemTypeAPI<IDT, IMT> {
+    title: string
+    summary: string
+    description: string
+    duration: string
+    userId?: number
+    suggest_productId?: string[],
+    images: IMT[],
+    id: IDT
+}
+

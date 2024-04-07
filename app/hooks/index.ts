@@ -1,4 +1,5 @@
 import { api } from "_api/config";
+import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
 import { AxiosError, AxiosResponse } from "axios";
@@ -28,5 +29,11 @@ export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndP
 export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
     queryKey: 'getSubCities',
     queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
+    onError: () => toast.error('خطا در دریافت لیست مناطق'),
+})
+
+export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
+    queryKey: 'getBlogs',
+    queryFn: () => api.get(BlogEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست مناطق'),
 })
