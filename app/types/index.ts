@@ -379,3 +379,23 @@ export interface BlogItemTypeAPI<IDT, IMT> {
     id: IDT
 }
 
+
+export interface BlogReadType {
+    id: number,
+    title: string,
+    summary: string,
+    description: string,
+    images: string[],
+    suggest_productId: [],
+    duration: 100,
+    createTime: string,
+    updateTime: string,
+    user: {
+        id: number,
+        firstName: null | string,
+        lastName: null | string,
+        userName: null | string,
+        phoneNumber: string
+    },
+    tags: []
+}

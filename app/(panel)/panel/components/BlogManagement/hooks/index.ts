@@ -3,7 +3,7 @@ import { create } from 'zustand'
 
 interface DataType {
     mode: 'list' | 'add' | 'edit',
-    blogId?:string
+    blogId?:number
 }
 
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from '@components'
 import { IconPencil, IconTrash } from '@tabler/icons-react'
-import { BlogItemType, BlogItemTypeAPI } from 'types'
+import { BlogItemType, BlogItemTypeAPI, BlogReadType } from 'types'
 import { useBlogsSection } from '../../../hooks'
 
-export const BlogCard = ({ title,description , duration , images  , id, summary,  }: BlogItemTypeAPI<string , string>) => {
+export const BlogCard = ({ title,description , duration , images  , id, summary,createTime  }: BlogReadType) => {
 
     const { dispatch } = useBlogsSection()
 
@@ -20,7 +20,7 @@ export const BlogCard = ({ title,description , duration , images  , id, summary,
 
                 <span className='text-body-3-normal text-ultra-violet line-clamp-2 text-ellipsis overflow-hidden leading-3'>{summary}</span>
 
-                {/* <span className='text-ultra-violet'>{(new Date(createdAt)).toLocaleString('fa-ir')}</span> */}
+                <span className='text-ultra-violet'>{createTime}</span>
             </div>
 
             <div className='col-span-2 lg:col-span-1 flex flex-row items-start justify-evenly'>
