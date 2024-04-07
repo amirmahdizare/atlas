@@ -5,8 +5,9 @@ import React from 'react'
 import { RelatedBlogs } from './components/RelatedBlogs'
 import { BlogBody } from './components/BlogBody'
 import { singleBlogDetail } from './data.mock'
+import { BlogReadType } from 'types'
 
-export const ClientPage = ({ id }: { id: string }) => {
+export const ClientPage = ({ id, data }: { id: string, data: BlogReadType }) => {
     return (
         <div className='grid grid-cols-5 items-start gap-4  py-2'>
 
@@ -19,7 +20,7 @@ export const ClientPage = ({ id }: { id: string }) => {
             </div>
 
             <div className='lg:order-3 order-2 col-span-5 lg:col-span-4'>
-                <BlogBody {...singleBlogDetail} />
+                <BlogBody {...data} />
             </div>
 
 

@@ -1,16 +1,59 @@
 import { Metadata } from 'next'
 import React from 'react'
-import { pageProps } from 'types'
+import { BlogReadType, pageProps } from 'types'
 import { ClientPage } from './ClientPage'
+import { ApiBaseURL } from '_api/serverSideConfig'
+import { BlogEndPoints } from '_api/endpoints/blog'
 
-export const metadata: Metadata = {
-    title: 'مقاله | دپارتمان املاک اطلس'
+
+export const generateMetadata = async ({ params: { id } }: pageProps<{ id: string }>): Promise<Metadata> => {
+
+    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id))}`)
+
+    const data: BlogReadType = await response.json()
+
+    console.log(data)
+
+    try {
+        return (
+            {
+                title: `${data.title} | دپارتمان املاک اطلس`,
+                description: data.summary
+            }
+        )
+
+    } catch (error) {
+        return ({
+            title: 'مقاله | دپارتمان املاک اطلس'
+        })
+    }
 }
 
-export default function page({ params: { id } }: pageProps<{ id: string }>) {
-    return (
-        <>
-            <ClientPage id={id} />
-        </>
-    )
+
+export default async function page({ params: { id } }: pageProps<{ id: string }>) {
+
+    // const cookies = cookies
+
+
+
+    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id))}`, {
+        // headers:{
+        //     Authorization:
+        // }
+    })
+
+    const data: BlogReadType = await response.json()
+
+    try {
+
+        if (response.ok)
+            return (
+                <>
+                    <ClientPage id={id} data={data} />
+                </>
+            )
+        return <span className='text-red-500 font-bold text-center p-4'>مقاله مورد نظر یافت نشد.</span>
+    } catch (error) {
+        return <span className='text-red-500 font-bold text-center p-4'>مقاله مورد نظر یافت نشد.</span>
+    }
 }
