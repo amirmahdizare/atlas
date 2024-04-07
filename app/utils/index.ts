@@ -44,3 +44,32 @@ export const getToken = () => cookieValue('access_token')
 
 
 export const captilizeFirstLetter = (text: string) => text?.[0].toUpperCase().concat(text.substring(1))
+
+
+export const createFormData = (data: { [key: string]: any }, arrayItems?: string[]) => {
+
+  var form_data = new FormData();
+
+  console.log(data)
+
+  var key: string
+
+  for (key in data) {
+    if (typeof data[key] != 'undefined' && arrayItems?.indexOf(key) == -1) {
+
+
+      if (typeof data[key] == 'object' && !Array.isArray(data[key]))
+        form_data.append(key, JSON.stringify(data[key]));
+
+      else if (!Array.isArray(data[key]))
+        form_data.append(key, data?.[key] as any);
+    }
+  }
+
+  arrayItems?.forEach(item => {
+    if (Array.isArray(data[item]))
+      data[item].forEach((f: string | Blob) => form_data.append(item, f))
+  })
+
+  return form_data
+}

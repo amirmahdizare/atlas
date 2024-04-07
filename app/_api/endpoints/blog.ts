@@ -7,8 +7,8 @@ export const BlogEndPoints = Object.freeze({
 })
 
 export interface BlogEndPointsType {
-    CREATE: ApiPostRequestType<BlogItemTypeAPI<undefined, File>, BlogItemTypeAPI<string , string>>,
+    CREATE: ApiPostRequestType<FormData, BlogItemTypeAPI<string , string>>,
     LIST: ApiGetRequestType<{}, BlogItemTypeAPI<string, string>[]>
-    UPDATE_SINGLE: ApiGetRequestType<BlogItemTypeAPI<undefined , File>, BlogItemTypeAPI<string , string>>,
+    UPDATE_SINGLE: ApiGetRequestType<FormData, BlogItemTypeAPI<string , string>>,
     DELETE_SINGLE: ApiPostRequestType<{}>
 }
