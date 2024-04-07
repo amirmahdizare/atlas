@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Input, TextArea } from '@components'
 import { IconInfoCircle, IconUpload } from '@tabler/icons-react'
 import { useBlogsSection } from '../../../hooks'
@@ -12,13 +12,13 @@ import { createFormData } from 'utils'
 
 export const DataForm = () => {
 
-    const { refetch } = useBlogs()
+    const { refetch, data: blogsData } = useBlogs()
 
     const { dispatch, blogId, mode } = useBlogsSection()
 
     const modeTitle = mode == 'add' ? 'افزودن' : 'ویرایش'
 
-    const { register, handleSubmit, formState: { errors }, watch } = useForm<BlogItemTypeAPI<undefined, File>>()
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<BlogItemTypeAPI<undefined, File>>()
 
     const { mutate, isLoading } = useCustomMutation<BlogEndPointsType['CREATE']>(
         {
@@ -36,8 +36,30 @@ export const DataForm = () => {
     )
 
     const handleMutate = (data: BlogItemTypeAPI<undefined, File>) => {
-        mutate(createFormData({ ...data, userId: 21, images: Array.from(data.images) }, ['images']))
+
+        var currentImages: string[] = []
+
+
+        // UnComment After Resolving Images
+        // if (mode == 'edit' && blogId) {
+        //     const targetBlog = blogsData?.data.find(a => a.id == blogId)
+        //     if (targetBlog?.images)
+        //         currentImages = targetBlog?.images
+        // }
+
+
+        mutate(createFormData({ ...data, userId: 21, images: [...currentImages, ...Array.from(data.images)] }, ['images']))
     }
+
+    useEffect(() => {
+        if (mode == 'edit' && blogId) {
+            const targetBlog = blogsData?.data.find(a => a.id == blogId)
+            if (targetBlog) {
+                const { createTime, updateTime, id, tags, user, suggest_productId, images, ...others } = targetBlog
+                reset(others)
+            }
+        }
+    }, [mode])
 
     return (
         <form className='grid grid-cols-3 gap-2' onSubmit={handleSubmit(handleMutate)}>
@@ -72,11 +94,13 @@ export const DataForm = () => {
                     <Button className='pointer-events-none' bgColor='gray' textColor='dark' icon={IconUpload}>افزودن تصویر</Button>
 
                     <input type='file' hidden id='blogPhoto' {...register('images', {
-                        required: {
+                        required: mode == 'add' ? {
                             value: true,
                             message: 'تصویر مقاله ضروری است.'
-                        }
+                        } : undefined
                     })} />
+
+                    {!!errors.images && <span className='text-red-500 font-bold'>تصویر مقاله ضروری است.</span>}
 
                     <div className='flex flex-row gap-1'>
                         <IconInfoCircle width={15} height={15} />

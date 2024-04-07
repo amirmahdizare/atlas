@@ -372,7 +372,7 @@ export interface BlogItemTypeAPI<IDT, IMT> {
     title: string
     summary: string
     description: string
-    duration: string
+    duration: number
     userId?: number
     suggest_productId?: string[],
     images: IMT[],
@@ -387,7 +387,7 @@ export interface BlogReadType {
     description: string,
     images: string[],
     suggest_productId: [],
-    duration: 100,
+    duration: number,
     createTime: string,
     updateTime: string,
     user: {
