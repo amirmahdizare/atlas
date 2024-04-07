@@ -1,6 +1,4 @@
 import React from 'react'
-import { blogs } from './data.mock'
-import { PropertyCard } from './components/PropertyCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Button, Spinner } from '@components'
 import { IconClipboard, IconPlus } from '@tabler/icons-react'
