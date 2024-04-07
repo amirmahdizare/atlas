@@ -3,6 +3,7 @@ import { Button } from '@components'
 import { IconPencil, IconTrash } from '@tabler/icons-react'
 import { BlogItemType, BlogItemTypeAPI, BlogReadType } from 'types'
 import { useBlogsSection } from '../../../hooks'
+import { DeleteBlog } from './DeleteBlog'
 
 export const BlogCard = ({ title,description , duration , images  , id, summary,createTime  }: BlogReadType) => {
 
@@ -24,7 +25,8 @@ export const BlogCard = ({ title,description , duration , images  , id, summary,
             </div>
 
             <div className='col-span-2 lg:col-span-1 flex flex-row items-start justify-evenly'>
-                <Button icon={IconTrash} bgColor='white' textColor='secondary'>حذف</Button>
+                <DeleteBlog id={id} />
+                {/* <Button icon={IconTrash} bgColor='white' textColor='secondary'>حذف</Button> */}
                 <Button icon={IconPencil} bgColor='primaryLighter' textColor='white' onClick={() => dispatch({ mode: 'edit', blogId: id })}>ویرایش</Button>
             </div>
 
