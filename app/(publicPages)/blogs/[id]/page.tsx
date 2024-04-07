@@ -12,7 +12,6 @@ export const generateMetadata = async ({ params: { id } }: pageProps<{ id: strin
 
     const data: BlogReadType = await response.json()
 
-    console.log(data)
 
     try {
         return (
@@ -32,15 +31,8 @@ export const generateMetadata = async ({ params: { id } }: pageProps<{ id: strin
 
 export default async function page({ params: { id } }: pageProps<{ id: string }>) {
 
-    // const cookies = cookies
 
-
-
-    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id))}`, {
-        // headers:{
-        //     Authorization:
-        // }
-    })
+    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id))}`)
 
     const data: BlogReadType = await response.json()
 
