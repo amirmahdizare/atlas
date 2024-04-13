@@ -17,7 +17,23 @@ export default function page({ params: { id } }: pageProps<{ id: string[] }>) {
                 <MobileBreadcrumb data={sampleProprty} />
             </div>
 
-            <div className='order-2 lg:order-1 col-span-5 lg:col-span-3 '>
+            <div className='order-2 flex flex-col gap-6 col-span-5 lg:col-span-3'>
+                <div className='lg:hidden'><Media data={sampleProprty} /></div>
+                <Title data={sampleProprty} />
+                <Descriptions data={sampleProprty} />
+                <SimilarCategories data={sampleProprty} />
+            </div>
+
+            <div className='order-3 flex flex-col gap-4 col-span-5 lg:col-span-2'>
+                <div className='lg:flex hidden'><Media data={sampleProprty} /></div>
+                <div className=' fixed w-full bottom-0 left-0 py-1.5 z-20 border-t-2 border-anti-flash-white-lighter lg:border-none lg:pb-0 bg-seasalt lg:relative'>
+                    <AgentInfo data={sampleProprty} />
+                </div>
+                <Note />
+            </div>
+
+
+            {/* <div className='order-2 lg:order-1 col-span-5 lg:col-span-3 '>
                 <Title data={sampleProprty} />
             </div>
 
@@ -44,7 +60,7 @@ export default function page({ params: { id } }: pageProps<{ id: string[] }>) {
 
             <div className='order-1 lg:order-2 col-span-5 lg:col-span-2'>
                 <Media data={sampleProprty} />
-            </div>
+            </div> */}
 
 
 
