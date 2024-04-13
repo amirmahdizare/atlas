@@ -399,3 +399,15 @@ export interface BlogReadType {
     },
     tags: []
 }
+
+
+export interface AgentNoteMutateType {
+    note: string,
+    productId: number
+}
+
+export interface AgentNoteReadType {
+    note: string,
+    productId: number,
+    id: string
+}
