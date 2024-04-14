@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir='rtl' className='text-mobile lg:text-desktop '>
-      <body className={`${IRANYekan.className} ${IRANYekanNumber.className} flex flex-col text-body-2-normal px-2 container mx-auto max-w-[1300px]  `}>
+      <body className={`${IRANYekan.className} ${IRANYekanNumber.className} flex flex-col text-body-2-normal px-0.5 lg:px-2 container mx-auto max-w-[1300px]  `}>
        <ClientLayout>
         {children}
        </ClientLayout>
