@@ -275,11 +275,13 @@ export interface CityType {
     name: string,
     id: number,
     createTime: string /// 2024-03-05,
-    updateTime: string /// 2024-03-05
+    updateTime: string /// 2024-03-05,
+    faTitle:string
 }
 
 export interface SubLocationBaseType {
-    name: string
+    name: string,
+    faTitle:string
 }
 
 export interface SubLocationMutationType extends SubLocationBaseType {

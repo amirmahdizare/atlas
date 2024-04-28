@@ -19,7 +19,7 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
 
     const { refetch, data } = useCities()
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<{ name: string }>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<{ name: string, faTitle: string }>()
 
     const { mutate, isLoading } = useCustomMutation({
         mutationFn: (data) => api.post(LocationEndPoints.CREATE_CITY, data),
@@ -35,7 +35,7 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
     })
 
     const { mutate: editMutate, isLoading: mutateLoading } = useCustomMutation({
-        mutationFn: (data) => id ? api.patch(LocationEndPoints.SINGLE(id?.toString()),data) : Promise.reject(),
+        mutationFn: (data) => id ? api.patch(LocationEndPoints.SINGLE(id?.toString()), data) : Promise.reject(),
         onSuccess: () => {
             toast.success('شهر با موفقیت به روز رسانی شد.')
             refetch()
@@ -101,10 +101,23 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                         </div>
 
 
-                        <Input label='نام شهر' placeholder='مثلا : تهران' register={register('name', {
+                        <Input label='نام فارسی شهر' placeholder='مثلا : تهران' register={register('faTitle', {
                             required: {
                                 value: true,
-                                message: 'وارد کردن شهر اجباری است.'
+                                message: 'وارد کردن نلم فارسی شهر اجباری است.'
+                            }
+                        }
+
+                        )}
+
+                            error={!!errors.faTitle}
+                            errorText={errors.faTitle?.message}
+                        />
+
+                        <Input label='نام انگلیسی شهر' placeholder='مثلا : Tehran' register={register('name', {
+                            required: {
+                                value: true,
+                                message: 'وارد کردن نام انگلیسی اجباری است.'
                             }
                         }
 
@@ -114,7 +127,6 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                             errorText={errors.name?.message}
                         />
 
-                        {/* <Input label='نام انگلیسی شهر' placeholder='مثلا : tehran' /> */}
 
 
                         <div className='flex flex-row gap-2'>

@@ -14,7 +14,7 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
 
     const [addModal, setAddModal] = useState<boolean>(false)
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<{ name: string }>()
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<{ name: string, faTitle: string }>()
 
     const { refetch, data: subLocationData } = useSubCities()
 
@@ -53,9 +53,9 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
         else if (mode == 'edit' && id)
             editMutate(data)
     }
-    
+
     useEffect(() => {
-        
+
         if (subLocationData?.data.find(i => i.id == id)) {
             reset(subLocationData?.data.find(i => i.id == id))
         }
@@ -101,12 +101,25 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
                         </div>
 
 
-                        <Input label='نام منطقه' placeholder='مثلا : منطقه 1' register={register('name', {
+                        <Input label='نام فارسی منطقه' placeholder='مثلا : منطقه 1' register={register('faTitle', {
                             required: {
-                                value: true, message: 'وارد کردن منطقه ضروری می باشد.'
+                                value: true, message: 'وارد کردن نام فارسی منطقه ضروری می باشد.'
                             }
                         })}
-                            error={!!errors?.name}
+                            error={!!errors?.faTitle}
+                            errorText={errors.faTitle?.message}
+                        />
+
+                        <Input label='نام انگلیسی منطقه' placeholder='مثلا : Zone1' register={register('name', {
+                            required: {
+                                value: true,
+                                message: 'وارد کردن نام انگلیسی اجباری است.'
+                            }
+                        }
+
+                        )}
+
+                            error={!!errors.name}
                             errorText={errors.name?.message}
                         />
 

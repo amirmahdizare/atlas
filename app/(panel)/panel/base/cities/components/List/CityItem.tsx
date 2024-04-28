@@ -9,7 +9,7 @@ import { useCitiesSection } from '../../hooks'
 import { DeleteArea } from './components/DeleteArea'
 import { useSubCities } from '@hooks'
 
-export const CityItem = ({ id, name, createTime }: CityType) => {
+export const CityItem = ({ id, name, createTime  , faTitle }: CityType) => {
 
     const [more, setMore] = useState<boolean>(false)
 
@@ -31,7 +31,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
                         <IconMapPin className='text-french-gray' width={20} height={20} />
                     </div>
 
-                    <span className='leading-6'>{name} </span>
+                    <span className='leading-6'>{faTitle} </span>
 
                 </div>
 
@@ -100,7 +100,7 @@ export const CityItem = ({ id, name, createTime }: CityType) => {
 
             {subLocations && subLocations?.length > 0 ? <div className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-2'>
                 {subLocations?.map(s => <div className='col-span-1 bg-white flex flex-row gap-1 items-center justify-between p-1 text-space-codet text-body-3-normal'>
-                    <span>{s.name} </span>
+                    <span>{s.faTitle} </span>
                     <div className='flex flex-row gap-1'>
                         <DeleteArea id={s.id} title={s.name} />
                         {/* <IconTrash width={20} height={20} className='text-ultra-violet cursor-pointer' onClick={() => alert('Delete')} /> */}
