@@ -5,12 +5,14 @@ import { PropertyCUType } from 'types'
 import { Medias } from './components/Medias'
 import { usePropertySection } from '(panel)/panel/components/PropertyManagement/hooks'
 import { Attributes } from './components/Attributes/Attributes'
+import { SelectLocations } from './components/SelectLocations'
 
 export const DataForm = () => {
 
     const methods = useForm<PropertyCUType<File>>()
 
     const { dispatch } = usePropertySection()
+
 
     const { mode, proprtyId } = usePropertySection()
 
@@ -31,31 +33,7 @@ export const DataForm = () => {
 
 
                 <div className='grid grid-cols-2 gap-2'>
-
-                    <div className='col-span-2 lg:col-span-1'>
-
-                        <Select
-                            items={[{ value: 'hashtgerd', lable: 'هشتگرد' }, { lable: 'شهر جدید هشتگرد', value: 'newCirty' }]}
-                            onChange={() => { }}
-                            value={'hashtgerd'}
-                            placeHolder='انتخاب شهر'
-                            label='شهر'
-
-                        />
-                    </div>
-
-                    <div className='col-span-2 lg:col-span-1'>
-
-                        <Select
-                            items={[{ value: 'hashtgerd', lable: 'فاز 7 ' }, { lable: 'فاز 4', value: 'newCirty' }]}
-                            onChange={() => { }}
-                            value={'hashtgerd'}
-                            placeHolder='انتخاب منظقه'
-                            label='منطقه'
-
-                        />
-                    </div>
-
+                    <SelectLocations />
                 </div>
 
                 <div className='grid grid-cols-2 gap-2'>
