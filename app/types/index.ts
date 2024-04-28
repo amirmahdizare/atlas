@@ -164,9 +164,8 @@ export interface PropertyCUType<MT> {
     rentPrice: number,
     agentNote?: string,
     features: Array<{
-        id: number,
-        filterId: number,
-        value: string | number | boolean
+        filterId: string,
+        value?: string | number | boolean
     }>
     id?: string,
     tags?: Array<string>
@@ -276,12 +275,12 @@ export interface CityType {
     id: number,
     createTime: string /// 2024-03-05,
     updateTime: string /// 2024-03-05,
-    faTitle:string
+    faTitle: string
 }
 
 export interface SubLocationBaseType {
     name: string,
-    faTitle:string
+    faTitle: string
 }
 
 export interface SubLocationMutationType extends SubLocationBaseType {

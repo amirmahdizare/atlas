@@ -1,12 +1,44 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { Input } from '@components'
 import { NumericFormat } from 'react-number-format'
+import { useFieldArray, useFormContext } from 'react-hook-form'
+import { PropertyCUType } from 'types'
+import { useFullCategories } from '@hooks'
 
 const AttrContainer = ({ children }: { children: ReactNode }) => {
-    return <div className='border-r-2  border-r-coral pr-1.5'>{children}</div>
+    return <div className='border-r-2  border-r-coral pr-1.5 flex flex-row gap-2 items-center'>{children}</div>
 }
 
 export const Attributes = () => {
+
+    const { getValues, control, setValue, watch, register, formState: { errors } } = useFormContext<PropertyCUType<File>>()
+
+
+    const { fields } = useFieldArray({
+        control,
+        name: 'features'
+    })
+
+    watch('features')
+
+    const { data, isLoading, isError } = useFullCategories()
+
+
+    const selectedSubcategory = getValues('subCategory')
+
+    const selectedCategory = getValues('category')
+
+
+    const attrss = data?.data.find(i => i.id == selectedCategory)?.subCategories.find(i => i.id == selectedSubcategory)?.filters
+    useEffect(() => {
+
+        if (attrss) {
+            const initalAttributes = attrss?.map(i => ({ value: undefined, filterId: i.id }))
+            setValue('features', initalAttributes)
+        }
+
+    }, [selectedSubcategory])
+
 
     const attrs: Array<{ key: string, type: 'string' | 'number' | 'boolean', title: string }> = [
         {
@@ -20,23 +52,70 @@ export const Attributes = () => {
         }
     ]
 
-    return (
-        <div className='flex flex-col gap-4'>
-            <span className='text-french-gray text-body-2-normal  text-right'>ویژگی ها</span>
-            {attrs.map(item => {
-                if (item.type == 'string')
-                    return <AttrContainer><Input label={item.title} type='string' /></AttrContainer>
-                else if (item.type == 'number')
-                    return <AttrContainer><NumericFormat thousandSeparator placeholder={item.title} /></AttrContainer>
-                else if (item.type === 'boolean')
-                    return <AttrContainer><label id={item.key} className='flex flex-row gap-1 items-center cursor-pointer'>
-                        <span className='text-french-gray text-body-2-normal  text-right'>{item.title}</span>
-                        <input type='checkbox' />
-                    </label></AttrContainer>
-                else
-                    return <></>
-            })}
-        </div>
 
-    )
+    const findType = (filterId: string) => attrss?.find(i => i.id == filterId)?.type
+
+    const findTitle = (filterId: string) => attrss?.find(i => i.id == filterId)?.title
+
+    const findUnit = (filterId: string) => attrss?.find(i => i.id == filterId)?.unit
+
+    if (data?.data) {
+
+
+
+        return (
+            <div className='flex flex-col gap-4'>
+                <span className='text-french-gray text-body-2-normal  text-right'>ویژگی ها</span>
+                {!selectedSubcategory && <span className='text-gray-500'>برای افزودن ویژگی های باید زیر دسته بندی را انتخاب کنید</span>}
+
+                {!!selectedSubcategory && fields.length == 0 && <span className='text-gray-500'>این زیر دسته بندی ویژگی ای ندارد.</span>}
+               
+                {fields?.map((item, index) => {
+                    if (findType(item.filterId) == 'string')
+                        return <AttrContainer>
+                            <Input label={findTitle(item.filterId)} type='string' register={register(`features.${index}.value`, {
+                                required: {
+                                    value: true,
+                                    message: `${findTitle(item.filterId)} وارد نشده است`
+                                }
+                            })}
+                                error={!!errors?.features?.[index]}
+                                errorText={errors?.features?.[index]?.message}
+                            />
+                            <span>{findUnit(item.filterId)}</span>
+                        </AttrContainer>
+                    else if (findType(item.filterId) == 'number')
+                        return <AttrContainer>
+                            <span>{findTitle(item.filterId)}</span>
+                            <NumericFormat
+                                thousandSeparator
+                                placeholder={findTitle(item.filterId)}
+                                onValueChange={(e) => setValue(`features.${index}.value`, e.floatValue)}
+                                value={Number(getValues(`features.${index}.value`) ?? 0)}
+                                className='border rounded-sm p-0.5'
+                            />
+                            <span>{findUnit(item.filterId)}</span>
+                        </AttrContainer>
+                    else if (findType(item.filterId) === 'boolean')
+                        return <AttrContainer><label id={item.id} className='flex flex-row gap-1 items-center cursor-pointer'>
+                            <span className=' text-body-2-normal  text-right'>{findTitle(item.filterId)} دارد</span>
+                            <input type='checkbox' {...register(`features.${index}.value`, {
+                                required: {
+                                    value: true,
+                                    message: `${findTitle(item.filterId)} وارد نشده است`
+                                }
+
+                            })} />
+                        </label></AttrContainer>
+                    else
+                        return <>sdf</>
+                })}
+            </div>
+
+        )
+    }
+    else if (isError)
+        return <div className='text-body-3-normal text-right text-bittersweet'>خطا در دریافت اطلاعات ویژگی ها</div>
+
+    return <div className='h-4 w-full animate-pulse '></div>
 }
