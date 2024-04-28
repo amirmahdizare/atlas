@@ -33,7 +33,7 @@ export const SelectLocations = () => {
                 {isError && <div className='text-red-500'>خطا در دریافت لیست شهرها</div>}
 
                 {data?.data && <Select
-                    items={data?.data.map(i => ({ lable: i.name, value: i.id.toString() }))}
+                    items={data?.data.map(i => ({ lable: i.faTitle, value: i.id.toString() }))}
                     onChange={(v) => { setValue('location', v); resetField('subLocation') }}
                     value={getValues('location')}
                     placeHolder='انتخاب شهر'
@@ -50,7 +50,7 @@ export const SelectLocations = () => {
                 {isError && <div className='text-red-500'>خطا در دریافت لیست مناطق</div>}
 
                 {subCitiesData?.data && <Select
-                    items={subCitiesData?.data.filter(i => i.parentLocation?.id.toString() == getValues('location')).map(i => ({ lable: i.name, value: i.id.toString() }))}
+                    items={subCitiesData?.data.filter(i => i.parentLocation?.id.toString() == getValues('location')).map(i => ({ lable: i.faTitle, value: i.id.toString() }))}
                     onChange={(v) => setValue('subLocation', v)}
                     value={getValues('subLocation') ?? ''}
                     placeHolder='انتخاب منطقه'

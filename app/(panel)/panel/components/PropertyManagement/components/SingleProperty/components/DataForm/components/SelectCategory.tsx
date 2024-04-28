@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from '@components'
 import { useFullCategories } from '@hooks'
 import { useFormContext } from 'react-hook-form'
@@ -12,6 +12,13 @@ export const SelectCategory = () => {
     const { data: fullData, isError, isLoading } = useFullCategories()
 
     watch(['category', 'subCategory'])
+    
+    useEffect(() => {
+
+        register('category', { required: { value: true, message: 'انتخاب دسته بندی اجباری است.' } })
+        register('subCategory', { required: { value: true, message: 'انتخاب زیر دسته بندی اجباری است.' } })
+
+    }, [])
 
     return (
         <>
@@ -28,7 +35,8 @@ export const SelectCategory = () => {
                     value={getValues('category')}
                     placeHolder='انتخاب دسته بندی'
                     label='دسته بندی'
-
+                    error={!!errors.category && !getValues('category')}
+                    errorText={errors.category?.message}
                 />}
             </div>
 
@@ -44,7 +52,8 @@ export const SelectCategory = () => {
                     value={getValues('subCategory')}
                     placeHolder='انتخاب زیردسته بندی'
                     label='زیر دسته بندی'
-
+                    error={!!errors.subCategory}
+                    errorText={errors.subCategory?.message}
                 />}
             </div>
         </>
