@@ -48,6 +48,16 @@ export const DataForm = () => {
                         errorText={errors.title?.message}
                     />
 
+                    <Input
+                        placeholder='مثلا : 30'
+                        label='متراژ (متر مربع)'
+                        register={register('metr', { required: { value: true, message: 'متراژ ملک اجباری می باشد' } , pattern:{value:/[0-9]/g , message:'متراژ به درستی وارد نشده است.'} })}
+                        error={!!errors.metr}
+                        errorText={errors.metr?.message}
+                        type='number'
+                        min={1}
+                    />
+
 
 
                     <div className='grid grid-cols-2 gap-2'>

@@ -161,6 +161,7 @@ export interface PropertyCUType<MT> {
     subCategory: string
     price: number,
     prePrice: number,
+    metr:number,
     rentPrice: number,
     agentNote?: string,
     features: Array<{
