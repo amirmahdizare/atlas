@@ -85,6 +85,11 @@ export const DataForm = () => {
                         </div>
                     </div>
 
+                    <label htmlFor='isSuggested' className='flex flex-row gap-2 items-center cursor-pointer'>
+                        <span className='text-body-2-normal'>آیا ملک پیشنهادی است ؟ (در صورت پیشنهادی مورد ملک  این ملک در صفحه اصلی نمایش داده می شود.)</span>
+                        <input id='isSuggested' type='checkbox' {...register('isSuggested')} />
+                    </label>
+
                     <div className='flex flex-row gap-4'>
 
                         <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', proprtyId: undefined })} fullWidth>انصراف</Button>
