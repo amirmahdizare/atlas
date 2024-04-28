@@ -11,6 +11,8 @@ export const DataForm = () => {
 
     const methods = useForm<PropertyCUType<File>>()
 
+    const { register, formState: { errors }, getValues } = methods
+
     const { dispatch } = usePropertySection()
 
 
@@ -21,15 +23,21 @@ export const DataForm = () => {
     //     // fetchData
     // }, [proprtyId])
 
+    console.log(getValues())
     return (
         <FormProvider {...methods}>
 
 
             <div className='flex flex-col gap-6 pb-2'>
 
-                <Input placeholder='مثلا : آپارتمان دوبلکس' label='عنوان ملک' />
+                <Input
+                    placeholder='مثلا : آپارتمان دوبلکس'
+                    label='عنوان ملک'
+                    register={register('title', { required: { value: true, message: 'عنوان ملک اجباری می باشد' } })}
+                    error={!!errors.title}
+                    errorText={errors.title?.message}
+                />
 
-                <Input placeholder='مثلا :  علی رضایی' label='نام و نام خانوادگی' />
 
 
                 <div className='grid grid-cols-2 gap-2'>
@@ -64,7 +72,13 @@ export const DataForm = () => {
 
                 </div>
 
-                <TextArea label='توضیحات' placeholder='مثلا : آپارتمان 200 متری دارای پارکینگ و آسانسور و ...' />
+                <TextArea
+                    label='توضیحات'
+                    placeholder='مثلا : آپارتمان 200 متری دارای پارکینگ و آسانسور و ...'
+                    register={register('description', { required: { value: true, message: 'توضیحات اجباری می باشد.' } })}
+                    error={!!errors.description}
+                    errorText={errors.description?.message}
+                />
 
                 <Attributes />
 
