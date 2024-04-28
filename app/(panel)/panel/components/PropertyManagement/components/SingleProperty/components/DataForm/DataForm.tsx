@@ -6,6 +6,7 @@ import { Medias } from './components/Medias'
 import { usePropertySection } from '(panel)/panel/components/PropertyManagement/hooks'
 import { Attributes } from './components/Attributes/Attributes'
 import { SelectLocations } from './components/SelectLocations'
+import { SelectCategory } from './components/SelectCategory'
 
 export const DataForm = () => {
 
@@ -45,31 +46,7 @@ export const DataForm = () => {
                 </div>
 
                 <div className='grid grid-cols-2 gap-2'>
-
-                    <div className='col-span-2 lg:col-span-1'>
-
-                        <Select
-                            items={[{ value: 'hashtgerd', lable: 'باغ' }, { lable: 'زمین', value: 'newCirty' }]}
-                            onChange={() => { }}
-                            value={'hashtgerd'}
-                            placeHolder='انتخاب دسته بندی'
-                            label='دسته بندی'
-
-                        />
-                    </div>
-
-                    <div className='col-span-2 lg:col-span-1'>
-
-                        <Select
-                            items={[{ value: 'hashtgerd', lable: 'مسکونی' }, { lable: 'اداری', value: 'newCirty' }]}
-                            onChange={() => { }}
-                            value={'hashtgerd'}
-                            placeHolder='انتخاب زیردسته بندی'
-                            label='زیر دسته بندی'
-
-                        />
-                    </div>
-
+                    <SelectCategory />
                 </div>
 
                 <TextArea

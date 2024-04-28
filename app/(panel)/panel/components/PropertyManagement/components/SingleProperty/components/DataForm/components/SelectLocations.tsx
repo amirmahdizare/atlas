@@ -6,7 +6,7 @@ import { PropertyCUType } from 'types'
 
 export const SelectLocations = () => {
 
-    const { register, setValue, getValues, formState: { errors }, watch } = useFormContext<PropertyCUType<File>>()
+    const { register, setValue, getValues, formState: { errors }, watch, resetField } = useFormContext<PropertyCUType<File>>()
 
     watch(['location', 'subLocation'])
 
@@ -14,12 +14,12 @@ export const SelectLocations = () => {
 
     const { data: subCitiesData, isLoading: subCityLoading } = useSubCities()
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        register('location',{required:{value:true , message:'انتخاب شهر اجباری است.'}})
-        register('subLocation',{required:{value:true , message:'انتخاب منطقه اجباری است.'}})
+        register('location', { required: { value: true, message: 'انتخاب شهر اجباری است.' } })
+        register('subLocation', { required: { value: true, message: 'انتخاب منطقه اجباری است.' } })
 
-    },[])
+    }, [])
 
     console.log(getValues())
 
@@ -34,7 +34,7 @@ export const SelectLocations = () => {
 
                 {data?.data && <Select
                     items={data?.data.map(i => ({ lable: i.name, value: i.id.toString() }))}
-                    onChange={(v) =>{ setValue('location', v) ;setValue('subLocation' , undefined)}}
+                    onChange={(v) => { setValue('location', v); resetField('subLocation') }}
                     value={getValues('location')}
                     placeHolder='انتخاب شهر'
                     label='شهر'
@@ -50,8 +50,8 @@ export const SelectLocations = () => {
                 {isError && <div className='text-red-500'>خطا در دریافت لیست مناطق</div>}
 
                 {subCitiesData?.data && <Select
-                    items={subCitiesData?.data.map(i => ({ lable: i.name, value: i.id.toString() }))}
-                    onChange={(v) =>setValue('subLocation',v)}
+                    items={subCitiesData?.data.filter(i => i.parentLocation?.id.toString() == getValues('location')).map(i => ({ lable: i.name, value: i.id.toString() }))}
+                    onChange={(v) => setValue('subLocation', v)}
                     value={getValues('subLocation') ?? ''}
                     placeHolder='انتخاب منطقه'
                     label='منطقه'
