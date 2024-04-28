@@ -165,7 +165,7 @@ export interface PropertyCUType<MT> {
     price: number,
     prePrice: number,
     metr: number,
-    productType:ProductType
+    productType: ProductType
     rentPrice: number,
     agentNote?: string,
     features: Array<{

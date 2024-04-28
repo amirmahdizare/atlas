@@ -12,7 +12,7 @@ import { Price } from './components/Price'
 
 export const DataForm = () => {
 
-    const methods = useForm<PropertyCUType<File>>({
+    const methods = useForm<PropertyCUType<{ content: File }>>({
         defaultValues: {
             productType: 'sell'
         }
@@ -32,7 +32,7 @@ export const DataForm = () => {
 
     console.log(errors)
 
-    const handleMutateProperty = (data: PropertyCUType<File>) => {
+    const handleMutateProperty = (data: PropertyCUType<{ content: File }>) => {
         console.log(data)
     }
 
