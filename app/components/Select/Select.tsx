@@ -36,7 +36,7 @@ ${fullWidth ? 'flex-1' : ''}`} onClick={() => setIsOpen(true)}>
                 {isOpen &&
 
                     <ClickAwayListener onClickAway={() => setIsOpen(false)}>
-                        <div className='absolute top-full left-0 w-full max-h-[200px] shadow'>
+                        <div className='absolute top-full left-0 w-full max-h-[200px] shadow z-40' >
                             {items?.map(item => <div className={`p-1.5 cursor-pointer  ${value == item.value ? 'bg-gray-100' : 'bg-white hover:bg-gray-50'}`} onClick={(e) => {
                                 e.stopPropagation()
                                 setIsOpen(false)
