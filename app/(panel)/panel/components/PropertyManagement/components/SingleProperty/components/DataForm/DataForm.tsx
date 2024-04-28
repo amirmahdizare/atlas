@@ -8,12 +8,13 @@ import { Attributes } from './components/Attributes/Attributes'
 import { SelectLocations } from './components/SelectLocations'
 import { SelectCategory } from './components/SelectCategory'
 import { SelectProductType } from './components/SelectProductType'
+import { Price } from './components/Price'
 
 export const DataForm = () => {
 
     const methods = useForm<PropertyCUType<File>>({
-        defaultValues:{
-            productType:'sell'
+        defaultValues: {
+            productType: 'sell'
         }
     })
 
@@ -42,8 +43,9 @@ export const DataForm = () => {
             <form onSubmit={handleSubmit(handleMutateProperty)}>
 
                 <div className='flex flex-col gap-4 pb-2'>
-                <SelectProductType />
 
+
+                    <SelectProductType />
 
 
 
@@ -58,13 +60,15 @@ export const DataForm = () => {
                     <Input
                         placeholder='مثلا : 30'
                         label='متراژ (متر مربع)'
-                        register={register('metr', { required: { value: true, message: 'متراژ آگهی اجباری می باشد' } , pattern:{value:/[0-9]/g , message:'متراژ به درستی وارد نشده است.'} })}
+                        register={register('metr', { required: { value: true, message: 'متراژ آگهی اجباری می باشد' }, pattern: { value: /[0-9]/g, message: 'متراژ به درستی وارد نشده است.' } })}
                         error={!!errors.metr}
                         errorText={errors.metr?.message}
                         type='number'
                         min={1}
                     />
 
+
+                    <Price />
 
 
                     <div className='grid grid-cols-2 gap-2'>
