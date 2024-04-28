@@ -175,6 +175,8 @@ export interface PropertyCUType<MT> {
     id?: string,
     tags?: Array<string>
     isSuggested: boolean,
+    isBookmarked?:boolean,
+    userId?:number
 }
 
 export interface AgentListInfo {

@@ -9,12 +9,30 @@ import { SelectLocations } from './components/SelectLocations'
 import { SelectCategory } from './components/SelectCategory'
 import { SelectProductType } from './components/SelectProductType'
 import { Price } from './components/Price'
+import { useCustomMutation } from '@hooks'
+import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
+import { api } from '_api/config'
+import { createFormData } from 'utils'
+import { toast } from 'react-toastify'
 
 export const DataForm = () => {
+
+    const { mode, proprtyId } = usePropertySection()
 
     const methods = useForm<PropertyCUType<{ content: File }>>({
         defaultValues: {
             productType: 'sell'
+        }
+    })
+
+    const { data, mutate, isLoading } = useCustomMutation<PropretyEndPointsType['CREATE']>({
+        mutationKey: mode == 'add' ? 'addProprty' : 'editProperty',
+        mutationFn: (data) => mode == 'edit' && typeof proprtyId != 'undefined' ? api.post(PropretyEndPoints.SINGLE(proprtyId), { ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }) : api.post(PropretyEndPoints.CREATE, createFormData({ ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias'])),
+        onSuccess: () => {
+            toast.success(`آگهی با موفقیت ${mode == 'add' ? 'ایجاد' : 'ویرایش'} شد.`)
+        },
+        onError: (e) => {
+            toast.error(e.response?.data.message ?? e.message)
         }
     })
 
@@ -23,16 +41,13 @@ export const DataForm = () => {
     const { dispatch } = usePropertySection()
 
 
-    const { mode, proprtyId } = usePropertySection()
 
     // useEffect(() => {
     //     if (mode)
     //     // fetchData
     // }, [proprtyId])
-
-    console.log(errors)
-
     const handleMutateProperty = (data: PropertyCUType<{ content: File }>) => {
+        mutate({ ...data, medias: data.medias.map(i => i.content), isBookmarked: false, userId: 24 })
         console.log(data)
     }
 
@@ -128,7 +143,7 @@ export const DataForm = () => {
                     <div className='flex flex-row gap-4'>
 
                         <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', proprtyId: undefined })} fullWidth>انصراف</Button>
-                        <Button bgColor='primaryNormal' textColor='white' fullWidth >ثبت </Button>
+                        <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading}>ثبت </Button>
 
                     </div>
                 </div>
