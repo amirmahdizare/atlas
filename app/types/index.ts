@@ -152,17 +152,25 @@ export interface SocialMediaType {
 }
 
 export interface PropertyCUType<MT> {
-    isSaved: boolean,
     title: string,
     location: string,
     subLocation?: string,
+    medias: MT[],
     category: string,
+    description: string
     subCategory: string
     price: number,
+    prePrice: number,
+    rentPrice: number,
+    agentNote?: string,
+    features: Array<{
+        id: number,
+        filterId: number,
+        value: string | number | boolean
+    }>
     id?: string,
-    labels?: Array<string>
-    medias: MT,
-    description: string
+    tags?: Array<string>
+    isSuggested: boolean,
 }
 
 export interface AgentListInfo {
