@@ -151,6 +151,9 @@ export interface SocialMediaType {
     icon: typeof IconBabyBottle
 }
 
+
+export type ProductType = 'rent' | 'sell' | 'buy'
+
 export interface PropertyCUType<MT> {
     title: string,
     location: string,
@@ -161,7 +164,8 @@ export interface PropertyCUType<MT> {
     subCategory: string
     price: number,
     prePrice: number,
-    metr:number,
+    metr: number,
+    productType:ProductType
     rentPrice: number,
     agentNote?: string,
     features: Array<{
