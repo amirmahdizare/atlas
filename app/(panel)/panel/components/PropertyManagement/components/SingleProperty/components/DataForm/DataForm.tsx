@@ -90,6 +90,20 @@ export const DataForm = () => {
                         <input id='isSuggested' type='checkbox' {...register('isSuggested')} />
                     </label>
 
+                    <div className='flex flex-col gap-2'>
+
+
+                        <TextArea
+                            label='توضیحات مشاور'
+                            placeholder='مثلا : مالک فروشنده و آشنا ...'
+                            register={register('agentNote')}
+                            error={!!errors.agentNote}
+                            errorText={errors.agentNote?.message}
+                        />
+
+                        <span className='text-body-3-bolder text-dark-orange'>!! توجه : این قسمت فقط برای مشاورین به نمایش خواهد آمد و کاربران به آن دسترسی ندارند.</span>
+                    </div>
+
                     <div className='flex flex-row gap-4'>
 
                         <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', proprtyId: undefined })} fullWidth>انصراف</Button>
