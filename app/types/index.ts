@@ -52,9 +52,9 @@ export interface PropertyDetailType {
     title: string,
     location: LocationType | null,
     subLocation: LocationType | null,
-    price:string | null
-    prePrice:string | null
-    rentPrice:string | null
+    price: string | null
+    prePrice: string | null
+    rentPrice: string | null
     metr: number,
     description: string, ///markdown HTML 
     productType: ProductType
@@ -67,7 +67,7 @@ export interface PropertyDetailType {
         phoneNumber: string
     },
     agentNote: string | "",
-    category:{
+    category: {
         id: number,
         title: string,
         enTitle: string
@@ -81,6 +81,11 @@ export interface PropertyDetailType {
     } | null,
 
     medias?: string[],
+    features: Array<{
+        filterId: string,
+        value: string | number | boolean,
+        id: string
+    }>
     isBookmarked: boolean,
     createTime: string
     updateTime: string,
@@ -174,17 +179,17 @@ export type ProductType = 'rent' | 'sell' | 'buy'
 
 export interface PropertyCUType<MT> {
     title: string,
-    location: string,
-    subLocation?: string,
+    location: number,
+    subLocation?: number,
     medias: MT[],
-    category: string,
+    category: number,
     description: string
-    subCategory: string
-    price: number,
-    prePrice: number,
+    subCategory: number
+    price?: number,
+    prePrice?: number,
     metr: number,
     productType: ProductType
-    rentPrice: number,
+    rentPrice?: number,
     agentNote?: string,
     features: Array<{
         filterId: string,

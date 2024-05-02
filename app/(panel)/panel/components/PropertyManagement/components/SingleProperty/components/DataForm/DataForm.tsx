@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Input, Select, TextArea } from '@components'
 import { FormProvider, useForm } from 'react-hook-form'
-import { PropertyCUType } from 'types'
+import { PropertyCUType, PropertyDetailType } from 'types'
 import { Medias } from './components/Medias'
-import { usePropertySection } from '(panel)/panel/components/PropertyManagement/hooks'
+import { usePropertyList, usePropertySection } from '(panel)/panel/components/PropertyManagement/hooks'
 import { Attributes } from './components/Attributes/Attributes'
 import { SelectLocations } from './components/SelectLocations'
 import { SelectCategory } from './components/SelectCategory'
@@ -12,14 +12,16 @@ import { Price } from './components/Price'
 import { useCustomMutation } from '@hooks'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { api } from '_api/config'
-import { createFormData } from 'utils'
+import { convertMediaUrlToFile, createFormData, createMediaUrl, getBase64Image, isBoolean, isNumber } from 'utils'
 import { toast } from 'react-toastify'
 
 export const DataForm = () => {
 
-    const { mode, proprtyId } = usePropertySection()
+    const { mode, proprtyId, dispatch } = usePropertySection()
 
-    const methods = useForm<PropertyCUType<{ content: File }>>({
+    const { data: propertyData, isFetching, isError, refetch } = usePropertyList()
+
+    const methods = useForm<PropertyCUType<{ content: File | string }>>({
         defaultValues: {
             productType: 'sell'
         }
@@ -27,29 +29,77 @@ export const DataForm = () => {
 
     const { data, mutate, isLoading } = useCustomMutation<PropretyEndPointsType['CREATE']>({
         mutationKey: mode == 'add' ? 'addProprty' : 'editProperty',
-        mutationFn: (data) => mode == 'edit' && typeof proprtyId != 'undefined' ? api.post(PropretyEndPoints.SINGLE(proprtyId), { ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }) : api.post(PropretyEndPoints.CREATE, createFormData({ ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias'])),
-        onSuccess: () => {
+        mutationFn: async (data) => {
+
+            if (mode == 'edit' && typeof proprtyId != 'undefined') {
+                const mappedMedias = await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString())))
+                return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({ ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))), medias: [...data.medias.filter(i => typeof i == 'object'), ...mappedMedias] }, ['medias']))
+
+            }
+
+            return api.post(PropretyEndPoints.CREATE, createFormData({ ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias']))
+        }
+        ,
+        onSuccess: (e, v) => {
+            console.log(v)
             toast.success(`آگهی با موفقیت ${mode == 'add' ? 'ایجاد' : 'ویرایش'} شد.`)
+            dispatch({ mode: 'list', proprtyId: undefined })
+            refetch()
+
         },
-        onError: (e) => {
+        onError: (e, v) => {
+            console.log(v)
             toast.error(e.response?.data.message ?? e.message)
         }
     })
 
-    const { register, formState: { errors }, getValues, handleSubmit } = methods
-
-    const { dispatch } = usePropertySection()
+    const { register, formState: { errors }, getValues, handleSubmit, reset } = methods
 
 
+    const allProprties = propertyData?.pages?.reduce<Array<PropertyDetailType>>((pv, cv) => {
+        pv.push(...cv.data)
+        return pv
+    }, [])
 
-    // useEffect(() => {
-    //     if (mode)
-    //     // fetchData
-    // }, [proprtyId])
-    const handleMutateProperty = (data: PropertyCUType<{ content: File }>) => {
-        mutate({ ...data, medias: data.medias.map(i => i.content), isBookmarked: false, userId: 24 })
+
+    useEffect(() => {
+        if (mode == 'edit') {
+            const targetProperty = allProprties?.find(i => i.id == proprtyId)
+            if (targetProperty) {
+                const { location, subLocation, category, subCategory, user, medias, price, rentPrice, prePrice, features, ...restProperty } = targetProperty
+                reset({
+                    ...restProperty,
+                    category: category?.id ?? undefined,
+                    subCategory: subCategory?.id ?? undefined,
+                    location: location?.id ?? undefined,
+                    subLocation: subLocation?.id,
+                    price: typeof price == 'string' ? Number(price) : undefined,
+                    prePrice: typeof prePrice == 'string' ? Number(prePrice) : undefined,
+                    rentPrice: typeof rentPrice == 'string' ? Number(rentPrice) : undefined,
+                    medias: medias?.map(i => ({ content: createMediaUrl(i) })),
+                    features: features.map(i => {
+                        if (isBoolean(i.value))
+                            return ({ ...i, value: Boolean(i.value) })
+                        else if (isNumber(i.value))
+
+                            return ({ ...i, value: Number(i.value) })
+
+                        return i
+                    })
+                })
+            }
+        }
+    }, [proprtyId])
+
+    const handleMutateProperty = (data: PropertyCUType<{ content: File | string }>) => {
+        const { prePrice, price, rentPrice, ...restData } = data
+        mutate({ ...restData, medias: data.medias.map(i => i.content), isBookmarked: false, userId: 24, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0 , price }) : ({ price: 0  , rentPrice , prePrice})) })
         console.log(data)
     }
+
+    // if (document?.querySelector('#media-1') != null) {
+    // console.log(document.querySelector('#media-0')  ? getBase64Image(document.querySelector('#media-0') as any ):'' )
+    // }
 
 
     return (

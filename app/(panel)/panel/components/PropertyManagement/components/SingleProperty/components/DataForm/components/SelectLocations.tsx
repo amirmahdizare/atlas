@@ -21,7 +21,6 @@ export const SelectLocations = () => {
 
     }, [])
 
-    console.log(getValues())
 
     return (
         <>
@@ -50,7 +49,7 @@ export const SelectLocations = () => {
                 {isError && <div className='text-red-500'>خطا در دریافت لیست مناطق</div>}
 
                 {subCitiesData?.data && <Select
-                    items={subCitiesData?.data.filter(i => i.parentLocation?.id.toString() == getValues('location')).map(i => ({ lable: i.faTitle, value: i.id.toString() }))}
+                    items={subCitiesData?.data.filter(i => getValues('location') && i.parentLocation?.id == getValues('location') ? true : false).map(i => ({ lable: i.faTitle, value: i.id.toString() }))}
                     onChange={(v) => setValue('subLocation', v)}
                     value={getValues('subLocation') ?? ''}
                     placeHolder='انتخاب منطقه'
