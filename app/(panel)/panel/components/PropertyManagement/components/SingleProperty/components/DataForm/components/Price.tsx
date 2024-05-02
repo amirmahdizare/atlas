@@ -25,7 +25,6 @@ export const Price = () => {
 
     const productType = getValues('productType')
 
-    console.log(watch())
 
     useEffect(() => {
         if (productType == 'rent') {
