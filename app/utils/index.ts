@@ -1,5 +1,6 @@
 import { DOMAttributes, KeyboardEvent } from "react";
 import { ProductType } from "types";
+import { NO_PHOTO_IMAGE } from "variables";
 
 export const startWithZero = (num: number, totalLength: number = 2) => {
   return String(num).padStart(totalLength, '0');
@@ -77,7 +78,9 @@ export const createFormData = (data: { [key: string]: any }, arrayItems?: string
 
 
 export const createMediaUrl = (url: string) => {
-  if (url.includes('http'))
+  if (!url || typeof url == 'undefined')
+    return NO_PHOTO_IMAGE
+  else if (url.includes('http'))
     return url
   else return `${process.env.NEXT_PUBLIC_API}/uploads/${url}`
 }
