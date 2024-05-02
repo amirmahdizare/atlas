@@ -83,15 +83,15 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                 </div>
 
                 <div className='order-2 flex flex-col gap-7 col-span-5 lg:col-span-3'>
-                    <div className='lg:hidden'><Media data={sampleProprty} /></div>
-                    <Title data={sampleProprty} />
+                    <div className='lg:hidden'><Media data={data} /></div>
+                    <Title data={data} />
                     <FeatureFields />
-                    <Descriptions data={sampleProprty} />
-                    <SimilarCategories data={sampleProprty} />
+                    <Descriptions data={data} />
+                    {/* <SimilarCategories data={data} /> */}
                 </div>
 
                 <div className='order-3 flex flex-col gap-4 col-span-5 lg:col-span-2'>
-                    <div className='lg:flex hidden'><Media data={sampleProprty} /></div>
+                    <div className='lg:flex hidden'><Media data={data} /></div>
                     <div className=' fixed w-full bottom-0 left-0 py-1.5 z-20 border-t-2 border-anti-flash-white-lighter lg:border-none lg:pb-0 bg-seasalt lg:relative'>
                         <AgentInfo data={sampleProprty} />
                     </div>

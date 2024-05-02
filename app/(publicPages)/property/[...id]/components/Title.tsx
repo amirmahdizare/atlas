@@ -21,8 +21,8 @@ export const Title = ({ data: { title, id, isBookmarked, location, subLocation, 
 
             <div className='flex flex-row gap-0.5 items-center text-body-2-bolder text-[#8F909F]'>
                 <IconMapPin className='text-gray-400' width={17.5} height={17.5} />
-                <span>{location}</span>
-                {!!subLocation && <span>,{subLocation}</span>}
+                <span>{location?.faTitle}</span>
+                {!!subLocation && <span>,{subLocation.faTitle}</span>}
 
             </div>
 
@@ -30,7 +30,7 @@ export const Title = ({ data: { title, id, isBookmarked, location, subLocation, 
                 <span className='text-body-1-bolder'>قیمت کل</span>
 
                 <div className='flex flex-row gap-1 items-center'>
-                    <span className='text-h3-bolder'>{price.toLocaleString()}</span>
+                    <span className='text-h3-bolder'>{Number(price ?? 0).toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-1-bolder' >تومان</span>
                 </div>
 
@@ -45,7 +45,7 @@ export const Title = ({ data: { title, id, isBookmarked, location, subLocation, 
                 <span className='text-body-2-normal'>قیمت هرمتر</span>
 
                 <div className='flex flex-row gap-1 items-center'>
-                    <span className='text-h6-normal'>{(Math.floor(price / metr )).toLocaleString()}</span>
+                    <span className='text-h6-normal'>{(Math.floor(Number(price ?? 0) / metr )).toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-normal' >تومان</span>
                 </div>
 
