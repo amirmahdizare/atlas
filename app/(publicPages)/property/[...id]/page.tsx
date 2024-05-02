@@ -16,16 +16,11 @@ export async function generateMetadata(
 
     try {
 
-        // read route params
         const id = params.id
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API}${PropretyEndPoints.SINGLE(id[0])}`)
 
         const data: PropertyDetailType = await response.json()
-
-
-        // optionally access and extend (rather than replace) parent metadata
-        // const previousImages = (await parent).openGraph?.images || []
 
         return {
             title: `${data.title}  | ${data.category?.title} | ${data.subCategory?.title} | ${data.location?.faTitle} | ${data.subLocation?.faTitle}  | دپارتمان املاک اطلس`,
