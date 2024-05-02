@@ -8,7 +8,7 @@ import { Thumb } from './components/Thumb';
 import { View } from './components/View';
 import ClickAwayListener from 'react-click-away-listener';
 
-export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
+export const Media = ({ data: { medias, title, category, subCategory, location, subLocation } }: { data: PropertyDetailType }) => {
 
     const [state, setState] = useState<boolean>(false)
 
@@ -21,6 +21,9 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
     useEffect(() => {
         setIsInit(true)
     }, [])
+
+
+    const imageAltProp = `${title} | ${category?.title} | ${subCategory?.title} | ${location?.faTitle} | ${subLocation?.faTitle} | دپارتمان املاک اطلس`
 
 
     return (
@@ -39,47 +42,47 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
             </div>}
 
 
-                <Swiper
-                    spaceBetween={10}
-                    slidesPerView={1}
-                    onSlideChange={(e) => setSlide(e.activeIndex)}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    className='flex flex-col items-stretch justify-stretch backdrop-brigh tness-50 relative'
-                    modules={[Pagination, Navigation, Thumbs, FreeMode]}
-                    loop
-                    pagination={{
-                        enabled: state ? false : true,
-                        el: '.pagination-ss',
-                        bulletActiveClass: 'active',
-                        bulletClass: 'w-2 h-1 rounded bg-gray-200 cursor-pointer',
-                        clickable: true
-                        // currentClass:'bg-red-500',
-                        // dynamicMainBullets:
-                        // renderBullet:(index , className )=>{
-                        //     console.log(className)
-                        //     return `<span class="w-2 h-1 rounded  ${className =='active' ? 'bg-mint-green'  : 'bg-white'} "></span>`
-                        
-                        // }
-                    }}
-                    navigation={
-                        {
-                            enabled: true,
-                            nextEl: '#nextSlideMedia',
-                            prevEl: '#prevSlideMedia',
-                            
-                        }
-                    }
-                    thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
-                    
-                    >
-                    <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
-                    {medias?.map(item => <SwiperSlide className='h-full max-h-[70vh] flex flex-row justify-center relative' >
-                        <div className='flex flex-row justify-center w-full ' onClick={() => setState(s => !s)}>
-                            <View isOpen={state} src={item} />
-                        </div>
-                    </SwiperSlide>)}
+            <Swiper
+                spaceBetween={10}
+                slidesPerView={1}
+                onSlideChange={(e) => setSlide(e.activeIndex)}
+                onSwiper={(swiper) => console.log(swiper)}
+                className='flex flex-col items-stretch justify-stretch backdrop-brigh tness-50 relative'
+                modules={[Pagination, Navigation, Thumbs, FreeMode]}
+                loop
+                pagination={{
+                    enabled: state ? false : true,
+                    el: '.pagination-ss',
+                    bulletActiveClass: 'active',
+                    bulletClass: 'w-2 h-1 rounded bg-gray-200 cursor-pointer',
+                    clickable: true
+                    // currentClass:'bg-red-500',
+                    // dynamicMainBullets:
+                    // renderBullet:(index , className )=>{
+                    //     console.log(className)
+                    //     return `<span class="w-2 h-1 rounded  ${className =='active' ? 'bg-mint-green'  : 'bg-white'} "></span>`
 
-                </Swiper>
+                    // }
+                }}
+                navigation={
+                    {
+                        enabled: true,
+                        nextEl: '#nextSlideMedia',
+                        prevEl: '#prevSlideMedia',
+
+                    }
+                }
+                thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+
+            >
+                <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
+                {medias?.map(item => <SwiperSlide className='h-full max-h-[70vh] flex flex-row justify-center relative' >
+                    <div className='flex flex-row justify-center w-full ' onClick={() => setState(s => !s)}>
+                        <View altProps={imageAltProp} isOpen={state} src={item} />
+                    </div>
+                </SwiperSlide>)}
+
+            </Swiper>
 
 
             {!state && <Swiper
@@ -90,9 +93,9 @@ export const Media = ({ data: { medias } }: { data: PropertyDetailType }) => {
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mt-1"
-                >
+            >
                 {medias?.map(item => <SwiperSlide className='h-full'>
-                    <Thumb src={item} onClick={() => { }} />
+                    <Thumb altProps={imageAltProp} src={item} onClick={() => { }} />
                 </SwiperSlide>)}
             </Swiper>}
 
