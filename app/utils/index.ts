@@ -1,4 +1,5 @@
 import { DOMAttributes, KeyboardEvent } from "react";
+import { ProductType } from "types";
 
 export const startWithZero = (num: number, totalLength: number = 2) => {
   return String(num).padStart(totalLength, '0');
@@ -116,4 +117,16 @@ export const isNumber = (value: any) => {
 
 export const isBoolean = (value: any) => {
   return value == 'true' || value == 'false'
+}
+
+
+export const convertProductType = (type: ProductType) => {
+  if (type == 'rent')
+    return 'اجاره'
+  else if (type == 'sell')
+    return 'فروش'
+  else if (type == 'buy')
+    return 'فروش'
+
+  return ''
 }

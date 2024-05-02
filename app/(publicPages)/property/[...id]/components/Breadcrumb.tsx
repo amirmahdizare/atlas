@@ -1,25 +1,37 @@
 import { IconChevronLeft } from '@tabler/icons-react'
 import React from 'react'
 import { PropertyDetailType } from 'types'
+import { convertProductType } from 'utils'
 
-export const Breadcrumb = ({data : { category: { name: categoryName }, subCategory, type: { name: typeName } , title }}: {data:PropertyDetailType}) => {
-    return (
-        <div className='px-2 py-1.5 text-french-gray flex flex-row items-center gap-1 text-body-3-normal bg-seasalt'>
+export const Breadcrumb = ({ data }: { data: PropertyDetailType }) => {
 
-            <span >{typeName}</span>
-            <IconChevronLeft />
-            <span>{categoryName}</span>
-            <IconChevronLeft />
+    console.log(data)
 
-            {!!subCategory && <>
-                <span>{subCategory?.name}</span>
+    if (data.category && data.subCategory) {
+
+        console.log(data)
+
+        const { category, subCategory, productType, title } = data
+        return (
+            <div className='px-2 py-1.5 text-french-gray flex flex-row items-center gap-1 text-body-3-normal bg-seasalt'>
+
+                <span >{convertProductType(productType)}</span>
+                <IconChevronLeft />
+                <span>{category?.title}</span>
                 <IconChevronLeft />
 
-            </>}
+                {!!subCategory?.title && <>
+                    <span>{subCategory?.title}</span>
+                    <IconChevronLeft />
 
-            <span className='text-raisin-black text-body-3-bolder'>{title}</span>
+                </>}
+
+                <span className='text-raisin-black text-body-3-bolder'>{title}</span>
 
 
-        </div>
-    )
+            </div>
+        )
+    }
+
+    return <></>
 }
