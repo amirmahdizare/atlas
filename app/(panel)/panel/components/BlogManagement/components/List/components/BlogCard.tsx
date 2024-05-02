@@ -4,8 +4,9 @@ import { IconPencil, IconTrash } from '@tabler/icons-react'
 import { BlogItemType, BlogItemTypeAPI, BlogReadType } from 'types'
 import { useBlogsSection } from '../../../hooks'
 import { DeleteBlog } from './DeleteBlog'
+import { createMediaUrl } from 'utils'
 
-export const BlogCard = ({ title,description , duration , images  , id, summary,createTime  }: BlogReadType) => {
+export const BlogCard = ({ title, description, duration, images, id, summary, createTime }: BlogReadType) => {
 
     const { dispatch } = useBlogsSection()
 
@@ -13,7 +14,7 @@ export const BlogCard = ({ title,description , duration , images  , id, summary,
         <div className='grid grid-cols-2 lg:grid-cols-4 gap-2 border-b pb-2'>
 
             <div className='col-span-1'>
-                <img src={images[0]} className='rounded object-cover' />
+                <img src={createMediaUrl(images[0])} className='rounded object-cover w-full aspect-video' />
             </div>
 
             <div className='flex flex-col gap-2  col-span-1 lg:col-span-2'>

@@ -1,6 +1,7 @@
 import { IconShare, IconThumbUp } from '@tabler/icons-react'
 import React from 'react'
 import { BlogDetailType, BlogReadType } from 'types'
+import { createMediaUrl } from 'utils'
 
 export const BlogBody = ({ createTime, description, duration, id, images, title, }: BlogReadType) => {
     return (
@@ -36,7 +37,7 @@ export const BlogBody = ({ createTime, description, duration, id, images, title,
             </div>
 
             <div className='flex flex-col gap-2'>
-                <img src={"https://cdn.baharnews.ir/images/docs/000213/n00213226-r-b-001.jpg" ?? images[0]} className='object-cover w-full max-h-[200px]  lg:max-h-[300px] rounded' />
+                <img src={createMediaUrl(images[0])} className='object-cover w-full max-h-[200px]  lg:max-h-[300px] rounded' />
             </div>
 
             <div dangerouslySetInnerHTML={{ __html: `${description}` }} className='text-body-3-normal text-ultra-violet leading-3'>
