@@ -11,7 +11,7 @@ export const SingleBlog = ({ createTime, duration, id, images, summary, title }:
 
     console.log(images)
     return (
-        <Link href={`/blogs/${id}`} prefetch={false} className=' flex-row grid grid-cols-4 gap-2 p-1 rounded overflow-hidden'>
+        <Link href={`/blogs/${id}/${title}`} prefetch={false} className=' flex-row grid grid-cols-4 gap-2 p-1 rounded overflow-hidden'>
 
             <div className='col-span-1 aspect-square  w-full relative rounded overflow-hidden'>
                 <Image src={createMediaUrl(images[0])} className='w-full object-cover rounded' alt={`${title}  | دپارتمان املاک اطلس`} fill />

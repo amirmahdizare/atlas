@@ -6,11 +6,12 @@ import { ApiBaseURL } from '_api/serverSideConfig'
 import { BlogEndPoints } from '_api/endpoints/blog'
 
 
-export const generateMetadata = async ({ params: { id } }: pageProps<{ id: string }>): Promise<Metadata> => {
+export const generateMetadata = async ({ params: { id } }: pageProps<{ id: string[] }>): Promise<Metadata> => {
 
-    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id))}`)
-
+    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id[0]))}`)
+    
     const data: BlogReadType = await response.json()
+    console.log(data)
 
 
     try {
@@ -32,7 +33,7 @@ export const generateMetadata = async ({ params: { id } }: pageProps<{ id: strin
 export default async function page({ params: { id } }: pageProps<{ id: string }>) {
 
 
-    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id))}`)
+    const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id[0]))}`)
 
     const data: BlogReadType = await response.json()
 

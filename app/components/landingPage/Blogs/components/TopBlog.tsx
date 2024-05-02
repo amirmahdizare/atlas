@@ -8,7 +8,7 @@ import { NO_PHOTO_IMAGE } from 'variables'
 
 export const TopBlog = ({ createTime, duration, id, images, summary, title }: BlogReadType) => {
     return (
-        <Link href={`/blogs/${id}`} prefetch={false} className='flex flex-col gap-2 p-1 rounded overflow-hidden'>
+        <Link href={`/blogs/${id}/${title}`} prefetch={false} className='flex flex-col gap-2 p-1 rounded overflow-hidden'>
 
             <div className='flex flex-1 aspect-video w-full relative rounded overflow-hidden'>
                 <Image src={createMediaUrl(images[0])} className='w-full' alt={`${title}  | دپارتمان املاک اطلس`} fill />
