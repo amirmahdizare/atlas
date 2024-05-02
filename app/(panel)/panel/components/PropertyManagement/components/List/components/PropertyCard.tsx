@@ -33,18 +33,18 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
                     <span className='text-body-3-normal text-gray-400'>{user.firstName} {user.lastName} {!user.firstName || !user.lastName ? NO_NAME_USER : ''}</span>
                 </div>
 
-                {!!price && <div className='flex flex-row gap-1 h-6'>
+                {!!Number(price) && <div className='flex flex-row gap-1 h-6'>
                     <span className='text-h6-bolder text-space-codet'>{Number(price)?.toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-normal'>تومان</span>
                 </div>}
 
-                {!!prePrice && <div className='flex flex-row gap-1'>
+                {!!Number(prePrice) && <div className='flex flex-row gap-1'>
                     <span>پیش پرداخت :</span>
                     <span className='text-h6-bolder text-space-codet'>{Number(prePrice)?.toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-normal'>تومان</span>
                 </div>}
 
-                {!!rentPrice && <div className='flex flex-row gap-1'>
+                {!!Number(rentPrice) && <div className='flex flex-row gap-1'>
                     <span>اجاره :</span>
                     <span className='text-h6-bolder text-space-codet'>{Number(rentPrice)?.toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-normal'>تومان</span>
