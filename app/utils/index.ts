@@ -81,3 +81,39 @@ export const createMediaUrl = (url: string) => {
   else return `${process.env.NEXT_PUBLIC_API}/uploads/${url}`
 }
 
+export const getBase64Image = (img: HTMLImageElement) => {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext("2d");
+  ctx?.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/?[A-z]*/g, 'base64');
+}
+
+
+export const convertMediaUrlToFile = async (img: string) => {
+
+  try {
+    const response = await fetch(img)
+
+    const image = await response.blob()
+    // .then((res) => res.blob())
+    const file = new File([image], `image.jpeg`, { type: image.type })
+
+    console.log(file)
+    return file
+
+  } catch (error) {
+    return Promise.resolve(undefined)
+  }
+}
+
+
+export const isNumber = (value: any) => {
+  return !isNaN(value)
+}
+
+export const isBoolean = (value: any) => {
+  return value == 'true' || value == 'false'
+}
