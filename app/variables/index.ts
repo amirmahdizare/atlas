@@ -16,3 +16,4 @@ export const CONTACT_INFO = {
 
 
 export const NEW_USER_DEFAULT_NAME = '-- کاربر جدید --'
+export const NO_NAME_USER = '-- کاربر بی نام --'
