@@ -39,36 +39,54 @@ export type pageProps<PT = {}, SP = {}> = {
     }
 }
 
+export interface LocationType {
+    id: number
+    name: string
+    faTitle: string
+    createTime: string
+    updateTime: string
+}
+
 export interface PropertyDetailType {
     id: string,
     title: string,
-    location: string,
-    subLocation?: string,
-    price: number,
+    location: LocationType | null,
+    subLocation: LocationType | null,
+    price:string | null
+    prePrice:string | null
+    rentPrice:string | null
     metr: number,
     description: string, ///markdown HTML 
-    agentInfo: {
-        avatar: string,
-        name: string,
-        id: string,
+    productType: ProductType
+    user: {
+        id: number
+        firstName: any
+        lastName: any
+        userName: any
+        avatar: any
         phoneNumber: string
     },
-    type: {
-        name: string,
-        id: string
-    }
-    agentNote: string,
-    privateNote: string,
-    category: {
-        id: string,
-        name: string
-    },
-    subCategory?: {
-        id: string,
-        name: string
-    },
+    agentNote: string | "",
+    category:{
+        id: number,
+        title: string,
+        enTitle: string
+
+    } | null,
+    subCategory: {
+        id: number,
+        title: string,
+        enTitle: string
+
+    } | null,
+
     medias?: string[],
-    isBookmarked: boolean
+    isBookmarked: boolean,
+    createTime: string
+    updateTime: string,
+    bookmarks: string[]
+    privateNotes: string[]
+    isSuggested: boolean;
 }
 
 
@@ -117,11 +135,11 @@ export interface PropertyListFilterType {
     // subCategory?:string
 }
 
-export interface LocationType {
-    title: string,
-    id: string,
-    parentId: string | null
-}
+// export interface LocationType {
+//     title: string,
+//     id: string,
+//     parentId: string | null
+// }
 
 export interface AccessType {
     title: string,
@@ -175,8 +193,8 @@ export interface PropertyCUType<MT> {
     id?: string,
     tags?: Array<string>
     isSuggested: boolean,
-    isBookmarked?:boolean,
-    userId?:number
+    isBookmarked?: boolean,
+    userId?: number
 }
 
 export interface AgentListInfo {
