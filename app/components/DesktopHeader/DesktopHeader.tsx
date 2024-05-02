@@ -6,9 +6,25 @@ import { AccordionMenu } from './components/AccordionMenu/AccordionMenu'
 import Link from 'next/link'
 import { UserStatus } from './components/UserStatus/UserStatus'
 import { ActionButtons } from './components/ActionButtons/ActionButtons'
+import { usePathname } from 'next/navigation'
 // import { ActionButtons } from './components/ActionButtons/ActionButtons'
 
 
+const LinkComponent = ({ title, link }: { title: string, link: string }) => {
+
+
+    const pathname = usePathname()
+
+    const isActive = pathname != '/' ? pathname == link : pathname.includes(link)
+
+    if (isActive)
+        return <Link href={link} className='text-robin-egg-lighter  relative'>
+            {title}
+            <div className='w-3/4 bg-robin-egg-lighter h-[1px] top-full mt-1 right-1/2 translate-x-1/2 absolute'></div>
+        </Link>
+
+    return <Link href={link} className='hover:text-coral'>{title}</Link>
+}
 export const DesktopHeader = () => {
     return (
         <div className='lg:flex flex-row gap-4 items-center justify-between p-2 text-body-3-bolder text-ultra-violet hidden'>
@@ -16,10 +32,11 @@ export const DesktopHeader = () => {
 
             <div className='flex flex-row gap-5 items-center justify-between'>
 
-                <Link href={'/'} className='text-robin-egg-lighter  relative'>
+                <LinkComponent link='/' title='صفحه اصلی' />
+                {/* <Link href={'/'} className='text-robin-egg-lighter  relative'>
                     صفحه اصلی
                     <div className='w-3/4 bg-robin-egg-lighter h-[1px] top-full mt-1 right-1/2 translate-x-1/2 absolute'></div>
-                </Link>
+                </Link> */}
 
                 {/* <AccordionMenu
                     title='خرید'
@@ -56,15 +73,19 @@ export const DesktopHeader = () => {
                         }
                     ]} /> */}
 
-                <Link href={'/blogs'} className='hover:text-coral'>اخبار و مقالات</Link>
-                <Link href={'/blogs'} className='hover:text-coral'>درباره ما</Link>
-                <Link href={'/blogs'} className='hover:text-coral'>تماس با ما</Link>
+                <LinkComponent link='/s/dsf' title='جستجوی ملک' />
+                <LinkComponent link='/blogs' title='اخبار و مقالات' />
+                <LinkComponent link='/aboutus' title='درباره ما' />
+                <LinkComponent link='/contactus' title='تماس با ما' />
+                {/* <Link href={'/blogs'} className='hover:text-coral'>اخبار و مقالات</Link>
+                <Link href={'/aboutus'} className='hover:text-coral'>درباره ما</Link>
+                <Link href={'/contactus'} className='hover:text-coral'>تماس با ما</Link> */}
 
             </div>
             <div className='flex flex-row gap-4 items-center'>
 
-            <UserStatus />
-            <ActionButtons />
+                <UserStatus />
+                <ActionButtons />
 
             </div>
 
