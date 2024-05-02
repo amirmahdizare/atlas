@@ -13,6 +13,7 @@ const SocialMediaButton = ({ icon :Icon, link, type }: { icon: typeof IconArrowL
     const appendClassName = type == 'colored' ? 'bg-coral text-white' : 'bg-gray-300 text-gray-800'
     return <Link href={link} className={`rounded-circle p-1.5 aspect-square ${appendClassName}`
     }>
+        <span className='sr-only'>دپارتمان اطلس در شبکه های اجتماعی</span>
         <Icon width={22.5} height={22.5}/>
     </Link>
 }
