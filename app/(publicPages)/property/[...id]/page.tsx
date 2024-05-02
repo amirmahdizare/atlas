@@ -79,7 +79,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                 </div>
 
                 <div className='order-1 col-span-5  lg:hidden'>
-                    <MobileBreadcrumb data={sampleProprty} />
+                    <MobileBreadcrumb data={data} />
                 </div>
 
                 <div className='order-2 flex flex-col gap-7 col-span-5 lg:col-span-3'>
