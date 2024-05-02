@@ -41,14 +41,12 @@ export const DataForm = () => {
         }
         ,
         onSuccess: (e, v) => {
-            console.log(v)
             toast.success(`آگهی با موفقیت ${mode == 'add' ? 'ایجاد' : 'ویرایش'} شد.`)
             dispatch({ mode: 'list', proprtyId: undefined })
             refetch()
 
         },
         onError: (e, v) => {
-            console.log(v)
             toast.error(e.response?.data.message ?? e.message)
         }
     })

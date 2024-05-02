@@ -1,15 +1,32 @@
 'use client'
-import { Button } from '@components'
+import { Button, Spinner } from '@components'
 import { IconArrowBigUp, IconEye, IconLocation, IconMapPin, IconPencil, IconTrash, IconUser } from '@tabler/icons-react'
 import Link from 'next/link'
 import React from 'react'
 import ReactSwitch from 'react-switch'
 import { PropertyDetailType } from 'types'
-import { usePropertySection } from '../../../hooks'
+import { usePropertyList, usePropertySection } from '../../../hooks'
 import { NO_NAME_USER } from 'variables'
 import { createMediaUrl } from 'utils'
+import { useCustomMutation } from '@hooks'
+import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
+import { api } from '_api/config'
+import { toast } from 'react-toastify'
 
 export const PropertyCard = ({ medias, id, price, location, user, title, prePrice, rentPrice }: PropertyDetailType) => {
+
+    const { refetch } = usePropertyList()
+
+    const { mutate, isLoading } = useCustomMutation<PropretyEndPointsType['DELETE_SINGLE']>({
+        mutationFn: () => api.delete(PropretyEndPoints.SINGLE(id)),
+        onSuccess: () => {
+            toast.success(`آگهی ${title} با موفقیت حذف شد`)
+            refetch()
+        },
+        onError: (e) => {
+            toast.error(e.response?.data.message ?? e.message)
+        }
+    })
 
     const { dispatch } = usePropertySection()
     return (
@@ -54,7 +71,10 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
             <div className='flex flex-row gap-1 justify-evenly col-span-3'>
                 <Link href={`/property/${id}`}><Button bgColor='gray' textColor='secondary' icon={IconEye} title='پیش نمایش'></Button></Link>
                 <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch({ mode: 'edit', proprtyId: id }) }} icon={IconPencil} title='ویرایش'></Button>
-                <Button bgColor='white' textColor='secondary' icon={IconTrash} title='حذف'></Button>
+                <Button bgColor='white' textColor='secondary' icon={isLoading ? Spinner : IconTrash} title='حذف' onClick={() => {
+                    if (prompt(`آیا مایل به حذف آگهی ${title} هستید؟`, 'بله'))
+                        mutate({})
+                }}></Button>
                 {/* <Button bgColor='gray' textColor='secondary' icon={IconArrowBigUp} title='نردبان'></Button> */}
                 {/* <label className='flex flex-row gap-1 items-center'>
                     <ReactSwitch
