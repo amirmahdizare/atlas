@@ -43,7 +43,7 @@ export const List = () => {
                         style={{ overflow: 'unset' }}
                         scrollableTarget='property-list'
                     >
-                        {allProprties?.map(item => <div className='bg-white shadow rounded p-1 hover:bg-gray-50'>
+                        {allProprties?.map(item => <div className='bg-white shadow rounded p-1 '>
                             <PropertyCard {...item} />
                         </div>)}
                     </InfiniteScroll>
