@@ -4,17 +4,19 @@ import { IconArrowBigUp, IconLocation, IconMapPin, IconPencil, IconUser } from '
 import Link from 'next/link'
 import React from 'react'
 import ReactSwitch from 'react-switch'
-import { PropertyListItemType } from 'types'
+import {  PropertyDetailType } from 'types'
 import { usePropertySection } from '../../../hooks'
+import { NO_NAME_USER } from 'variables'
+import { createMediaUrl } from 'utils'
 
-export const PropertyCard = ({ img, id, price, location, agentInfo, title }: PropertyListItemType) => {
+export const PropertyCard = ({ medias, id, price, location, user, title , prePrice , rentPrice }: PropertyDetailType) => {
 
     const { dispatch } = usePropertySection()
     return (
         <Link className='grid grid-cols-3 gap-1.5 ' href={`/property/${id}`}>
 
             <div className='col-span-1'>
-                <img src={img} className='object-cover aspect-square w-full rounded ' />
+                <img src={medias && medias?.length > 0 ? createMediaUrl(medias?.[0])  : ''} className='object-cover aspect-square w-full rounded ' />
             </div>
 
 
@@ -23,22 +25,34 @@ export const PropertyCard = ({ img, id, price, location, agentInfo, title }: Pro
 
                 <div className='flex flex-row gap-1 items-center '>
                     <IconMapPin className='text-ultra-violet' width={15} height={18} />
-                    <span className='text-body-3-normal text-gray-400'>{location}</span>
+                    <span className='text-body-3-normal text-gray-400'>{location?.faTitle}</span>
                 </div>
 
                 <div className='flex flex-row gap-1 items-center '>
                     <IconUser className='text-ultra-violet' width={15} height={18} />
-                    <span className='text-body-3-normal text-gray-400'>{agentInfo?.name}</span>
+                    <span className='text-body-3-normal text-gray-400'>{user.firstName  } {user.lastName } { !user.firstName || !user.lastName ? NO_NAME_USER : ''}</span>
                 </div>
 
-                <div className='flex flex-row gap-1'>
-                    <span className='text-h6-bolder text-space-codet'>{price.toLocaleString()}</span>
+               {!!price && <div className='flex flex-row gap-1 h-6'>
+                    <span className='text-h6-bolder text-space-codet'>{Number(price)?.toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-normal'>تومان</span>
-                </div>
+                </div>}
+
+                {!!prePrice && <div className='flex flex-row gap-1'>
+                    <span>پیش پرداخت :</span>
+                    <span className='text-h6-bolder text-space-codet'>{Number(prePrice)?.toLocaleString()}</span>
+                    <span className='text-ultra-violet text-body-2-normal'>تومان</span>
+                </div>}
+
+                {!!rentPrice && <div className='flex flex-row gap-1'>
+                    <span>اجاره :</span>
+                    <span className='text-h6-bolder text-space-codet'>{Number(rentPrice)?.toLocaleString()}</span>
+                    <span className='text-ultra-violet text-body-2-normal'>تومان</span>
+                </div>}
 
             </div>
             <div className='flex flex-row gap-1 justify-evenly col-span-3'>
-                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => {e.preventDefault();  e.stopPropagation() ; dispatch({ mode: 'edit', proprtyId: id })}} icon={IconPencil}>ویرایش</Button>
+                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch({ mode: 'edit', proprtyId: id }) }} icon={IconPencil}>ویرایش</Button>
                 <Button bgColor='gray' textColor='secondary' icon={IconArrowBigUp}>نردبان</Button>
                 <label className='flex flex-row gap-1 items-center'>
                     <ReactSwitch

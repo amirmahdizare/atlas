@@ -4,40 +4,57 @@ import { PropertyCard } from './components/PropertyCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Button, Spinner } from '@components'
 import { IconFile, IconHome, IconPlus } from '@tabler/icons-react'
-import { usePropertySection } from '../../hooks'
+import { usePropertyList, usePropertySection } from '../../hooks'
+import { PropertyCUType, PropertyDetailType } from 'types'
 
 export const List = () => {
 
     const { dispatch } = usePropertySection()
 
-    return (
-        <>
-            <div className='flex flex-row gap-2 justify-between '>
+    const { data, isFetching, isError } = usePropertyList()
 
-                <div className='flex flex-row gap-1 items-center'>
-                    <IconHome width={25} height={25} className='text-french-gray' />
-                    <span>لیست آگهی ها</span>
+
+    const allProprties = data?.pages?.reduce<Array<PropertyDetailType>>((pv, cv) => {
+        pv.push(...cv.data)
+        return pv
+    }, [])
+
+    if (allProprties && allProprties?.length > 0)
+        return (
+            <>
+                <div className='flex flex-row gap-2 justify-between '>
+
+                    <div className='flex flex-row gap-1 items-center'>
+                        <IconHome width={25} height={25} className='text-french-gray' />
+                        <span>لیست آگهی ها</span>
+                    </div>
+
+                    <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت آگهی</Button>
+
                 </div>
+                <div className=' h-fit overflow-auto' id='property-list'>
 
-                <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت آگهی</Button>
+                    <InfiniteScroll
+                        className='grid grid-cols-1 lg:grid-cols-2 gap-2 h-full'
+                        dataLength={allProprties?.length ?? 0}
+                        hasMore={false}
+                        loader={<Spinner />}
+                        next={() => alert('Next')}
+                        style={{ overflow: 'unset' }}
+                        scrollableTarget='property-list'
+                    >
+                        {allProprties?.map(item => <div className='bg-white shadow rounded p-1 hover:bg-gray-50'>
+                            <PropertyCard {...item} />
+                        </div>)}
+                    </InfiniteScroll>
+                </div>
+            </>
+        )
 
-            </div>
-            <div className=' h-fit overflow-auto' id='property-list'>
+    else if (isError)
+        return <span className='text-red-500 text-center'>خطا در دریافت اطلاعات</span>
 
-                <InfiniteScroll
-                    className='grid grid-cols-1 lg:grid-cols-2 gap-2 h-full'
-                    dataLength={news.length}
-                    hasMore={false}
-                    loader={<Spinner />}
-                    next={() => alert('Next')}
-                    style={{ overflow: 'unset' }}
-                    scrollableTarget='property-list'
-                >
-                    {news?.map(item => <div className='bg-white shadow rounded p-1 hover:bg-gray-50'>
-                        <PropertyCard {...item} />
-                    </div>)}
-                </InfiniteScroll>
-            </div>
-        </>
-    )
+    return <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 h-full flex-1'>
+        {Array.from(new Array(10)).map(i => <div className='  rounded p-1 bg-gray-50 animate-pulse h-16'></div>)}
+    </div>
 }

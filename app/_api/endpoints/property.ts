@@ -1,4 +1,4 @@
-import { ApiGetRequestType, ApiPostRequestType, CategoryType_API, FilterRecordType, PropertyCUType, SubCategoryType, SuggestMutateType, SuggestReadType } from "types"
+import { ApiGetRequestType, ApiPostRequestType, CategoryType_API, FilterRecordType, PropertyCUType, PropertyDetailType, SubCategoryType, SuggestMutateType, SuggestReadType } from "types"
 
 export const PropretyEndPoints = Object.freeze({
     CREATE: '/products/create',
@@ -7,8 +7,8 @@ export const PropretyEndPoints = Object.freeze({
 })
 
 export interface PropretyEndPointsType {
-    CREATE: ApiPostRequestType<PropertyCUType<File | string>, PropertyCUType<string>>,
-    LIST: ApiGetRequestType<{}, PropertyCUType<string>[]>
-    UPDATE_SINGLE: ApiGetRequestType<SuggestMutateType, PropertyCUType<string>>,
+    CREATE: ApiPostRequestType<PropertyCUType<File | string>, PropertyDetailType>,
+    LIST: ApiGetRequestType<{}, PropertyDetailType[]>
+    UPDATE_SINGLE: ApiGetRequestType<SuggestMutateType, PropertyDetailType>,
     DELETE_SINGLE: ApiPostRequestType<{}>
 }
