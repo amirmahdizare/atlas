@@ -5,11 +5,8 @@ import { convertProductType } from 'utils'
 
 export const Breadcrumb = ({ data }: { data: PropertyDetailType }) => {
 
-    console.log(data)
 
     if (data.category && data.subCategory) {
-
-        console.log(data)
 
         const { category, subCategory, productType, title } = data
         return (
