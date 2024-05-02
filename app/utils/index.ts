@@ -73,3 +73,11 @@ export const createFormData = (data: { [key: string]: any }, arrayItems?: string
 
   return form_data
 }
+
+
+export const createMediaUrl = (url: string) => {
+  if (url.includes('http'))
+    return url
+  else return `${process.env.NEXT_PUBLIC_API}/uploads/${url}`
+}
+
