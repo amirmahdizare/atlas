@@ -85,7 +85,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                 <div className='order-2 flex flex-col gap-7 col-span-5 lg:col-span-3'>
                     <div className='lg:hidden'><Media data={data} /></div>
                     <Title data={data} />
-                    <FeatureFields />
+                    <FeatureFields data={data} />
                     <Descriptions data={data} />
                     {/* <SimilarCategories data={data} /> */}
                 </div>
