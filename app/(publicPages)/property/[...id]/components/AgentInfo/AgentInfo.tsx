@@ -6,8 +6,10 @@ import React from 'react'
 import { PropertyDetailType } from 'types'
 import { ActionButton } from './components/ActionButton'
 import Link from 'next/link'
+import { NO_NAME_USER, SAMPLE_AVATAR } from 'variables'
+import { createMediaUrl } from 'utils'
 
-export const AgentInfo = ({ data: { agentInfo: { avatar, id, name, phoneNumber }  , agentNote} }: { data: PropertyDetailType }) => {
+export const AgentInfo = ({ data: { user: { avatar, id, firstName, lastName, phoneNumber }, agentNote } }: { data: PropertyDetailType }) => {
 
     const isUserAgent = false
     return (
@@ -16,21 +18,21 @@ export const AgentInfo = ({ data: { agentInfo: { avatar, id, name, phoneNumber }
                 <Link href={`/agent/${id}`} className='flex flex-row gap-1 items-center' prefetch={false}>
 
                     <div className='w-5 h-5 aspect-square rounded-circle relative '>
-                        <Image fill className='object-cover rounded-circle' src={'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699142400&semt=ais'} alt={`تصویر مشاور ${name} | دپارتمان املاک اطلس`} />
+                        <Image fill className='object-cover rounded-circle' src={avatar ? createMediaUrl(avatar) : SAMPLE_AVATAR} alt={`تصویر مشاور ${firstName} ${lastName} | دپارتمان املاک اطلس`} />
                     </div>
 
                     <div className='flex flex-col gap-1.5'>
-                        <span className='text-space-codet text-body-2-bolder line-clamp-1 ' title={name}>{name}</span>
+                        <span className='text-space-codet text-body-2-bolder line-clamp-1 ' title={`${firstName} ${lastName}`}>{firstName} {lastName ?? NO_NAME_USER}</span>
                         <span className='text-body-3-normal text-ultra-violet'>کارشناس ملک</span>
                     </div>
                 </Link>
 
-                <span className='sr-only'>شماره تماس مشاور {name} {phoneNumber} دپارتمان املاک اطلس</span>
+                <span className='sr-only'>شماره تماس مشاور {`${firstName} ${lastName}`} {phoneNumber} دپارتمان املاک اطلس</span>
                 <ActionButton phoneNumber={phoneNumber} />
             </div>
 
             {!!isUserAgent && <div className='flex flex-col gap-1.5'>
-                <span  className='text-space-codet text-body-2-bolder'>یاداشت مشاور</span>
+                <span className='text-space-codet text-body-2-bolder'>یاداشت مشاور</span>
 
                 <p className='text-ultra-violet text-body-3-normal'>
                     {agentNote}

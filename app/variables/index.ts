@@ -1,4 +1,5 @@
 import logo from 'images/atlaslight.svg'
+import sampleAvatar from 'images/sampleavatar.jpg'
 
 export const LIGHT_LOGO = logo
 
@@ -17,3 +18,5 @@ export const CONTACT_INFO = {
 
 export const NEW_USER_DEFAULT_NAME = '-- کاربر جدید --'
 export const NO_NAME_USER = '-- کاربر بی نام --'
+
+export const SAMPLE_AVATAR = sampleAvatar.src
