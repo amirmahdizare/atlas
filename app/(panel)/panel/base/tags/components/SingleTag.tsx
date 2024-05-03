@@ -33,9 +33,7 @@ export const SingleTag = ({ backgrondColor, textColor, name, id }: TagReadType) 
         <div className='grid grid-cols-3 items-center gap-2'>
             <span className='col-span-1'>{name}</span>
             <span className='col-span-1 p-1 rounded w-fit' style={{ backgroundColor: backgrondColor, color: textColor }} >{name}</span>
-            {/* <span className='col-span-1'>
-                <div ></div>
-            </span> */}
+
             <span className='col-span-1 flex flex-row gap-2 items-center text-body-2-light'>
                 {isLoading ? <Spinner /> : <IconTrash className='text-red-500 cursor-pointer h-2.5 aspect-square' onClick={handleDelete} />}
                 <MutateTag mode='edit' recordId={id ?? ''}><IconPencil className='text-mint-green h-2.5 aspect-square' /></MutateTag>
