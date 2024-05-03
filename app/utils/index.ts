@@ -77,7 +77,7 @@ export const createFormData = (data: { [key: string]: any }, arrayItems?: string
 }
 
 
-export const createMediaUrl = (url: string) => {
+export const createMediaUrl = (url: string | undefined) => {
   if (!url || typeof url == 'undefined')
     return NO_PHOTO_IMAGE
   else if (url.includes('http'))
