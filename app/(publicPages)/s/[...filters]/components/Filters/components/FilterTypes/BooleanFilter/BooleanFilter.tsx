@@ -1,13 +1,25 @@
 import React, { useState } from 'react'
 import ReactSwitch from 'react-switch'
-import { useSearchProperty } from '../../../../../hooks'
-import { CategorySpecialFieldType } from 'types'
+import { usePropertySearchResults, useSearchProperty } from '../../../../../hooks'
+import { CategorySpecialFieldType, FullFilterType } from 'types'
 
-export const BooleanFilter = ({ title, itemKey }: CategorySpecialFieldType) => {
+export const BooleanFilter = ({ title, itemKey, id }: FullFilterType) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const { filter, dispatchFilter } = useSearchProperty()
+    const { filter, dispatchFilter } = usePropertySearchResults()
+
+    const targetFilter = filter.featureValues?.find(i => i.filterId == id)
+
+
+    const toggleFilter = (targetState: boolean) => {
+        if (targetState)
+            dispatchFilter({ featureValues: [...(filter?.featureValues ?? []), { filterId: id, value: "true" }] })
+        else
+            dispatchFilter({ featureValues: filter.featureValues?.filter(i => i.filterId != id) })
+
+    }
+
 
     if (itemKey)
         return (
@@ -22,7 +34,7 @@ export const BooleanFilter = ({ title, itemKey }: CategorySpecialFieldType) => {
                     <div className='flex flex-row gap-2 items-center'>
 
 
-                    <ReactSwitch checkedIcon={false} uncheckedIcon={false} handleDiameter={15} height={22} width={42} onChange={(checked) => dispatchFilter({ [itemKey]: checked ? true : undefined })} checked={!!filter?.[itemKey]} offColor='#EBEBF0' onColor='#05BAC6' />
+                        <ReactSwitch checkedIcon={false} uncheckedIcon={false} handleDiameter={15} height={22} width={42} onChange={(checked) =>toggleFilter(checked)} checked={targetFilter?.value =='true' ? true : false} offColor='#EBEBF0' onColor='#05BAC6' />
 
                     </div>
                 </div>
