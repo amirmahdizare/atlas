@@ -42,7 +42,6 @@ export const OneButtonFilter = ({ title, type, hint, unit, itemKey, id, suggests
             dispatchFilter({ featureValues: filter.featureValues?.filter(i => i.filterId != id) })
     }
 
-    console.log(suggests)
 
 
     return (
