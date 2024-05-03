@@ -48,11 +48,9 @@ export const getToken = () => cookieValue('access_token')
 export const captilizeFirstLetter = (text: string) => text?.[0].toUpperCase().concat(text.substring(1))
 
 
-export const createFormData = (data: { [key: string]: any }, arrayItems?: string[]) => {
+export const createFormData = (data: { [key: string]: any }, arrayItems: string[] = []) => {
 
   var form_data = new FormData();
-
-  console.log(data)
 
   var key: string
 
@@ -60,7 +58,7 @@ export const createFormData = (data: { [key: string]: any }, arrayItems?: string
     if (typeof data[key] != 'undefined' && arrayItems?.indexOf(key) == -1) {
 
 
-      if (typeof data[key] == 'object' && !Array.isArray(data[key]))
+      if (typeof data[key] == 'object' && Array.isArray(data[key]))
         form_data.append(key, JSON.stringify(data[key]));
 
       else if (!Array.isArray(data[key]))
@@ -73,6 +71,8 @@ export const createFormData = (data: { [key: string]: any }, arrayItems?: string
       data[item].forEach((f: string | Blob) => form_data.append(item, f))
   })
 
+  console.log(form_data)
+
   return form_data
 }
 
@@ -82,6 +82,8 @@ export const createMediaUrl = (url: string | undefined) => {
     return NO_PHOTO_IMAGE
   else if (url.includes('http'))
     return url
+  else if (url.includes('uploads/'))
+    return `${process.env.NEXT_PUBLIC_API}/${url}`
   else return `${process.env.NEXT_PUBLIC_API}/uploads/${url}`
 }
 
