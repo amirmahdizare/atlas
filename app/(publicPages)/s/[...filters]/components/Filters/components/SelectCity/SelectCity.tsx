@@ -27,7 +27,6 @@ export const SelectCity = () => {
 
     const isLocationInclude = (cityId: string) => filter.city?.findIndex(i => i.value == cityId) != -1
 
-    console.log(filter)
 
     if (cities)
         return (

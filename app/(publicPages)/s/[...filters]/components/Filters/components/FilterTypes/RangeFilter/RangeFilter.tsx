@@ -2,29 +2,48 @@ import { IconChevronDown, IconX } from '@tabler/icons-react'
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import ClickAwayListener from 'react-click-away-listener'
 import { NumericFormat } from 'react-number-format'
-import { useSearchProperty } from '../../../../../hooks'
-import { CategorySpecialFieldType, FullFilterType, PropertyListFilterType } from 'types'
+import { usePropertySearchResults } from '../../../../../hooks'
+import { FullFilterType, PropertyListFilterType } from 'types'
 import { handleKeyPress, isStringExist } from 'utils'
 
-export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests }: FullFilterType) => {
+export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests, id }: FullFilterType) => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const [isActive, setIsActive] = useState<{ [key: string]: boolean }>({})
 
-    const { filter, dispatchFilter } = useSearchProperty()
+    const { filter, dispatchFilter } = usePropertySearchResults()
 
-    const fieldfilterByIndex = (key: keyof PropertyListFilterType, index: number) => !!filter?.[key]?.toString().includes('-') ? filter?.[key]?.toString().split('-')[index] : undefined
+    const customNumberInputRef = useRef<HTMLInputElement>(null)
 
-    const fieldfilter = (key: keyof PropertyListFilterType) => filter?.[key]
+    const targetFilter = filter.featureValues?.find(i => i.filterId == id)
+
+    const fieldfilterByIndex = (key: keyof PropertyListFilterType, index: number) => !!targetFilter?.value?.toString().includes('-') ? targetFilter.value?.toString().split('-')[index] : undefined
 
     const dispachFilter = (item: keyof PropertyListFilterType, value: any, index: number) => {
-        console.table({ field: fieldfilter(itemKey)?.toString(), value, index })
 
-        if (!isStringExist(fieldfilterByIndex(itemKey, index == 0 ? 1 : 0)) && !isStringExist(value))
-            return dispatchFilter({ [item]: undefined })
 
-        dispatchFilter({ [item]: `${index == 0 ? value : (fieldfilterByIndex(itemKey, 0) ?? '')}-${index == 1 ? value : (fieldfilterByIndex(itemKey, 1) ?? '')}` })
+        if (!isStringExist(fieldfilterByIndex(itemKey, index == 0 ? 1 : 0)) && !isStringExist(value)) {
+            return dispatchFilter({ featureValues: filter.featureValues?.filter(i => i.filterId != id) })
+        }
+
+
+        const isFilterExist = filter.featureValues?.findIndex(i => i.filterId == id) != -1
+
+        if (!isFilterExist)
+            dispatchFilter({
+                featureValues: [...(filter?.featureValues ?? []), {
+                    filterId: id,
+                    value: `${index == 0 ? value : (fieldfilterByIndex(itemKey, 0) ?? '')}-${index == 1 ? value : (fieldfilterByIndex(itemKey, 1) ?? '')}`
+                }]
+            })
+        else
+            dispatchFilter({
+                featureValues: filter?.featureValues?.map(f => f.filterId == id ? ({
+                    filterId: id,
+                    value: `${index == 0 ? value : (fieldfilterByIndex(itemKey, 0) ?? '')}-${index == 1 ? value : (fieldfilterByIndex(itemKey, 1) ?? '')}`
+                }) : f) ?? []
+            })
 
     }
 
@@ -68,21 +87,26 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests }: Full
                             <div className='flex flex-row gap-1 flex-1 w  '>
                                 {!!fieldfilterByIndex(itemKey, index) && <IconX width={15} height={15} className='cursor-pointer' onClick={() => dispachFilter(itemKey, '', index)} />}
 
-                                {item.items.find(i => i.value == fieldfilterByIndex(itemKey, index)) ?
+                                {item.items.find(i => {
+                                    return i.value == fieldfilterByIndex(itemKey, index)
+                                }) ?
                                     <span>{item.items.find(i => i.value == fieldfilterByIndex(itemKey, index))?.title}</span>
-                                    : <NumericFormat
-                                        onKeyDown={handleKeyPress((e) => dispachFilter(itemKey, e.currentTarget.value.replaceAll(',', ''), index))}
-                                        placeholder={hint}
-                                        size={7}
-                                        thousandSeparator
-                                        className={`${isActive?.[index] ? 'bg-white' : 'bg-seasalt'} outline-none shri nk-0 ba sis-0 w-fit input-range`}
-                                        // onBlur={({ target: { value } }) => dispachFilter(itemKey, value.replaceAll(',', ''), index)}
-                                        value={fieldfilterByIndex(itemKey, index) ?? ''}
-                                        decimalScale={0}
-                                        autoFocus
-                                        type='tel'
-                                        dir='rtl'
-                                    />
+                                    : <>
+                                        <NumericFormat
+                                            onKeyDown={handleKeyPress((e) => dispachFilter(itemKey, e.currentTarget.value.replaceAll(',', ''), index))}
+                                            placeholder={hint}
+                                            size={7}
+                                            thousandSeparator
+                                            className={`${isActive?.[index] ? 'bg-white' : 'bg-seasalt'} outline-none shri nk-0 ba sis-0 w-fit input-range`}
+                                            // onBlur={({ target: { value } }) => value ? dispachFilter(itemKey, value.replaceAll(',', ''), index) : undefined}
+                                            value={fieldfilterByIndex(itemKey, index) ?? ''}
+                                            decimalScale={0}
+                                            autoFocus
+                                            getInputRef={customNumberInputRef}
+                                            type='tel'
+                                            dir='rtl'
+                                        />
+                                    </>
                                 }
 
 
@@ -94,8 +118,6 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests }: Full
 
 
 
-
-                            {/* {item.items.map(item => item.title)} */}
                             {isActive?.[index] &&
                                 <div className='flex flex-col gap-1 p-1 rounded-app z-10 bg-white absolute top-full left-0 w-full shadow'>
 
@@ -108,8 +130,9 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests }: Full
                                     />
 
                                     <div className='flex flex-col  overflow-y-auto max-h-[300px] h-fit'>
-                                        <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt' onClick={(e) => dispachFilter(itemKey, '', index)}>وارد کردن مبلغ دلخواه</span>
-                                        {item.items.filter(f => f.title.includes(searchKey) || f.value == fieldfilterByIndex(itemKey, index)).map(op => <span className={`text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt ${fieldfilterByIndex(itemKey, index) == op.value ? 'bg-seasalt' : ''}`} onClick={() => dispachFilter(itemKey, op.value, index)}>{op.title}</span>)}
+                                        <span className='text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt' onClick={(e) => { dispachFilter(itemKey, '', index); customNumberInputRef.current?.focus() }}>وارد کردن مبلغ دلخواه</span>
+                                        {item.items.filter(f => f.title.includes(searchKey)).map(op => <span className={`text-ultra-violet text-body-3-normal p-0.5 py-1  hover:bg-seasalt ${fieldfilterByIndex(itemKey, index)?.toString() == op.value.toString() ? 'bg-seasalt' : ''}`} onClick={() => dispachFilter(itemKey, op.value, index)}>{op.title}</span>)}
+                                        {/* || f.value == fieldfilterByIndex(itemKey, index)  || Belong To Top Filter &&  */}
                                     </div>
 
                                 </div>
