@@ -65,7 +65,7 @@ export interface PropertyDetailType {
         userName: any
         avatar: any
         phoneNumber: string
-    },
+    } | null,
     agentNote: string | "",
     category: {
         id: number,
@@ -449,4 +449,14 @@ export interface AgentNoteReadType {
     note: string,
     productId: number,
     id: string
+}
+
+
+export interface PropertySearchParams {
+    featureValues?: Array<{ filterId: string, value: string | number }>,
+    userId?: string,
+    locations?: string[],
+    sublocations?: string[],
+    category?: string,
+    subCategory?: string
 }
