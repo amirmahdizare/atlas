@@ -470,3 +470,19 @@ export interface UserInfoType<T> {
     avatar: T,
     id?: string
 }
+
+export interface TagReadType {
+    name: string,
+    // title: string,
+    textColor: string,
+    backgrondColor: string,
+    id: string
+}
+
+export interface TagMutateType {
+    name: string,
+    title: string,
+    textColor: string,
+    backgrondColor: string,
+    color?:string,
+}

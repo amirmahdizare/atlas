@@ -14,7 +14,7 @@ export const accesses: AccessType[] = [
         hint: 'با این دسترسی امکان ویرایش/اضافه/حذف دسته بندی ها به کاربر داده می شود.'
     },
     {
-        route: 'base/labels',
+        route: 'base/tags',
         title: 'مدیریت برچسب ها',
         isMenuItem: true,
         hint: 'با این دسترسی امکان ویرایش/اضافه/حذف برچسب ها به کاربر داده می شود.'

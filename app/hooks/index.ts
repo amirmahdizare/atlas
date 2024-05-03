@@ -2,6 +2,7 @@ import { api } from "_api/config";
 import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
+import { TagsEndPoints, TagsEndPointsType } from "_api/endpoints/tag";
 import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
@@ -46,4 +47,11 @@ export const useUserInfo = () => useCustomQuery<UsersEndpointType['USER_INFO']>(
     queryKey: 'getUserInfo',
     queryFn: () => api.get(UsersEndpoints.USER_INFO),
     onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
+})
+
+
+export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
+    queryKey: 'getTags',
+    queryFn: () => api.get(TagsEndPoints.LIST),
+    onError: () => toast.error('خطا در دریافت برچسب ها'),
 })
