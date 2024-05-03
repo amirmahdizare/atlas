@@ -16,7 +16,7 @@ export const News = () => {
 
 
 
-                <Link className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden' href={'/s/sdf'}>
+                <Link className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden' href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'}>
                     <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                     <IconArrowDownLeft width={15} height={15} />
                 </Link>
@@ -40,7 +40,7 @@ export const News = () => {
 
                     </div>
 
-                    <Link href={'/s/sdf'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
+                    <Link href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
                         <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                         <IconArrowDownLeft width={15} height={15} />
                     </Link>

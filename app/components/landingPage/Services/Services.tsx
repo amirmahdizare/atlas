@@ -15,7 +15,7 @@ export const Services = () => {
                     <div className='top-full w-1/4 right-0  absolute bg-mint-green mt-1 h-[2px] rounded'></div>
                 </div>
 
-                <Link href={'/s/sdf'} className='flex flex-row gap-1 cursor-pointer hover:text-coral'>
+                <Link href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'} className='flex flex-row gap-1 cursor-pointer hover:text-coral'>
                     <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                     <IconArrowDownLeft width={17.5} height={17.5} />
                 </Link>

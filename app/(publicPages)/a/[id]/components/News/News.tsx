@@ -16,7 +16,7 @@ export const News = () => {
 
 
 
-                <Link href={'/s/sdf'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
+                <Link href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
                     <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                     <IconArrowDownLeft width={15} height={15} />
                 </Link>

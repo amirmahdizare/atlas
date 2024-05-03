@@ -16,7 +16,7 @@ export const MostViewed = () => {
 
 
 
-                <Link href={'/s/sdfds'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden z-[1]'>
+                <Link href={'/s/hashtgerd-newcity/شهر جدید هشتگردds'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden z-[1]'>
                     <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                     <IconArrowDownLeft width={15} height={15} />
                 </Link>
