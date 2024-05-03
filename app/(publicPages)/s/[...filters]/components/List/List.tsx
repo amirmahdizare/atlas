@@ -17,8 +17,8 @@ export const List = () => {
 
     if (allProprties && allProprties?.length > 0)
         return (
-            <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-1'>
-                {allProprties?.map(item => <div className='col-span-1'>
+            <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-1 items-stretch justify-stretch'>
+                {allProprties?.map(item => <div className='col-span-1 '>
                     <PropertyListCard {...item} />
                 </div>)}
 

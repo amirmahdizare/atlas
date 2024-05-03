@@ -458,5 +458,6 @@ export interface PropertySearchParams {
     locations?: string[],
     sublocations?: string[],
     category?: string,
-    subCategory?: string
+    subCategory?: string,
+    productType?:ProductType
 }

@@ -10,7 +10,7 @@ import logo from 'images/atlaslight.svg'
 import { createMediaUrl } from 'utils'
 import { NO_NAME_USER, SAMPLE_AVATAR } from 'variables'
 
-export const PropertyListCard = ({ id, medias, location, price, subLocation, title, user }: PropertyDetailType) => {
+export const PropertyListCard = ({ id, medias, location, price, prePrice, rentPrice, subLocation, title, user }: PropertyDetailType) => {
 
 
     const agentAvatar = user?.avatar ? createMediaUrl(user.avatar) : SAMPLE_AVATAR
@@ -37,16 +37,29 @@ export const PropertyListCard = ({ id, medias, location, price, subLocation, tit
 
             <span className='text-raisin-black text-h4-bolder leading-3 line-clamp-2 h-6  text-ellipsis ' title={title}>{title}</span>
 
-            <div className='flex flex-row gap-0.5 items-center'>
+            {/* <div className='flex flex-row gap-0.5 items-center'>
                 <IconMapPin width={20} height={20} className='text-french-gray' />
-                <span className='text-ultra-violet line-clamp-1 text-ellipsis text-body-3-normal' title={`${location} ${subLocation ? `, ${subLocation}` : ''}`}>{location?.faTitle} {subLocation ? `, ${subLocation}` : ''}</span>
-            </div>
+                <span className='text-ultra-violet line-clamp-1 text-ellipsis text-body-3-normal' title={`${location?.faTitle} ${subLocation ? `, ${subLocation.faTitle}` : ''}`}>{location?.faTitle} {subLocation ? `, ${subLocation.faTitle}` : ''}</span>
+            </div> */}
 
-            <div className='flex flex-row gap-3 justify-between'>
-                <p className='line-clamp-1 text-ellipsis overflow-hidden'>
+            {!Number(rentPrice) && <div className='flex flex-row gap-3 justify-between h-2'></div>}
+
+            <div className='flex flex-row gap-3 justify-between h-2'>
+                {!!Number(price) && <p className='line-clamp-1 text-ellipsis overflow-hidden'>
                     <span className='text-space-codet text-h5-bolder'>{Number(price ?? 0)?.toLocaleString()}</span>
                     <span className='text-ultra-violet  text-body-3-light mr-[1px]'> تومان</span>
-                </p>
+                </p>}
+
+
+                {!!Number(prePrice) && <p className='line-clamp-1 text-ellipsis overflow-hidden flex flex-row gap-1 items-center'>
+                    <span className='text-gray-400 text-body-3-normal'>ودیعه:</span>
+                    <span className='text-space-codet text-h5-bolder'>{Number(prePrice ?? 0)?.toLocaleString()}</span>
+                    <span className='text-ultra-violet  text-body-3-light mr-[1px]'> تومان</span>
+                </p>}
+
+
+
+
 
                 {/* <div className='aspect-square bg-orange-200 rounded hidden lg:block'>
                     <IconArrowDownLeft className='text-orange' />
@@ -54,9 +67,18 @@ export const PropertyListCard = ({ id, medias, location, price, subLocation, tit
 
             </div>
 
+            {!!Number(rentPrice) && <div className='flex flex-row gap-3 justify-between h-2'>
+
+                <p className='line-clamp-1 text-ellipsis overflow-hidden flex flex-row gap-1 items-center'>
+                    <span className='text-gray-400 text-body-3-normal'>اجاره:</span>
+                    <span className='text-space-codet text-h5-bolder'>{Number(rentPrice ?? 0)?.toLocaleString()}</span>
+                    <span className='text-ultra-violet  text-body-3-light mr-[1px]'> تومان</span>
+                </p>
+
+            </div>}
             <Divider />
 
-            <div className='flex flex-row  justify-around items-center gap-1'>
+            <div className='flex flex-row  justify-start items-center gap-1'>
                 <div className='flex flex-row gap-1 items-center'>
 
                     <div className='w-3 aspect-square rounded-circle overflow-hidden relative shrink-0'>
@@ -65,8 +87,8 @@ export const PropertyListCard = ({ id, medias, location, price, subLocation, tit
 
                     <span className='text-body-3-normal text-ultra-violet line-clamp-1' title={agentName ?? 'مشاور'}>{`${agentName}` ?? 'مشاور'}</span>
                 </div>
-
-                <IconShare className='text-gray-300' width={20} height={20} />
+                {/* //TODO Share Button Policy
+                <IconShare className='text-gray-300' width={20} height={20} /> */}
 
             </div>
 
