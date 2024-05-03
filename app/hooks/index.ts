@@ -2,6 +2,7 @@ import { api } from "_api/config";
 import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
+import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -38,4 +39,11 @@ export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
     queryKey: 'getBlogs',
     queryFn: () => api.get(BlogEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست مناطق'),
+})
+
+
+export const useUserInfo = () => useCustomQuery<UsersEndpointType['USER_INFO']>({
+    queryKey: 'getUserInfo',
+    queryFn: () => api.get(UsersEndpoints.USER_INFO),
+    onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
 })
