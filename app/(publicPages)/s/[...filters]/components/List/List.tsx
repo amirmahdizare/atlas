@@ -28,6 +28,11 @@ export const List = () => {
     else if (isError)
         return <span>خطا در دریافت آگهی ها</span>
 
+    //TODO Replace NoProperty Found
+    
+    else if (allProprties && allProprties?.length == 0)
+        return <div  className='text-center p-2 w-full  text-dark-orange h-full flex flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
+
     return <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 '>
         {Array.from(new Array(20)).map((i, index) => <div key={index} className='col-span-1 bg-gray-100 animate-pulse  w-full aspect-[10/16]'></div>)}
     </div>

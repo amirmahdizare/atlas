@@ -1,9 +1,9 @@
 import { IconChevronDown, IconX } from '@tabler/icons-react'
 import React, { useEffect, useState } from 'react'
 import { useSearchProperty } from '../../../../../hooks'
-import { CategorySpecialFieldType, PropertyListFilterType } from 'types'
+import { CategorySpecialFieldType, FullFilterType, PropertyListFilterType } from 'types'
 
-export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: CategorySpecialFieldType) => {
+export const OneButtonFilter = ({ title, type, hint, unit, itemKey, id, suggests }: FullFilterType) => {
 
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -12,7 +12,19 @@ export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: 
 
     const [isActive, setIsActive] = useState<{ [key: string]: boolean }>({})
 
-    const fieldfilter = (key: keyof PropertyListFilterType) => filter?.[key]
+
+    const targetFilter = filter.featureValues?.find(i => i.filterId == id)
+
+
+    const toggleFilter = (targetState: boolean) => {
+        if (targetState)
+            dispatchFilter({ featureValues: [...(filter?.featureValues ?? []), { filterId: id, value: "true" }] })
+        else
+            dispatchFilter({ featureValues: filter.featureValues?.filter(i => i.filterId != id) })
+
+    }
+
+    // const fieldfilter = (key: keyof PropertyListFilterType) => filter?.[key]
 
 
     useEffect(() => {
@@ -21,9 +33,16 @@ export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: 
 
 
     const dispachFilter = (item: keyof PropertyListFilterType, value: any) => {
-        dispatchFilter({ [item]: value })
+
+        const isExist = filter.featureValues?.findIndex(c => c.filterId == id) != -1
+
+        if (!isExist)
+            dispatchFilter({ featureValues: [...(filter?.featureValues ?? []), { filterId: id, value }] })
+        else
+            dispatchFilter({ featureValues: filter.featureValues?.filter(i => i.filterId != id) })
     }
 
+    console.log(suggests)
 
 
     return (
@@ -38,7 +57,7 @@ export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: 
 
 
                 <div className='flex flex-row gap-1.5 items-center'>
-                    {itemKey && filter?.[itemKey] && <span className='cursor-pointer text-vermilion text-body-3-normal ' onClick={() => dispachFilter(itemKey, undefined)}>حذف</span>}
+                    {itemKey && targetFilter && <span className='cursor-pointer text-vermilion text-body-3-normal ' onClick={() => dispachFilter(itemKey, undefined)}>حذف</span>}
 
                     <IconChevronDown className={isOpen ? 'rotate-180 transition-all duration-300' : ' transition-all duration-300'} width={15} height={15} />
 
@@ -47,7 +66,7 @@ export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: 
 
             <div className={`flex flex-col gap-2.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                {suggest?.map(item => <div className='flex flex-col gap-1.5 w-full'>
+                {suggests?.map(item => <div className='flex flex-col gap-1.5 w-full'>
 
                     <div className={`rounded-app w- full justify -stretch items-center gap-1  flex flex-wrap flex-row  relative  text-body-3-normal cursor-pointer`} onClick={() => setIsActive({ ...isActive, [itemKey]: !isActive[itemKey] })}>
 
@@ -65,7 +84,7 @@ export const OneButtonFilter = ({ title, type, hint, unit , itemKey, suggest }: 
                             <IconChevronDown className={isActive?.[item.itemKey] ? 'rotate-180 transition-all duration-300' : ' transition-all duration-300'} width={15} height={15} />
                         </div> */}
 
-                        {item.items.map(op => <span className={`text-body-3-normal  rounded-lg border-anti-flash-white  p-1 px-1 border  hov er:bg-s easalt ${fieldfilter(itemKey) == op.value ? 'bg-robin-egg text-white' : 'text-french-gray bg-white'}`} onClick={() => dispachFilter(itemKey, op.value)}>{op.title}</span>)}
+                        {item.items.map(op => <span className={`text-body-3-normal  rounded-lg border-anti-flash-white  p-1 px-1 border  hov er:bg-s easalt ${targetFilter?.value == op.value ? 'bg-robin-egg text-white' : 'text-french-gray bg-white'}`} onClick={() => dispachFilter(itemKey, op.value)}>{op.title}</span>)}
 
 
                     </div>
