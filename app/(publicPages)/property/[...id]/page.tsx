@@ -7,6 +7,7 @@ import { AgentInfo, Descriptions, FeatureFields, Media, Note, SimilarCategories,
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { Metadata } from 'next'
 import { createMediaUrl } from 'utils'
+import { Tags } from './components/Tags'
 
 
 export async function generateMetadata(
@@ -33,16 +34,16 @@ export async function generateMetadata(
                 data.subLocation?.faTitle ?? ''
             ],
             description: data.description,
-            authors: [{ name: 'دپارتمان املاک اطلس', url: 'https://amlakatlas.com' }, { name: `${data.user.firstName} ${data.user.lastName}`, url: `https://amlakatlas.com/${data.user.userName}` }],
+            authors: [{ name: 'دپارتمان املاک اطلس', url: 'https://amlakatlas.com' }, { name: `${data?.user?.firstName} ${data?.user?.lastName}`, url: `https://amlakatlas.com/${data?.user?.userName}` }],
             category: `${data.productType == 'sell' ? 'فروش' : 'اجاره'} ${data.category?.title ?? ''} ${data.subCategory?.title ?? ''} `,
-            creator: `${data.user.firstName} ${data.user.lastName} | دپارتمان املاک اطلس`,
+            creator: `${data?.user?.firstName} ${data?.user?.lastName} | دپارتمان املاک اطلس`,
             openGraph: {
                 images: data?.medias?.map(i => createMediaUrl(i)),
                 title: `${data.title}  | ${data.category?.title} | ${data.subCategory?.title} | ${data.location?.faTitle} | ${data.subLocation?.faTitle}  | دپارتمان املاک اطلس`,
                 type: 'article',
-                authors: ['دپارتمان املاک اطلس', `${data.user.firstName} ${data.user.lastName}`],
+                authors: ['دپارتمان املاک اطلس', `${data?.user?.firstName} ${data?.user?.lastName}`],
                 countryName: 'ایران',
-                phoneNumbers: [data.user.phoneNumber],
+                phoneNumbers: [data?.user?.phoneNumber ?? ''],
                 locale: 'fa',
                 tags: [data.title,
                 data.productType == 'sell' ? 'فروش' : 'اجاره',
@@ -73,10 +74,10 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
         const data: PropertyDetailType = await response.json()
 
         return (
-            <div className='grid grid-cols-5 gap-2 lg:gap-4 py-1.5 '>
-                <div className='order-1 col-span-5 lg:block hidden'>
+            <div className='grid grid-cols-5 gap-2 lg:gap-3 py-1.5 '>
+                {(data?.subCategory?.id || data?.category?.id) && <div className='order-1 col-span-5 lg:block hidden'>
                     <Breadcrumb data={data} />
-                </div>
+                </div>}
 
                 <div className='order-1 col-span-5  lg:hidden'>
                     <MobileBreadcrumb data={data} />
@@ -87,6 +88,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                     <Title data={data} />
                     <FeatureFields data={data} />
                     <Descriptions data={data} />
+                    {Array.isArray(data.tags) && data?.tags?.length > 0 && <Tags data={data} />}
                     {/* <SimilarCategories data={data} /> */}
                 </div>
 

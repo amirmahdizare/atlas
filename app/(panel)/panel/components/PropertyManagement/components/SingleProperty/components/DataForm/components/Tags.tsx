@@ -1,5 +1,7 @@
-import { useTags } from '@hooks'
+'use client'
+
 import React from 'react'
+import { useTags } from '@hooks'
 import { useFormContext } from 'react-hook-form'
 import { PropertyCUType } from 'types'
 

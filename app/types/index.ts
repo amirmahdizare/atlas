@@ -91,7 +91,8 @@ export interface PropertyDetailType {
     updateTime: string,
     bookmarks: string[]
     privateNotes: string[]
-    isSuggested: boolean;
+    isSuggested: boolean,
+    tags?: TagReadType[]
 }
 
 
@@ -484,5 +485,5 @@ export interface TagMutateType {
     title: string,
     textColor: string,
     backgrondColor: string,
-    color?:string,
+    color?: string,
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect } from 'react'
 import { Button, Input, Select, TextArea } from '@components'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -65,7 +67,7 @@ export const DataForm = () => {
         if (mode == 'edit') {
             const targetProperty = allProprties?.find(i => i.id == proprtyId)
             if (targetProperty) {
-                const { location, subLocation, category, subCategory, user, medias, price, rentPrice, prePrice, features, ...restProperty } = targetProperty
+                const { location, subLocation, category, subCategory, tags, user, medias, price, rentPrice, prePrice, features, ...restProperty } = targetProperty
                 reset({
                     ...restProperty,
                     category: category?.id ?? undefined,
@@ -84,7 +86,8 @@ export const DataForm = () => {
                             return ({ ...i, value: Number(i.value) })
 
                         return i
-                    })
+                    }),
+                    tags: tags?.map(i => i.id)
                 })
             }
         }
