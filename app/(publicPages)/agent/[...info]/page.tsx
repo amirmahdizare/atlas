@@ -20,7 +20,7 @@ export default async function page({ params: { info } }: pageProps<{ info: strin
 
         const data: UserFullInfo[] = await response.json()
 
-        const targetAgent = data.find(i => i.id == '24')
+        const targetAgent = data.find(i => i.id == '21')
 
         if (targetAgent)
             return (

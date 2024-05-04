@@ -12,7 +12,7 @@ export const News = ({data}:{data:UserFullInfo}) => {
 
                 <div className='text-raisin-black text-h3-bolder relative text-center'>
                     آگهی های مشاور
-                    <div className='absolute bg-mint-green w-[80px] left-1/2 -translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
+                    <div className='absolute bg-mint-green w-[80px] right-0 lg:left-1/2 lg:-translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
                 </div>
 
 
