@@ -16,7 +16,7 @@ export default function layout({ children }: { children: ReactNode }) {
                 
                 <Link href={'/'}><Image src={fullogo} className='max-h-5' alt='لوگوی اطلس' /></Link>
 
-                <span className='text-body-2-normal-normal text-french-gray'>منو</span>
+                {/* <span className='text-body-2-normal-normal text-french-gray'>منو</span> */}
 
                 <Menu />
 
@@ -40,7 +40,7 @@ export default function layout({ children }: { children: ReactNode }) {
                                 <Monitor className='text-robin-egg' />
                                 <span className='text-raisin-black text-h5-bolder'>پنل مدیریت</span>
                             </div>
-                            <input className='border p-1 rounded' placeholder='جستجو' />
+                            {/* <input className='border p-1 rounded' placeholder='جستجو' /> */}
                         </div>
                         <IconBell />
                     </div>
