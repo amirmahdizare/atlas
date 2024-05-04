@@ -469,7 +469,7 @@ export interface UserInfoType<T> {
     firstName: string
     lastName: string,
     avatar: T,
-    phoneNumber:string
+    phoneNumber: string
     id?: string
 }
 
@@ -487,4 +487,19 @@ export interface TagMutateType {
     textColor: string,
     backgrondColor: string,
     color?: string,
+}
+
+export interface UserFullInfo {
+    userName: string
+    firstName: string
+    lastName: string,
+    avatar: string,
+    phoneNumber: string
+    id: string,
+    tags: [],
+    privateNotes: [], //TODO
+    bookmarks: [], //TODO,
+    permissions: Array<PermissionType<string>>,
+    blogs: BlogReadType[],
+    products: PropertyDetailType[]
 }

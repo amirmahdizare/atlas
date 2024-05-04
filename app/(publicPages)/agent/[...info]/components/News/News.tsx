@@ -3,8 +3,9 @@ import { Announcement, Building } from '@icons'
 import { IconArrowDownLeft } from '@tabler/icons-react'
 import { Properties } from './components/Properties'
 import Link from 'next/link'
+import { UserFullInfo } from 'types'
 
-export const News = () => {
+export const News = ({data}:{data:UserFullInfo}) => {
     return (
         <div className='flex flex-col gap-4 items-stretch py-2'>
             <div className='flex flex-row gap-4 justify-between lg:justify-center'>
@@ -48,7 +49,7 @@ export const News = () => {
                 </div> */}
 
                 {/* <Slider /> */}
-                <Properties/>
+                <Properties data={data}/>
             </div>
 
 
