@@ -469,6 +469,7 @@ export interface UserInfoType<T> {
     firstName: string
     lastName: string,
     avatar: T,
+    phoneNumber:string
     id?: string
 }
 
