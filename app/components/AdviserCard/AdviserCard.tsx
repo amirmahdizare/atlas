@@ -10,7 +10,7 @@ export const AdviserCard = ({ avatar, firstName, lastName, userName, phoneNumber
     const agentName = firstName || lastName ? `${firstName}  ${lastName}` : NO_NAME_USER
 
     return (
-        <Link className='flex flex-col rounded gap-2 overflow-hidden items-stretch bg-white hover:shadow my-0.5 relative' href={`/agent/${userName}/${agentName}`}>
+        <Link className='flex flex-col rounded gap-2 overflow-hidden items-stretch bg-white hover:shadow my-0.5 relative' href={`/agent/${id}/${agentName}`}>
 
             <div className='relative'>
                 <img src={createMediaUrl(avatar)} className='aspect-square w-full object-cover ' />
