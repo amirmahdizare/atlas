@@ -199,7 +199,7 @@ export interface PropertyCUType<MT> {
     tags?: Array<string>
     isSuggested: boolean,
     isBookmarked?: boolean,
-    userId?: number
+    userId?: number,
 }
 
 export interface AgentListInfo {

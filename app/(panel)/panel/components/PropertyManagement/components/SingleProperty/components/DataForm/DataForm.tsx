@@ -14,6 +14,7 @@ import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/propert
 import { api } from '_api/config'
 import { convertMediaUrlToFile, createFormData, createMediaUrl, getBase64Image, isBoolean, isNumber } from 'utils'
 import { toast } from 'react-toastify'
+import { Tags } from './components/Tags'
 
 export const DataForm = () => {
 
@@ -91,7 +92,7 @@ export const DataForm = () => {
 
     const handleMutateProperty = (data: PropertyCUType<{ content: File | string }>) => {
         const { prePrice, price, rentPrice, ...restData } = data
-        mutate({ ...restData, medias: data.medias.map(i => i.content), isBookmarked: false, userId: 24, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0 , price }) : ({ price: 0  , rentPrice , prePrice})) })
+        mutate({ ...restData, medias: data.medias.map(i => i.content), isBookmarked: false, userId: 24, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0, price }) : ({ price: 0, rentPrice, prePrice })) })
         console.log(data)
     }
 
@@ -154,8 +155,9 @@ export const DataForm = () => {
 
                     <Medias />
 
+                    <Tags />
 
-                    <div className='flex flex-col gap-2'>
+                    {/* <div className='flex flex-col gap-2'>
                         <span className='text-french-gray text-body-2-normal  text-right'>برچسب (اختیاری)</span>
                         <div className='flex flex-row gap-4'>
                             <label htmlFor='ca' className='cursor-pointer flex items-center gap-1'>کاسبی
@@ -167,7 +169,7 @@ export const DataForm = () => {
                             </label>
 
                         </div>
-                    </div>
+                    </div> */}
 
                     <label htmlFor='isSuggested' className='flex flex-row gap-2 items-center cursor-pointer'>
                         <span className='text-body-2-normal'>آیا آگهی پیشنهادی است ؟ (در صورت پیشنهادی مورد آگهی  این آگهی در صفحه اصلی نمایش داده می شود.)</span>
