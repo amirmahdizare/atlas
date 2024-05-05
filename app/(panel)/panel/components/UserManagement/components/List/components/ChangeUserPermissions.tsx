@@ -24,11 +24,9 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
 
-    const { register, handleSubmit, control, watch } = useForm<FormValues>()
-
+    const { register, handleSubmit, control, watch, getValues, reset, setValue } = useForm<FormValues>()
 
     console.log(watch())
-
 
     const { data, isLoading } = useCustomQuery<PermissionEndPointsType['GET_LIST']>({
         queryFn: () => api.get(PermissionEndPoints.GET_LIST),
@@ -38,7 +36,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     const { refetch } = useUserList()
 
     const { mutate, isLoading: mutateLoading } = useCustomMutation<UsersEndpointType['UPADTE_USER_PERMISSION']>({
-        mutationFn: (data) => api.patch(UsersEndpoints.UPADTE_USER_PERMISSION(userId.toString()), data ),
+        mutationFn: (data) => api.patch(UsersEndpoints.UPADTE_USER_PERMISSION(userId.toString()), data),
         onError: (data) => {
             toast.error(data.response?.data?.message)
         },
@@ -55,7 +53,17 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     }
 
 
-    ///To Do => Fetch Current User Permissions
+    ///TODO => Fetch Current User Permissions
+
+    const toggleSelectAll = (targetState: boolean) => {
+        if (!targetState) {
+            console.log({ targetState })
+            reset(data?.data.reduce((pv, cv) => ({ ...pv, [cv.id]: false }), {}))
+        }
+
+        else
+            reset(data?.data.reduce((pv, cv) => ({ ...pv, [cv.id]: true }), {}))
+    }
 
     return (
         <>
@@ -71,8 +79,17 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
             >
                 <form className='flex flex-col gap-2 p-2 max-h-[80vh] overflow-auto' onSubmit={handleSubmit(handleSubmitPermissions)}>
 
-                    <span className='font-bold text-md'>تعیین دسترسی های کاربر</span>
+                    <div className='flex flex-row justify-between items-center'>
 
+                        <span className='font-bold text-md'>تعیین دسترسی های کاربر</span>
+
+                        <label className='flex flex-row gap-1 cursor-pointer p-1 rounded border' htmlFor='selectAll'>
+                            <input type='checkbox' id='selectAll' onChange={({ target: { checked } }) => toggleSelectAll(checked)} checked={Object.values(getValues()).filter(i => !!i).length == data?.data.length} />
+                            <span>انتخاب همه</span>
+
+                        </label>
+
+                    </div>
                     {data?.data.map((item, index) => <label htmlFor={item.id.toString()} className={`cursor-pointer flex flex-row gap-2 justify-center items-center p-2 border-2 rounded text-center hover:bg-gray-50 ${false ? 'bg-blue-50 border-mint-green' : ''}`}>
 
                         <input type='checkbox' id={item.id.toString()} key={item.id} {...register(`${item.id}`)} />
