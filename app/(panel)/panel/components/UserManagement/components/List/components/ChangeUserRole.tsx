@@ -22,7 +22,10 @@ export const ChangeUserRole = ({ userId, userRoleId }: { userId: number, userRol
   const { refetch } = useUserList()
 
   const { mutate, isLoading: mutateLoading } = useCustomMutation({
-    mutationFn: (data:string) => api.patch(UsersEndpoints.UPDATE_USER_ROLE(userId.toString()),{roleId:data}),
+    mutationFn: (data: string) => {
+      //TODO Prevent User To Change ItSelf Role
+      return api.patch(UsersEndpoints.UPDATE_USER_ROLE(userId.toString()), { roleId: data })
+    },
     onError: (data) => {
       toast.error(data.response?.data?.message)
     },
