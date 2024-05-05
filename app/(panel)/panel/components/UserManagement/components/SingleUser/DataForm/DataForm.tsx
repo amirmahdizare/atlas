@@ -9,30 +9,43 @@ import { useCustomMutation, useCustomQuery } from 'hooks'
 import { api } from '_api/config'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
 import { toast } from 'react-toastify'
+import { IconUser } from '@tabler/icons-react'
+import { NO_PHOTO_IMAGE } from 'variables'
+import { createFormData, createMediaUrl } from 'utils'
+
+
+export interface FormData {
+    firstName: string,
+    lastName: string,
+    phoneNumber: string,
+    avatar: File[],
+    userName: string | null
+}
 
 export const DataForm = () => {
 
-    const { dispatch, userId, mode } = useUsersSection()
+    const { dispatch, userId, mode, type } = useUsersSection()
 
     const { refetch, data: usersData } = useUserList()
 
+    const typeName = type == 'agent' ? 'مشاور' : 'کاربر'
 
     const { mutate, isLoading } = useCustomMutation<UsersEndpointType['CREATE_USER']>({
-        mutationFn: (data) => !!userId && mode == 'edit' ? api.patch(UsersEndpoints.SINGLE_USER(userId.toString()), data) : api.post(UsersEndpoints.CREATE_USER, data),
-        mutationKey: 'addUser',
+        mutationFn: (data) => !!userId && mode == 'edit' ? api.patch(UsersEndpoints.SINGLE_USER(userId.toString()), createFormData(data)) : api.post(UsersEndpoints.CREATE_USER, createFormData(data)),
+        mutationKey: ['MutateUser', mode],
         onSuccess: (data, { firstName }) => {
             dispatch({ mode: 'list' });
             refetch();
-            toast.success(`کاربر ${firstName} با موفقیت اضافه شد.`)
+            toast.success(`${typeName} ${firstName} با موفقیت اضافه شد.`)
         }
     })
 
-    const methods = useForm<UsersEndpointType['CREATE_USER']['REQUEST']>()
+    const methods = useForm<FormData>()
 
     const { register, formState: { errors }, watch, getValues, setValue, handleSubmit, reset } = methods
 
 
-
+    watch('avatar')
     // watch('avatar')
 
     // const avatarImg = () => getValues('avatar')?.[0] ? URL?.createObjectURL(getValues('avatar')?.[0]) : imageSample.src
@@ -46,8 +59,21 @@ export const DataForm = () => {
     }, [userId])
 
 
-    const handleMutateUser = (data: UsersEndpointType['CREATE_USER']['REQUEST']) => {
-        mutate(data)
+    const handleMutateUser = ({ avatar, ...data }: FormData) => {
+        mutate({ ...data, ...(typeof avatar?.[0] == 'object' ? ({ avatar: avatar?.[0] }) : ({})) })
+    }
+
+
+    const imageUrl = () => {
+        const avatar = getValues('avatar')
+
+        if (!avatar) return NO_PHOTO_IMAGE
+        if (typeof avatar == 'object')
+            return URL.createObjectURL(avatar?.[0])
+        else if (typeof avatar == 'string')
+            return createMediaUrl(avatar)
+        else
+            return NO_PHOTO_IMAGE
     }
 
     return (
@@ -68,6 +94,28 @@ export const DataForm = () => {
                     }
                 })} />
 
+
+                {type == 'agent' && <><Input label='یوزرنیم' register={register('userName', {
+                    // required: {
+                    //     value: true,
+                    //     message: 'یوزرنیم ضروری است.'
+                    // }
+                })} />
+
+
+                    <div className='flex flex-row gap-2 items-center'>
+                        <IconUser />
+
+                        <span>تصویر پروفایل</span>
+
+                        <input type='file' {...register('avatar')} />
+
+                        <img src={imageUrl()} className='w-10 aspect-square rounded object-cover' />
+
+
+
+                    </div></>}
+
                 <Input type='tel' label='شماره تلفن' register={register('phoneNumber',
                     {
                         pattern: {
@@ -84,6 +132,8 @@ export const DataForm = () => {
                     readOnly={mode == 'edit'}
                     disabled={mode == 'edit'}
                 />
+
+                {/* {register('')} */}
 
                 {/* <TextArea label='درباره مشاور' register={register('desc')} /> */}
 
