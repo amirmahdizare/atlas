@@ -20,8 +20,8 @@ export const MobileBreadcrumb = ({ data }: { data: PropertyDetailType }) => {
 
 
             <div className='flex flex-row gap-1'>
-                <Bookmark id={data?.id} />
-                <Share  id={data.id}/>
+                {/* <Bookmark id={data?.id} /> */}
+                <Share  id={data.id} data={data}/>
             </div>
 
         </div>

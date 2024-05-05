@@ -37,16 +37,18 @@ const PriceComponent = ({ primary, secondary }: { primary: { title: string, valu
 }
 
 
-export const Title = ({ data: { title, id, isBookmarked, location, subLocation, price, prePrice, rentPrice, metr, productType }, }: { data: PropertyDetailType }) => {
+export const Title = ({ data, }: { data: PropertyDetailType }) => {
+
+    const { title, id, isBookmarked, location, subLocation, price, prePrice, rentPrice, metr, productType } = data
     return (
         <div className='flex flex-col  gap-2  '>
 
             <div className='flex flex-row justify-between items-center gap-2'>
                 <span className='text-space-codet text-body-1-bolder lg:text-[0.50rem] leading-4 whitespace-pre-wrap break-words'>{title}</span>
 
-                <div className=' flex-row gap-1 hidden lg:flewx'>
-                    <Share id={id} />
-                    <Bookmark id={id} isBookmarked={isBookmarked} />
+                <div className=' flex-row gap-1 hidden lg:flex'>
+                    <Share id={id} data={data} />
+                    {/* <Bookmark id={id} isBookmarked={isBookmarked} /> */}
                 </div>
 
 

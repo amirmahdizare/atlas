@@ -74,7 +74,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
         const data: PropertyDetailType = await response.json()
 
         return (
-            <div className='grid grid-cols-5 gap-2 lg:gap-3 py-1.5 '>
+            <div className='grid grid-cols-5 gap-2 lg:gap-3 p-1.5 '>
                 {(data?.subCategory?.id || data?.category?.id) && <div className='order-1 col-span-5 lg:block hidden'>
                     <Breadcrumb data={data} />
                 </div>}
@@ -83,7 +83,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                     <MobileBreadcrumb data={data} />
                 </div>
 
-                <div className='order-2 flex flex-col gap-7 col-span-5 lg:col-span-3'>
+                <div className='order-2 flex flex-col gap-4 lg:gap-7 col-span-5 lg:col-span-3'>
                     <div className='lg:hidden'><Media data={data} /></div>
                     <Title data={data} />
                     <FeatureFields data={data} />
