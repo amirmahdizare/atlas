@@ -22,3 +22,5 @@ export const NO_NAME_USER = '-- کاربر بی نام --'
 
 export const SAMPLE_AVATAR = sampleAvatar.src
 export const NO_PHOTO_IMAGE = noPhoto.src
+
+export const agentRoles = ['superAdmin' , 'admin' , 'agent']

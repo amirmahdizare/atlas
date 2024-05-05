@@ -1,6 +1,7 @@
 import React from 'react'
 import { Metadata } from 'next'
 import { ClientPage } from './ClientPage'
+import { UserManagement } from '(panel)/panel/components/UserManagement/UserManagement'
 
 export const metadata: Metadata = {
     title: 'مدیریت کاربران'
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
 export default function page() {
     return (
         <>
-            <ClientPage />
+            <UserManagement type='user' />
+            {/* <ClientPage /> */}
         </>
     )
 }
