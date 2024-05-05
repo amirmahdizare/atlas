@@ -20,7 +20,7 @@ export const useSearchProperty = create<StoreType>((set) => ({
     dispatch: (data) => set((state) => ({ ...state, ...data })),
     dispatchFilter: (filter) => set((state) => ({ ...state, filter: { ...state.filter, ...filter } })),
     filter: {
-        featureValues: []
+        featureValues: [],
     }
 }))
 
@@ -28,8 +28,9 @@ export const usePropertySearchResults = () => {
     const searchHook = useSearchProperty()
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
-        queryFn: ({ queryKey }) => api.post(PropretyEndPoints.SEARCH, queryKey[1]),
-        queryKey: ['SearchProprtyResults', searchHook.filter]
+        queryFn: ({ queryKey }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? JSON.parse(queryKey[1]) : {}),
+        queryKey: ['SearchProprtyResults', JSON.stringify(searchHook.filter)],
+        staleTime: 1000 * 60 * 5
     })
 
 
