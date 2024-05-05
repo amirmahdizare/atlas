@@ -18,7 +18,7 @@ export const DataForm = () => {
 
 
     const { mutate, isLoading } = useCustomMutation<UsersEndpointType['CREATE_USER']>({
-        mutationFn: (data) => api.post(UsersEndpoints.CREATE_USER, data),
+        mutationFn: (data) => !!userId && mode == 'edit' ? api.patch(UsersEndpoints.SINGLE_USER(userId.toString()), data) : api.post(UsersEndpoints.CREATE_USER, data),
         mutationKey: 'addUser',
         onSuccess: (data, { firstName }) => {
             dispatch({ mode: 'list' });
@@ -81,6 +81,8 @@ export const DataForm = () => {
                     })}
                     error={!!errors?.phoneNumber}
                     errorText={errors?.phoneNumber?.message}
+                    readOnly={mode == 'edit'}
+                    disabled={mode == 'edit'}
                 />
 
                 {/* <TextArea label='درباره مشاور' register={register('desc')} /> */}
