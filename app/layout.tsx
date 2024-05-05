@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
 import { ContactSummary } from 'components/landingPage';
 import { ClientLayout } from 'ClientLayout';
+import 'react-quill/dist/quill.snow.css';
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',

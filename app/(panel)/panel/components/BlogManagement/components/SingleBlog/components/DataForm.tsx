@@ -9,6 +9,8 @@ import { BlogEndPoints, BlogEndPointsType } from '_api/endpoints/blog'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
 import { createFormData } from 'utils'
+import ReactQuill from 'react-quill';
+import { } from 'react-quill';
 
 export const DataForm = () => {
 
@@ -16,9 +18,12 @@ export const DataForm = () => {
 
     const { dispatch, blogId, mode } = useBlogsSection()
 
+
     const modeTitle = mode == 'add' ? 'افزودن' : 'ویرایش'
 
-    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<BlogItemTypeAPI<undefined, File>>()
+    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue } = useForm<BlogItemTypeAPI<undefined, File>>()
+
+    watch('description')
 
     const { mutate, isLoading } = useCustomMutation<BlogEndPointsType['CREATE']>(
         {
@@ -124,8 +129,24 @@ export const DataForm = () => {
                     placeholder='خلاصه مقاله' />
             </div>
 
-            <div className='col-span-3 '>
-                <TextArea register={register('description', {
+            <div className='col-span-3 !text-right'>
+
+                <div className='mb-2 flex text-french-gray text-body-2-normal  text-right'>متن مقاله</div>
+
+
+
+                <ReactQuill modules={{
+                    toolbar: [
+                        [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }],
+                        [{ size: [] }],
+                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                        ['link', 'image', 'video'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                        { 'indent': '-1' }, { 'indent': '+1' }],
+                        ['clean']
+                    ]
+                }} className='!text-right' theme="snow" value={getValues('description')} onChange={(value: string) => { setValue('description', value) }} />
+                {/* <TextArea register={register('description', {
                     required: {
                         value: true,
                         message: 'متن مقاله ضروری است.'
@@ -134,7 +155,7 @@ export const DataForm = () => {
                     error={!!errors?.summary}
                     errorText={errors.summary?.message}
                     style={{ minHeight: '150px' }}
-                    placeholder='متن  مقاله' />
+                    placeholder='متن  مقاله' /> */}
             </div>
 
 

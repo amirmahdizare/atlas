@@ -17,7 +17,7 @@ export const BlogManagement = ({ me }: { me: boolean }) => {
 
             {mode == 'list' && <List />}
 
-            {mode != 'list' && <SingleBlog mode={mode} blogId={blogId} />}
+            {mode != 'list' && <SingleBlog mode={mode} blogId={blogId?.toString()} />}
 
         </div>
     )

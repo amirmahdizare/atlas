@@ -35,8 +35,8 @@ export const DeleteBlog = ({ id }: { id: number }) => {
 
 
     return (
-        <Button icon={IconTrash} bgColor='white' textColor='secondary' onClick={isLoading ? undefined : () => handleDeleteBlog()}>
-            {isLoading ? <Spinner /> : 'حذف'}
+        <Button title='حذف' icon={IconTrash} bgColor='white' textColor='secondary' onClick={isLoading ? undefined : () => handleDeleteBlog()}>
+            {isLoading ? <Spinner /> : ''}
         </Button>
 
     )
