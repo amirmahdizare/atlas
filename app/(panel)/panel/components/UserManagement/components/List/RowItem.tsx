@@ -20,11 +20,11 @@ export const RowItem = (ad: UserListType) => {
 
     const [more, setMore] = useState<boolean>(false)
 
-    const { dispatch } = useUsersSection()
+    const { dispatch   , type } = useUsersSection()
 
     return (
         <div className='grid grid-cols-5 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
-            <div className='col-span-2 flex flex-row gap-1 items-center'>
+            <div className={`${type=='agent' ? 'col-span-2' : 'col-span-3'}  flex flex-row gap-1 items-center`}>
                 {/* <img src={ad.avatar} className='rounded-circle w-5 aspect-square object-cover' /> */}
                 <RenderName firstName={ad?.firstName} lastName={ad?.lastName} />
             </div>
@@ -34,7 +34,7 @@ export const RowItem = (ad: UserListType) => {
                 {ad.phoneNumber}
                 <IconPhoneCall width={15} height={15} className='text-french-gray' />
             </a>
-            <span >{ad?.role?.name ? ad?.role?.name[0].toUpperCase().concat(ad?.role?.name.substring(1)) : '-'}</span>
+            {type=='agent' && <span >{ad?.role?.name ? ad?.role?.name[0].toUpperCase().concat(ad?.role?.name.substring(1)) : '-'}</span>}
             <div className='col-span-1 flex flex-row gap-2 justify-center'>
 
 
