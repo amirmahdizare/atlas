@@ -17,6 +17,7 @@ import { api } from '_api/config'
 import { convertMediaUrlToFile, createFormData, createMediaUrl, getBase64Image, isBoolean, isNumber } from 'utils'
 import { toast } from 'react-toastify'
 import { Tags } from './components/Tags'
+import ReactQuill from 'react-quill'
 
 export const DataForm = () => {
 
@@ -54,7 +55,9 @@ export const DataForm = () => {
         }
     })
 
-    const { register, formState: { errors }, getValues, handleSubmit, reset } = methods
+    const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch } = methods
+
+    watch('description')
 
 
     const allProprties = propertyData?.pages?.reduce<Array<PropertyDetailType>>((pv, cv) => {
@@ -146,13 +149,28 @@ export const DataForm = () => {
                         <SelectCategory />
                     </div>
 
-                    <TextArea
+
+                    <ReactQuill modules={{
+                        toolbar: [
+                            [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }],
+                            [{ size: [] }],
+                            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                            ['link', 'image', 'video'],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                            { 'indent': '-1' }, { 'indent': '+1' }],
+                            ['clean']
+                        ]
+                    }} className='!text-right' theme="snow" value={getValues('description')} onChange={(value: string) => { setValue('description', value) }} />
+
+
+                    {!!errors?.description && <span className='text-red-500 text-body-3-normal'>{errors.description.message}</span>}
+                    {/* <TextArea
                         label='توضیحات'
                         placeholder='مثلا : آپارتمان 200 متری دارای پارکینگ و آسانسور و ...'
                         register={register('description', { required: { value: true, message: 'توضیحات اجباری می باشد.' } })}
                         error={!!errors.description}
                         errorText={errors.description?.message}
-                    />
+                    /> */}
 
                     <Attributes />
 
