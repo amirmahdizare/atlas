@@ -1,61 +1,64 @@
 'use client'
 
 import React, { ReactNode } from 'react'
-import { Metadata } from 'next'
-import { IconBell, IconHome } from '@tabler/icons-react'
+import { IconHome } from '@tabler/icons-react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { redirect, usePathname } from 'next/navigation'
 import logo from 'images/logo-full-white.svg'
 import Image from 'next/image'
-// import avatar from 'images/agents/dadash.png'
 import { useUserInfo } from '@hooks'
 import { createMediaUrl } from 'utils'
 
 export default function layout({ children }: { children: ReactNode }) {
 
 
-    const { data: { avatar, firstName, lastName } } = useUserInfo()
+    const { data: { avatar, firstName, lastName, role } } = useUserInfo()
 
     const pathname = usePathname()
-    return (
-        <div className='flex flex-col bg-anti-flash-white-lighter   max-h-full'>
-            <div className='flex flex-col bg-raisin-black'>
-                <div className='flex flex-row gap-2 justify-between p-2 text-french-gray'>
 
-                    <div className='flex flex-row gap-4 items-center'>
-                        <Image src={logo} alt='لوگوی اطلس' className='w-8 lg:w-12' />
-                        {/* <input placeholder='جستجو' className='p-1 rounded-sm bg-space-codet focus:outline-mint-green outline-1 outline-none text-body-3-normal' /> */}
+    if (!!role?.name || role?.name != 'guest')
+
+        return (
+            <div className='flex flex-col bg-anti-flash-white-lighter   max-h-full'>
+                <div className='flex flex-col bg-raisin-black'>
+                    <div className='flex flex-row gap-2 justify-between p-2 text-french-gray'>
+
+                        <div className='flex flex-row gap-4 items-center'>
+                            <Image src={logo} alt='لوگوی اطلس' className='w-8 lg:w-12' />
+                            {/* <input placeholder='جستجو' className='p-1 rounded-sm bg-space-codet focus:outline-mint-green outline-1 outline-none text-body-3-normal' /> */}
+                        </div>
+
+
+                        <div className='flex flex-row gap-2 items-center'>
+
+                            <Link href={'/dashboard/profile'} className='flex flex-row gap-2 items-center cursor-pointer'>
+                                <Image src={createMediaUrl(avatar)} className='object-cover aspect-square rounded-circle w-4 lg:w-6' width={55} height={55} alt='عکس پروفایل' />
+                                <span>{firstName ?? '-'} {lastName ?? '-'}</span>
+                            </Link>
+
+                            <Link href={'/'} className='bg-space-codet aspect-square rounded-circle p-1  cursor-pointer hover:text-gray-50'>
+                                <IconHome width={20} height={20} />
+                            </Link>
+
+                        </div>
+
                     </div>
 
 
-                    <div className='flex flex-row gap-2 items-center'>
+                    <div className='flex flex-row gap-2 justify-center border-t border-t-gray-700 p-2 text-body-2-normal'>
 
-                        <Link href={'/dashboard/profile'} className='flex flex-row gap-2 items-center cursor-pointer'>
-                            <Image src={createMediaUrl(avatar)} className='object-cover aspect-square rounded-circle w-4 lg:w-6' width={55} height={55} alt='عکس پروفایل' />
-                            <span>{firstName ?? '-'} {lastName  ?? '-'}</span>
-                        </Link>
-
-                        <Link href={'/'} className='bg-space-codet aspect-square rounded-circle p-1  cursor-pointer hover:text-gray-50'>
-                            <IconHome width={20} height={20} />
-                        </Link>
+                        <Link className={pathname == '/dashboard/profile' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/profile'}>ویرایش اطلاعات</Link>
+                        <Link className={pathname == '/dashboard/bookmarks' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/bookmarks'}>لیست علاقه مندی ها</Link>
 
                     </div>
 
                 </div>
+                <div className='m-2 lg:m-4 bg-white flex-1 flex p-2  h- fit box-border overflow-auto'>
 
-
-                <div className='flex flex-row gap-2 justify-center border-t border-t-gray-700 p-2 text-body-2-normal'>
-
-                    <Link className={pathname == '/dashboard/profile' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/profile'}>ویرایش اطلاعات</Link>
-                    <Link className={pathname == '/dashboard/bookmarks' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/bookmarks'}>لیست علاقه مندی ها</Link>
-
+                    {children}
                 </div>
-
             </div>
-            <div className='m-2 lg:m-4 bg-white flex-1 flex p-2  h- fit box-border overflow-auto'>
+        )
 
-                {children}
-            </div>
-        </div>
-    )
+    return redirect('/')
 }
