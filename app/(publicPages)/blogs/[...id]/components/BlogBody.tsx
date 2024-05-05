@@ -2,6 +2,7 @@ import { IconShare, IconThumbUp } from '@tabler/icons-react'
 import React from 'react'
 import { BlogDetailType, BlogReadType } from 'types'
 import { createMediaUrl } from 'utils'
+import { ShareBlog } from './ShareButton'
 
 export const BlogBody = ({ createTime, description, duration, id, images, title, }: BlogReadType) => {
     return (
@@ -12,17 +13,19 @@ export const BlogBody = ({ createTime, description, duration, id, images, title,
                 <span className='text-h6-bolder text-raisin-black'>{title}</span>
 
 
-                {/* <div className='flex flex-row gap-2 items-center'>
+                <div className='flex flex-row gap-2 items-center'>
 
-                    <div className='bg-anti-flash-white-lighter p-1 rounded-circle flex flex-row items-center justify-center'>
+
+                    <ShareBlog description={description} id={id.toString()} title={title} />
+                    {/* <div className='bg-anti-flash-white-lighter p-1 rounded-circle flex flex-row items-center justify-center'>
                         <IconShare className='text-ultra-violet' width={20} height={20} />
-                    </div>
+                    </div> */}
 
-                    <div className='bg-anti-flash-white-lighter p-1 rounded-circle flex flex-row items-center justify-center'>
+                    {/* <div className='bg-anti-flash-white-lighter p-1 rounded-circle flex flex-row items-center justify-center'>
                         <IconThumbUp className='text-ultra-violet' width={20} height={20} />
-                    </div>
+                    </div> */}
 
-                </div> */}
+                </div>
 
             </div>
 

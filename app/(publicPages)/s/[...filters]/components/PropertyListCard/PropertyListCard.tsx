@@ -9,8 +9,11 @@ import { Divider } from '@components'
 import logo from 'images/atlaslight.svg'
 import { createMediaUrl } from 'utils'
 import { NO_NAME_USER, SAMPLE_AVATAR } from 'variables'
+import { Share } from './components/Share'
 
-export const PropertyListCard = ({ id, medias, location, price, prePrice, rentPrice, subLocation, title, user }: PropertyDetailType) => {
+export const PropertyListCard = (data: PropertyDetailType) => {
+
+    const { id, medias, location, price, prePrice, rentPrice, subLocation, title, user } = data
 
 
     const agentAvatar = user?.avatar ? createMediaUrl(user.avatar) : SAMPLE_AVATAR
@@ -87,7 +90,9 @@ export const PropertyListCard = ({ id, medias, location, price, prePrice, rentPr
 
                     <span className='text-body-3-normal text-ultra-violet line-clamp-1' title={agentName ?? 'مشاور'}>{`${agentName}` ?? 'مشاور'}</span>
                 </div>
+                <Share data={data} id={data.id} />
                 {/* //TODO Share Button Policy
+                
                 <IconShare className='text-gray-300' width={20} height={20} /> */}
 
             </div>
