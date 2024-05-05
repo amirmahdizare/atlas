@@ -7,9 +7,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logo from 'images/logo-full-white.svg'
 import Image from 'next/image'
-import avatar from 'images/agents/dadash.png'
+// import avatar from 'images/agents/dadash.png'
+import { useUserInfo } from '@hooks'
+import { createMediaUrl } from 'utils'
 
 export default function layout({ children }: { children: ReactNode }) {
+
+
+    const { data: { avatar, firstName, lastName } } = useUserInfo()
 
     const pathname = usePathname()
     return (
@@ -18,16 +23,16 @@ export default function layout({ children }: { children: ReactNode }) {
                 <div className='flex flex-row gap-2 justify-between p-2 text-french-gray'>
 
                     <div className='flex flex-row gap-4 items-center'>
-                        <Image src={logo} alt='لوگوی اطلس' />
-                        <input placeholder='جستجو' className='p-1 rounded-sm bg-space-codet focus:outline-mint-green outline-1 outline-none text-body-3-normal' />
+                        <Image src={logo} alt='لوگوی اطلس' className='w-8 lg:w-12' />
+                        {/* <input placeholder='جستجو' className='p-1 rounded-sm bg-space-codet focus:outline-mint-green outline-1 outline-none text-body-3-normal' /> */}
                     </div>
 
 
                     <div className='flex flex-row gap-2 items-center'>
 
                         <Link href={'/dashboard/profile'} className='flex flex-row gap-2 items-center cursor-pointer'>
-                            <Image src={avatar} className='object-cover aspect-square rounded-circle' width={55} height={55} alt='عکس پروفایل' />
-                            <span>امیرزارع</span>
+                            <Image src={createMediaUrl(avatar)} className='object-cover aspect-square rounded-circle w-4 lg:w-6' width={55} height={55} alt='عکس پروفایل' />
+                            <span>{firstName ?? '-'} {lastName  ?? '-'}</span>
                         </Link>
 
                         <Link href={'/'} className='bg-space-codet aspect-square rounded-circle p-1  cursor-pointer hover:text-gray-50'>
@@ -49,7 +54,7 @@ export default function layout({ children }: { children: ReactNode }) {
             </div>
             <div className='m-2 lg:m-4 bg-white flex-1 flex p-2  h- fit box-border overflow-auto'>
 
-            {children}
+                {children}
             </div>
         </div>
     )
