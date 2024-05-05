@@ -273,7 +273,7 @@ export interface ErrorResponseType {
     statusCode: number
 }
 
-export type RoleTypeName = 'user' | 'superAdmin' | 'adviser'
+export type RoleTypeName = 'user' | 'superAdmin' | 'adviser' | 'admin' | 'guest' 
 
 export interface UserListType {
     id: number,
@@ -501,5 +501,6 @@ export interface UserFullInfo {
     bookmarks: [], //TODO,
     permissions: Array<PermissionType<string>>,
     blogs: BlogReadType[],
-    products: PropertyDetailType[]
+    products: PropertyDetailType[],
+    role: { id: number, name: RoleTypeName }
 }

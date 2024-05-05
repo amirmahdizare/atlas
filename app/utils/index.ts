@@ -1,5 +1,5 @@
 import { DOMAttributes, KeyboardEvent } from "react";
-import { ProductType } from "types";
+import { ProductType, RoleTypeName } from "types";
 import { NO_PHOTO_IMAGE } from "variables";
 
 export const startWithZero = (num: number, totalLength: number = 2) => {
@@ -134,4 +134,17 @@ export const convertProductType = (type: ProductType) => {
     return 'فروش'
 
   return ''
+}
+
+
+export const translateRole = (roleEng: RoleTypeName) => {
+  switch (roleEng) {
+    case 'adviser': return 'مشاور'
+    case 'admin': return 'ادمین'
+    case 'guest': return 'میهمان'
+    case 'superAdmin': return 'مدیریت'
+    case 'user': 'کاربر'
+    default: return 'میهمان'
+  }
+
 }

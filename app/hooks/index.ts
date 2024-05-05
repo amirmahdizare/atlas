@@ -7,7 +7,7 @@ import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { ApiGetRequestType, ApiPostRequestType } from "types";
+import { ApiGetRequestType, ApiPostRequestType, UserFullInfo } from "types";
 
 export const useCustomMutation = <T extends ApiPostRequestType, CT = unknown>(data: UseMutationOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>) => useMutation<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>(data)
 
@@ -43,12 +43,32 @@ export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
 })
 
 
-export const useUserInfo = () => useCustomQuery<UsersEndpointType['USER_INFO']>({
-    queryKey: 'getUserInfo',
-    queryFn: () => api.get(UsersEndpoints.USER_INFO),
-    onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
-})
+export const useUserInfo  = (): {data:UserFullInfo}=> {
 
+    return {
+        data: {
+            firstName: 'امیر حسین',
+            lastName: 'کشن زارع',
+            phoneNumber: '09196442725',
+            blogs:[],
+            bookmarks:[],
+            permissions:[],
+            privateNotes:[],
+            products:[],
+            tags:[],
+            role: { id: 1, name: 'superAdmin' },
+            id: '',
+            avatar: 'uploads/avatar-1714907579743-746723178.jpg',
+            userName: 'asdf'
+        }
+    }
+
+    useCustomQuery<UsersEndpointType['USER_INFO']>({
+        queryKey: 'getUserInfo',
+        queryFn: () => api.get(UsersEndpoints.USER_INFO),
+        onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
+    })
+}
 
 export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
     queryKey: 'getTags',

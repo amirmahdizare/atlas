@@ -7,6 +7,8 @@ import Image from 'next/image'
 import { Button, Divider } from '@components'
 import Link from 'next/link'
 import ClickAwayListener from 'react-click-away-listener'
+import { useUserInfo } from '@hooks'
+import { createMediaUrl, translateRole } from 'utils'
 
 
 export const ResponsiveMenu = () => {
@@ -14,6 +16,9 @@ export const ResponsiveMenu = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const isUserLoggedIn = true
+
+    const { data: { role: { name: roleName }, avatar, lastName, firstName } } = useUserInfo()
+
 
     return (
         <>
@@ -31,12 +36,20 @@ export const ResponsiveMenu = () => {
 
                         <Divider />
 
+
+
+
                         {
                             !isUserLoggedIn
                                 ? <Link href={'/login'} className='flex-1 w-full flex'><Button fullWidth icon={IconUser}>ورود به اطلس</Button></Link>
-                                : <div className='flex flex-row gap-2 items-center'>
-                                    <img src='https://files.namnak.com/users/sf/aup/202303/96_pics/%D9%85%D8%AD%D9%85%D8%AF%D8%B1%D8%B6%D8%A7-%DA%AF%D9%84%D8%B2%D8%A7%D8%B1.jpg' className='w-7 aspect-square rounded-circle' />
-                                    <span className='text-h5-bolder text-ellipsis overflow-hidden line-clamp-1'>امیرزارع</span>
+                                :                                 <div className='flex flex-row gap-2 items-center'>
+
+                                    <img src={createMediaUrl(avatar)} className='rounded-circle w-5' />
+                                    <div className='flex-col flex gap-1'>
+                                        <span className='text-raisin-black text-h5-bolder'>{firstName} {lastName}</span>
+                                        <span className='text-ultra-violet text-body-3-normal'>{translateRole(roleName)}</span>
+                                    </div>
+
                                 </div>
                         }
 
