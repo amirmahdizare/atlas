@@ -8,7 +8,7 @@ import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/propert
 import { Metadata } from 'next'
 import { createMediaUrl } from 'utils'
 import { Tags } from './components/Tags'
-
+import { cookies } from 'next/headers'
 
 export async function generateMetadata(
     { params }: pageProps<{ id: string[] }>,
@@ -69,7 +69,13 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
 
     try {
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API}${PropretyEndPoints.SINGLE(id[0])}`)
+        const possibleAccessToken = cookies()?.get('access_token')
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API}${PropretyEndPoints.SINGLE(id[0])}` ,{
+            headers:!!possibleAccessToken?.value ? {
+                Authorization:`bearer ${possibleAccessToken?.value}`
+            } : {}
+        })
 
         const data: PropertyDetailType = await response.json()
 
