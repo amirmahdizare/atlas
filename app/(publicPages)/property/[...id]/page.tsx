@@ -3,7 +3,7 @@ import { PropertyDetailType, pageProps } from 'types'
 import { Breadcrumb } from './components/Breadcrumb'
 import { sampleProprty } from './data.mock'
 import { MobileBreadcrumb } from './components/MobileBreadcrumb'
-import { AgentInfo, Descriptions, FeatureFields, Media, Note, SimilarCategories, Title } from './components'
+import { AgentInfo, AgentNote, Descriptions, FeatureFields, Media, Note, SimilarCategories, Title } from './components'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { Metadata } from 'next'
 import { createMediaUrl } from 'utils'
@@ -97,6 +97,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                     <div className=' fixed w-full bottom-0 left-0 py-1.5 z-20 border-t-2 border-anti-flash-white-lighter lg:border-none lg:pb-0 bg-seasalt lg:relative'>
                         <AgentInfo data={data} />
                     </div>
+                    <AgentNote {...data} />
                     <Note propertyId={data.id} />
                 </div>
 
