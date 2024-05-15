@@ -39,7 +39,7 @@ const PriceComponent = ({ primary, secondary }: { primary: { title: string, valu
 
 export const Title = ({ data, }: { data: PropertyDetailType }) => {
 
-    const { title, id, isBookmarked, location, subLocation, price, prePrice, rentPrice, metr, productType } = data
+    const { title, id, bookmarks, location, subLocation, price, prePrice, rentPrice, metr, productType } = data
     return (
         <div className='flex flex-col  gap-2  '>
 
@@ -48,7 +48,7 @@ export const Title = ({ data, }: { data: PropertyDetailType }) => {
 
                 <div className=' flex-row gap-1 hidden lg:flex'>
                     <Share id={id} data={data} />
-                    {/* <Bookmark id={id} isBookmarked={isBookmarked} /> */}
+                    <Bookmark id={id} isBookmarked={!!bookmarks.find(i => i?.product?.id == id)} />
                 </div>
 
 

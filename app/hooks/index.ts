@@ -1,19 +1,22 @@
 import { api } from "_api/config";
 import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
+import { BookmarkEndPoints } from "_api/endpoints/bookmark";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
 import { TagsEndPoints, TagsEndPointsType } from "_api/endpoints/tag";
 import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
+import { usePathname } from "next/navigation";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { ApiGetRequestType, ApiPostRequestType, UserFullInfo } from "types";
+import { create } from "zustand";
 
 export const useCustomMutation = <T extends ApiPostRequestType, CT = unknown>(data: UseMutationOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>) => useMutation<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>(data)
 
 export const useCustomQuery = <T extends ApiGetRequestType, CT = unknown>(data: UseQueryOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>>) => useQuery<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>>(data)
 
-export const useCustomInfiniteQuery = <T extends ApiGetRequestType, CT = unknown >(data: UseInfiniteQueryOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>>) => useInfiniteQuery<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>>(data)
+export const useCustomInfiniteQuery = <T extends ApiGetRequestType, CT = unknown>(data: UseInfiniteQueryOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>>) => useInfiniteQuery<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>>(data)
 
 
 export const useFullCategories = () => useCustomQuery<CategoryEndPointsType['ALL_WITH_RELATION']>({
@@ -43,19 +46,19 @@ export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
 })
 
 
-export const useUserInfo  = (): {data:UserFullInfo}=> {
+export const useUserInfo = (): { data: UserFullInfo } => {
 
     return {
         data: {
             firstName: 'امیر حسین',
             lastName: 'کشن زارع',
             phoneNumber: '09196442725',
-            blogs:[],
-            bookmarks:[],
-            permissions:[],
-            privateNotes:[],
-            products:[],
-            tags:[],
+            blogs: [],
+            bookmarks: [],
+            permissions: [],
+            privateNotes: [],
+            products: [],
+            tags: [],
             role: { id: 1, name: 'superAdmin' },
             id: '',
             avatar: 'uploads/avatar-1714907579743-746723178.jpg',
@@ -75,3 +78,23 @@ export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
     queryFn: () => api.get(TagsEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت برچسب ها'),
 })
+
+export const useBookmark = (productId: string, isActive: boolean) => {
+    const store = create<{ isActive: boolean, toggle: (state: boolean) => void }>((set) => ({
+        isActive :isActive,
+        toggle: () => set((state) => ({ isActive: !state.isActive }))
+    }))
+
+
+    const mutQury = useCustomMutation({
+        mutationFn: () => store.getState().isActive ? api.delete(BookmarkEndPoints.OFF(productId)) : api.post(BookmarkEndPoints.ON(productId)),
+        onSuccess: (d, v) => {
+            store.getState().toggle(v)
+        },
+        onError:(e)=>{
+            console.log(e)
+        }
+    })
+
+    return { ...store.getState(), ...mutQury }
+}
