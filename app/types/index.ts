@@ -86,10 +86,10 @@ export interface PropertyDetailType {
         value: string | number | boolean,
         id: string
     }>
-    isBookmarked: boolean,
+    // isBookmarked: boolean,
     createTime: string
     updateTime: string,
-    bookmarks: string[]
+    bookmarks: BookmarkRecordType[]
     privateNotes: string[]
     isSuggested: boolean,
     tags?: TagReadType[]
@@ -503,4 +503,11 @@ export interface UserFullInfo {
     blogs: BlogReadType[],
     products: PropertyDetailType[],
     role: { id: number, name: RoleTypeName }
+}
+
+
+export interface BookmarkRecordType {
+    user:UserInfoType<string>,
+    product:PropertyDetailType,
+    id:string
 }
