@@ -6,10 +6,11 @@ import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLoca
 import { TagsEndPoints, TagsEndPointsType } from "_api/endpoints/tag";
 import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { ApiGetRequestType, ApiPostRequestType, UserFullInfo } from "types";
+import { getToken } from "utils";
 import { create } from "zustand";
 
 export const useCustomMutation = <T extends ApiPostRequestType, CT = unknown>(data: UseMutationOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>) => useMutation<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>(data)
@@ -80,13 +81,18 @@ export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
 })
 
 export const useBookmark = (productId: string, isActive: boolean) => {
+
+    const pathname =usePathname()
+
+    const {push} =useRouter()
+    
     const store = create<{ isActive: boolean, toggle: (state: boolean) => void }>((set) => ({
         isActive :isActive,
         toggle: () => set((state) => ({ isActive: !state.isActive }))
     }))
 
 
-    const mutQury = useCustomMutation({
+    const { mutate :baseMutate,  ...mutQury} = useCustomMutation({
         mutationFn: () => store.getState().isActive ? api.delete(BookmarkEndPoints.OFF(productId)) : api.post(BookmarkEndPoints.ON(productId)),
         onSuccess: (d, v) => {
             store.getState().toggle(v)
@@ -96,5 +102,13 @@ export const useBookmark = (productId: string, isActive: boolean) => {
         }
     })
 
-    return { ...store.getState(), ...mutQury }
+    const mutate = (d:any) =>{
+        if (!getToken()) {
+            alert('برای ذخیره یادداشت باید به سایت وارد شود.')
+            return push(`/login?callbackUrl=${pathname}`)
+        }
+        baseMutate(d)
+    }
+
+    return { ...store.getState(), ...mutQury , mutate}
 }
