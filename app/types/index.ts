@@ -443,7 +443,7 @@ export interface BlogReadType {
 
 export interface AgentNoteMutateType {
     note: string,
-    productId: number
+    productId: string
 }
 
 export interface AgentNoteReadType {

@@ -2,17 +2,23 @@
 import React from 'react'
 
 import { Button } from '@components'
-import { useCustomQuery } from '@hooks'
+import { useCustomMutation, useCustomQuery } from '@hooks'
 import { api } from '_api/config'
-import { PrivateEndPoints, PrivateEndPointsType } from '_api/endpoints/PrivateNote'
+import { PrivateEndPoints, PrivateEndPointsType } from '_api/endpoints/privateNote'
 import { useForm } from 'react-hook-form'
+import { getToken } from 'utils'
+import { usePathname, useRouter } from 'next/navigation'
 
 
 export const Note = ({ propertyId }: { propertyId: string }) => {
 
-    const { register, formState, handleSubmit, reset } = useForm<{ note: string }>()
+    const { register, formState, handleSubmit, reset, watch } = useForm<{ note: string }>()
 
-    const { data, isLoading } = useCustomQuery<PrivateEndPointsType['BY_PRODUCT']>({
+    const { push } = useRouter()
+
+    const pathname = usePathname()
+
+    const { data: initialData, isLoading } = useCustomQuery<PrivateEndPointsType['BY_PRODUCT']>({
         queryFn: () => api.get(PrivateEndPoints.BY_PRODUCT(propertyId)),
         queryKey: ['privateNote', propertyId],
         onSuccess: (e) => {
@@ -23,13 +29,25 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
         }
     })
 
-    const handleMutate = () => {
+    const { mutate, isLoading: loadingMutate } = useCustomMutation<PrivateEndPointsType['CREATE']>({
+        mutationFn: (data) => !!initialData?.data ? api.patch(PrivateEndPoints.SINGLE(initialData.data.id), data) : api.post(PrivateEndPoints.CREATE, data),
+        mutationKey: [initialData?.data.id ? 'edit' : 'create', propertyId]
+    })
 
+
+    const handleMutate = (data: { note: string }) => {
+        if (!getToken()) {
+            alert('برای ذخیره یادداشت باید به سایت وارد شود.')
+            return push(`/login?callbackUrl=${pathname}`)
+        }
+
+        mutate({ note: data.note, productId: propertyId })
     }
 
+    const noteValue = watch('note')
 
     return (
-        <form className='flex flex-col gap-2' onSubmit={() => handleSubmit(handleMutate)}>
+        <form className='flex flex-col gap-2' onSubmit={handleSubmit(handleMutate)}>
             <span className='text-space-codet text-body-2-bolder'>یادداشت</span>
 
             {isLoading ? <div className='h-8 w-full rounded bg-gray-50 animate-pulse'>
@@ -41,7 +59,7 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
                     {...register('note')}
                 />}
 
-            <Button fullWidth>ذخیره</Button>
+            <Button disabled={(noteValue == initialData?.data.note || !noteValue)} bgColor={(noteValue == initialData?.data.note || !noteValue) ? 'gray' : undefined} textColor={(noteValue == initialData?.data.note || !noteValue) ? 'textGray' : undefined} fullWidth loading={loadingMutate} type='submit'>ذخیره</Button>
 
             <p className='text-ultra-violet text-h4-normal'>یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد شد.</p>
 

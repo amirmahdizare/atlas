@@ -1,9 +1,9 @@
 import { AgentNoteMutateType, AgentNoteReadType, ApiGetRequestType, ApiPostRequestType } from "types"
 
 export const PrivateEndPoints = Object.freeze({
-    CREATE: '/private_notes/create',
-    LIST: '/private_notes',
-    SINGLE: (catId: string) => `/private_notes/${catId}`,
+    CREATE: '/private-notes',
+    LIST: '/private-notes',
+    SINGLE: (catId: string) => `/private-notes/${catId}`,
     BY_PRODUCT: (pId: string) => `/private-notes/by-product/${pId}`
 })
 
