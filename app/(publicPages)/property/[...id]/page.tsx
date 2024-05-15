@@ -97,7 +97,7 @@ export default async function page({ params: { id } }: pageProps<{ id: string[] 
                     <div className=' fixed w-full bottom-0 left-0 py-1.5 z-20 border-t-2 border-anti-flash-white-lighter lg:border-none lg:pb-0 bg-seasalt lg:relative'>
                         <AgentInfo data={data} />
                     </div>
-                    <Note />
+                    <Note propertyId={data.id} />
                 </div>
 
 
