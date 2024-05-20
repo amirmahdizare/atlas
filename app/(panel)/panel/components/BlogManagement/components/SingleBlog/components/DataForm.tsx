@@ -8,7 +8,7 @@ import { useBlogs, useCustomMutation } from '@hooks'
 import { BlogEndPoints, BlogEndPointsType } from '_api/endpoints/blog'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
-import { createFormData } from 'utils'
+import { createFormData, createMediaUrl } from 'utils'
 import ReactQuill from 'react-quill';
 import { } from 'react-quill';
 
@@ -21,9 +21,11 @@ export const DataForm = () => {
 
     const modeTitle = mode == 'add' ? 'افزودن' : 'ویرایش'
 
-    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue } = useForm<BlogItemTypeAPI<undefined, File>>()
+    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue } = useForm<BlogItemTypeAPI<undefined, File | string | undefined>>()
 
-    watch('description')
+    watch(['description'])
+
+    const currentImage = watch('images')
 
     const { mutate, isLoading } = useCustomMutation<BlogEndPointsType['CREATE']>(
         {
@@ -40,7 +42,7 @@ export const DataForm = () => {
         }
     )
 
-    const handleMutate = (data: BlogItemTypeAPI<undefined, File>) => {
+    const handleMutate = (data: BlogItemTypeAPI<undefined, File | string | undefined>) => {
 
         var currentImages: string[] = []
 
@@ -53,18 +55,48 @@ export const DataForm = () => {
         // }
 
 
-        mutate(createFormData({ ...data, userId: 21, images: [...currentImages, ...Array.from(data.images)] }, ['images']))
+        mutate(createFormData({ ...data, images: [...currentImages, ...Array.from(data.images)] }, ['images']))
     }
 
     useEffect(() => {
         if (mode == 'edit' && blogId) {
             const targetBlog = blogsData?.data.find(a => a.id == blogId)
             if (targetBlog) {
-                const { createTime, updateTime, id, tags, user, suggest_productId, images, ...others } = targetBlog
+                const { createTime, updateTime, id, tags, user, suggest_productId, ...others } = targetBlog
                 reset(others)
             }
         }
     }, [mode])
+
+
+    const RenderImageBox = () => {
+
+        if (!currentImage)
+            return <>
+                <Button className='pointer-events-none' bgColor='gray' textColor='dark' icon={IconUpload}>افزودن تصویر</Button>
+                <div className='flex flex-row gap-1'>
+                    <IconInfoCircle width={15} height={15} />
+                    <span className='text-ultra-violet text-body-3-light'>تصاویر شما باید کمتر 6 مگابایت باشند.</span>
+                </div></>
+
+        else if (typeof currentImage?.[0] == 'string') {
+
+            return <img src={createMediaUrl(currentImage[0])} className='w-full aspect-square object-cover' />
+        }
+
+        else if (typeof currentImage?.[0] == 'object') {
+            const imageLink = URL.createObjectURL(currentImage[0])
+            return <img src={imageLink} className='w-full aspect-square object-cover' />
+        }
+
+        return <>
+            <Button className='pointer-events-none' bgColor='gray' textColor='dark' icon={IconUpload}>افزودن تصویر</Button>
+            <div className='flex flex-row gap-1'>
+                <IconInfoCircle width={15} height={15} />
+                <span className='text-ultra-violet text-body-3-light'>تصاویر شما باید کمتر 6 مگابایت باشند.</span>
+            </div></>
+
+    }
 
     return (
         <form className='grid grid-cols-3 gap-2' onSubmit={handleSubmit(handleMutate)}>
@@ -86,6 +118,8 @@ export const DataForm = () => {
                     }
 
                 })}
+                    error={!!errors?.duration}
+                    errorText={errors?.duration?.message}
                     type='number'
                 />
 
@@ -96,7 +130,10 @@ export const DataForm = () => {
 
                 <label className=' bg-anti-flash-white flex gap-2 flex-col items-center justify-center cursor-pointer p-2 min-h-[200px] rounded-sm' htmlFor='blogPhoto'>
 
-                    <Button className='pointer-events-none' bgColor='gray' textColor='dark' icon={IconUpload}>افزودن تصویر</Button>
+                    <RenderImageBox />
+
+
+                    {!!errors.images && <span className='text-red-500 font-bold'>تصویر مقاله ضروری است.</span>}
 
                     <input type='file' hidden id='blogPhoto' {...register('images', {
                         required: mode == 'add' ? {
@@ -104,13 +141,6 @@ export const DataForm = () => {
                             message: 'تصویر مقاله ضروری است.'
                         } : undefined
                     })} />
-
-                    {!!errors.images && <span className='text-red-500 font-bold'>تصویر مقاله ضروری است.</span>}
-
-                    <div className='flex flex-row gap-1'>
-                        <IconInfoCircle width={15} height={15} />
-                        <span className='text-ultra-violet text-body-3-light'>تصاویر شما باید کمتر 6 مگابایت باشند.</span>
-                    </div>
 
                 </label>
             </div>
