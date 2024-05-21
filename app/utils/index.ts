@@ -1,6 +1,6 @@
 import { DOMAttributes, KeyboardEvent } from "react";
 import { ProductType, RoleTypeName } from "types";
-import { NO_PHOTO_IMAGE } from "variables";
+import { NO_PHOTO_IMAGE, agentRoles } from "variables";
 
 export const startWithZero = (num: number, totalLength: number = 2) => {
   return String(num).padStart(totalLength, '0');
@@ -148,3 +148,6 @@ export const translateRole = (roleEng: RoleTypeName) => {
   }
 
 }
+
+
+export const isUserAgent = (role: RoleTypeName) => agentRoles.indexOf(role) != -1
