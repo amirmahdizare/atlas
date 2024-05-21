@@ -62,7 +62,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
                                     <div className='flex flex-row gap-2 items-center'>
 
-                                        <img src={createMediaUrl(avatar)} className='rounded-circle w-5' />
+                                        <img src={createMediaUrl(avatar)} className='rounded-circle w-5 aspect-square object-cover' />
                                         <div className='flex-col flex gap-1'>
                                             <span className='text-raisin-black text-h5-bolder'>{firstName} {lastName}</span>
                                             <span className='text-ultra-violet text-body-3-normal'>{translateRole(roleName)}</span>

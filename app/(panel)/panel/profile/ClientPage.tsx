@@ -45,13 +45,15 @@ export const ClientPage = () => {
     const renderAvatarUrl = () => {
         if (typeof currentFormAvatar == 'string')
             return createMediaUrl(currentFormAvatar)
-        else if (Array.isArray(currentFormAvatar) && typeof currentFormAvatar[0] == 'object') {
+        else if (currentFormAvatar?.length > 0 && typeof currentFormAvatar?.[0] == 'object') {
             return URL.createObjectURL(currentFormAvatar[0])
         }
         else
             return undefined
     }
 
+    console.log(currentFormAvatar)
+    
     if (isError)
         return <div></div>
 
@@ -90,7 +92,7 @@ export const ClientPage = () => {
 
 
                 <label htmlFor={'avatar'} className='flex flex-row gap-2 items-center cursor-pointer'>
-                    {!!renderAvatarUrl() ? <img src={renderAvatarUrl()} className='w-4 h-4 rounded-circle' /> : <IconPhoto className='w-4 h-4 ' />}
+                    {!!renderAvatarUrl() ? <img src={renderAvatarUrl()} className='w-6 h-6 rounded-circle' /> : <IconPhoto className='w-6 h-6 ' />}
 
                     <span>عکس پروفایل</span>
                     <input type='file' id={'avatar'}  {...register('avatar')} />
