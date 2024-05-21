@@ -89,7 +89,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
 
 
-                            {avatar && <img src={createMediaUrl(avatar)} className='rounded-circle w-4' />}
+                            {avatar && <img src={createMediaUrl(avatar)} className='rounded-circle w-4 object-cover aspect-square' />}
                             {/* <Link href={'/'} ><IconHome className='text-gray-500 w-3 aspect-square'/></Link> */}
 
                             {/* <div className=' flex flex-row gap-1 items-center border rounded p-0.5 border-gray-100'>
