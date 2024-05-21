@@ -7,7 +7,7 @@ import { Monitor } from 'icons'
 import { Menu } from './components/Menu/Menu'
 import { ResponsiveMenu } from './components/ResponsiveMenu/ResponsiveMenu'
 import Link from 'next/link'
-import { createMediaUrl, translateRole } from 'utils'
+import { createMediaUrl, isUserAgent, translateRole } from 'utils'
 import { useUserInfo } from '@hooks'
 import { agentRoles } from 'variables'
 import { redirect } from 'next/navigation'
@@ -26,7 +26,7 @@ export default function layout({ children }: { children: ReactNode }) {
         const { data: { role: { name: roleName }, avatar, lastName, firstName } } = data
 
 
-        if (agentRoles.indexOf(roleName) != -1)
+        if (isUserAgent(roleName))
             return (
                 <div className='grid grid-cols-5 flex-1 border rounded border-gray-100'>
 
@@ -83,7 +83,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
                         <div className='flex flex-row gap-2 justify-between p-1.5 shadow border-b lg:hidden items-center'>
 
-                            <ResponsiveMenu />
+                            {/* <ResponsiveMenu /> */}
 
                             <Link href={'/'}><Image src={fullogo} className='max-h-5 aspect-video flex-1' alt='لوگوی اطلس' /></Link>
 
