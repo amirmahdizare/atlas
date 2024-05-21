@@ -47,30 +47,30 @@ export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
 })
 
 
-export const useUserInfo = (): { data: UserFullInfo } => {
+export const useUserInfo = () => {
 
-    return {
-        data: {
-            firstName: 'امیر حسین',
-            lastName: 'کشن زارع',
-            phoneNumber: '09196442725',
-            blogs: [],
-            bookmarks: [],
-            permissions: [],
-            privateNotes: [],
-            products: [],
-            tags: [],
-            role: { id: 1, name: 'superAdmin' },
-            id: '',
-            avatar: 'uploads/avatar-1714907579743-746723178.jpg',
-            userName: 'asdf'
-        }
-    }
+    // return {
+    //     data: {
+    //         firstName: 'امیر حسین',
+    //         lastName: 'کشن زارع',
+    //         phoneNumber: '09196442725',
+    //         blogs: [],
+    //         bookmarks: [],
+    //         permissions: [],
+    //         privateNotes: [],
+    //         products: [],
+    //         tags: [],
+    //         role: { id: 1, name: 'superAdmin' },
+    //         id: '',
+    //         avatar: 'uploads/avatar-1714907579743-746723178.jpg',
+    //         userName: 'asdf'
+    //     }
+    // }
 
-    useCustomQuery<UsersEndpointType['USER_INFO']>({
+    return useCustomQuery<UsersEndpointType['USER_INFO']>({
         queryKey: 'getUserInfo',
-        queryFn: () => api.get(UsersEndpoints.USER_INFO),
-        onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
+        queryFn: () => api.post(UsersEndpoints.USER_INFO),
+        // onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
     })
 }
 
@@ -82,27 +82,27 @@ export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
 
 export const useBookmark = (productId: string, isActive: boolean) => {
 
-    const pathname =usePathname()
+    const pathname = usePathname()
 
-    const {push} =useRouter()
-    
+    const { push } = useRouter()
+
     const store = create<{ isActive: boolean, toggle: (state: boolean) => void }>((set) => ({
-        isActive :isActive,
+        isActive: isActive,
         toggle: () => set((state) => ({ isActive: !state.isActive }))
     }))
 
 
-    const { mutate :baseMutate,  ...mutQury} = useCustomMutation({
+    const { mutate: baseMutate, ...mutQury } = useCustomMutation({
         mutationFn: () => store.getState().isActive ? api.delete(BookmarkEndPoints.OFF(productId)) : api.post(BookmarkEndPoints.ON(productId)),
         onSuccess: (d, v) => {
             store.getState().toggle(v)
         },
-        onError:(e)=>{
+        onError: (e) => {
             console.log(e)
         }
     })
 
-    const mutate = (d:any) =>{
+    const mutate = (d: any) => {
         if (!getToken()) {
             alert('برای ذخیره یادداشت باید به سایت وارد شود.')
             return push(`/login?callbackUrl=${pathname}`)
@@ -110,5 +110,5 @@ export const useBookmark = (productId: string, isActive: boolean) => {
         baseMutate(d)
     }
 
-    return { ...store.getState(), ...mutQury , mutate}
+    return { ...store.getState(), ...mutQury, mutate }
 }

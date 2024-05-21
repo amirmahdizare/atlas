@@ -470,7 +470,9 @@ export interface UserInfoType<T> {
     lastName: string,
     avatar: T,
     phoneNumber: string
-    id?: string
+    id?: string,
+    role:{id:string , name:RoleTypeName},
+    permissions:PermissionType<string>[]
 }
 
 export interface TagReadType {
