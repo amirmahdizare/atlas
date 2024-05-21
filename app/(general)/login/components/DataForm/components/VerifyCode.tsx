@@ -3,7 +3,7 @@ import React, { useCallback } from 'react'
 import { Button, Input } from '@components'
 import { api } from '_api/config';
 import { AuthEndpointType, AuthEndpoints } from '_api/endpoints/auth';
-import { useCustomMutation } from 'hooks';
+import { useCustomMutation, useUserInfo } from 'hooks';
 import Countdown from 'react-countdown';
 import { useForm } from 'react-hook-form'
 import { startWithZero, storeToken } from 'utils';
@@ -16,6 +16,8 @@ import { useRouter } from 'next/navigation';
 export const VerifyCode = () => {
 
     const router = useRouter()
+
+    const {refetch}  = useUserInfo()
 
     const { register, handleSubmit, formState: { errors } } = useForm<{ verifyCode: string }>()
 
@@ -36,6 +38,7 @@ export const VerifyCode = () => {
         onSuccess: (data) => {
             storeToken(data?.data?.access_token)
             toast.success('با موفقیت وارد شدید.')
+            refetch()
             router.push('/')
         },
         onError: (data) => {
