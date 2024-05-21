@@ -14,7 +14,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { PermissionType } from 'types'
 
 
-// type FormValues = { permissions: string[] }
+const bannedPermissions = ['role']
 
 type FormValues = {
     [key: string]: boolean
@@ -94,9 +94,9 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     console.log(proccessedData)
 
 
-    const handleToggleCatSelect = (catName:string , state:boolean) =>{
+    const handleToggleCatSelect = (catName: string, state: boolean) => {
 
-        reset( {...currentSelected ,  ...data?.data.filter(i=>i.action.split('_')[1]==catName).reduce((pv, cv) => ({ ...pv, [cv.id]: state }), {})})
+        reset({ ...currentSelected, ...data?.data.filter(i => i.action.split('_')[1] == catName).reduce((pv, cv) => ({ ...pv, [cv.id]: state }), {}) })
 
     }
 
@@ -134,13 +134,13 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
 
                 {/* {data?.data.reduce<Array<{title:string , items : PermissionType[]}>>((pv, cv) => [] , []) } */}
 
-                {proccessedData?.map(cat => <div className='flex flex-col gap-1 col-span-2 lg:col-span-1 border rounded p-1'>
+                {proccessedData?.filter(i => bannedPermissions.indexOf(i.title) == -1).map(cat => <div className='flex flex-col gap-1 col-span-2 lg:col-span-1 border rounded p-1'>
 
                     <div className='flex flex-row gap-2 items-center justify-between'>
                         <span className='text-body-2-bolder'>{captilizeFirstLetter(cat.title)}</span>
 
                         <label className='flex flex-row gap-1 items-center border p-1 rounded cursor-pointer' htmlFor={`all-${cat.title}`}>
-                            <input id={`all-${cat.title}`} type='checkbox' checked={cat.items.every(i => currentSelected[i.id])} onChange={({target:{checked}})=>handleToggleCatSelect( cat.title ,checked)} />
+                            <input id={`all-${cat.title}`} type='checkbox' checked={cat.items.every(i => currentSelected[i.id])} onChange={({ target: { checked } }) => handleToggleCatSelect(cat.title, checked)} />
                             <span>انتخاب همه</span>
 
                         </label>
@@ -166,7 +166,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
                 <div className='col-span-4 flex'>
 
 
-                <Button loading={mutateLoading} fullWidth>ثبت تغییرات</Button>
+                    <Button loading={mutateLoading} fullWidth>ثبت تغییرات</Button>
 
                 </div>
             </form>

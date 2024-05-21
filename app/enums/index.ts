@@ -43,4 +43,55 @@ export enum PermissionBackendRoutes {
     USER_UPDATE = 'update_user',
     USER_DELETE = 'delete_user',
 
+
+    LOCATIONS_CREATE = 'create_locations',
+    LOCATIONS_READ = 'read_locations',
+    LOCATIONS_UPDATE = 'update_locations',
+    LOCATIONS_DELETE = 'delete_locations',
+
+
+    
+    SUBLOCATIONS_CREATE = 'create_sublocations',
+    SUBLOCATIONS_READ = 'read_sublocations',
+    SUBLOCATIONS_UPDATE = 'update_sublocations',
+    SUBLOCATIONS_DELETE = 'delete_sublocations',
+
+
+    TAG_CREATE = 'create_tag',
+    TAG_READ = 'read_tag',
+    TAG_UPDATE = 'update_tag',
+    TAG_DELETE = 'delete_tag',
+
+
+    CATEGORY_CREATE = 'create_category',
+    CATEGORY_READ = 'read_category',
+    CATEGORY_UPDATE = 'update_category',
+    CATEGORY_DELETE = 'delete_category',
+
+    SUBCATEGORY_CREATE = 'create_subcategory',
+    SUBCATEGORY_READ = 'read_subcategory',
+    SUBCATEGORY_UPDATE = 'update_subcategory',
+    SUBCATEGORY_DELETE = 'delete_subcategory',
+
+
+
+    FILTER_CREATE = 'create_filter',
+    FILTER_READ = 'read_filter',
+    FILTER_UPDATE = 'update_filter',
+    FILTER_DELETE = 'delete_filter',
+
+    
+    SUGGEST_CREATE = 'create_suggest',
+    SUGGEST_READ = 'read_suggest',
+    SUGGEST_UPDATE = 'update_suggest',
+    SUGGEST_DELETE = 'delete_suggest',
+
+
+
+    ITEM_CREATE = 'create_item',
+    ITEM_READ = 'read_item',
+    ITEM_UPDATE = 'update_item',
+    ITEM_DELETE = 'delete_item',
+
+
 }
