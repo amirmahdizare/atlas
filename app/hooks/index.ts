@@ -70,6 +70,7 @@ export const useUserInfo = () => {
     return useCustomQuery<UsersEndpointType['USER_INFO']>({
         queryKey: 'getUserInfo',
         queryFn: () => api.post(UsersEndpoints.USER_INFO),
+        staleTime: 1000 * 60 * 10
         // onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
     })
 }
