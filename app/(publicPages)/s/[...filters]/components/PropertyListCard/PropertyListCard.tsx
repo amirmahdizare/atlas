@@ -40,10 +40,10 @@ export const PropertyListCard = (data: PropertyDetailType) => {
 
             <span className='text-raisin-black text-h4-bolder leading-3 line-clamp-2 h-6  text-ellipsis ' title={title}>{title}</span>
 
-            {/* <div className='flex flex-row gap-0.5 items-center'>
+            <div className='flex flex-row gap-0.5 items-center'>
                 <IconMapPin width={20} height={20} className='text-french-gray' />
                 <span className='text-ultra-violet line-clamp-1 text-ellipsis text-body-3-normal' title={`${location?.faTitle} ${subLocation ? `, ${subLocation.faTitle}` : ''}`}>{location?.faTitle} {subLocation ? `, ${subLocation.faTitle}` : ''}</span>
-            </div> */}
+            </div>
 
             {!Number(rentPrice) && <div className='flex flex-row gap-3 justify-between h-2'></div>}
 

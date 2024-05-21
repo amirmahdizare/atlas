@@ -73,7 +73,7 @@ export const DesktopHeader = () => {
                         }
                     ]} /> */}
 
-                <LinkComponent link='/s/dsf' title='جستجوی ملک' />
+                <LinkComponent link='/s/mehestan' title='جستجوی ملک' />
                 <LinkComponent link='/blogs' title='اخبار و مقالات' />
                 <LinkComponent link='/aboutus' title='درباره ما' />
                 <LinkComponent link='/contactus' title='تماس با ما' />
