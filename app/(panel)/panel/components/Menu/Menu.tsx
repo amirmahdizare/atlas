@@ -3,10 +3,14 @@ import { ContactInfo, Monitor, UserEdit } from 'icons'
 import { MenuItem } from '../MenuItem'
 import { MenuCollection } from '../MenuCollection'
 import { accesses } from '../../../panel/data.mock'
+import { useUserInfo } from '@hooks'
 
 
 
 export const Menu = ({ onClick }: { onClick?: Function }) => {
+
+
+
     return (
         <div className='flex flex-col gap-3' onClick={() => onClick ? onClick() : undefined} >
 

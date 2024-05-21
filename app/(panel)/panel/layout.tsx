@@ -83,7 +83,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
                         <div className='flex flex-row gap-2 justify-between p-1.5 shadow border-b lg:hidden items-center'>
 
-                            {/* <ResponsiveMenu /> */}
+                            <ResponsiveMenu />
 
                             <Link href={'/'}><Image src={fullogo} className='max-h-5 aspect-video flex-1' alt='لوگوی اطلس' /></Link>
 
