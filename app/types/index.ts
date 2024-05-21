@@ -456,7 +456,7 @@ export interface AgentNoteReadType {
 export interface PropertySearchParams {
     featureValues?: Array<{ filterId: string, value: string | number | boolean }>,
     userId?: string,
-    locations?: string[],
+    location?: number[],
     sublocations?: string[],
     category?: string,
     subCategory?: string,

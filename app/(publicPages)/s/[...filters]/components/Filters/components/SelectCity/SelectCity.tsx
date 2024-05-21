@@ -19,13 +19,13 @@ export const SelectCity = () => {
     const [modal, setModal] = useState<boolean>(false)
 
     const handleToggleCity = (city: CityType) => {
-        if (filter.city?.find(i => i.value == city.id.toString()))
-            dispatchFilter({ city: filter.city.filter(i => i.value != city.id.toString()), zone: [] })
+        if (filter.location?.find(i => i == city.id))
+            dispatchFilter({ location: filter.location.filter(i => i != city.id), sublocations: [] })
         else
-            dispatchFilter({ city: [...(filter?.city ?? []), { title: city.name, value: city.id.toString() }], zone: [] })
+            dispatchFilter({ location: [...(filter?.location ?? []), city.id ] })
     }
 
-    const isLocationInclude = (cityId: string) => filter.city?.findIndex(i => i.value == cityId) != -1
+    const isLocationInclude = (cityId: number) => !!filter?.location && filter.location?.findIndex(i => i == cityId) != -1
 
 
     if (cities)
@@ -35,8 +35,8 @@ export const SelectCity = () => {
                 <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen ? 'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                     <div className='flex flex-row gap-1 items-center'>
                         <span className='text-body-2-bolder'>شهر</span>
-                        {!!filter.city?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
-                     rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.city?.length}</span>}
+                        {!!filter.location?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
+                     rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.location?.length}</span>}
                     </div>
 
                     <div className='flex flex-row gap-2 items-center'>
@@ -49,19 +49,19 @@ export const SelectCity = () => {
 
                 <div className={`flex flex-col gap-1.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                    {!!filter.city?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ city: [], zone: [] })}>
+                    {!!filter.location?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ location: [], sublocations: [] })}>
                         <IconArrowRight width={15} />
                         <span>
                             همه شهر ها
                         </span>
                     </span>}
 
-                    {!filter.city?.length && <div className={`px-1 py-0.5 transition-all duration-150 border-r-2 text-body-3-bolder cursor-pointer  ${filter?.city?.length == 0 ? 'border-r-robin-egg-blue-00  text-robin-egg-blue-00 font-bold' : 'text-ultra-violet hover:text-coral border-r-white'}`}>
+                    {!filter.location?.length && <div className={`px-1 py-0.5 transition-all duration-150 border-r-2 text-body-3-bolder cursor-pointer  ${filter?.location?.length == 0 ? 'border-r-robin-egg-blue-00  text-robin-egg-blue-00 font-bold' : 'text-ultra-violet hover:text-coral border-r-white'}`}>
                         همه شهر ها
                     </div>}
 
                     {cities.map(item => <label htmlFor={item.id.toString()} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
-                        <input checked={isLocationInclude(item.id.toString())} type='checkbox' className='accent-mint-green' id={item.id.toString()} onChange={() => handleToggleCity(item)} />
+                        <input checked={isLocationInclude(item.id)} type='checkbox' className='accent-mint-green' id={item.id.toString()} onChange={() => handleToggleCity(item)} />
                         <span className='text-body-3-bolder text-ultra-violet leading-3'>{item.name}</span>
                     </label>)}
                 </div>
@@ -74,7 +74,7 @@ export const SelectCity = () => {
                             <IconX className='cursor-pointer text-gray-500' onClick={() => setModal(false)} />
                         </div>
                         {cities.map(item => <label htmlFor={item.id.toString()} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
-                            <input checked={isLocationInclude(item.id.toString())} type='checkbox' id={item.id.toString()} onChange={() => handleToggleCity(item)} />
+                            <input checked={isLocationInclude(item.id)} type='checkbox' id={item.id.toString()} onChange={() => handleToggleCity(item)} />
                             <span>{item.name}</span>
                         </label>)}
                     </div>
