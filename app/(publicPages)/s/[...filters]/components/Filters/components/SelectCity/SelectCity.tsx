@@ -20,7 +20,7 @@ export const SelectCity = () => {
 
     const handleToggleCity = (city: CityType) => {
         if (filter.location?.find(i => i == city.id))
-            dispatchFilter({ location: filter.location.filter(i => i != city.id), sublocations: [] })
+            dispatchFilter({ location: filter.location.filter(i => i != city.id), sublocation: [] })
         else
             dispatchFilter({ location: [...(filter?.location ?? []), city.id ] })
     }
@@ -49,7 +49,7 @@ export const SelectCity = () => {
 
                 <div className={`flex flex-col gap-1.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                    {!!filter.location?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ location: [], sublocations: [] })}>
+                    {!!filter.location?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ location: [], sublocation: [] })}>
                         <IconArrowRight width={15} />
                         <span>
                             همه شهر ها
@@ -62,7 +62,7 @@ export const SelectCity = () => {
 
                     {cities.map(item => <label htmlFor={item.id.toString()} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
                         <input checked={isLocationInclude(item.id)} type='checkbox' className='accent-mint-green' id={item.id.toString()} onChange={() => handleToggleCity(item)} />
-                        <span className='text-body-3-bolder text-ultra-violet leading-3'>{item.name}</span>
+                        <span className='text-body-3-bolder text-ultra-violet leading-3'>{item.faTitle}</span>
                     </label>)}
                 </div>
 
@@ -75,7 +75,7 @@ export const SelectCity = () => {
                         </div>
                         {cities.map(item => <label htmlFor={item.id.toString()} className='flex flex-row items-center gap-1.5 cursor-pointer hover:text-coral'>
                             <input checked={isLocationInclude(item.id)} type='checkbox' id={item.id.toString()} onChange={() => handleToggleCity(item)} />
-                            <span>{item.name}</span>
+                            <span>{item.faTitle}</span>
                         </label>)}
                     </div>
 
