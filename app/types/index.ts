@@ -458,8 +458,8 @@ export interface PropertySearchParams {
     userId?: string,
     location?: number[],
     sublocations?: string[],
-    category?: string,
-    subCategory?: string,
+    category?: number[],
+    subCategory?: number [],
     productType?: ProductType
 }
 

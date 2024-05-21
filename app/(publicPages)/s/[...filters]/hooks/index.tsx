@@ -27,15 +27,15 @@ export const useSearchProperty = create<StoreType>((set) => ({
 export const usePropertySearchResults = () => {
     const searchHook = useSearchProperty()
 
-    // const { sublocations , category , subCategory , locations ,...rest} = searchHook.filter
+    const { category, subCategory, ...rest } = searchHook.filter
 
     // console.log(locations)
 
-    // const currentFilter :PropertySearchParams = {
-    //     ...rest    , 
+    //     const currentFilter :PropertySearchParams = {
+    //         ...rest    , 
 
-    //     ...(locations?.length)
-    //     locations:[]}
+    //         ...(category ? ({category:[category]}) : ({}))
+    // }
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
         queryFn: ({ queryKey }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? JSON.parse(queryKey[1]) : {}),
