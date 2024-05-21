@@ -11,12 +11,17 @@ import { createMediaUrl } from 'utils'
 
 export default function layout({ children }: { children: ReactNode }) {
 
+    const { data, isLoading, isError } = useUserInfo()
 
-    const { data: { avatar, firstName, lastName, role } } = useUserInfo()
 
-    const pathname = usePathname()
+    if (isError)
+        return redirect('/')
 
-    if (!!role?.name || role?.name != 'guest')
+    else if (data?.data) {
+
+        const { avatar, firstName, lastName, role } = data.data
+
+        const pathname = usePathname()
 
         return (
             <div className='flex flex-col bg-anti-flash-white-lighter   max-h-full'>
@@ -59,6 +64,11 @@ export default function layout({ children }: { children: ReactNode }) {
                 </div>
             </div>
         )
+    }
 
-    return redirect('/')
+    return <div className='flex flex-col gap-2 items-center '>
+
+        {Array.from(new Array(10)).map(i => <div className='bg-gray-20 w-full h-6 rounded animate-pulse'></div>)}
+
+    </div>
 }
