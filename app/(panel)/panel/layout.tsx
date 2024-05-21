@@ -117,7 +117,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
     return <div className='flex flex-col gap-2'>
 
-        {Array.from(new Array(10)).map(i => <div className='bg-gray-50 animate-pulse rounded'></div>)}
+        {Array.from(new Array(10)).map(i => <div className='bg-gray-50 animate-pulse rounded h-6 w-full'></div>)}
 
     </div>
 }
