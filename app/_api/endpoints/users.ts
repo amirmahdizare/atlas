@@ -36,6 +36,7 @@ export interface UsersEndpointType {
         userName: string
     }>,
     SINGLE_USER: ApiPostRequestType<UserInfoType<File>, UserInfoType<string>>
+    GET_SINGLE: ApiGetRequestType<{}, UserInfoType<string>>
     UPADTE_USER_PERMISSION: ApiPostRequestType<{ permissionIds: Array<number> }>,
     USER_INFO: ApiGetRequestType<{}, UserInfoType<string>>,
     GET_AGENTS: ApiGetRequestType<{}, UserInfo<string>>
