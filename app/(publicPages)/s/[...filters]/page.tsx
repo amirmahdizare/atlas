@@ -13,7 +13,7 @@ export default function page({ params: { filters } }: pageProps<{ filters: Array
 
     return (
         <div className='flex flex-col gap-2'>
-            <Breadcrumb />
+            {/* <Breadcrumb /> */}
             <ClientPage />
         </div>
     )

@@ -28,7 +28,7 @@ export const Filters = () => {
         <SelectCity />
         <SelectArea />
         {!!filter?.subCategory
-          ? categories?.find(i => i.id == filter?.category)?.subCategories.find(s => s.id == filter.subCategory)?.filters.map(item => {
+          ? categories?.find(i => i.id == filter?.category?.[0].toString())?.subCategories.find(s => s.id == filter.subCategory?.[0].toString())?.filters.map(item => {
             if (item.filtertype == 'RANGE')
               return <>
                 <Divider />
