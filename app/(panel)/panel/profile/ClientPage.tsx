@@ -18,7 +18,7 @@ export const ClientPage = () => {
     const { data, isError, refetch } = useUserInfo()
 
     const { mutate, isLoading } = useCustomMutation({
-        mutationFn: (data) => api.patch(UsersEndpoints.SINGLE_USER('24'), createFormData(data)),
+        mutationFn: (d) => api.patch(UsersEndpoints.SINGLE_USER(data?.data?.id ?? ''), createFormData(d)),
         onSuccess: () => {
             toast.success('مشخصات شما با موفقیت ویرایش شد.')
             refetch()
