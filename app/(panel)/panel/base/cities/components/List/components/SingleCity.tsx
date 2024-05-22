@@ -47,11 +47,15 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
         }
     })
 
-    const handleSubmitCity = (data: { name: string }) => {
+    const handleSubmitCity = (formData: { name: string }) => {
+
+        
+        if (data?.data?.find(i => i.name == formData.name)  )
+            return toast.info('شهری با این نام انگلیسی قبلا ثبت شده است . لطفا نام انگلیسی دیگری قرار دهید')
         if (mode == 'add')
-            mutate(data)
+            mutate(formData)
         else if (mode == 'edit' && id)
-            editMutate(data)
+            editMutate(formData)
     }
 
     useEffect(() => {
@@ -60,6 +64,12 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
         }
 
     }, [id])
+
+
+    useEffect(() => {
+        if (addModal)
+            reset()
+    }, [addModal])
 
 
     return (
