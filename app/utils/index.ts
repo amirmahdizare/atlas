@@ -151,3 +151,6 @@ export const translateRole = (roleEng: RoleTypeName) => {
 
 
 export const isUserAgent = (role: RoleTypeName) => agentRoles.indexOf(role) != -1
+
+
+export const minuteToMs = (minute: number) => 1000 * 60 * minute

@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import { ApiGetRequestType, ApiPostRequestType, UserFullInfo } from "types";
-import { getToken } from "utils";
+import { getToken, minuteToMs } from "utils";
 import { create } from "zustand";
 
 export const useCustomMutation = <T extends ApiPostRequestType, CT = unknown>(data: UseMutationOptions<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>) => useMutation<AxiosResponse<T['RESPONSE']['SUCCESS']>, AxiosError<T['RESPONSE']['ERROR']>, T['REQUEST'], CT>(data)
@@ -30,20 +30,23 @@ export const useFullCategories = () => useCustomQuery<CategoryEndPointsType['ALL
 export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndPointsType['GET_LIST']>({
     queryKey: 'getCities',
     queryFn: () => api.get(LocationEndPoints.GET_LIST),
-    onError: () => toast.error('خطا در دریافت لیست شهرها'),
+    onError: (e) => console.log('خطا در دریافت لیست شهرها',e),
+    staleTime:minuteToMs(10)
 })
 
 
 export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
     queryKey: 'getSubCities',
     queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
-    onError: () => toast.error('خطا در دریافت لیست مناطق'),
+    onError: (e) => console.log('خطا در دریافت لیست مناطق',e),
+    staleTime:minuteToMs(10)
 })
 
 export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
     queryKey: 'getBlogs',
     queryFn: () => api.get(BlogEndPoints.LIST),
-    onError: () => toast.error('خطا در دریافت لیست مناطق'),
+    onError: () => toast.error('خطا در دریافت لیست مقالات'),
+    staleTime:minuteToMs(10)
 })
 
 
