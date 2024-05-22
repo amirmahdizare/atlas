@@ -457,7 +457,7 @@ export interface PropertySearchParams {
     featureValues?: Array<{ filterId: string, value: string | number | boolean }>,
     userId?: string,
     location?: number[],
-    sublocation?: number[],
+    subLocation?: number[],
     category?: number[],
     subCategory?: number [],
     productType?: ProductType

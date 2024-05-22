@@ -19,13 +19,13 @@ export const SelectArea = () => {
     const [modal, setModal] = useState<boolean>(false)
 
     const handleToggleCity = (city: SubLocationReadType) => {
-        if (filter.sublocation?.find(i => i.toString() == city.id))
-            dispatchFilter({ sublocation: filter.sublocation.filter(i => i.toString() != city.id) })
+        if (filter.subLocation?.find(i => i.toString() == city.id))
+            dispatchFilter({ subLocation: filter.subLocation.filter(i => i.toString() != city.id) })
         else
-            dispatchFilter({ sublocation: [...(filter?.sublocation ?? []), Number(city.id)] })
+            dispatchFilter({ subLocation: [...(filter?.subLocation ?? []), Number(city.id)] })
     }
 
-    const isLocationInclude = (cityId: string) => filter.sublocation && filter.sublocation?.findIndex(i => i.toString() == cityId) != -1
+    const isLocationInclude = (cityId: string) => filter.subLocation && filter.subLocation?.findIndex(i => i.toString() == cityId) != -1
 
 
     if (filter.location?.length == 1 && subCities)
@@ -39,8 +39,8 @@ export const SelectArea = () => {
                     <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen ? 'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                         <div className='flex flex-row gap-1 items-center'>
                             <span className='text-body-2-bolder'>محله</span>
-                            {!!filter.sublocation?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
-                     rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.sublocation?.length}</span>}
+                            {!!filter.subLocation?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
+                     rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.subLocation?.length}</span>}
                         </div>
 
                         <div className='flex flex-row gap-2 items-center'>
@@ -53,14 +53,14 @@ export const SelectArea = () => {
 
                     <div className={`flex flex-col gap-2.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                        {!!filter.sublocation?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ sublocation: [] })}>
+                        {!!filter.subLocation?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ subLocation: [] })}>
                             <IconArrowRight width={15} />
                             <span>
                                 همه محله ها
                             </span>
                         </span>}
 
-                        {!filter.sublocation?.length && <div className={`px-1 py-0.5 transition-all duration-150 border-r-2 text-body-3-bolder cursor-pointer  ${(filter?.sublocation && !filter?.sublocation?.length) ? 'border-r-robin-egg-blue-00  text-robin-egg-blue-00 font-bold' : 'text-ultra-violet hover:text-coral border-r-white'}`}>
+                        {!filter.subLocation?.length && <div className={`px-1 py-0.5 transition-all duration-150 border-r-2 text-body-3-bolder cursor-pointer  ${(filter?.subLocation && !filter?.subLocation?.length) ? 'border-r-robin-egg-blue-00  text-robin-egg-blue-00 font-bold' : 'text-ultra-violet hover:text-coral border-r-white'}`}>
                             همه محله ها
                         </div>}
 
@@ -91,7 +91,7 @@ export const SelectArea = () => {
             </>
         )
 
-    else if (filter.sublocation?.length != 1)
+    else if (filter.subLocation?.length != 1)
         return <></>
     return <div className='h-3 w-full animate-pulse bg-gray-100'></div>
 
