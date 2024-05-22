@@ -8,6 +8,7 @@ import logo from 'images/logo-full-white.svg'
 import Image from 'next/image'
 import { useUserInfo } from '@hooks'
 import { createMediaUrl } from 'utils'
+import { SAMPLE_AVATAR } from 'variables'
 
 export default function layout({ children }: { children: ReactNode }) {
 
@@ -19,7 +20,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
     else if (data?.data) {
 
-        const { avatar, firstName, lastName, role } = data.data
+        const { avatar, firstName, lastName, role, phoneNumber } = data.data
 
         const pathname = usePathname()
 
@@ -37,8 +38,13 @@ export default function layout({ children }: { children: ReactNode }) {
                         <div className='flex flex-row gap-2 items-center'>
 
                             <Link href={'/dashboard/profile'} className='flex flex-row gap-2 items-center cursor-pointer'>
-                                <Image src={createMediaUrl(avatar)} className='object-cover aspect-square rounded-circle w-4 lg:w-6' width={55} height={55} alt='عکس پروفایل' />
-                                <span>{firstName ?? '-'} {lastName ?? '-'}</span>
+                                <Image src={SAMPLE_AVATAR} className='object-cover aspect-square rounded-circle w-4 lg:w-6' width={200} height={200} alt='عکس پروفایل' />
+                                
+                                <div className='flex flex-col gap-1.5  text-right'>
+                                    <span>{firstName ?? '-'} {lastName ?? '-'}</span>
+                                    <span className='text-body-3-normal'>{phoneNumber}</span>
+                                </div>
+
                             </Link>
 
                             <Link href={'/'} className='bg-space-codet aspect-square rounded-circle p-1  cursor-pointer hover:text-gray-50'>
