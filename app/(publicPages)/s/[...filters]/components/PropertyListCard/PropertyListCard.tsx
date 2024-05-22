@@ -79,7 +79,7 @@ export const PropertyListCard = (data: PropertyDetailType) => {
                 </p>
 
             </div>}
-            <Divider />
+            {/* <Divider />
 
             <div className='flex flex-row  justify-start items-center gap-1'>
                 <div className='flex flex-row gap-1 items-center'>
@@ -91,11 +91,10 @@ export const PropertyListCard = (data: PropertyDetailType) => {
                     <span className='text-body-3-normal text-ultra-violet line-clamp-1' title={agentName ?? 'مشاور'}>{`${agentName}` ?? 'مشاور'}</span>
                 </div>
                 <Share data={data} id={data.id} />
-                {/* //TODO Share Button Policy
                 
-                <IconShare className='text-gray-300' width={20} height={20} /> */}
+                <IconShare className='text-gray-300' width={20} height={20} /> 
 
-            </div>
+            </div> */}
 
         </Link>
     )
