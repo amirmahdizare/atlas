@@ -39,7 +39,7 @@ export const CityItem = ({ id, name, createTime  , faTitle }: CityType) => {
 
                 <div className='col-span-1'>{subLocations?.length} منطقه</div>
 
-                <div className='flex col-span-1 flex-row gap-2 items-center'>
+                <div className='flex col-span-4 lg:col-span-1 flex-row gap-2 items-center justify-evenly'>
 
 
                     <SingleArea cityId={id} mode='add' cityTitle={name}>
