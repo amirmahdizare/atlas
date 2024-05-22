@@ -29,7 +29,7 @@ export const usePropertySearchResults = () => {
 
     const { featureValues, ...rest } = searchHook.filter
 
-    const especialFilters = ['price', 'prePrice', 'rentPrice']
+    // const especialFilters = rest.productType == 'sell' ? ['price'] : ['prePrice', 'rentPrice']
 
 
     ///TODO Price Filter

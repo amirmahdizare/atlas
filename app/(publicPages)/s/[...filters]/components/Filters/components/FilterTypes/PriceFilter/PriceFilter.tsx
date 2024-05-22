@@ -1,17 +1,30 @@
-import { usePropertySearchResults } from '(publicPages)/s/[...filters]/hooks'
 import React from 'react'
+
+import { usePropertySearchResults } from '(publicPages)/s/[...filters]/hooks'
 import { RangeFilter } from '../RangeFilter/RangeFilter'
-import { priceFilterData } from './data'
+import { prePriceFilterData, priceFilterData } from './data'
+import { Divider } from '@components'
 
 export const PriceFilter = () => {
 
-    const { filter, dispatchFilter } = usePropertySearchResults()
+    const { filter } = usePropertySearchResults()
 
-    
+
     if (filter?.productType == 'sell')
-        return <RangeFilter {...priceFilterData} />
+        return <>
+            <Divider />
+            <RangeFilter {...priceFilterData} />
+        </>
+
+    else if (filter?.productType == 'rent')
+        return <>
+            <Divider />
+            <RangeFilter {...prePriceFilterData} />
+            <Divider />
+
+        </>
 
     return (
-        <div>هیج</div>
+        <></>
     )
 }
