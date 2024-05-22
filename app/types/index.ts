@@ -273,7 +273,7 @@ export interface ErrorResponseType {
     statusCode: number
 }
 
-export type RoleTypeName = 'user' | 'superAdmin' | 'adviser' | 'admin' | 'guest' 
+export type RoleTypeName = 'user' | 'superAdmin' | 'agent' | 'admin' | 'guest' 
 
 export interface UserListType {
     id: number,

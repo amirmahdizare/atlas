@@ -139,7 +139,7 @@ export const convertProductType = (type: ProductType) => {
 
 export const translateRole = (roleEng: RoleTypeName) => {
   switch (roleEng) {
-    case 'adviser': return 'مشاور'
+    case 'agent': return 'مشاور'
     case 'admin': return 'ادمین'
     case 'guest': return 'میهمان'
     case 'superAdmin': return 'مدیریت'

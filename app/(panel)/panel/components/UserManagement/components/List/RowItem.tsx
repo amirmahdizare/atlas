@@ -7,6 +7,7 @@ import { useUsersSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
 import { ChangeUserPermissions } from './components/ChangeUserPermissions'
+import { translateRole } from 'utils'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -34,7 +35,7 @@ export const RowItem = (ad: UserListType) => {
                 {ad.phoneNumber}
                 <IconPhoneCall width={15} height={15} className='text-french-gray' />
             </a>
-            {type == 'agent' && <span >{ad?.role?.name ? ad?.role?.name[0].toUpperCase().concat(ad?.role?.name.substring(1)) : '-'}</span>}
+            {type == 'agent' && <span >{ad.role ?translateRole(ad.role.name) :'-'}</span>}
             <div className='col-span-1 flex flex-row gap-2 justify-center'>
 
 
