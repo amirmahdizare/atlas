@@ -59,7 +59,7 @@ export default function layout({ children }: { children: ReactNode }) {
                     <div className='flex flex-row gap-2 justify-center border-t border-t-gray-700 p-2 text-body-2-normal'>
 
                         <Link className={pathname == '/dashboard/profile' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/profile'}>ویرایش اطلاعات</Link>
-                        <Link className={pathname == '/dashboard/bookmarks' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/bookmarks'}>لیست علاقه مندی ها</Link>
+                        <Link className={pathname == '/dashboard/bookmarks' ? 'rounded-lg text-robin-egg-lighter bg-space-codet p-1.5' : 'text-ultra-violet hover:text-gray-400 p-1.5'} href={'/dashboard/bookmarks'}>لیست نشان شده ها</Link>
 
                     </div>
 
