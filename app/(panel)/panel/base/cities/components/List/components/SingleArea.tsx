@@ -48,6 +48,9 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
     })
 
     const handleSubmitSubCity = (data: { name: string }) => {
+
+        if (subLocationData?.data?.find(i => i.name == data.name) && subLocationData?.data?.find(i => i.parentLocation?.id == cityId) )
+            return toast.info('منطقه ای با این نام انگلیسی قبلا ثبت شده است . لطفا نام انگلیسی دیگری قرار دهید')
         if (mode == 'add')
             mutate(data)
         else if (mode == 'edit' && id)
@@ -61,6 +64,12 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
         }
 
     }, [subLocationData?.data])
+
+
+    useEffect(() => {
+        if (addModal)
+            reset()
+    }, [addModal])
 
     return (
         <>
