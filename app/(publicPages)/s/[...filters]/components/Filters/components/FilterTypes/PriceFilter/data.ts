@@ -276,3 +276,184 @@ export const prePriceFilterData: FullFilterType = {
         }
     ]
 }
+
+
+
+const rentPriceItems : ItemsReadType[] =   [
+    {
+        title: 'رایگان',
+        id: '0',
+        value: '0',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' },
+    },
+
+    {
+        title: '1 میلیون',
+        id: '1',
+        value: '1000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+
+    ,
+
+    {
+        title: '2 میلیون',
+        id: '2',
+        value: '2000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+    {
+        title: '3 میلیون',
+        id: '3',
+        value: '3000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+    
+    {
+        title: '4 میلیون',
+        id: '4',
+        value: '4000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+    
+    {
+        title: '5 میلیون',
+        id: '5',
+        value: '5000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+    
+    {
+        title: '6 میلیون',
+        id: '6',
+        value: '600000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+    {
+        title: '7 میلیون',
+        id: '7',
+        value: '7000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+    {
+        title: '8 میلیون',
+        id: '8',
+        value: '8000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+    {
+        title: '10 میلیون',
+        id: '10',
+        value: '10000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+
+
+    {
+        title: '12 میلیون',
+        id: '12',
+        value: '12000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+
+    {
+        title: '15 میلیون',
+        id: '15',
+        value: '15000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+
+    
+
+    {
+        title: '20 میلیون',
+        id: '20',
+        value: '20000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+
+
+    
+
+    {
+        title: '30 میلیون',
+        id: '30',
+        value: '30000000',
+        suggest: { filter: 'aa' as any, id: 'sdf', title: 'sdf' }
+    }
+    ,
+
+
+
+
+
+]
+
+export const rentPriceFilterData: FullFilterType = {
+    filtertype: 'RANGE',
+    hint: ' اجاره',
+    id: 'rentPrice',
+    isPrimary: 'false',
+    itemKey: 'price',
+    title:'اجاره',
+    type:'number',
+    unit:'تومان',
+    subCategory: { category: { enTitle: '', id: '22222' as any, title: '' }, enTitle: '', id: 'sdf', title: 'sdf' },
+    suggests: [
+        {
+            filter: {
+                filtertype: 'RANGE',
+                hint: 'اجاره',
+                id: 'sdf',
+                isPrimary: 'true',
+                itemKey: 'price',
+                subCategory: { category: { enTitle: '', id: '22222' as any, title: '' }, enTitle: '', id: 'sdf', title: 'sdf' },
+                title: 'از',
+                type: 'number',
+                unit: 'تومان',
+
+
+            },
+            id: 'sdfsdaf',
+            title: 'از',
+            items:rentPriceItems
+        },
+        {
+            filter: {
+                filtertype: 'RANGE',
+                hint: 'اجاره',
+                id: 'sdf',
+                isPrimary: 'true',
+                itemKey: 'price',
+                subCategory: { category: { enTitle: '', id: '22222' as any, title: '' }, enTitle: '', id: 'sdf', title: 'sdf' },
+                title: 'تا',
+                type: 'number',
+                unit: 'تومان',
+
+
+            },
+            id: 'sdfsdaf',
+            title: 'تا',
+            items:rentPriceItems
+        }
+    ]
+}

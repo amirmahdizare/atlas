@@ -2,7 +2,7 @@ import React from 'react'
 
 import { usePropertySearchResults } from '(publicPages)/s/[...filters]/hooks'
 import { RangeFilter } from '../RangeFilter/RangeFilter'
-import { prePriceFilterData, priceFilterData } from './data'
+import { prePriceFilterData, priceFilterData, rentPriceFilterData } from './data'
 import { Divider } from '@components'
 
 export const PriceFilter = () => {
@@ -21,6 +21,8 @@ export const PriceFilter = () => {
             <Divider />
             <RangeFilter {...prePriceFilterData} />
             <Divider />
+            <RangeFilter {...rentPriceFilterData} />
+            
 
         </>
 
