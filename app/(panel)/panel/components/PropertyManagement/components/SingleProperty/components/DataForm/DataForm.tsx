@@ -37,11 +37,11 @@ export const DataForm = () => {
 
             if (mode == 'edit' && typeof proprtyId != 'undefined') {
                 const mappedMedias = await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString())))
-                return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({ ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))), medias: [...data.medias.filter(i => typeof i == 'object'), ...mappedMedias] }, ['medias']))
+                return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({ ...data, tagIds: [], features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))), medias: [...data.medias.filter(i => typeof i == 'object'), ...mappedMedias] }, ['medias']))
 
             }
-
-            return api.post(PropretyEndPoints.CREATE, createFormData({ ...data, features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias']))
+            // ,tagIds: JSON.stringify(data.tagIds) TODO Tags
+            return api.post(PropretyEndPoints.CREATE, createFormData({ ...data, tagIds: [], features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias']))
         }
         ,
         onSuccess: (e, v) => {
@@ -90,7 +90,7 @@ export const DataForm = () => {
 
                         return i
                     }),
-                    tags: tags?.map(i => i.id)
+                    // tagIds: tags?.map(i => i.id)
                 })
             }
         }
@@ -98,8 +98,8 @@ export const DataForm = () => {
 
     const handleMutateProperty = (data: PropertyCUType<{ content: File | string }>) => {
         const { prePrice, price, rentPrice, ...restData } = data
-        mutate({ ...restData, medias: data.medias.map(i => i.content), isBookmarked: false, userId: 24, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0, price }) : ({ price: 0, rentPrice, prePrice })) })
-        console.log(data)
+        mutate({ ...restData, medias: data.medias.map(i => i.content), isBookmarked: false, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0, price }) : ({ price: 0, rentPrice, prePrice })) })
+        // console.log(data)
     }
 
     // if (document?.querySelector('#media-1') != null) {
@@ -176,7 +176,7 @@ export const DataForm = () => {
 
                     <Medias />
 
-                    <Tags />
+                    {/* <Tags /> */}
 
                     {/* <div className='flex flex-col gap-2'>
                         <span className='text-french-gray text-body-2-normal  text-right'>برچسب (اختیاری)</span>

@@ -197,7 +197,7 @@ export interface PropertyCUType<MT> {
         value?: string | number | boolean
     }>
     id?: string,
-    tags?: Array<string>
+    tagIds?: Array<number>
     isSuggested: boolean,
     isBookmarked?: boolean,
     userId?: number,
@@ -480,7 +480,7 @@ export interface TagReadType {
     // title: string,
     textColor: string,
     backgrondColor: string,
-    id: string
+    id: number
 }
 
 export interface TagMutateType {

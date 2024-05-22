@@ -11,16 +11,16 @@ export const Tags = () => {
 
     const { setValue, formState: { errors }, watch } = useFormContext<PropertyCUType<string>>()
 
-    const currentTags = watch('tags') ?? []
+    const currentTags = watch('tagIds') ?? []
 
 
-    const toggleTag = (tagId: string) => {
+    const toggleTag = (tagId: number) => {
 
         if (currentTags?.findIndex(i => i == tagId) != -1) {
-            setValue('tags', currentTags?.filter(i => i != tagId))
+            setValue('tagIds', currentTags?.filter(i => i != tagId))
         }
         else
-            setValue('tags', [...(currentTags ?? []), tagId.toString()])
+            setValue('tagIds', [...(currentTags ?? []), tagId])
 
     }
 
@@ -39,8 +39,8 @@ export const Tags = () => {
 
                     {tags?.map(item => {
 
-                        const isSelected = currentTags?.indexOf(item.id.toString()) != -1
-                        return <label htmlFor={item.id} onClick={() => toggleTag(item.id)} className={`cursor-pointer flex flex-row gap-1 items-center p-1 border rounded ${isSelected ? 'border-mint-green' : 'border-gray-300'}`}>
+                        const isSelected = currentTags?.indexOf(item.id) != -1
+                        return <label htmlFor={item.id.toString()} onClick={() => toggleTag(item.id)} className={`cursor-pointer flex flex-row gap-1 items-center p-1 border rounded ${isSelected ? 'border-mint-green' : 'border-gray-300'}`}>
                             <input type='checkbox' checked={isSelected} />
 
                             <div style={{ backgroundColor: item.backgrondColor, color: item.textColor }} className='px-1 py-0.5 rounded text-body-3-normal'>
