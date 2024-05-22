@@ -27,14 +27,28 @@ export const useSearchProperty = create<StoreType>((set) => ({
 export const usePropertySearchResults = () => {
     const searchHook = useSearchProperty()
 
-    const { category, subCategory, ...rest } = searchHook.filter
+    const { featureValues, ...rest } = searchHook.filter
 
-    // console.log(locations)
+    const especialFilters = ['price', 'prePrice', 'rentPrice']
 
-    //     const currentFilter :PropertySearchParams = {
-    //         ...rest    , 
 
-    //         ...(category ? ({category:[category]}) : ({}))
+    ///TODO Price Filter
+
+    // const especialFiltersObj = featureValues?.reduce<Partial<PropertySearchParams>>((pv, cv) => {
+    //     if (especialFilters.indexOf(cv.filterId) != -1) {
+    //         const keyFilter = especialFilters.find(i => i == cv.filterId)
+    //         if (keyFilter)
+    //             return ({ ...pv, [keyFilter]: cv.value })
+
+    //     }
+    //     return pv
+    // }, {})
+
+    // const currentFilter: PropertySearchParams = {
+    //     ...rest ,
+    //     ...especialFiltersObj,
+    //     ...featureValues?.filter(i => especialFilters.indexOf(i.filterId) == -1),
+
     // }
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({

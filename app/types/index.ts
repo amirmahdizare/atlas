@@ -460,7 +460,10 @@ export interface PropertySearchParams {
     subLocation?: number[],
     category?: number[],
     subCategory?: number [],
-    productType?: ProductType
+    productType?: ProductType,
+    price?:string,
+    prePrice?:string,
+    rentPrice?:string
 }
 
 

@@ -5,6 +5,7 @@ import { useSearchProperty } from '../../hooks/index'
 // import { categories } from './components/CategoryFilter/data.mock'
 import { BooleanFilter, OneButtonFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
 import { useFullCategories } from '@hooks'
+import { PriceFilter } from './components/FilterTypes/PriceFilter/PriceFilter'
 
 const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]'></div>
 
@@ -24,6 +25,8 @@ export const Filters = () => {
         <SelectType />
         <Divider />
         <CategoryFilter />
+        <Divider/>
+        <PriceFilter />
         <Divider />
         <SelectCity />
         <SelectArea />
