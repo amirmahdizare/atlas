@@ -6,7 +6,7 @@ import { Menu } from '../.../../../../Menu/Menu'
 import { IconChevronDown, IconUser } from '@tabler/icons-react'
 import { useUserInfo } from '@hooks'
 import Link from 'next/link'
-import { agentRoles } from 'variables'
+import { SAMPLE_AVATAR, agentRoles } from 'variables'
 import { createMediaUrl, isUserAgent } from 'utils'
 
 export const UserStatus = () => {
@@ -33,7 +33,7 @@ export const UserStatus = () => {
             >
                 {/* <IconUser className='text-robin-egg-lighter' /> */}
 
-                <img src={createMediaUrl(avatar)} className='w-3 h-3 rounded-circle' />
+                <img src={isUserAgent(roleName) ? createMediaUrl(avatar) : SAMPLE_AVATAR} className='w-3 h-3 rounded-circle' />
 
                 <span className='line-clamp-1 whitespace-nowrap text-ellipsis'> {isUserAgent(roleName) ? `${firstName} ${lastName}` : `کاربر ${phoneNumber}`} </span>
 
