@@ -4,6 +4,7 @@ import { Button } from '../../../Button/Button'
 import { IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
 import { useUserInfo } from '@hooks'
 import { isUserAgent, translateRole } from 'utils'
+import { Exit } from '@components'
 
 export const ActionButtons = () => {
 
@@ -28,7 +29,7 @@ export const ActionButtons = () => {
         const { role: { name } } = data.data
 
         if (isUserAgent(name)) {
-            return <div className='flex flex-row gap-2'>
+            return <div className='flex flex-row gap-2 items-center'>
                 <Button
                     // icon={IconArrowDownLeft}
                     iconSide='left' bgColor='gray' textColor='textGray' href='/panel'>رفتن به پنل {translateRole(name)}</Button>
@@ -37,12 +38,13 @@ export const ActionButtons = () => {
                     bgColor='secondary'
                     href='/panel/property/list'
                 >ثبت آگهی</Button>
+                <Exit/>
             </div>
         }
 
         else
             return (
-                <div className='flex flex-row gap-2'>
+                <div className='flex flex-row gap-2 items-center'>
                     <Button
                         icon={IconArrowDownLeft}
                         iconSide='left' bgColor='gray' textColor='textGray' href='requestproperty'>درخواست ملک</Button>
@@ -51,6 +53,7 @@ export const ActionButtons = () => {
                         bgColor='secondary'
                         href='/addproperty'
                     >ثبت آگهی</Button>
+                    <Exit/>
                 </div>
             )
 

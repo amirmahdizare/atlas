@@ -4,13 +4,13 @@ import { Menu as MenuIcon } from 'icons'
 import logofull from 'images/logo-full.svg'
 import Image from 'next/image'
 import { Menu } from '../Menu/Menu'
-import { IconArrowBack, IconX } from '@tabler/icons-react'
+import { IconArrowBack, IconPower, IconX } from '@tabler/icons-react'
 import ClickAwayListener from 'react-click-away-listener';
 import logo from 'images/atlaslight.svg'
 import Link from 'next/link'
 import { createMediaUrl, translateRole } from 'utils'
 import { useUserInfo } from '@hooks'
-import { Divider } from '@components'
+import { Divider, Exit } from '@components'
 
 export const StickyMobileHeader = () => {
 
@@ -31,15 +31,14 @@ export const StickyMobileHeader = () => {
             </div>
             <ClickAwayListener onClickAway={() => setIsOpen(false)}>
 
-                <div className={`flex flex-col p-2 gap-2 shadow transition-all duration-300 fixed right-0 z-[3] rounded-b h-[calc(100vh-100px)] top-0 bg-white ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className={`flex flex-col items-start p-2 gap-2 shadow transition-all duration-300 fixed right-0 z-[3] rounded-b h-[calc(100vh-100px)] top-0 bg-white ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
                     <div className='flex flex-row gap-2 justify-between items-center'>
                         <Image src={logo} className='w-5 h-5' alt='لوگوی دپارتمان اطلس' />
                         <div className='cursor-pointer float-left border rounded-circle p-1' onClick={() => setIsOpen(!isOpen)}><IconX width={20} height={20} /></div>
                     </div>
-                    <div className='bg-gray-100 w-full h-[1px]'></div>
 
-                    <Divider/>
+                    <Divider />
 
                     {data?.data && <div className='flex flex-row gap-2 items-center'>
 
@@ -51,9 +50,15 @@ export const StickyMobileHeader = () => {
 
                     </div>}
 
-                    <Divider/>
-                    
+                    <Divider />
+
                     <Menu onClickLink={() => setIsOpen(false)} />
+                    <Divider />
+
+                    {!!data?.data && <Exit><div className='flex flex-row gap-1 border rounded border-red-500 text-red-500  items-center w-fit px-1.5 py-0.5'>
+                        <IconPower />
+                        <span>خروج</span>
+                    </div></Exit>}
                 </div>
             </ClickAwayListener>
 

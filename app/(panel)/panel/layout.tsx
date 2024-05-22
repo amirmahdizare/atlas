@@ -2,7 +2,7 @@
 import React, { ReactNode } from 'react'
 import fullogo from 'images/logo-full.svg'
 import Image from 'next/image'
-import { IconBell, IconHome, IconUser } from '@tabler/icons-react'
+import { IconBell, IconHome, IconPower, IconUser } from '@tabler/icons-react'
 import { Monitor } from 'icons'
 import { Menu } from './components/Menu/Menu'
 import { ResponsiveMenu } from './components/ResponsiveMenu/ResponsiveMenu'
@@ -11,7 +11,7 @@ import { createMediaUrl, isUserAgent, translateRole } from 'utils'
 import { useUserInfo } from '@hooks'
 import { agentRoles } from 'variables'
 import { redirect, usePathname } from 'next/navigation'
-import { Divider } from '@components'
+import { Divider, Exit } from '@components'
 import { accessPairs } from './accessBase'
 import { toast } from 'react-toastify'
 import { PermissionBackendRoutes } from 'enums'
@@ -87,7 +87,10 @@ export default function layout({ children }: { children: ReactNode }) {
                                 </div> */}
                                     {/* <input className='border p-1 rounded' placeholder='جستجو' /> */}
                                 </div>
-                                <Link href={'/'} className='text-gray-500'><IconHome /></Link>
+                                <div className='flex flex-row gap-2 items-center '>
+                                    <Link href={'/'} className='text-gray-500'><IconHome /></Link>
+                                    <Exit />
+                                </div>
                                 {/* <IconBell /> */}
                             </div>
 

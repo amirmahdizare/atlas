@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { useUserInfo } from '@hooks'
 import { createMediaUrl } from 'utils'
 import { SAMPLE_AVATAR } from 'variables'
+import { Exit } from '@components'
 
 export default function layout({ children }: { children: ReactNode }) {
 
@@ -50,6 +51,8 @@ export default function layout({ children }: { children: ReactNode }) {
                             <Link href={'/'} className='bg-space-codet aspect-square rounded-circle p-1  cursor-pointer hover:text-gray-50'>
                                 <IconHome width={20} height={20} />
                             </Link>
+
+                            <Exit/>
 
                         </div>
 
