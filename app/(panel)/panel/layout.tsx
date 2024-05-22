@@ -10,13 +10,18 @@ import Link from 'next/link'
 import { createMediaUrl, isUserAgent, translateRole } from 'utils'
 import { useUserInfo } from '@hooks'
 import { agentRoles } from 'variables'
-import { redirect } from 'next/navigation'
+import { redirect, usePathname } from 'next/navigation'
 import { Divider } from '@components'
+import { accessPairs } from './accessBase'
+import { toast } from 'react-toastify'
+import { PermissionBackendRoutes } from 'enums'
 
 export default function layout({ children }: { children: ReactNode }) {
 
 
     const { data, isError } = useUserInfo()
+
+    const pathname = usePathname()
 
 
     if (isError)
@@ -25,8 +30,15 @@ export default function layout({ children }: { children: ReactNode }) {
     else if (data?.data) {
         const { data: { role: { name: roleName }, avatar, lastName, firstName } } = data
 
+        const permissions = data?.data.permissions
 
-        if (isUserAgent(roleName))
+
+        if (pathname.includes('/panel/') && [pathname.replace('/panel/', '')]?.filter(i => !!accessPairs?.find(ap => ap.frontRoute == i)?.permissionsAction.every(p => permissions.findIndex(up => up.action == PermissionBackendRoutes[p]) != -1)).length != 1) {
+            toast.error('شما به این قسمت دسترسی ندارید.')
+            return isUserAgent(roleName) ? redirect('/panel') : redirect('/')
+        }
+
+        else if (isUserAgent(roleName))
             return (
                 <div className='grid grid-cols-5 flex-1 border rounded border-gray-100'>
 

@@ -298,7 +298,9 @@ export interface PermissionType<IT> {
     title: string,
     isMenuItem: boolean,
     hint: string,
-    action: keyof typeof PermissionBackendRoutes
+    action: typeof   PermissionBackendRoutes.BLOG_CREATE
+    
+    // keyof  typeof  PermissionBackendRoutes
 }
 
 export interface CityType {

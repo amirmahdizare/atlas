@@ -6,7 +6,7 @@ import { DataForm } from './DataForm/DataForm'
 
 export const SingleUser = () => {
 
-    const { dispatch, mode, userId } = useUsersSection()
+    const { dispatch, mode, userId , type} = useUsersSection()
 
     return (
         <div className='flex flex-col gap-2 items-stretch'>
@@ -14,7 +14,7 @@ export const SingleUser = () => {
             <div className='flex flex-row gap-2 justify-between '>
                 <div className='flex flex-row gap-1 items-center'>
                     <IconUser width={25} height={25} className='text-french-gray' />
-                    <span>{mode == 'add' ? 'افزودن' : 'ویرایش'} مشاور </span>
+                    <span>{mode == 'add' ? 'افزودن' : 'ویرایش'} {type=='agent' ? "مشاور" : 'کاربر'} </span>
                 </div>
 
 
