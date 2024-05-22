@@ -1,6 +1,6 @@
 import { api } from "_api/config";
 import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
-import { BookmarkEndPoints } from "_api/endpoints/bookmark";
+import { BookmarkEndPoints, BookmarkEndPointsType } from "_api/endpoints/bookmark";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
 import { TagsEndPoints, TagsEndPointsType } from "_api/endpoints/tag";
@@ -113,3 +113,11 @@ export const useBookmark = (productId: string, isActive: boolean) => {
 
     return { ...store.getState(), ...mutQury, mutate }
 }
+
+
+export const useMyBookmarks = () => useCustomQuery<BookmarkEndPointsType['GET_ALL']>({
+    queryFn: () => api.get(BookmarkEndPoints.GET_ALL),
+    queryKey: ['getAllBookmarks'],
+    onError: (e) => { console.log(e) },
+    staleTime: 1000 * 60 * 5
+})
