@@ -13,6 +13,8 @@ import { PermissionEndPoints, PermissionEndPointsType } from '_api/endpoints/per
 import { useFieldArray, useForm } from 'react-hook-form'
 import { PermissionType } from 'types'
 
+const batchAccesses = ['category', 'subcategory', 'filter', 'suggest', 'item']
+
 
 const bannedPermissions = ['role']
 
@@ -94,9 +96,9 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
     console.log(proccessedData)
 
 
-    const handleToggleCatSelect = (catName: string, state: boolean) => {
+    const handleToggleCatSelect = (catName: string, state: boolean , items:Array<any>) => {
 
-        reset({ ...currentSelected, ...data?.data.filter(i => i.action.split('_')[1] == catName).reduce((pv, cv) => ({ ...pv, [cv.id]: state }), {}) })
+        reset({ ...currentSelected, ...items.reduce((pv, cv) => ({ ...pv, [cv.id]: state }), {}) })
 
     }
 
@@ -111,8 +113,8 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
 
 
             const proccessedData = data?.data.reduce<Array<{ title: string, items: PermissionType<string>[] }>>((pv, cv, index, array) => {
-                if (pv.findIndex(i => i.title == cv.action.split('_')[1]) == -1)
-                    pv.push({ title: cv.action.split('_')[1], items: array.filter(i => i.action.split('_')[1] == cv.action.split('_')[1]) })
+                if (pv.findIndex(i => i.title == cv.action.split('_')[1]) == -1 && pv.findIndex(i => i.items.findIndex(i => i.action == cv.action)!=-1)==-1)
+                    pv.push({ title: cv.action.split('_')[1], items: array.filter(i => batchAccesses.indexOf(cv.action.split('_')[1]) == -1 ? i.action.split('_')[1] == cv.action.split('_')[1] : (i.action.split('_')[1] == cv.action.split('_')[1] || batchAccesses.indexOf(i.action.split('_')[1]) != -1)) })
                 return pv
             }, [])
 
@@ -140,7 +142,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
                         <span className='text-body-2-bolder'>{captilizeFirstLetter(cat.title)}</span>
 
                         <label className='flex flex-row gap-1 items-center border p-1 rounded cursor-pointer' htmlFor={`all-${cat.title}`}>
-                            <input id={`all-${cat.title}`} type='checkbox' checked={cat.items.every(i => currentSelected[i.id])} onChange={({ target: { checked } }) => handleToggleCatSelect(cat.title, checked)} />
+                            <input id={`all-${cat.title}`} type='checkbox' checked={cat.items.every(i => currentSelected[i.id])} onChange={({ target: { checked } }) => handleToggleCatSelect(cat.title, checked ,cat.items)} />
                             <span>انتخاب همه</span>
 
                         </label>
