@@ -12,5 +12,5 @@ export interface PrivateEndPointsType {
     LIST: ApiGetRequestType<{}, AgentNoteReadType>
     UPDATE_SINGLE: ApiGetRequestType<AgentNoteMutateType, AgentNoteReadType>,
     DELETE_SINGLE: ApiPostRequestType<{}>,
-    BY_PRODUCT:ApiGetRequestType<{},AgentNoteReadType>
+    BY_PRODUCT:ApiGetRequestType<{},AgentNoteReadType[]>
 }

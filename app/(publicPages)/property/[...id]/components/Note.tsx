@@ -2,12 +2,13 @@
 import React from 'react'
 
 import { Button } from '@components'
-import { useCustomMutation, useCustomQuery } from '@hooks'
+import { useCustomMutation, useCustomQuery, useUserInfo } from '@hooks'
 import { api } from '_api/config'
 import { PrivateEndPoints, PrivateEndPointsType } from '_api/endpoints/privateNote'
 import { useForm } from 'react-hook-form'
 import { getToken } from 'utils'
 import { usePathname, useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 
 export const Note = ({ propertyId }: { propertyId: string }) => {
@@ -16,27 +17,33 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
 
     const { push } = useRouter()
 
+    const { isError } = useUserInfo()
+
     const pathname = usePathname()
 
     const { data: initialData, isLoading } = useCustomQuery<PrivateEndPointsType['BY_PRODUCT']>({
         queryFn: () => api.get(PrivateEndPoints.BY_PRODUCT(propertyId)),
         queryKey: ['privateNote', propertyId],
         onSuccess: (e) => {
-            reset({ note: e?.data?.note })
+            if (e.data.length > 0)
+                reset({ note: e?.data?.[0].note })
         },
         onError: (e) => {
             console.log(e)
         }
     })
 
-    const { mutate, isLoading: loadingMutate } = useCustomMutation<PrivateEndPointsType['CREATE']>({
-        mutationFn: (data) => !!initialData?.data ? api.patch(PrivateEndPoints.SINGLE(initialData.data.id), data) : api.post(PrivateEndPoints.CREATE, data),
-        mutationKey: [initialData?.data.id ? 'edit' : 'create', propertyId]
+    const { mutate, isLoading: loadingMutate , data:mutateResult} = useCustomMutation<PrivateEndPointsType['CREATE']>({
+        mutationFn: (data) => !!initialData?.data && initialData?.data?.length > 0 ? api.patch(PrivateEndPoints.SINGLE(initialData?.data?.[0]?.id), data) : api.post(PrivateEndPoints.CREATE, data),
+        mutationKey: [initialData?.data?.[0] ? 'edit' : 'create', propertyId],
+        onSuccess: (d, v) => {
+            toast.success(`یادداشت با موفقیت ${!!initialData?.data && initialData?.data?.length > 0 ? 'ویرایش' : 'ثبت'} شد`)
+        }
     })
 
 
     const handleMutate = (data: { note: string }) => {
-        if (!getToken()) {
+        if (isError) {
             alert('برای ذخیره یادداشت باید به سایت وارد شود.')
             return push(`/login?callbackUrl=${pathname}`)
         }
@@ -45,6 +52,12 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
     }
 
     const noteValue = watch('note')
+
+    const currentNote = initialData?.data && initialData?.data?.length > 0 ? initialData?.data?.[0].note : ''
+
+    // console.log({ noteValue, currentNote })
+
+    const isMutateSuccessful = !!mutateResult?.data?.id
 
     return (
         <form className='flex flex-col gap-2' onSubmit={handleSubmit(handleMutate)}>
@@ -59,7 +72,7 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
                     {...register('note')}
                 />}
 
-            <Button disabled={(noteValue == initialData?.data.note || !noteValue)} bgColor={(noteValue == initialData?.data.note || !noteValue) ? 'gray' : undefined} textColor={(noteValue == initialData?.data.note || !noteValue) ? 'textGray' : undefined} fullWidth loading={loadingMutate} type='submit'>ذخیره</Button>
+            <Button disabled={(noteValue == currentNote) || !noteValue || isMutateSuccessful} bgColor={(noteValue == currentNote || !noteValue || isMutateSuccessful) ? 'gray' : undefined} textColor={(noteValue == currentNote || !noteValue || isMutateSuccessful) ? 'textGray' : undefined} fullWidth loading={loadingMutate} type='submit'>ذخیره</Button>
 
             <p className='text-ultra-violet text-h4-normal'>یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد شد.</p>
 
