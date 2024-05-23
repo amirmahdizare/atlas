@@ -1,19 +1,23 @@
 'use client'
 
-import React, { ReactNode } from 'react'
-import { IconHome } from '@tabler/icons-react'
+import React, { ReactNode, useState } from 'react'
+import { IconHome, IconMenu, IconMenu2, IconX } from '@tabler/icons-react'
 import Link from 'next/link'
 import { redirect, usePathname } from 'next/navigation'
 import logo from 'images/logo-full-white.svg'
 import Image from 'next/image'
 import { useUserInfo } from '@hooks'
-import { createMediaUrl } from 'utils'
+import { createMediaUrl, translateRole } from 'utils'
 import { SAMPLE_AVATAR } from 'variables'
-import { Exit } from '@components'
+import { Divider, Exit, Menu } from '@components'
+import ClickAwayListener from 'react-click-away-listener'
 
 export default function layout({ children }: { children: ReactNode }) {
 
     const { data, isLoading, isError } = useUserInfo()
+
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+
 
 
     if (isError)
@@ -30,9 +34,55 @@ export default function layout({ children }: { children: ReactNode }) {
                 <div className='flex flex-col bg-raisin-black'>
                     <div className='flex flex-row gap-2 justify-between p-2 text-french-gray'>
 
-                        <div className='flex flex-row gap-4 items-center'>
+                        <div className='flex flex-row gap-2 items-center'>
+
+                            <div className='flex flex-col cursor-pointer relative'>
+
+                                <IconMenu2 className='cursor-pointer lg:hidden' onClick={() => setIsOpen(true)} />
+
+                                <ClickAwayListener onClickAway={() => setIsOpen(false)}>
+
+                                    <div className={`flex flex-col bg-raisin-black lg:hidden text-french-gray items-start p-2 gap-2 shadow transition-all duration-300 fixed right-0 z-[3] rounded-b h-[calc(100vh-100px)] top-0 bg- white ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+
+                                        <div className='flex flex-row gap-2 justify-between items-center w-full'>
+                                            <Image width={70} height={30} src={logo} className='w- 7 h- 7' alt='لوگوی دپارتمان اطلس' />
+                                            <div className='cursor-pointer float-left border rounded-circle p-1' onClick={() => setIsOpen(!isOpen)}><IconX width={20} height={20} /></div>
+                                        </div>
+
+                                        {/* <Divider />
+
+                                        {data?.data && <div className='flex flex-row gap-2 items-center'>
+
+                                            <img src={createMediaUrl(data.data.avatar)} className='rounded-circle w-5 aspect-square' />
+                                            <div className='flex-col flex gap-1'>
+                                                <span className='text-gray-400 text-h5-bolder'>{data.data.firstName} {data.data.lastName}</span>
+                                                <span className='text-gray-400 text-body-3-normal'>{translateRole(data.data.role.name)}</span>
+                                            </div>
+
+                                        </div>} */}
+
+
+                                        <Divider />
+
+                                        <Menu onClickLink={() => setIsOpen(false)} />
+
+                                    </div>
+                                </ClickAwayListener>
+                            </div>
+
                             <Image src={logo} alt='لوگوی اطلس' className='w-8 lg:w-12' />
                             {/* <input placeholder='جستجو' className='p-1 rounded-sm bg-space-codet focus:outline-mint-green outline-1 outline-none text-body-3-normal' /> */}
+                        </div>
+
+
+                        <div className='hidden lg:flex flex-row gap-2.5 items-center text-french-gray text-body-3-normal'>
+
+                            <Link className='hover:text-coral' href={'/s/mehestan'}>جستجوی ملک</Link>
+                            <Link className='hover:text-coral' href={'/addproperty'}>فروش ملک</Link>
+                            <Link className='hover:text-coral' href={'/requestproperty'}>درخواست ملک</Link>
+                            <Link className='hover:text-coral' href={'/aboutus'}>درباره ما</Link>
+                            <Link className='hover:text-coral' href={'/contactus'}>تماس با ما</Link>
+
                         </div>
 
 
@@ -40,7 +90,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
                             <Link href={'/dashboard/profile'} className='flex flex-row gap-2 items-center cursor-pointer'>
                                 <Image src={SAMPLE_AVATAR} className='object-cover aspect-square rounded-circle w-4 lg:w-6' width={200} height={200} alt='عکس پروفایل' />
-                                
+
                                 <div className='flex flex-col gap-1.5  text-right'>
                                     <span>{firstName ?? '-'} {lastName ?? '-'}</span>
                                     <span className='text-body-3-normal'>{phoneNumber}</span>
@@ -52,7 +102,7 @@ export default function layout({ children }: { children: ReactNode }) {
                                 <IconHome width={20} height={20} />
                             </Link>
 
-                            <Exit/>
+                            <Exit />
 
                         </div>
 

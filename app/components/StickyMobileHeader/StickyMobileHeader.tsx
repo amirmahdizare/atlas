@@ -42,7 +42,7 @@ export const StickyMobileHeader = () => {
 
                     {data?.data && <div className='flex flex-row gap-2 items-center'>
 
-                        <img src={createMediaUrl(data.data.avatar)} className='rounded-circle w-5' />
+                        <img src={createMediaUrl(data.data.avatar)} className='rounded-circle w-5 aspect-square' />
                         <div className='flex-col flex gap-1'>
                             <span className='text-raisin-black text-h5-bolder'>{data.data.firstName} {data.data.lastName}</span>
                             <span className='text-ultra-violet text-body-3-normal'>{translateRole(data.data.role.name)}</span>
