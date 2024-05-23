@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Button } from '@components'
 import { useCustomMutation, useCustomQuery, useUserInfo } from '@hooks'
@@ -33,7 +33,7 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
         }
     })
 
-    const { mutate, isLoading: loadingMutate , data:mutateResult} = useCustomMutation<PrivateEndPointsType['CREATE']>({
+    const { mutate, isLoading: loadingMutate, data: mutateResult, reset: resetMutate } = useCustomMutation<PrivateEndPointsType['CREATE']>({
         mutationFn: (data) => !!initialData?.data && initialData?.data?.length > 0 ? api.patch(PrivateEndPoints.SINGLE(initialData?.data?.[0]?.id), data) : api.post(PrivateEndPoints.CREATE, data),
         mutationKey: [initialData?.data?.[0] ? 'edit' : 'create', propertyId],
         onSuccess: (d, v) => {
@@ -53,11 +53,13 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
 
     const noteValue = watch('note')
 
-    const currentNote = initialData?.data && initialData?.data?.length > 0 ? initialData?.data?.[0].note : ''
+
+    const isMutateSuccessful = !!mutateResult?.data?.id
+
+    const currentNote = isMutateSuccessful ? mutateResult?.data?.note : (initialData?.data && initialData?.data?.length > 0 ? initialData?.data?.[0].note : '')
 
     // console.log({ noteValue, currentNote })
 
-    const isMutateSuccessful = !!mutateResult?.data?.id
 
     return (
         <form className='flex flex-col gap-2' onSubmit={handleSubmit(handleMutate)}>
@@ -72,7 +74,7 @@ export const Note = ({ propertyId }: { propertyId: string }) => {
                     {...register('note')}
                 />}
 
-            <Button disabled={(noteValue == currentNote) || !noteValue || isMutateSuccessful} bgColor={(noteValue == currentNote || !noteValue || isMutateSuccessful) ? 'gray' : undefined} textColor={(noteValue == currentNote || !noteValue || isMutateSuccessful) ? 'textGray' : undefined} fullWidth loading={loadingMutate} type='submit'>ذخیره</Button>
+            <Button disabled={(noteValue == currentNote) || !noteValue} bgColor={(noteValue == currentNote || !noteValue) ? 'gray' : undefined} textColor={(noteValue == currentNote || !noteValue) ? 'textGray' : undefined} fullWidth loading={loadingMutate} type='submit'>ذخیره</Button>
 
             <p className='text-ultra-violet text-h4-normal'>یادداشت تنها برای شما قابل دیدن است و پس از حذف آگهی، پاک خواهد شد.</p>
 
