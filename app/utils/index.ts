@@ -1,3 +1,4 @@
+import { ReadonlyURLSearchParams } from "next/navigation";
 import { DOMAttributes, KeyboardEvent } from "react";
 import { ProductType, RoleTypeName } from "types";
 import { NO_PHOTO_IMAGE, agentRoles } from "variables";
@@ -154,3 +155,8 @@ export const isUserAgent = (role: RoleTypeName) => agentRoles.indexOf(role) != -
 
 
 export const minuteToMs = (minute: number) => 1000 * 60 * minute
+
+
+export const convertSearchParamToObject = <T extends {[k:string]:string}  ,> (searchParam: ReadonlyURLSearchParams)  :T=>{
+  return Object.fromEntries(searchParam.entries()) as T
+}

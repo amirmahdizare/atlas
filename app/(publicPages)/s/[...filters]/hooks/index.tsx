@@ -1,7 +1,9 @@
 import { useCustomInfiniteQuery } from '@hooks'
 import { api } from '_api/config'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
+import { useSearchParams } from 'next/navigation'
 import { PropertyListFilterType, PropertySearchParams } from 'types'
+import { convertSearchParamToObject } from 'utils'
 import { create } from 'zustand'
 
 
@@ -15,7 +17,7 @@ interface StoreType extends DataType {
     dispatchFilter: (data: Partial<PropertySearchParams>) => void
 }
 
-export const useSearchProperty = create<StoreType>((set) => ({
+export const useSearchProperty =  create<StoreType>((set) => ({
     cardMode: 'block',
     dispatch: (data) => set((state) => ({ ...state, ...data })),
     dispatchFilter: (filter) => set((state) => ({ ...state, filter: { ...state.filter, ...filter } })),
@@ -24,10 +26,59 @@ export const useSearchProperty = create<StoreType>((set) => ({
     }
 }))
 
+
+const validFilters: Array<{ name: keyof PropertySearchParams, type: 'array' | 'single' }> = [
+    { name: 'location', type: 'array' },
+    { name: 'subLocation', type: 'array' },
+    { name: 'category', type: 'array' },
+    { name: 'subCategory', type: 'array' },
+    { name: 'price', type: 'single' },
+    { name: 'prePrice', type: 'single' },
+    { name: 'rentPrice', type: 'single' },
+    { name: 'productType', type: 'single' },
+]
+
+const convertUrlToFilter = (searchObject: { [key: string]: any }) => {
+
+    let newFilter: Partial<PropertySearchParams> = {}
+
+
+    for (const property in searchObject) {
+
+        const foundedFilter = validFilters?.find(f => f.name == property)
+
+        if (foundedFilter) {
+
+            newFilter = { ...newFilter, [property]: foundedFilter.type == 'array' ? JSON.parse(searchObject[property]) : searchObject[property] }
+        }
+        // console.log(`${property}: ${object[property]}`);
+    }
+
+    console.log(newFilter)
+
+    return newFilter
+
+    // dispatch(newFilter)
+
+}
+
 export const usePropertySearchResults = () => {
+
+    // const searchParams = useSearchParams()
     const searchHook = useSearchProperty()
 
+    // const dispatchFilter = useSearchProperty(s => s.dispatch)
+
     const { featureValues, ...rest } = searchHook.filter
+
+
+    // const filters = convertUrlToFilter(convertSearchParamToObject(searchParams))
+
+
+
+    // if (JSON.stringify(filters) != JSON.stringify(searchHook.filter))
+    //     dispatchFilter({filter :filters})
+
 
     // const especialFilters = rest.productType == 'sell' ? ['price'] : ['prePrice', 'rentPrice']
 
