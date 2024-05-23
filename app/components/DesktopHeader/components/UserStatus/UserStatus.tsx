@@ -26,7 +26,7 @@ export const UserStatus = () => {
 
         // if (isUserAgent(data.data.role.name) )
         return (
-            <Link href={isUserAgent(roleName) ? '/panel' : '/dashboard'} className='flex flex-row gap-1 items-center relative border border-gray-100 rounded-[4px] p-1 cursor-pointer'
+            <Link href={ '/dashboard'} className='flex flex-row gap-1 items-center relative border border-gray-100 rounded-[4px] p-1 cursor-pointer'
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave={() => setIsOpen(false)}
             // onMouseOut={() => setIsOpen(false)}
