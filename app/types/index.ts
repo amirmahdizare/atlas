@@ -449,9 +449,10 @@ export interface AgentNoteMutateType {
 }
 
 export interface AgentNoteReadType {
+    id:string
     note: string,
-    productId: number,
-    id: string
+    user: UserFullInfo,
+    product:PropertyDetailType | null
 }
 
 

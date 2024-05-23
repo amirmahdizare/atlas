@@ -1,4 +1,5 @@
 import { api } from "_api/config";
+import { AgentNoteEndPoints, AgentNoteEndPointsType } from "_api/endpoints/agentNote";
 import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
 import { BookmarkEndPoints, BookmarkEndPointsType } from "_api/endpoints/bookmark";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
@@ -30,23 +31,23 @@ export const useFullCategories = () => useCustomQuery<CategoryEndPointsType['ALL
 export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndPointsType['GET_LIST']>({
     queryKey: 'getCities',
     queryFn: () => api.get(LocationEndPoints.GET_LIST),
-    onError: (e) => console.log('خطا در دریافت لیست شهرها',e),
-    staleTime:minuteToMs(10)
+    onError: (e) => console.log('خطا در دریافت لیست شهرها', e),
+    staleTime: minuteToMs(10)
 })
 
 
 export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocationEndPointsType['GET_LIST']>({
     queryKey: 'getSubCities',
     queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
-    onError: (e) => console.log('خطا در دریافت لیست مناطق',e),
-    staleTime:minuteToMs(10)
+    onError: (e) => console.log('خطا در دریافت لیست مناطق', e),
+    staleTime: minuteToMs(10)
 })
 
 export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
     queryKey: 'getBlogs',
     queryFn: () => api.get(BlogEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست مقالات'),
-    staleTime:minuteToMs(10)
+    staleTime: minuteToMs(10)
 })
 
 
@@ -123,4 +124,13 @@ export const useMyBookmarks = () => useCustomQuery<BookmarkEndPointsType['GET_AL
     queryKey: ['getAllBookmarks'],
     onError: (e) => { console.log(e) },
     staleTime: 1000 * 60 * 5
+})
+
+
+export const useAgentNotes = (props?: any) => useCustomQuery<AgentNoteEndPointsType['LIST']>({
+    queryFn: () => api.get(AgentNoteEndPoints.LIST),
+    queryKey: ['getAllAgentNotes'],
+    onError: (e) => { console.log(e) },
+    staleTime: minuteToMs(5),
+    ...props
 })
