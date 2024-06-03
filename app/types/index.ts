@@ -531,3 +531,15 @@ export interface CorpReadType extends CorpMutateType<string> {
     id: number,
     user: Omit<UserListType, 'role'>
 }
+
+export interface BuyOrSellMutateType<FT> {
+    title: string,
+    description: string,
+    side: 'sell' | 'buy',
+    medias: FT
+}
+
+export interface BuyOrSellReadType extends BuyOrSellMutateType<string[]> {
+    id: number,
+    user: Omit<UserListType, 'role'>
+}

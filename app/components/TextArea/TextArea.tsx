@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-interface PropTypes extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
+interface PropTypes extends React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
     label?: string,
     required?: boolean,
     error?: boolean,
