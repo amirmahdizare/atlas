@@ -10,10 +10,10 @@ export const SinglePart = ({ id, title, description, side, user, medias: images 
     return (
         <Link href={`/participation/${id}`} className=' gap-2 grid grid-cols-4  p-1 rounded border hover:bg-gray-50 relative'>
 
-            <div className='col-span-1 relative'>
+            <div className=' lg:col-span-1 relative'>
 
 
-            <img src={createMediaUrl(images?.[0])} className='aspect-video rounded w-full object-cover ' />
+                <img src={createMediaUrl(images?.[0])} className='aspect-video rounded w-full object-cover ' />
 
                 <span className='absolute left-0.5 bottom-0.5 rounded bg-mint-green text-white p-1 shadow'>  {side == 'creator' ? 'سازنده' : 'مالک'}</span>
             </div>
@@ -47,8 +47,8 @@ export const SinglePart = ({ id, title, description, side, user, medias: images 
 
             </div> */}
 
-            <div className='absolute left-0.5 bottom-0.5'>
-                <Button icon={IconArrowDownLeft} bgColor='secondary'  iconSide='left'>مشاهده جزییات</Button>
+            <div className='absolute left-0.5 bottom-0.5 hidden lg:flex'>
+                <Button icon={IconArrowDownLeft} bgColor='secondary' iconSide='left'>مشاهده جزییات</Button>
 
             </div>
 
