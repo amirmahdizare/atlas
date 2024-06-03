@@ -11,7 +11,7 @@ export const List = () => {
 
     const { dispatch } = usePropertySection()
 
-    const { data, isFetching, isError } = usePropertyList()
+    const { data, isFetching, isError  , hasNextPage , fetchNextPage} = usePropertyList()
 
 
     const allProprties = data?.pages?.reduce<Array<PropertyDetailType>>((pv, cv) => {
@@ -32,14 +32,14 @@ export const List = () => {
                     <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت آگهی</Button>
 
                 </div>
-                <div className=' h-fit overflow-auto' id='property-list'>
+                <div className=' h-fit overflow-auto ' id='property-list'>
 
                     <InfiniteScroll
                         className='grid grid-cols-1 lg:grid-cols-2 gap-2 h-full'
                         dataLength={allProprties?.length ?? 0}
-                        hasMore={false}
-                        loader={<Spinner />}
-                        next={() => alert('Next')}
+                        hasMore={!!hasNextPage}
+                        loader={<div className='flex h-full w-full items-center justify-center bg-gray-50 animate-pulse rounded min-h-[80px]'><Spinner /></div>}
+                        next={() => fetchNextPage()}
                         style={{ overflow: 'unset' }}
                         scrollableTarget='property-list'
                     >
