@@ -47,7 +47,7 @@ export const ClientPage = () => {
 
 
     return (
-        <form className='grid grid-cols-4 gap-4 ' onSubmit={handleSubmit((d) => mutate(d))}>
+        <form className='grid grid-cols-4 gap-4 ' onSubmit={handleSubmit((d) => mutate({firstName:d.firstName ,lastName:d.lastName}))}>
             <div className='flex flex-row gap-1 col-span-4 items-center'>
                 <IconArticle width={25} height={25} className='text-french-gray' />
                 <span className='text-body-2-bolder text-space-codet'>ویرایش اطلاعات کاربری</span>
