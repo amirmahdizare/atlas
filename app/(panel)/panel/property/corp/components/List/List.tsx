@@ -21,10 +21,10 @@ export const List = () => {
 
                     <div className='flex flex-row gap-1 items-center'>
                         <IconClipboard width={25} height={25} className='text-french-gray' />
-                        <span>لیست مقالات</span>
+                        <span>لیست پروژه های مشارکت</span>
                     </div>
 
-                    <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', corpId: undefined })}>ثبت فایل مشارکت</Button>
+                    <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', corpId: undefined })}>ثبت پروژه مشارکت</Button>
 
                 </div>
                 <div className='  overflow-auto flex flex-col gap-2 h-full' id='property-list'>

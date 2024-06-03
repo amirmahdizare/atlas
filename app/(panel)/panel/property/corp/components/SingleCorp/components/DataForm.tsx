@@ -1,38 +1,51 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Button, Input, TextArea } from '@components'
 import { IconInfoCircle, IconUpload } from '@tabler/icons-react'
 import { useCorpSection } from '../../../hooks'
 import { useForm } from 'react-hook-form'
 import { BlogItemTypeAPI } from 'types'
-import { useBlogs, useCustomMutation } from '@hooks'
+import { useBlogs, useCorps, useCustomMutation } from '@hooks'
 import { BlogEndPoints, BlogEndPointsType } from '_api/endpoints/blog'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
-import { createFormData, createMediaUrl } from 'utils'
+import { convertMediaUrlToFile, createFormData, createMediaUrl } from 'utils'
 import ReactQuill from 'react-quill';
 import { } from 'react-quill';
+import { CorpEndPoints, CorpEndPointsType } from '_api/endpoints/participation'
 
 export const DataForm = () => {
 
-    const { refetch, data: blogsData } = useBlogs()
+    const { refetch, data: blogsData } = useCorps()
 
     const { dispatch, corpId, mode } = useCorpSection()
 
 
     const modeTitle = mode == 'add' ? 'افزودن' : 'ویرایش'
 
-    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue } = useForm<BlogItemTypeAPI<undefined, File | string | undefined>>()
+    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue } = useForm<CorpEndPointsType['CREATE']['REQUEST']>()
 
     watch(['description'])
 
-    const currentImage = watch('images')
+    const currentImage = watch('medias')
 
-    const { mutate, isLoading } = useCustomMutation<BlogEndPointsType['CREATE']>(
+    const { mutate, isLoading } = useCustomMutation<CorpEndPointsType['CREATE']>(
         {
-            mutationKey: 'mutateBlog',
-            mutationFn: (data) => mode == 'edit' && corpId ? api.patch(BlogEndPoints.SINGLE(corpId), data) : api.post(BlogEndPoints.CREATE, data),
+            mutationKey: 'mutateCorp',
+            mutationFn: async (data) => {
+
+
+                if (mode == 'edit' && corpId) {
+                    var currentImages: (File | undefined)[] = []
+                    if (blogsData?.data.find(a => a.id == corpId)?.medias)
+                        currentImages = await Promise.all(blogsData?.data?.find(a => a.id == corpId)?.medias.map(async i => convertMediaUrlToFile(createMediaUrl(i))) ?? [])
+
+                    return api.patch(CorpEndPoints.SINGLE(corpId), createFormData({ ...data, medias: [...currentImages, ...Array.from(data.medias)] }, ['medias']))
+                }
+                else
+                    return api.post(CorpEndPoints.CREATE, createFormData({ ...data }, ['medias']))
+            },
             onSuccess: () => {
-                toast.success(`${modeTitle} فایل مشارکت با موفقیت انجام شد.`)
+                toast.success(`${modeTitle} پروژه مشارکت با موفقیت انجام شد.`)
                 refetch()
                 dispatch({ mode: 'list', corpId: undefined })
             },
@@ -42,7 +55,7 @@ export const DataForm = () => {
         }
     )
 
-    const handleMutate = (data: BlogItemTypeAPI<undefined, File | string | undefined>) => {
+    const handleMutate = (data: CorpEndPointsType['CREATE']['REQUEST']) => {
 
         var currentImages: string[] = []
 
@@ -55,21 +68,21 @@ export const DataForm = () => {
         // }
 
 
-        mutate(createFormData({ ...data, images: [...currentImages, ...Array.from(data.images)] }, ['images']))
+        mutate({ ...data })
     }
 
     useEffect(() => {
         if (mode == 'edit' && corpId) {
             const targetBlog = blogsData?.data.find(a => a.id == corpId)
             if (targetBlog) {
-                const { createTime, updateTime, id, tags, user, suggest_productId, ...others } = targetBlog
+                const { user, id, medias, ...others } = targetBlog
                 reset(others)
             }
         }
     }, [mode])
 
 
-    const RenderImageBox = () => {
+    const RenderImageBox = useCallback(() => {
 
         if (!currentImage)
             return <>
@@ -96,22 +109,39 @@ export const DataForm = () => {
                 <span className='text-ultra-violet text-body-3-light'>تصاویر شما باید کمتر 6 مگابایت باشند.</span>
             </div></>
 
-    }
+    }, [currentImage])
 
     return (
         <form className='grid grid-cols-3 gap-2' onSubmit={handleSubmit(handleMutate)}>
 
             <div className='col-span-3 lg:col-span-2 flex flex-col gap-2 justify-around'>
-                <Input label='عنوان مقاله' register={register('title', {
+                <Input label='عنوان پروژه مشارکت' register={register('title', {
                     required: {
                         value: true,
-                        message: 'عنوان مقاله ضروری است'
+                        message: 'عنوان پروژه مشارکت ضروری است'
                     }
                 })}
                     error={!!errors?.title}
                     errorText={errors?.title?.message}
                 />
-                <Input label='مدت زمان مطالعه (به دقیقه)' register={register('duration', {
+
+                <div className='flex flex-row gap-2'>
+                    <span className='text-french-gray text-body-2-normal  text-right'>طرف آگهی دهنده </span>
+
+                    <label className='flex flex-row gap-2 items-center'>
+                        <span>مالک</span>
+                        <input type='radio' value={'owner'} {...register('side', { required: { value: true, message: 'طرفی که این فایل را ایجاد می کند باید مشخص باشد' } })} />
+                    </label>
+
+                    <label className='flex flex-row gap-2 items-center'>
+                        <span>سازنده</span>
+                        <input type='radio' value={'owner'} {...register('side', { required: { value: true, message: 'طرفی که این فایل را ایجاد می کند باید مشخص باشد' } })} />
+                    </label>
+                </div>
+
+                {!!errors?.side && <span className='text-red-500 '>{errors?.side?.message}</span>}
+                
+                {/* <Input label='مدت زمان مطالعه (به دقیقه)' register={register('duration', {
                     required: {
                         value: true,
                         message: 'مدت زمان مطالعه ضروری است.'
@@ -121,24 +151,24 @@ export const DataForm = () => {
                     error={!!errors?.duration}
                     errorText={errors?.duration?.message}
                     type='number'
-                />
+                /> */}
 
             </div>
 
             <div className='flex flex-col gap-2 col-span-3 lg:col-span-1'>
-                <span className='text-body-3-normal text-ultra-violet'>افزودن تصاویر مقاله</span>
+                <span className='text-body-3-normal text-ultra-violet'>افزودن تصویر پروژه مشارکت</span>
 
                 <label className=' bg-anti-flash-white flex gap-2 flex-col items-center justify-center cursor-pointer p-2 min-h-[200px] rounded-sm' htmlFor='blogPhoto'>
 
                     <RenderImageBox />
 
 
-                    {!!errors.images && <span className='text-red-500 font-bold'>تصویر مقاله ضروری است.</span>}
+                    {!!errors.medias && <span className='text-red-500 font-bold'>تصویر پروژه مشارکت ضروری است.</span>}
 
-                    <input type='file' hidden id='blogPhoto' {...register('images', {
+                    <input type='file' hidden id='blogPhoto' {...register('medias', {
                         required: mode == 'add' ? {
                             value: true,
-                            message: 'تصویر مقاله ضروری است.'
+                            message: 'تصویر پروژه مشارکت ضروری است.'
                         } : undefined
                     })} />
 
@@ -146,22 +176,9 @@ export const DataForm = () => {
             </div>
 
 
-            <div className='col-span-3 '>
-                <TextArea register={register('summary', {
-                    required: {
-                        value: true,
-                        message: 'خلاصه مقاله ضروری است.'
-                    }
-                })}
-                    error={!!errors?.summary}
-                    errorText={errors.summary?.message}
-                    style={{ minHeight: '150px' }}
-                    placeholder='خلاصه مقاله' />
-            </div>
-
             <div className='col-span-3 !text-right'>
 
-                <div className='mb-2 flex text-french-gray text-body-2-normal  text-right'>متن مقاله</div>
+                <div className='mb-2 flex text-french-gray text-body-2-normal  text-right'>متن پروژه مشارکت</div>
 
 
 
@@ -179,19 +196,19 @@ export const DataForm = () => {
                 {/* <TextArea register={register('description', {
                     required: {
                         value: true,
-                        message: 'متن مقاله ضروری است.'
+                        message: 'متن پروژه مشارکت ضروری است.'
                     }
                 })}
                     error={!!errors?.summary}
                     errorText={errors.summary?.message}
                     style={{ minHeight: '150px' }}
-                    placeholder='متن  مقاله' /> */}
+                    placeholder='متن  پروژه مشارکت' /> */}
             </div>
 
 
             <div className='flex flex-row gap-2 col-span-3'>
                 <Button bgColor='gray' type='button' textColor='dark' onClick={() => dispatch({ mode: 'list' })} fullWidth>انصراف</Button>
-                <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading}>ثبت {mode == 'edit' ? 'تغییرات' : ''} مقاله</Button>
+                <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading}>ثبت {mode == 'edit' ? 'تغییرات' : ''} پروژه مشارکت</Button>
             </div>
 
 

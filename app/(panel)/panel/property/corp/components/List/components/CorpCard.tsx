@@ -21,7 +21,7 @@ export const CorpCard = ({ title, description, side , user,medias: images, id }:
             <div className='flex flex-col gap-2  col-span-1 lg:col-span-2'>
                 <span className='text-body-2-bolder line-clamp-1 text-ellipsis overflow-hidden'>{title}</span>
 
-                <span className='text-body-3-normal text-ultra-violet line-clamp-2 text-ellipsis overflow-hidden leading-3'>{description}</span>
+                <span className='text-body-3-normal text-ultra-violet line-clamp-2 text-ellipsis overflow-hidden leading-3' dangerouslySetInnerHTML={{__html:description}}/>
 
                 {/* <span className='text-ultra-violet'>{createTime}</span> */}
             </div>

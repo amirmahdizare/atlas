@@ -3,7 +3,7 @@ import { ApiGetRequestType, ApiPostRequestType, CorpMutateType, CorpReadType, It
 export const CorpEndPoints = Object.freeze({
     CREATE: '/participation',
     LIST: '/participation',
-    SINGLE: (id: string) => `/participation/${id}`
+    SINGLE: (id: number) => `/participation/${id}`
 })
 
 export interface CorpEndPointsType {
