@@ -8,12 +8,15 @@ import { PropertyDetailType } from 'types'
 import { usePropertyList, usePropertySection } from '../../../hooks'
 import { NO_NAME_USER } from 'variables'
 import { createMediaUrl } from 'utils'
-import { useCustomMutation } from '@hooks'
+import { useCustomMutation, useUserInfo } from '@hooks'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
 
-export const PropertyCard = ({ medias, id, price, location, user, title, prePrice, rentPrice }: PropertyDetailType) => {
+export const PropertyCard = ({ medias, id, price, location, user, title, prePrice, rentPrice, active }: PropertyDetailType) => {
+
+
+    const { data, isLoading: loadingUserData } = useUserInfo()
 
     const { refetch } = usePropertyList()
 
@@ -28,7 +31,29 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
         }
     })
 
+    const { mutate: toggle, isLoading: toggleLoading } = useCustomMutation<PropretyEndPointsType['TOGGLE_ACTIVE']>({
+        mutationFn: (d) => api.patch(PropretyEndPoints.TOGGLE_ACTIVE(id), d),
+        onSuccess: () => {
+            toast.success(`وضعیت آگهی ${title} با موفقیت تغییر کرد.`)
+            refetch()
+        },
+        onError: (e) => {
+            toast.error(e.response?.data.message ?? e.message)
+        }
+    })
+
     const { dispatch } = usePropertySection()
+
+
+    const handleChangeActive = () => {
+        if (data?.data.role.name != 'superAdmin')
+            return
+        if (prompt(`آیا مایل به ${active ? 'غیرفعال' : 'فعال'} کردن "${title}" هستید؟`, 'بله')) {
+            toggle({ active: !!!active })
+        }
+    }
+
+    const isUserCanChangeStatus = data?.data.role.name == 'superAdmin'
     return (
         <div className='grid grid-cols-3 gap-1.5 ' >
 
@@ -68,7 +93,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
                 </div>}
 
             </div>
-            <div className='flex flex-row gap-1 justify-evenly col-span-3'>
+            <div className='flex flex-row gap-1 justify-evenly col-span-3 items-center'>
                 <Link href={`/property/${id}`} target='_blank'><Button bgColor='gray' textColor='secondary' icon={IconEye} title='پیش نمایش'></Button></Link>
                 <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch({ mode: 'edit', proprtyId: id }) }} icon={IconPencil} title='ویرایش'></Button>
                 <Button bgColor='white' textColor='secondary' icon={isLoading ? IconLoader : IconTrash} title='حذف' onClick={() => {
@@ -76,22 +101,25 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
                         mutate({})
                 }}></Button>
                 {/* <Button bgColor='gray' textColor='secondary' icon={IconArrowBigUp} title='نردبان'></Button> */}
-                {/* <label className='flex flex-row gap-1 items-center'>
-                    <ReactSwitch
-                        checked={true}
-                        onChange={() => { }}
-                        size={10}
-                        checkedIcon={false}
-                        uncheckedIcon={false}
-                        width={40}
-                        handleDiameter={22}
-                        height={25}
-                        onColor='#FF734C'
-                        offColor='#E4E4EB'
+                {isUserCanChangeStatus && <label className='flex flex-row gap-1 items-center'>
+                    {!toggleLoading
+                        ? <ReactSwitch
+                            checked={active}
+                            onChange={() => handleChangeActive()}
+                            size={10}
+                            checkedIcon={false}
+                            uncheckedIcon={false}
+                            width={30}
+                            handleDiameter={15}
+                            height={20}
+                            onColor='#FF734C'
+                            offColor='#E4E4EB'
 
-                    />
-                    <span className='text-body-2-normal text-ultra-violet'>غیرفعال</span>
-                </label> */}
+                        /> : <Spinner />}
+                </label>}
+                <span className='text-body-2-normal text-ultra-violet'>{active ? 'فعال' : 'غیرفعال'}</span>
+
+                {data?.data.role.name != 'superAdmin' &&  user?.id == data?.data.id && !active && <span className='text-gray-400'>منتظر تایید</span>}
             </div>
         </div>
     )

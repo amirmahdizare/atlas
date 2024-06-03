@@ -46,6 +46,7 @@ export const DataForm = () => {
         ,
         onSuccess: (e, v) => {
             toast.success(`آگهی با موفقیت ${mode == 'add' ? 'ایجاد' : 'ویرایش'} شد.`)
+            // toggle()
             dispatch({ mode: 'list', proprtyId: undefined })
             refetch()
 
@@ -54,6 +55,17 @@ export const DataForm = () => {
             toast.error(e.response?.data.message ?? e.message)
         }
     })
+
+    // const { mutate: toggle, isLoading: toggleLoading } = useCustomMutation<PropretyEndPointsType['TOGGLE_ACTIVE']>({
+    //     mutationFn: (d) => api.patch(PropretyEndPoints.TOGGLE_ACTIVE(id), d),
+    //     onSuccess: () => {
+    //         toast.success(`وضعیت آگهی ${title} با موفقیت تغییر کرد.`)
+    //         refetch()
+    //     },
+    //     onError: (e) => {
+    //         toast.error(e.response?.data.message ?? e.message)
+    //     }
+    // })
 
     const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch } = methods
 

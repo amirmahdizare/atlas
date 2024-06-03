@@ -48,6 +48,7 @@ export interface LocationType {
 }
 
 export interface PropertyDetailType {
+    active:boolean,
     id: string,
     title: string,
     location: LocationType | null,
