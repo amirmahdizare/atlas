@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { ClientPage } from './ClientPage'
 
 export const metadata: Metadata = {
-    title: "مقالات اطلس"
+    title: "پروژه های مشارکت اطلس"
 }
 
 export default function page() {
