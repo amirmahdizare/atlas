@@ -8,7 +8,7 @@ export const ShareBlog = ({ id, title , description }: { id: string  , title:str
     // const { title, description, user } = data
 
     const shareData = {
-        title: `${title} |  مقالات دپارتمان املاک اطلس `,
+        title: `${title} |  پروژه های مشارکت دپارتمان املاک اطلس `,
         text: description,
         url: `${window.location.origin}/property/${id}/${title}`
     };

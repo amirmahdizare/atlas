@@ -8,7 +8,7 @@ import { Button } from '@components'
 export const SinglePart = ({ id, title, description, side, user, medias: images }: CorpReadType) => {
 
     return (
-        <Link href={`/blogs/${id}`} className=' gap-2 grid grid-cols-4  p-1 rounded border hover:bg-gray-50 relative'>
+        <Link href={`/participation/${id}`} className=' gap-2 grid grid-cols-4  p-1 rounded border hover:bg-gray-50 relative'>
 
             <div className='col-span-1 relative'>
 
