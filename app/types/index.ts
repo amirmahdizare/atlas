@@ -523,7 +523,7 @@ export interface BookmarkRecordType {
 export interface CorpMutateType<FT> {
     title: string
     description: string
-    side: 'owner' | 'builder',
+    side: 'owner' | 'creator',
     medias: FT[]
 }
 
