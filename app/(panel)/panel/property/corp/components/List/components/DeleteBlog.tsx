@@ -1,21 +1,22 @@
 import { Button, Spinner } from '@components'
-import { useBlogs, useCustomMutation } from '@hooks'
+import { useBlogs, useCorps, useCustomMutation } from '@hooks'
 import { IconTrash } from '@tabler/icons-react'
 import { api } from '_api/config'
 import { BlogEndPoints } from '_api/endpoints/blog'
+import { CorpEndPoints } from '_api/endpoints/participation'
 import React from 'react'
 import { toast } from 'react-toastify'
 
 export const DeleteBlog = ({ id }: { id: number }) => {
 
-    const { data, refetch } = useBlogs()
+    const { data, refetch } = useCorps()
 
 
     const { mutate, isLoading } = useCustomMutation({
-        mutationFn: () => api.delete(BlogEndPoints.SINGLE(id)),
-        mutationKey: ['deleteBlog', id],
+        mutationFn: () => api.delete(CorpEndPoints.SINGLE(id)),
+        mutationKey: ['deleteCorp', id],
         onSuccess: () => {
-            toast.success('مقاله با موفقیت پاک شد.')
+            toast.success('پروژه مشارکت با موفقیت پاک شد.')
             refetch()
         },
         onError: (data) => {
@@ -27,7 +28,7 @@ export const DeleteBlog = ({ id }: { id: number }) => {
     const handleDeleteBlog = () => {
 
         const targetBlog = data?.data.find(b => b.id == id)
-        if (prompt(`آیا مایل به حذف مقاله "${targetBlog?.title}" هستید ؟ برای تایید دکمه OK را انتخاب کنید`, 'بله')) {
+        if (prompt(`آیا مایل به حذف پروژه مشارکت "${targetBlog?.title}" هستید ؟ برای تایید دکمه OK را انتخاب کنید`, 'بله')) {
             mutate({})
         }
     }
