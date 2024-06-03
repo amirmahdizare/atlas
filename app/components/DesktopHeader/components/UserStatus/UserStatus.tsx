@@ -35,7 +35,7 @@ export const UserStatus = () => {
 
                 <img src={isUserAgent(roleName) ? createMediaUrl(avatar) : SAMPLE_AVATAR} className='w-3 h-3 rounded-circle' />
 
-                <span className='line-clamp-1 whitespace-nowrap text-ellipsis'> {isUserAgent(roleName) ? `${firstName} ${lastName}` : `کاربر ${phoneNumber}`} </span>
+                <span className='line-clamp-1 whitespace-nowrap text-ellipsis'> {isUserAgent(roleName) ? `${firstName} ${lastName}` : `${phoneNumber}`} </span>
 
                 {!isUserAgent(roleName) && <>
                     <IconChevronDown width={15} height={15} className={isOpen ? 'rotate-180' : ''} />
