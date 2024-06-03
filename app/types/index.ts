@@ -273,7 +273,7 @@ export interface ErrorResponseType {
     statusCode: number
 }
 
-export type RoleTypeName = 'user' | 'superAdmin' | 'agent' | 'admin' | 'guest' 
+export type RoleTypeName = 'user' | 'superAdmin' | 'agent' | 'admin' | 'guest'
 
 export interface UserListType {
     id: number,
@@ -298,8 +298,8 @@ export interface PermissionType<IT> {
     title: string,
     isMenuItem: boolean,
     hint: string,
-    action: typeof   PermissionBackendRoutes.BLOG_CREATE
-    
+    action: typeof PermissionBackendRoutes.BLOG_CREATE
+
     // keyof  typeof  PermissionBackendRoutes
 }
 
@@ -449,10 +449,10 @@ export interface AgentNoteMutateType {
 }
 
 export interface AgentNoteReadType {
-    id:string
+    id: string
     note: string,
     user: UserFullInfo,
-    product:PropertyDetailType | null
+    product: PropertyDetailType | null
 }
 
 
@@ -462,11 +462,11 @@ export interface PropertySearchParams {
     location?: number[],
     subLocation?: number[],
     category?: number[],
-    subCategory?: number [],
+    subCategory?: number[],
     productType?: ProductType,
-    price?:string,
-    prePrice?:string,
-    rentPrice?:string
+    price?: string,
+    prePrice?: string,
+    rentPrice?: string
 }
 
 
@@ -477,8 +477,8 @@ export interface UserInfoType<T> {
     avatar: T,
     phoneNumber: string
     id?: string,
-    role:{id:string , name:RoleTypeName},
-    permissions:PermissionType<string>[]
+    role: { id: string, name: RoleTypeName },
+    permissions: PermissionType<string>[]
 }
 
 export interface TagReadType {
@@ -515,7 +515,19 @@ export interface UserFullInfo {
 
 
 export interface BookmarkRecordType {
-    user:UserInfoType<string>,
-    product:PropertyDetailType,
-    id:string
+    user: UserInfoType<string>,
+    product: PropertyDetailType,
+    id: string
+}
+
+export interface CorpMutateType<FT> {
+    title: string
+    description: string
+    side: 'owner' | 'builder',
+    medias: FT[]
+}
+
+export interface CorpReadType extends CorpMutateType<string> {
+    id: number,
+    user: Omit<UserListType, 'role'>
 }

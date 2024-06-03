@@ -4,6 +4,7 @@ import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
 import { BookmarkEndPoints, BookmarkEndPointsType } from "_api/endpoints/bookmark";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
+import { CorpEndPoints, CorpEndPointsType } from "_api/endpoints/participation";
 import { TagsEndPoints, TagsEndPointsType } from "_api/endpoints/tag";
 import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
@@ -130,6 +131,15 @@ export const useMyBookmarks = () => useCustomQuery<BookmarkEndPointsType['GET_AL
 export const useAgentNotes = (props?: any) => useCustomQuery<AgentNoteEndPointsType['LIST']>({
     queryFn: () => api.get(AgentNoteEndPoints.LIST),
     queryKey: ['getAllAgentNotes'],
+    onError: (e) => { console.log(e) },
+    staleTime: minuteToMs(5),
+    ...props
+})
+
+
+export const useCorps = (props?: any) => useCustomQuery<CorpEndPointsType['LIST']>({
+    queryFn: () => api.get(CorpEndPoints.LIST),
+    queryKey: ['getAllCorps'],
     onError: (e) => { console.log(e) },
     staleTime: minuteToMs(5),
     ...props

@@ -1,20 +1,20 @@
 import React from 'react'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import { Button, Spinner } from '@components'
+
+import { Button } from '@components'
 import { IconClipboard, IconPlus } from '@tabler/icons-react'
 import { useCorpSection } from '../../hooks'
-import { BlogCard } from './components/BlogCard'
-import { useBlogs } from '@hooks'
+import {  CorpCard } from './components/CorpCard'
+import {  useCorps } from '@hooks'
 
 export const List = () => {
 
     const { dispatch } = useCorpSection()
 
-    const { data, isError } = useBlogs()
+    const { data, isError } = useCorps()
 
-    const blogs = data?.data
+    const corps = data?.data
 
-    if (blogs)
+    if (corps)
         return (
             <>
                 <div className='flex flex-row gap-2 justify-between '>
@@ -24,22 +24,23 @@ export const List = () => {
                         <span>لیست مقالات</span>
                     </div>
 
-                    <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', corpId: undefined })}>ثبت مقاله</Button>
+                    <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', corpId: undefined })}>ثبت فایل مشارکت</Button>
 
                 </div>
-                <div className=' h-fit overflow-auto' id='property-list'>
+                <div className='  overflow-auto flex flex-col gap-2 h-full' id='property-list'>
 
-                    <InfiniteScroll
+
+                    {/* <InfiniteScroll
                         className='flex flex-col gap-2 h-full'
-                        dataLength={blogs.length}
+                        dataLength={corps.length}
                         hasMore={false}
                         loader={<Spinner />}
                         next={() => alert('Next')}
                         style={{ overflow: 'unset' }}
                         scrollableTarget='property-list'
-                    >
-                        {blogs?.map(item => <BlogCard {...item} />)}
-                    </InfiniteScroll>
+                    > */}
+                        {corps?.map(item => <CorpCard {...item} />)}
+                    {/* </InfiniteScroll> */}
                 </div>
             </>
         )
