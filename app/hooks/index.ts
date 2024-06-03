@@ -2,6 +2,7 @@ import { api } from "_api/config";
 import { AgentNoteEndPoints, AgentNoteEndPointsType } from "_api/endpoints/agentNote";
 import { BlogEndPoints, BlogEndPointsType } from "_api/endpoints/blog";
 import { BookmarkEndPoints, BookmarkEndPointsType } from "_api/endpoints/bookmark";
+import { BuyOrSellEndPoints, BuyOrSellEndPointsType } from "_api/endpoints/buyOrSell";
 import { CategoryEndPoints, CategoryEndPointsType } from "_api/endpoints/category";
 import { LocationEndPoints, LocationEndPointsType, SubLocationEndPoints, SubLocationEndPointsType } from "_api/endpoints/location";
 import { CorpEndPoints, CorpEndPointsType } from "_api/endpoints/participation";
@@ -140,6 +141,16 @@ export const useAgentNotes = (props?: any) => useCustomQuery<AgentNoteEndPointsT
 export const useCorps = (props?: any) => useCustomQuery<CorpEndPointsType['LIST']>({
     queryFn: () => api.get(CorpEndPoints.LIST),
     queryKey: ['getAllCorps'],
+    onError: (e) => { console.log(e) },
+    staleTime: minuteToMs(5),
+    ...props
+})
+
+
+
+export const useBuyOrSells = (props?: any) => useCustomQuery<BuyOrSellEndPointsType['LIST']>({
+    queryFn: () => api.get(BuyOrSellEndPoints.LIST),
+    queryKey: ['getAllBuyOrSells'],
     onError: (e) => { console.log(e) },
     staleTime: minuteToMs(5),
     ...props

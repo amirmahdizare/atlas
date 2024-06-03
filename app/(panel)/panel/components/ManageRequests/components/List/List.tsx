@@ -1,39 +1,47 @@
 import { IconClipboard } from '@tabler/icons-react'
 import React from 'react'
 import { useRequestSection } from '../../hooks'
-import {  requests } from '../../data.mock'
+import { requests } from '../../data.mock'
 import { RowItem } from './RowItem'
+import { useBuyOrSells } from '@hooks'
 
 export const List = () => {
 
     const { dispatch } = useRequestSection()
 
-    return (
-        <div className='flex flex-col gap-2'>
-            <div className='flex flex-row gap-2 justify-between '>
-                <div className='flex flex-row gap-1 items-center'>
-                    <IconClipboard width={25} height={25} className='text-french-gray' />
-                    لیست درخواست ها
+    const { isError, data } = useBuyOrSells()
+
+    if (isError)
+        return <span className='text-red-500 font-bold text-center'>خطا در دریافت درخواست </span>
+
+
+    else if (data?.data)
+        return (
+            <div className='flex flex-col gap-2'>
+                <div className='flex flex-row gap-2 justify-between '>
+                    <div className='flex flex-row gap-1 items-center'>
+                        <IconClipboard width={25} height={25} className='text-french-gray' />
+                        لیست درخواست ها
+                    </div>
+
+
+                    {/* <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', adviserId: undefined })}>افزودن مشاور</Button> */}
+
                 </div>
 
+                <div className='grid grid-cols-7 gap-2 bg-seasalt p-2 text-ultra-violet text-body-3-normal border-y border-gray-100 '>
+                    <div className='col-span-2'>عنوان</div>
+                    <div className='col-span-2'>نام و نام خانوادگی</div>
+                    <div className='col-span-1'>نوع</div>
+                    <div className='col-span-1'>مختصر توضیحات</div>
+                    {/* <div className='col-span-1 text-center'>منطقه</div> */}
+                    <div className='col-span-1 text-center'>جزییات</div>
 
-                {/* <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', adviserId: undefined })}>افزودن مشاور</Button> */}
+                </div>
 
-            </div>
+                {data.data?.map((i, index) => <RowItem odd={index % 2 == 0} {...i} />)}
 
-            <div className='grid grid-cols-7 gap-2 bg-seasalt p-2 text-ultra-violet text-body-3-normal border-y border-gray-100 '>
-                <div className='col-span-2'>عنوان</div>
-                <div className='col-span-1'>نام و نام خانوادگی</div>
-                <div className='col-span-1'>دسته بندی</div>
-                <div className='col-span-1'>شهر</div>
-                <div className='col-span-1 text-center'>منطقه</div>
-                <div className='col-span-1 text-center'>جزییات</div>
-
-            </div>
-
-            {requests?.map((i, index)=> <RowItem odd={index%2==0} { ...i} />)}
-
-            {/* {advisers?.map(ad =>
+                {/* {advisers?.map(ad =>
                 <div className='grid grid-cols-6 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
                     <div className='col-span-2 flex flex-row gap-1 items-center'>
                         <img src={ad.avatar} className='rounded-circle w-5 aspect-square object-cover' />
@@ -71,6 +79,14 @@ export const List = () => {
 
                 </div>)} */}
 
+            </div>
+        )
+
+
+        return <div className='flex flex-col gap-2'>
+            {Array.from(new Array(10)).map(d=><div key={d} className='w-full bg-gray-50 h-4 rounded animate-pulse'>
+
+            </div>)}
+
         </div>
-    )
 }
