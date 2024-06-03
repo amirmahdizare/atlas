@@ -1,6 +1,6 @@
 'use client'
 import { Button, Spinner } from '@components'
-import { IconArrowBigUp, IconEye, IconLocation, IconMapPin, IconPencil, IconTrash, IconUser } from '@tabler/icons-react'
+import { IconArrowBigUp, IconEye, IconLoader, IconLocation, IconMapPin, IconPencil, IconTrash, IconUser } from '@tabler/icons-react'
 import Link from 'next/link'
 import React from 'react'
 import ReactSwitch from 'react-switch'
@@ -71,7 +71,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
             <div className='flex flex-row gap-1 justify-evenly col-span-3'>
                 <Link href={`/property/${id}`} target='_blank'><Button bgColor='gray' textColor='secondary' icon={IconEye} title='پیش نمایش'></Button></Link>
                 <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch({ mode: 'edit', proprtyId: id }) }} icon={IconPencil} title='ویرایش'></Button>
-                <Button bgColor='white' textColor='secondary' icon={isLoading ? Spinner : IconTrash} title='حذف' onClick={() => {
+                <Button bgColor='white' textColor='secondary' icon={isLoading ? IconLoader : IconTrash} title='حذف' onClick={() => {
                     if (prompt(`آیا مایل به حذف آگهی ${title} هستید؟`, 'بله'))
                         mutate({})
                 }}></Button>
