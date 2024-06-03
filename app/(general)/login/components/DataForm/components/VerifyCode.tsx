@@ -6,7 +6,7 @@ import { AuthEndpointType, AuthEndpoints } from '_api/endpoints/auth';
 import { useCustomMutation, useUserInfo } from 'hooks';
 import Countdown from 'react-countdown';
 import { useForm } from 'react-hook-form'
-import { startWithZero, storeToken } from 'utils';
+import { redirectJs, startWithZero, storeToken } from 'utils';
 import { useLoginPage } from '../../hooks';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
@@ -39,7 +39,7 @@ export const VerifyCode = () => {
             storeToken(data?.data?.access_token)
             toast.success('با موفقیت وارد شدید.')
             refetch()
-            router.push('/')
+            redirectJs('/')
         },
         onError: (data) => {
             toast.error('خطا در تایید کد ورود')

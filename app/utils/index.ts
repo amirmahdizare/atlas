@@ -160,3 +160,12 @@ export const minuteToMs = (minute: number) => 1000 * 60 * minute
 export const convertSearchParamToObject = <T extends {[k:string]:string}  ,> (searchParam: ReadonlyURLSearchParams)  :T=>{
   return Object.fromEntries(searchParam.entries()) as T
 }
+
+
+export const redirectJs = (path: string) => {
+
+  if (typeof window != 'undefined')
+      window.location.href = path
+
+  return
+}
