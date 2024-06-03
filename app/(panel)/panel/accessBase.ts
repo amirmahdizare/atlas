@@ -36,13 +36,13 @@ export const accessPairs: Array<{ frontRoute: string, permissionsAction: Array<k
     ,
     {
         frontRoute:'property/requests',
-        permissionsAction:['PRODUCT_CREATE']
+        permissionsAction:['BUYORSELL_CREATE' ,'BUYORSELL_UPDATE']
     }
 
     ,
     {
-        frontRoute:'property/corp',
-        permissionsAction:['PRODUCT_READ']
+        frontRoute:'property/participation',
+        permissionsAction:['PARTICIPATION_CREATE' ,'PARTICIPATION_UPDATE']
     }
     ,
     {

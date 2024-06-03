@@ -94,4 +94,15 @@ export enum PermissionBackendRoutes {
     ITEM_DELETE = 'delete_item',
 
 
+    PARTICIPATION_CREATE = 'create_participation',
+    PARTICIPATION_READ = 'read_participation',
+    PARTICIPATION_UPDATE = 'update_participation',
+    PARTICIPATION_DELETE = 'delete_participation',
+
+    BUYORSELL_CREATE = 'create_saleOrBuyProduct',
+    BUYORSELL_READ = 'read_saleOrBuyProduct',
+    BUYORSELL_UPDATE = 'update_saleOrBuyProduct',
+    BUYORSELL_DELETE = 'delete_saleOrBuyProduct',
+
+
 }
