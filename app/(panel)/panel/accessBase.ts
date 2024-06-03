@@ -36,7 +36,7 @@ export const accessPairs: Array<{ frontRoute: string, permissionsAction: Array<k
     ,
     {
         frontRoute:'property/requests',
-        permissionsAction:['BUYORSELL_CREATE' ,'BUYORSELL_UPDATE']
+        permissionsAction:['BUYORSELL_DELETE' ,'BUYORSELL_READ']
     }
 
     ,

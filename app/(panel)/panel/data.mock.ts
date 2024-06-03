@@ -69,7 +69,7 @@ export const accesses: AccessType[] = [
     //     hint: 'با این دسترسی امکان مشاهده درخواست های خرید/فروش به کاربر داده می شود.'
     // },
     {
-        route: 'property/corp',
+        route: 'property/participation',
         title: 'مدیریت همه پروژه های مشارکت',
         isMenuItem: true,
         hint: 'با این دسترسی امکان مشاهده/ویرایش/حذف/غیرفعال سازی/نردبان پروژه های مشارکت به کاربر داده می شود.'

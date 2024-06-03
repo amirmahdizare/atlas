@@ -27,7 +27,7 @@ export const CorpCard = ({ title, description, side , user,medias: images, id }:
             </div>
 
             <div className='col-span-2 lg:col-span-1 flex flex-row items-start justify-evenly'>
-                <Link target='_blank' title='مشاهده پیش نمایش' href={`/corp/${id}`}><Button icon={IconEye} textColor='primaryDarker' bgColor='gray'> </Button></Link>
+                <Link target='_blank' title='مشاهده پیش نمایش' href={`/participation/${id}`}><Button icon={IconEye} textColor='primaryDarker' bgColor='gray'> </Button></Link>
                 <DeleteBlog id={id} />
                 {/* <Button icon={IconTrash} bgColor='white' textColor='secondary'>حذف</Button> */}
                 <Button title='ویرایش' icon={IconPencil} bgColor='primaryLighter' textColor='white' onClick={() => dispatch({ mode: 'edit', corpId: id })}></Button>
