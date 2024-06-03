@@ -33,7 +33,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
         <div className='grid grid-cols-3 gap-1.5 ' >
 
             <div className='col-span-1'>
-                <img src={medias && medias?.length > 0 ? createMediaUrl(medias?.[0]) : ''} className='object-cover aspect-square w-full rounded ' />
+                <img src={createMediaUrl(medias?.[0])} className='object-cover aspect-square w-full rounded ' />
             </div>
 
 
@@ -47,7 +47,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
 
                 <div className='flex flex-row gap-1 items-center '>
                     <IconUser className='text-ultra-violet' width={15} height={18} />
-                    <span className='text-body-3-normal text-gray-400'>{user.firstName} {user.lastName} {!user.firstName || !user.lastName ? NO_NAME_USER : ''}</span>
+                    <span className='text-body-3-normal text-gray-400'>{user?.firstName} {user?.lastName} {!user?.firstName || !user?.lastName ? NO_NAME_USER : ''}</span>
                 </div>
 
                 {!!Number(price) && <div className='flex flex-row gap-1 h-6'>
