@@ -47,7 +47,7 @@ export const Title = ({ data, }: { data: PropertyDetailType }) => {
                 <span className='text-space-codet text-body-1-bolder lg:text-[0.50rem] leading-4 whitespace-pre-wrap break-words'>{title}</span>
 
                 <div className=' flex-row gap-1 hidden lg:flex'>
-                    <Bookmark id={id} isBookmarked={!!bookmarks.find(i => i?.product?.id == id)} />
+                    {/* <Bookmark id={id} isBookmarked={!!bookmarks.find(i => i?.product?.id == id)} /> */}
                     <Share id={id} data={data} />
                 </div>
 

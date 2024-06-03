@@ -42,7 +42,7 @@ export const ClientPage = () => {
 
 
     const { isLoading, mutate, isError: errorOfMutate, data: resultOfAdd } = useCustomMutation<BuyOrSellEndPointsType['CREATE']>({
-        mutationFn: (data) => api.post(BuyOrSellEndPoints.CREATE, createFormData({ ...data , title :data.title.concat('  *  ').concat((new Date()).toLocaleString('fa-ir')), medias: files.array.map(i => i.content) }, ['medias'])),
+        mutationFn: (data) => api.post(BuyOrSellEndPoints.CREATE, createFormData({ ...data , title :data.title.concat('  |  ').concat((new Date()).toLocaleString('fa-ir')), medias: files.array.map(i => i.content) }, ['medias'])),
         mutationKey: ['requestproperty'],
         onSuccess: () => {
             toast.success('درخواست ثبت ملک با موفقیت ارسال شد.')
@@ -57,7 +57,7 @@ export const ClientPage = () => {
 
     const handleMutate = (d: BuyOrSellMutateType<File[]>) => {
 
-        mutate({ ...d, title :d.title.concat('  *  ').concat((new Date()).toLocaleString('fa-ir'))  , side: 'sell' })
+        mutate({ ...d, title :d.title.concat('  |  ').concat((new Date()).toLocaleString('fa-ir'))  , side: 'sell' })
     }
 
 

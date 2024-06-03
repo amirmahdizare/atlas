@@ -16,7 +16,7 @@ export const ActionButtons = () => {
             <div className='flex flex-row gap-2'>
                 <Button
                     icon={IconArrowDownLeft}
-                    iconSide='left' bgColor='gray' textColor='textGray' href='requestproperty'>درخواست ملک</Button>
+                    iconSide='left' bgColor='gray' textColor='textGray' href='/requestproperty'>درخواست ملک</Button>
                 <Button
                     icon={IconPlus}
                     bgColor='secondary'
@@ -47,7 +47,7 @@ export const ActionButtons = () => {
                 <div className='flex flex-row gap-2 items-center'>
                     <Button
                         icon={IconArrowDownLeft}
-                        iconSide='left' bgColor='gray' textColor='textGray' href='requestproperty'>درخواست ملک</Button>
+                        iconSide='left' bgColor='gray' textColor='textGray' href='/requestproperty'>درخواست ملک</Button>
                     <Button
                         icon={IconPlus}
                         bgColor='secondary'

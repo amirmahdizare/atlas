@@ -21,7 +21,7 @@ export const MobileBreadcrumb = ({ data }: { data: PropertyDetailType }) => {
 
             <div className='flex flex-row gap-1'>
                 <Share id={data.id} data={data} />
-                <Bookmark isBookmarked={!!data?.bookmarks.find(i => i?.product?.id == data.id)} id={data?.id} />
+                {/* <Bookmark isBookmarked={!!data?.bookmarks.find(i => i?.product?.id == data.id)} id={data?.id} /> */}
             </div>
 
         </div>
