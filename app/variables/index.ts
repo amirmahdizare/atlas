@@ -24,3 +24,5 @@ export const SAMPLE_AVATAR = sampleAvatar.src
 export const NO_PHOTO_IMAGE = noPhoto.src
 
 export const agentRoles = ['superAdmin' , 'admin' , 'agent']
+
+export const SEARCH_PRODUCT_LIMIT = 10

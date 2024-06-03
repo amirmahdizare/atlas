@@ -3,7 +3,8 @@ import { api } from '_api/config'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { useSearchParams } from 'next/navigation'
 import { PropertyListFilterType, PropertySearchParams } from 'types'
-import { convertSearchParamToObject } from 'utils'
+import { convertSearchParamToObject, minuteToMs } from 'utils'
+import { SEARCH_PRODUCT_LIMIT } from 'variables'
 import { create } from 'zustand'
 
 
@@ -17,7 +18,7 @@ interface StoreType extends DataType {
     dispatchFilter: (data: Partial<PropertySearchParams>) => void
 }
 
-export const useSearchProperty =  create<StoreType>((set) => ({
+export const useSearchProperty = create<StoreType>((set) => ({
     cardMode: 'block',
     dispatch: (data) => set((state) => ({ ...state, ...data })),
     dispatchFilter: (filter) => set((state) => ({ ...state, filter: { ...state.filter, ...filter } })),
@@ -103,9 +104,10 @@ export const usePropertySearchResults = () => {
     // }
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
-        queryFn: ({ queryKey }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? JSON.parse(queryKey[1]) : {}),
+        queryFn: ({ queryKey, pageParam = 1 }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? { ...JSON.parse(queryKey[1]), limit: SEARCH_PRODUCT_LIMIT, page: pageParam } : {}),
         queryKey: ['SearchProprtyResults', JSON.stringify(searchHook.filter)],
-        staleTime: 1000 * 60 * 5
+        staleTime: minuteToMs(5),
+        getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined
     })
 
 
