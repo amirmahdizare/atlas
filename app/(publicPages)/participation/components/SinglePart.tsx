@@ -18,7 +18,7 @@ export const SinglePart = ({ id, title, description, side, user, medias: images 
                 <span className='absolute left-0.5 bottom-0.5 rounded bg-mint-green text-white p-1 shadow'>  {side == 'creator' ? 'سازنده' : 'مالک'}</span>
             </div>
 
-            <div className='flex flex-col gap-2 items-start'>
+            <div className='flex flex-col gap-2 items-start col-span-3'>
 
                 <span className='text-body-2-bolder line-clamp-2 text-ellipsis leading-3 h-6'>
                     {title}
