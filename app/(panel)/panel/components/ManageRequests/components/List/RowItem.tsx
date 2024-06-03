@@ -25,7 +25,7 @@ export const RowItem = (req: BuyOrSellReadType & { odd: boolean }) => {
             <div className='col-span-1'>
                 {req.side == 'buy' 
                 ? <span className='text-green-500 font-bold p-0.5 border rounded border-green-500'> خرید </span>
-                : <span className='text-red-500 font-bold p-0.5 border rounded border-red-500'> خرید </span>}</div>
+                : <span className='text-red-500 font-bold p-0.5 border rounded border-red-500'> فروش </span>}</div>
 
             <div className='col-span-1 line-clamp-1 text-ellipsis overflow-hidden'>{req.description}</div>
 
