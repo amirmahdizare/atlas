@@ -90,7 +90,7 @@ export const DataForm = () => {
 
                         return i
                     }),
-                    // tagIds: tags?.map(i => i.id)
+                    tagIds: tags?.map(i => i.id)
                 })
             }
         }
@@ -176,7 +176,7 @@ export const DataForm = () => {
 
                     <Medias />
 
-                    {/* <Tags /> */}
+                    <Tags />
 
                     {/* <div className='flex flex-col gap-2'>
                         <span className='text-french-gray text-body-2-normal  text-right'>برچسب (اختیاری)</span>
