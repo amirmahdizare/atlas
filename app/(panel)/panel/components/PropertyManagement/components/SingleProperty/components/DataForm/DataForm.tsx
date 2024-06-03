@@ -11,19 +11,23 @@ import { SelectLocations } from './components/SelectLocations'
 import { SelectCategory } from './components/SelectCategory'
 import { SelectProductType } from './components/SelectProductType'
 import { Price } from './components/Price'
-import { useCustomMutation } from '@hooks'
+import { useCustomMutation, useUserInfo } from '@hooks'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { api } from '_api/config'
 import { convertMediaUrlToFile, createFormData, createMediaUrl, getBase64Image, isBoolean, isNumber } from 'utils'
 import { toast } from 'react-toastify'
 import { Tags } from './components/Tags'
 import ReactQuill from 'react-quill'
+import { useMutation } from 'react-query'
+import { AxiosError, AxiosResponse } from 'axios'
 
 export const DataForm = () => {
 
     const { mode, proprtyId, dispatch } = usePropertySection()
 
     const { data: propertyData, isFetching, isError, refetch } = usePropertyList()
+
+    const { data: userInfo } = useUserInfo()
 
     const methods = useForm<PropertyCUType<{ content: File | string }>>({
         defaultValues: {
@@ -45,8 +49,10 @@ export const DataForm = () => {
         }
         ,
         onSuccess: (e, v) => {
+            if (userInfo?.data.role.name != 'superAdmin') {
+                return toggle({active:false , id:e.data.id})
+            }
             toast.success(`آگهی با موفقیت ${mode == 'add' ? 'ایجاد' : 'ویرایش'} شد.`)
-            // toggle()
             dispatch({ mode: 'list', proprtyId: undefined })
             refetch()
 
@@ -56,16 +62,19 @@ export const DataForm = () => {
         }
     })
 
-    // const { mutate: toggle, isLoading: toggleLoading } = useCustomMutation<PropretyEndPointsType['TOGGLE_ACTIVE']>({
-    //     mutationFn: (d) => api.patch(PropretyEndPoints.TOGGLE_ACTIVE(id), d),
-    //     onSuccess: () => {
-    //         toast.success(`وضعیت آگهی ${title} با موفقیت تغییر کرد.`)
-    //         refetch()
-    //     },
-    //     onError: (e) => {
-    //         toast.error(e.response?.data.message ?? e.message)
-    //     }
-    // })
+
+
+    const { mutate: toggle, isLoading: toggleLoading } = useMutation<AxiosResponse, AxiosError<any>, { active: boolean, id: string }>({
+        mutationFn: (d) => api.patch(PropretyEndPoints.TOGGLE_ACTIVE(d.id), { active: d.active }),
+        onSuccess: () => {
+            toast.success(`آگهی با موفقیت ${mode == 'add' ? 'ایجاد' : 'ویرایش'} شد. پس از تایید مدیریت به نمایش خواهد آمد.`)
+            dispatch({ mode: 'list', proprtyId: undefined })
+            refetch()
+        },
+        onError: (e) => {
+            toast.error(e.response?.data.message ?? e.message)
+        }
+    })
 
     const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch } = methods
 
