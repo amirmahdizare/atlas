@@ -4,12 +4,32 @@ import ClickAwayListener from 'react-click-away-listener'
 import ReactSwitch from 'react-switch'
 import { AgentListInfo, BuyOrSellReadType, RequestItemType } from 'types'
 import { useRequestSection } from '../../hooks'
+import { useBuyOrSells, useCustomMutation } from '@hooks'
+import { BuyOrSellEndPoints, BuyOrSellEndPointsType } from '_api/endpoints/buyOrSell'
+import { api } from '_api/config'
+import { toast } from 'react-toastify'
+import { Spinner } from '@components'
 
 export const RowItem = (req: BuyOrSellReadType & { odd: boolean }) => {
 
     const [more, setMore] = useState<boolean>(false)
 
     const { dispatch } = useRequestSection()
+
+
+    const { refetch } = useBuyOrSells()
+
+
+    const { mutate, isLoading } = useCustomMutation<BuyOrSellEndPointsType['DELETE_SINGLE']>({
+        mutationFn: () => api.delete(BuyOrSellEndPoints.SINGLE(req.id.toString())),
+        onSuccess: () => {
+            toast.success('در خواست با موفقیت حذف شد.')
+            refetch()
+        },
+        onError: () => {
+            toast.error('خطا در حذف درخواست.')
+        }
+    })
 
     return (
         <div className={`grid grid-cols-7 gap-1 p-1.5 text-space-codet text-body-3-normal items-center hover:bg-gray-200 cursor-pointer ${req.odd ? 'bg-white' : 'bg-seasalt'}`} onClick={() => dispatch({ reqId: req.id.toString(), mode: 'edit' })}>
@@ -23,9 +43,9 @@ export const RowItem = (req: BuyOrSellReadType & { odd: boolean }) => {
 
             <div className='col-span-2 line-clamp-1 text-ellipsis overflow-hidden'>{req.user.firstName ?? '-'} {req.user.lastName ?? '-'}</div>
             <div className='col-span-1'>
-                {req.side == 'buy' 
-                ? <span className='text-green-500 font-bold p-0.5 border rounded border-green-500'> خرید </span>
-                : <span className='text-red-500 font-bold p-0.5 border rounded border-red-500'> فروش </span>}</div>
+                {req.side == 'buy'
+                    ? <span className='text-green-500 font-bold p-0.5 border rounded border-green-500'> خرید </span>
+                    : <span className='text-red-500 font-bold p-0.5 border rounded border-red-500'> فروش </span>}</div>
 
             <div className='col-span-1 line-clamp-1 text-ellipsis overflow-hidden'>{req.description}</div>
 
@@ -65,9 +85,9 @@ export const RowItem = (req: BuyOrSellReadType & { odd: boolean }) => {
 
                                 {/* <div className='flex-1 bg-gray-300 h-[1px]'></div> */}
 
-                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => !isLoading ? mutate({}) : undefined}>
                                     <span>حذف </span>
-                                    <IconTrash width={20} height={20} className='text-red-500' />
+                                    {isLoading ? <Spinner /> : <IconTrash width={20} height={20} className='text-red-500' />}
                                 </div>
 
                             </div>

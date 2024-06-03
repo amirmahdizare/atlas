@@ -35,7 +35,7 @@ export const ClientPage = () => {
 
     const handleMutate = (d: BuyOrSellMutateType<File[]>) => {
 
-        mutate({...d,title :d.title.concat(' / ').concat((new Date()).toLocaleString('fa-ir')) , side:'buy'})
+        mutate({...d,title :d.title.concat('  *  ').concat((new Date()).toLocaleString('fa-ir')) , side:'buy'})
     }
 
     if (isError)
