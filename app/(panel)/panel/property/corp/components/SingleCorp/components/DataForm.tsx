@@ -26,20 +26,20 @@ export const DataForm = () => {
 
     watch(['description'])
 
-    const currentImage = watch('medias')
+    const currentImage = watch('medias') ?? blogsData?.data.find(a => a.id == corpId)?.medias
 
     const { mutate, isLoading } = useCustomMutation<CorpEndPointsType['CREATE']>(
         {
             mutationKey: 'mutateCorp',
             mutationFn: async (data) => {
-
-
+                
                 if (mode == 'edit' && corpId) {
                     var currentImages: (File | undefined)[] = []
+                    console.log(Array.from(data?.medias)?.length > 0 ? data.medias : currentImages)
                     if (blogsData?.data.find(a => a.id == corpId)?.medias)
                         currentImages = await Promise.all(blogsData?.data?.find(a => a.id == corpId)?.medias.map(async i => convertMediaUrlToFile(createMediaUrl(i))) ?? [])
 
-                    return api.patch(CorpEndPoints.SINGLE(corpId), createFormData({ ...data, medias: [...currentImages, ...Array.from(data.medias)] }, ['medias']))
+                    return api.patch(CorpEndPoints.SINGLE(corpId), createFormData({ ...data, medias: Array.from(data?.medias)?.length > 0 ? [...data.medias] : [...currentImages] }, ['medias']))
                 }
                 else
                     return api.post(CorpEndPoints.CREATE, createFormData({ ...data }, ['medias']))
@@ -125,22 +125,22 @@ export const DataForm = () => {
                     errorText={errors?.title?.message}
                 />
 
-                <div className='flex flex-row gap-2'>
+                <div className='flex flex-row gap-2 items-center'>
                     <span className='text-french-gray text-body-2-normal  text-right'>طرف آگهی دهنده </span>
 
-                    <label className='flex flex-row gap-2 items-center'>
+                    <label className='flex flex-row gap-1 items-center border p-1 rounded cursor-pointer'>
                         <span>مالک</span>
                         <input type='radio' value={'owner'} {...register('side', { required: { value: true, message: 'طرفی که این فایل را ایجاد می کند باید مشخص باشد' } })} />
                     </label>
 
-                    <label className='flex flex-row gap-2 items-center'>
+                    <label className='flex flex-row gap-1 items-center border p-1 rounded cursor-pointer'>
                         <span>سازنده</span>
-                        <input type='radio' value={'owner'} {...register('side', { required: { value: true, message: 'طرفی که این فایل را ایجاد می کند باید مشخص باشد' } })} />
+                        <input type='radio' value={'creator'} {...register('side', { required: { value: true, message: 'طرفی که این فایل را ایجاد می کند باید مشخص باشد' } })} />
                     </label>
                 </div>
 
                 {!!errors?.side && <span className='text-red-500 '>{errors?.side?.message}</span>}
-                
+
                 {/* <Input label='مدت زمان مطالعه (به دقیقه)' register={register('duration', {
                     required: {
                         value: true,
