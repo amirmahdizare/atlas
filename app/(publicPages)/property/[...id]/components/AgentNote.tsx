@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@components'
-import { useAgentNotes, useCustomMutation, useUserInfo } from '@hooks'
+import { useAgentNotes, useCustomMutation, useCustomQuery, useUserInfo } from '@hooks'
 import { api } from '_api/config'
 import { AgentNoteEndPoints, AgentNoteEndPointsType } from '_api/endpoints/agentNote'
 import React, { useEffect, useState } from 'react'
@@ -16,7 +16,11 @@ export const AgentNote = (data: PropertyDetailType) => {
     const { data: userData, isError, isLoading: loadingUser } = useUserInfo()
 
 
-    const { data: agentsData, isLoading, isError: agentNoteError, refetch } = useAgentNotes({ enabled: false })
+    const { data: agentsData, isLoading, isError: agentNoteError, refetch } = useCustomQuery<AgentNoteEndPointsType['SINGLE_PRODUCT']>({
+        queryFn: () => api.get(AgentNoteEndPoints.SINGLE_PRODUCT(data.id)),
+        queryKey: ['agentNote', data.id],
+        enabled:false
+    })
 
     useEffect(() => {
 
@@ -35,7 +39,7 @@ export const AgentNote = (data: PropertyDetailType) => {
 
             return currentAgentNote?.id ? api.patch(AgentNoteEndPoints.SINGLE(currentAgentNote?.id), { note: formData.note, productId: formData.productId }) : api.post(AgentNoteEndPoints.CREATE, { note: formData.note, productId: formData.productId })
         },
-        onSuccess:()=>{
+        onSuccess: () => {
             toast.success('یادداشت مشاور با موفقیت ذخیره شد. ')
         }
     })
