@@ -8,15 +8,15 @@ import { SingleProperty } from './components/SingleProperty/SingleProperty'
 
 export const PropertyManagement = ({ me }: { me: boolean }) => {
 
-    const { mode, proprtyId  , dispatch} = usePropertySection()
+    const { mode, proprtyId, dispatch } = usePropertySection()
 
     return (
         <div className='flex flex-col gap-2 max-h-full'>
 
 
-            {mode == 'list' && <List />}
+            <div className={`${mode == 'list' ? '' : 'hidden'}`}>   <List /></div>
 
-            {mode != 'list' && <SingleProperty mode={mode} propertyId={proprtyId} />}
+            <div className={`${mode != 'list' ? '' : 'hidden'}`}>  <SingleProperty mode={mode == 'list' ? 'add' : 'edit'} propertyId={proprtyId} /></div>
 
         </div>
     )

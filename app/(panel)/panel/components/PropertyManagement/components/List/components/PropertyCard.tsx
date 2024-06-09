@@ -2,7 +2,7 @@
 import { Button, Spinner } from '@components'
 import { IconArrowBigUp, IconEye, IconLoader, IconLocation, IconMapPin, IconPencil, IconTrash, IconUser } from '@tabler/icons-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import ReactSwitch from 'react-switch'
 import { PropertyDetailType } from 'types'
 import { usePropertyList, usePropertySection } from '../../../hooks'
@@ -18,7 +18,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
 
     const { data, isLoading: loadingUserData } = useUserInfo()
 
-    const { refetch } = usePropertyList()
+    const { refetch } =usePropertyList()
 
     const { mutate, isLoading } = useCustomMutation<PropretyEndPointsType['DELETE_SINGLE']>({
         mutationFn: () => api.delete(PropretyEndPoints.SINGLE(id)),
@@ -119,7 +119,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
                 </label>}
                 <span className='text-body-2-normal text-ultra-violet'>{active ? 'فعال' : 'غیرفعال'}</span>
 
-                {data?.data.role.name != 'superAdmin' &&  user?.id == data?.data.id && !active && <span className='text-gray-400'>منتظر تایید</span>}
+                {data?.data.role.name != 'superAdmin' && user?.id == data?.data.id && !active && <span className='text-gray-400'>منتظر تایید</span>}
             </div>
         </div>
     )

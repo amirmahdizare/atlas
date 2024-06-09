@@ -11,12 +11,13 @@ export const Tags = () => {
 
     const { setValue, formState: { errors }, watch } = useFormContext<PropertyCUType<string>>()
 
-    const currentTags = watch('tagIds') ?? []
+    const currentTags = watch('tagIds')
 
+    console.log(currentTags)
 
     const toggleTag = (tagId: number) => {
 
-        if (currentTags?.findIndex(i => i == tagId) != -1) {
+        if (currentTags?.findIndex(i => i.toString() == tagId.toString()) != -1) {
             setValue('tagIds', currentTags?.filter(i => i != tagId))
         }
         else

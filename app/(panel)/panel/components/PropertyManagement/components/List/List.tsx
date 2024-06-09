@@ -44,7 +44,7 @@ export const List = () => {
                         scrollableTarget='property-list'
                     >
                         {allProprties?.map(item => <div className='bg-white shadow rounded p-1 '>
-                            <PropertyCard {...item} />
+                            <PropertyCard key={item.id} {...item} />
                         </div>)}
                     </InfiniteScroll>
                 </div>
