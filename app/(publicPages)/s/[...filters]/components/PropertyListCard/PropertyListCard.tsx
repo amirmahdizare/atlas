@@ -13,7 +13,7 @@ import { Share } from './components/Share'
 
 export const PropertyListCard = (data: PropertyDetailType) => {
 
-    const { id, medias, location, price, prePrice, rentPrice, subLocation, title, user } = data
+    const { id, medias, location, price, prePrice, rentPrice, subLocation, title, user, tags } = data
 
 
     const agentAvatar = user?.avatar ? createMediaUrl(user.avatar) : SAMPLE_AVATAR
@@ -34,6 +34,14 @@ export const PropertyListCard = (data: PropertyDetailType) => {
                     <div className='absolute aspect-square bg-white rounded shadow left-1 top-1 p-1'>
                         <BookmarkStatus isSaved={false} />
                     </div> */}
+                    <div className='flex flex-row gap-0.5 items-center absolute left-0.5 bottom-0.5 text-body-3-normal ' dir='ltr'>
+                        {/* target='_blank' href={`/s/tag=[${tag.name}]`} */}
+                        {tags?.slice(0, 2).map(tag => <div style={{ backgroundColor: tag.backgrondColor, color: tag.textColor }} className=' p-0.5 rounded'>
+                            {tag.name}
+                        </div>)}
+                        {!!tags && tags?.length > 2  && <div className='rounded-circle text-gray-400'>+2</div>}
+
+                    </div>
 
                 </div>
             </div>

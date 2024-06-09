@@ -13,12 +13,12 @@ import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/propert
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
 
-export const PropertyCard = ({ medias, id, price, location, user, title, prePrice, rentPrice, active }: PropertyDetailType) => {
+export const PropertyCard = ({ medias, id, price, location, user, title, prePrice, rentPrice, active , tags }: PropertyDetailType) => {
 
 
     const { data, isLoading: loadingUserData } = useUserInfo()
 
-    const { refetch } =usePropertyList()
+    const { refetch } = usePropertyList()
 
     const { mutate, isLoading } = useCustomMutation<PropretyEndPointsType['DELETE_SINGLE']>({
         mutationFn: () => api.delete(PropretyEndPoints.SINGLE(id)),
@@ -57,8 +57,16 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
     return (
         <div className='grid grid-cols-3 gap-1.5 ' >
 
-            <div className='col-span-1'>
+            <div className='col-span-1 relative'>
                 <img src={createMediaUrl(medias?.[0])} className='object-cover aspect-square w-full rounded ' />
+                <div className='flex flex-row gap-0.5 items-center absolute left-0.5 bottom-0.5 text-body-3-normal ' dir='ltr'>
+                    {/* target='_blank' href={`/s/tag=[${tag.name}]`} */}
+                    {tags?.slice(0, 2).map(tag => <div style={{ backgroundColor: tag.backgrondColor, color: tag.textColor }} className=' p-0.5 rounded'>
+                        {tag.name}
+                    </div>)}
+                    {!!tags && tags?.length > 2 && <div className='rounded-circle text-gray-400'>+2</div>}
+
+                </div>
             </div>
 
 
