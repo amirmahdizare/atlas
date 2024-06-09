@@ -23,7 +23,7 @@ export const MenuCollection = ({ title, baseLink, icon: Icon, items }: { title: 
 
             <div className='flex flex-col  pr-2 '>
                 {items.filter(i => i.isMenuItem && i.route.includes(baseLink)).map(item => <Link href={'/panel/'+item.route}
-                    className={pathname.includes(item.route) ? 'text-coral bg-orange-200 p-1 text-body-3-bolder border-r border-r-coral' : 'p-1 text-ultra-violet text-body-3-normal hover:text-coral border-r leading-2'}
+                    className={pathname.includes(item.route) ? 'text-coral bg-orange-200 p-1 text-body-3-bolder border-r border-r-coral leading-[0.55rem]' : 'p-1 text-ultra-violet text-body-3-normal hover:text-coral border-r leading-[0.55rem]'}
                 >
                     {item.title}
                 </Link>)}
