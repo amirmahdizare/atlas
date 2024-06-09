@@ -12,10 +12,12 @@ import { useCustomMutation, useUserInfo } from '@hooks'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
+import { Ladder } from './Ladder'
 
-export const PropertyCard = ({ medias, id, price, location, user, title, prePrice, rentPrice, active , tags }: PropertyDetailType) => {
+export const PropertyCard = (pr: PropertyDetailType) => {
 
 
+    const { medias, id, price, location, user, title, prePrice, rentPrice, active , tags } = pr
     const { data, isLoading: loadingUserData } = useUserInfo()
 
     const { refetch } = usePropertyList()
@@ -108,7 +110,7 @@ export const PropertyCard = ({ medias, id, price, location, user, title, prePric
                     if (prompt(`آیا مایل به حذف آگهی ${title} هستید؟`, 'بله'))
                         mutate({})
                 }}></Button>
-                {/* <Button bgColor='gray' textColor='secondary' icon={IconArrowBigUp} title='نردبان'></Button> */}
+                <Ladder {...pr}/>
                 {isUserCanChangeStatus && <label className='flex flex-row gap-1 items-center'>
                     {!toggleLoading
                         ? <ReactSwitch
