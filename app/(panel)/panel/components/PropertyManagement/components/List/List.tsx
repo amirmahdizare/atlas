@@ -32,7 +32,7 @@ export const List = () => {
                     <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت آگهی</Button>
 
                 </div>
-                <div className=' h-fit overflow-auto ' id='property-list'>
+                <div className=' h-full overflow-auto ' id='property-list'>
 
                     <InfiniteScroll
                         className='grid grid-cols-1 lg:grid-cols-2 gap-2 h-full'
@@ -40,7 +40,7 @@ export const List = () => {
                         hasMore={!!hasNextPage}
                         loader={<div className='flex h-full w-full items-center justify-center bg-gray-50 animate-pulse rounded min-h-[80px]'><Spinner /></div>}
                         next={() => fetchNextPage()}
-                        style={{ overflow: 'unset' }}
+                        // style={{ overflow: 'unset' }}
                         scrollableTarget='property-list'
                     >
                         {allProprties?.map(item => <div className='bg-white shadow rounded p-1 '>
