@@ -4,7 +4,7 @@ import logofull from 'images/logo-full.svg'
 // import { IconArrowDownLeft } from '@tabler/icons-react'
 import Link from 'next/link'
 import { Icon123, IconMap, IconMessage, IconPhone } from '@tabler/icons-react'
-import { CONTACT_INFO, NESHAN_SHORTCUT } from 'variables'
+import { CONTACT_INFO, DESCRIPTION, NESHAN_SHORTCUT } from 'variables'
 import { IconArrowLeft , IconBrandInstagram , IconBrandTwitter , IconBrandWhatsapp ,IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
 import { Button } from '@components'
 
@@ -41,8 +41,7 @@ export const Footer = () => {
                 </div>
 
                 <p className='text-ultra-violet leading-3 text-body-3-normal'>
-                    دپارتمان املاک اطلس سال 1398 کار خود را برای هدف ارتقای سطح رضایت متقاضیان ملک در شهر جدید هشتگرد (مهستان) آغاز کرده است.
-                    این مجموعه همواره سعی بر جلب رضایت مالکیت و متقاضیان ملک دارد.
+                    {DESCRIPTION}
                     {/* لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت و سه درصد گذشته حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد */}
                 </p>
 
