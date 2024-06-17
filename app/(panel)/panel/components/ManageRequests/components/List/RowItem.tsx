@@ -31,13 +31,15 @@ export const RowItem = (req: BuyOrSellReadType & { odd: boolean }) => {
         }
     })
 
+    console.log(req.title.split('|'))
+
     return (
         <div className={`grid grid-cols-7 gap-1 p-1.5 text-space-codet text-body-3-normal items-center hover:bg-gray-200 cursor-pointer ${req.odd ? 'bg-white' : 'bg-seasalt'}`} onClick={() => dispatch({ reqId: req.id.toString(), mode: 'edit' })}>
 
             <div className='col-span-2 flex flex-row gap-1 items-center'>
                 {/* <img src={ad.avatar} className='rounded-circle w-5 aspect-square object-cover' /> */}
                 {/* <span> */}
-                {req.title}
+                {req.title.split('|').slice(0,req.title.split('|').length-1).join(' ')}
                 {/* </span> */}
             </div>
 

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useRequestSection } from '../../../hooks'
 import { useBuyOrSells } from '@hooks'
 import { createMediaUrl, isFileSrcImage, isFileSrcVideo } from 'utils'
+import { IconPhoneCall } from '@tabler/icons-react'
+import { CopyLink } from '@components'
 
 
 const RenderContent = ({ file }: { file: string }) => {
@@ -40,7 +42,29 @@ export const DataForm = () => {
 
     return <div className='flex flex-col gap-2'>
 
-        <span className='font-bold'>{targetRecord?.title ?? '-'}</span>
+
+        <div className='flex flex-row gap-1.5 items-center'>
+
+            {targetRecord?.side == 'buy'
+                ? <span className='text-green-500 font-bold p-1 border rounded border-green-500 w-fit'> درخواست خرید </span>
+                : <span className='text-red-500 font-bold p-1 border rounded border-red-500 w-fit'> درخواست فروش </span>}
+
+            <div className='p-1 border flex rounded flex-row gap-1 border-gray-400  items-center'>
+              <span> {targetRecord?.user.firstName ?? '-'} &nbsp;
+                {targetRecord?.user.lastName ?? '-'}</span> 
+                |
+                <a href={`tel:${targetRecord?.user.phoneNumber}`} className='flex flex-row gap-0.5 items-center hover:text-coral'>
+                    <span>{targetRecord?.user.phoneNumber}</span>
+                    <IconPhoneCall className='w-2 h-2 text-gray-400 text-inherit' />
+                </a>
+                |
+                <CopyLink text={targetRecord?.user.phoneNumber ??''}/>
+            </div>
+
+        </div>
+        <span className='font-bold'>عنوان  : {targetRecord?.title.split('|').slice(0, targetRecord.title.split('|').length - 1).join(' ') ?? '-'}</span>
+
+        <span className='text-gray-500'>تاریخ  : {targetRecord?.title.split('|').reverse()[0] ?? '-'}</span>
 
         <p className='leading-4 text-body-3-normal' dangerouslySetInnerHTML={{ __html: targetRecord?.description ?? '-' }} />
 
