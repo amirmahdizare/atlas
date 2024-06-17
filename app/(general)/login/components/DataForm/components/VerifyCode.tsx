@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { redirectJs, startWithZero, storeToken } from 'utils';
 import { useLoginPage } from '../../hooks';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 
 
 
@@ -17,8 +17,9 @@ export const VerifyCode = () => {
 
     const router = useRouter()
 
-    const {refetch}  = useUserInfo()
+    const { refetch } = useUserInfo()
 
+    const callBackUrl = useSearchParams().get('callbackUrl')
     const { register, handleSubmit, formState: { errors } } = useForm<{ verifyCode: string }>()
 
     const { phoneNumber, dispatch } = useLoginPage()
@@ -39,6 +40,8 @@ export const VerifyCode = () => {
             storeToken(data?.data?.access_token)
             toast.success('با موفقیت وارد شدید.')
             refetch()
+            if (callBackUrl)
+                redirect(callBackUrl)
             redirectJs('/')
         },
         onError: (data) => {
