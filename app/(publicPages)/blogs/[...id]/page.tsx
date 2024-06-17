@@ -11,7 +11,7 @@ export const generateMetadata = async ({ params: { id } }: pageProps<{ id: strin
     const response = await fetch(`${ApiBaseURL}${BlogEndPoints.SINGLE(Number(id[0]))}`)
     
     const data: BlogReadType = await response.json()
-    console.log(data)
+
 
 
     try {
