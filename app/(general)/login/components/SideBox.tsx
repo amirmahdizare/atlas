@@ -3,8 +3,9 @@ import React, { ReactNode } from 'react'
 import loginPhoto from 'images/loginPhoto.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { IconArrowLeft, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp, IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
+import { IconArrowLeft, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp, IconBrandTelegram, IconArrowDownLeft, IconPlus, IconPhoneCall, IconMail } from '@tabler/icons-react'
 import { Button } from '@components'
+import { CONTACT_INFO } from 'variables'
 
 const SocialMediaButton = ({ icon: Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
 
@@ -20,7 +21,7 @@ export const SideBox = () => {
         <div className='col-span-7 lg:col-span-3 bg-[#F9F9FF] p-2 lg:h-full flex items-center justify-center flex-col gap-4 relative'>
 
             <div className='hidden lg:flex flex-row absolute top-8 left-8 gap-2 items-center'>
-                <Button icon={IconArrowDownLeft} iconSide='left' bgColor='white' href='requestproperty' textColor='textGray'>درخواست ملک</Button>
+                <Button icon={IconArrowDownLeft} iconSide='left' bgColor='white' href='/requestproperty' textColor='textGray'>درخواست ملک</Button>
                 <Button icon={IconPlus} bgColor='secondary'
                     href='/addproperty'
 
@@ -38,10 +39,10 @@ export const SideBox = () => {
 
 
             <div className='flex flex-row gap-2 items-center lg:absolute bottom-4'>
-                <SocialMediaButton icon={IconBrandInstagram} link='www.google.com' type='normal' />
-                <SocialMediaButton icon={IconBrandTwitter} link='www.twitter.com' type='normal' />
-                <SocialMediaButton icon={IconBrandWhatsapp} link='www.whatsapp' type='colored' />
-                <SocialMediaButton icon={IconBrandTelegram} link='www.telegram' type='normal' />
+                {/* <SocialMediaButton icon={IconBrandInstagram} link='www.google.com' type='normal' /> */}
+                <SocialMediaButton icon={IconMail} link={`mailto:${CONTACT_INFO.email}`} type='normal' />
+                <SocialMediaButton icon={IconPhoneCall} link={`tel:+${CONTACT_INFO.phone}`} type='colored' />
+                {/* <SocialMediaButton icon={IconBrandTelegram} link='www.telegram' type='normal' /> */}
             </div>
 
         </div>

@@ -11,7 +11,7 @@ export const ClientPage = () => {
             <Suspense fallback={<AdvisersLoader />}>
                 <Advisers />
             </Suspense>
-            <SocialMedias />
+            {/* <SocialMedias /> */}
         </div>
     )
 }

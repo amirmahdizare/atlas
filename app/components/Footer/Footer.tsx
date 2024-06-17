@@ -80,12 +80,12 @@ export const Footer = () => {
                 <ContactItem icon={IconPhone} link={`tel:+${CONTACT_INFO.phone}`} title={CONTACT_INFO.phone} />
 
 
-                <div className='flex flex-row gap-2 items-center bottom-4 justify-center '>
+                {/* <div className='flex flex-row gap-2 items-center bottom-4 justify-center '>
                     <SocialMediaButton icon={IconBrandInstagram} link='www.google.com' type='normal' />
                     <SocialMediaButton icon={IconBrandTwitter} link='www.twitter.com' type='normal' />
                     <SocialMediaButton icon={IconBrandWhatsapp} link='www.whatsapp' type='colored' />
                     <SocialMediaButton icon={IconBrandTelegram} link='www.telegram' type='normal' />
-                </div>
+                </div> */}
 
                 <span className='text-ultra-violet text-body-2-normal  lg:hidden'>کلیه حقوق این سایت متعلق به دپارتمان املاک اطلس می باشد.</span>
 
