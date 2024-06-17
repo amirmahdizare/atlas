@@ -25,7 +25,7 @@ export const Filters = () => {
         <SelectType />
         <Divider />
         <CategoryFilter />
-        {/*TODO <PriceFilter /> */}
+         <PriceFilter />
         <Divider />
         <SelectCity />
         <SelectArea />

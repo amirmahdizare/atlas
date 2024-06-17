@@ -81,31 +81,31 @@ export const usePropertySearchResults = () => {
     //     dispatchFilter({filter :filters})
 
 
-    // const especialFilters = rest.productType == 'sell' ? ['price'] : ['prePrice', 'rentPrice']
+    const especialFilters = rest.productType == 'sell' ? ['price'] : ['prePrice', 'rentPrice']
 
 
-    ///TODO Price Filter
+    //TODO Price Filter
 
-    // const especialFiltersObj = featureValues?.reduce<Partial<PropertySearchParams>>((pv, cv) => {
-    //     if (especialFilters.indexOf(cv.filterId) != -1) {
-    //         const keyFilter = especialFilters.find(i => i == cv.filterId)
-    //         if (keyFilter)
-    //             return ({ ...pv, [keyFilter]: cv.value })
+    const especialFiltersObj = featureValues?.reduce<Partial<PropertySearchParams>>((pv, cv) => {
+        if (especialFilters.indexOf(cv.filterId) != -1) {
+            const keyFilter = especialFilters.find(i => i == cv.filterId)
+            if (keyFilter)
+                return ({ ...pv, [keyFilter]: cv.value })
 
-    //     }
-    //     return pv
-    // }, {})
+        }
+        return pv
+    }, {})
 
-    // const currentFilter: PropertySearchParams = {
-    //     ...rest ,
-    //     ...especialFiltersObj,
-    //     ...featureValues?.filter(i => especialFilters.indexOf(i.filterId) == -1),
+    const currentFilter: PropertySearchParams = {
+        ...rest ,
+        ...especialFiltersObj,
+        ...featureValues?.filter(i => especialFilters.indexOf(i.filterId) == -1),
 
-    // }
+    }
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
         queryFn: ({ queryKey, pageParam = 1 }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? { ...JSON.parse(queryKey[1]), limit: SEARCH_PRODUCT_LIMIT, page: pageParam } : {}),
-        queryKey: ['SearchProprtyResults', JSON.stringify(searchHook.filter)],
+        queryKey: ['SearchProprtyResults', JSON.stringify(currentFilter)],
         staleTime: minuteToMs(5),
         getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined
     })
