@@ -169,3 +169,10 @@ export const redirectJs = (path: string) => {
 
   return
 }
+
+
+export const copyLink = (text: string) => {
+
+  navigator.clipboard.writeText(text);
+
+}
