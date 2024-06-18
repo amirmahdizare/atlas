@@ -84,7 +84,7 @@ export const Filters = () => {
             : undefined}
 
           {isFetching && <div className='flex flex-row justify-center w-full lg:hidden'><Spinner /></div>}
-          {Array.isArray(allProprties) && !isFetching && <Button onClick={() => setIsOpen(false)} loading={isLoading}> مشاهده  {allProprties && allProprties?.length > SEARCH_PRODUCT_LIMIT ? `+${SEARCH_PRODUCT_LIMIT}` : allProprties?.length} نتیجه</Button>}
+          {Array.isArray(allProprties) && !isFetching && <Button className='lg:hidden' onClick={() => setIsOpen(false)} loading={isLoading}> مشاهده  {allProprties && allProprties?.length > SEARCH_PRODUCT_LIMIT ? `+${SEARCH_PRODUCT_LIMIT}` : allProprties?.length} نتیجه</Button>}
           {searchResultError && !isFetching && <span className='text-red-500 lg:hidden text-center'>خطا در دریافت اطلاعات</span>}
 
         </div>
