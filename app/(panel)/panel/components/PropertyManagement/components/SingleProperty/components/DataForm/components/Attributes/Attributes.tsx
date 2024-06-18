@@ -10,7 +10,7 @@ const AttrContainer = ({ children }: { children: ReactNode }) => {
     return <div className='border-r-2  border-r-coral pr-1.5 flex flex-row gap-2 items-center'>{children}</div>
 }
 
-export const Attributes = () => {
+export const Attributes = ({ initialSubCategoryId }: { initialSubCategoryId?: number }) => {
 
     const { getValues, control, setValue, watch, register, formState: { errors } } = useFormContext<PropertyCUType<File>>()
 
@@ -36,9 +36,11 @@ export const Attributes = () => {
     useEffect(() => {
 
         if (attrss) {
-            
-            const initalAttributes = attrss?.map(i => ({ value: i.type=='boolean' ? false : undefined, filterId: i.id }))
-            setValue('features', initalAttributes)
+            if (initialSubCategoryId != selectedSubcategory) {
+
+                const initalAttributes = attrss?.map(i => ({ value: i.type == 'boolean' ? false : undefined, filterId: i.id }))
+                setValue('features', initalAttributes)
+            }
         }
 
     }, [selectedSubcategory])
@@ -73,7 +75,7 @@ export const Attributes = () => {
                 {!selectedSubcategory && <span className='text-gray-500'>برای افزودن ویژگی های باید زیر دسته بندی را انتخاب کنید</span>}
 
                 {!!selectedSubcategory && fields.length == 0 && <span className='text-gray-500'>این زیر دسته بندی ویژگی ای ندارد.</span>}
-               
+
                 {fields?.map((item, index) => {
                     if (findType(item.filterId) == 'string')
                         return <AttrContainer>
@@ -94,9 +96,9 @@ export const Attributes = () => {
                             <NumericFormat
                                 thousandSeparator
                                 placeholder={findTitle(item.filterId)}
-                                onValueChange={(e) => setValue(`features.${index}.value`, e.floatValue,{shouldValidate:true})}
+                                onValueChange={(e) => setValue(`features.${index}.value`, e.floatValue, { shouldValidate: true })}
                                 value={Number(getValues(`features.${index}.value`))}
-                                className={`border outline-none focus:border-mint-green rounded-sm p-0.5 ${!!(errors?.[`features`])?.[index] ? 'border-imperial-red' : '' }`}
+                                className={`border outline-none focus:border-mint-green rounded-sm p-0.5 ${!!(errors?.[`features`])?.[index] ? 'border-imperial-red' : ''}`}
                             />
                             <span>{findUnit(item.filterId)}</span>
                             {!!errors?.features?.[index] && <IconAlertCircle className='text-red-500' />}
@@ -105,14 +107,14 @@ export const Attributes = () => {
                         return <AttrContainer><label id={item.id} className='flex flex-row gap-1 items-center cursor-pointer'>
                             <span className=' text-body-2-normal  text-right'>{findTitle(item.filterId)}</span>
                             <input type='checkbox' defaultChecked={false} {...register(`features.${index}.value`, {
-                                
+
                                 // required: {
                                 //     value: true,
                                 //     message: `${findTitle(item.filterId)} وارد نشده است`
                                 // }
 
                             })} />
-                             {!!errors?.features?.[index] && <IconAlertCircle className='text-red-500' />}
+                            {!!errors?.features?.[index] && <IconAlertCircle className='text-red-500' />}
                         </label></AttrContainer>
                     else
                         return <>-</>

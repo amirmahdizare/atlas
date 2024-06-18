@@ -63,10 +63,10 @@ export const DataForm = () => {
             if (Array.isArray(errorResponse)) {
                 toast.warning('برخی ویژگی ها به درستی وارد نشده اند.')
                 // errorResponse.forEach(e => { setError(e.split(' ')?.[0] as any, { message: 'به درستی وارد نشده است.' }) })
-            //     errorResponse.forEach(e => { 
-                    
-            //         setError(e.split(' ')?.[0] as any, { message: 'به درستی وارد نشده است.' }) 
-            // })
+                //     errorResponse.forEach(e => { 
+
+                //         setError(e.split(' ')?.[0] as any, { message: 'به درستی وارد نشده است.' }) 
+                // })
             }
             else {
 
@@ -88,7 +88,7 @@ export const DataForm = () => {
             toast.error(e.response?.data.message ?? e.message)
         }
     })
-    
+
     const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch, setError } = methods
     console.log(errors)
 
@@ -121,7 +121,7 @@ export const DataForm = () => {
                     medias: medias?.map(i => ({ content: createMediaUrl(i) })),
                     features: features.map(i => {
                         if (isBoolean(i.value))
-                            return ({ ...i, value: i.value=='true' ? true : false })
+                            return ({ ...i, value: i.value == 'true' ? true : false })
                         else if (isNumber(i.value))
 
                             return ({ ...i, value: Number(i.value) })
@@ -210,7 +210,7 @@ export const DataForm = () => {
                         errorText={errors.description?.message}
                     /> */}
 
-                    <Attributes />
+                    <Attributes initialSubCategoryId={allProprties?.find(i => i.id == proprtyId)?.subCategory?.id ?? undefined} />
 
                     <Medias />
 
