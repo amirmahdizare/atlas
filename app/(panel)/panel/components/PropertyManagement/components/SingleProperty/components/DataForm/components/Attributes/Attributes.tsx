@@ -4,6 +4,7 @@ import { NumericFormat } from 'react-number-format'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { PropertyCUType } from 'types'
 import { useFullCategories } from '@hooks'
+import { IconAlertCircle } from '@tabler/icons-react'
 
 const AttrContainer = ({ children }: { children: ReactNode }) => {
     return <div className='border-r-2  border-r-coral pr-1.5 flex flex-row gap-2 items-center'>{children}</div>
@@ -19,6 +20,8 @@ export const Attributes = () => {
         name: 'features'
     })
 
+    console.log(fields)
+
     watch('features')
 
     const { data, isLoading, isError } = useFullCategories()
@@ -29,28 +32,29 @@ export const Attributes = () => {
     const selectedCategory = getValues('category')
 
 
-    const attrss = data?.data.find(i => i.id == selectedCategory)?.subCategories.find(i => i.id == selectedSubcategory)?.filters
+    const attrss = data?.data.find(i => i.id == selectedCategory?.toString())?.subCategories.find(i => i.id == selectedSubcategory?.toString())?.filters
     useEffect(() => {
 
         if (attrss) {
-            const initalAttributes = attrss?.map(i => ({ value: undefined, filterId: i.id }))
+            
+            const initalAttributes = attrss?.map(i => ({ value: i.type=='boolean' ? false : undefined, filterId: i.id }))
             setValue('features', initalAttributes)
         }
 
     }, [selectedSubcategory])
 
 
-    const attrs: Array<{ key: string, type: 'string' | 'number' | 'boolean', title: string }> = [
-        {
-            key: 'metr', title: 'متراژ بنا', type: 'number',
-        },
-        {
-            key: 'asansor', title: 'آسانسور', type: 'boolean'
-        },
-        {
-            key: 'document', title: 'نوع سند', type: 'string'
-        }
-    ]
+    // const attrs: Array<{ key: string, type: 'string' | 'number' | 'boolean', title: string }> = [
+    //     {
+    //         key: 'metr', title: 'متراژ بنا', type: 'number',
+    //     },
+    //     {
+    //         key: 'asansor', title: 'آسانسور', type: 'boolean'
+    //     },
+    //     {
+    //         key: 'document', title: 'نوع سند', type: 'string'
+    //     }
+    // ]
 
 
     const findType = (filterId: string) => attrss?.find(i => i.id == filterId)?.type
@@ -90,25 +94,28 @@ export const Attributes = () => {
                             <NumericFormat
                                 thousandSeparator
                                 placeholder={findTitle(item.filterId)}
-                                onValueChange={(e) => setValue(`features.${index}.value`, e.floatValue)}
-                                value={Number(getValues(`features.${index}.value`) ?? 0)}
-                                className='border rounded-sm p-0.5'
+                                onValueChange={(e) => setValue(`features.${index}.value`, e.floatValue,{shouldValidate:true})}
+                                value={Number(getValues(`features.${index}.value`))}
+                                className={`border outline-none focus:border-mint-green rounded-sm p-0.5 ${!!(errors?.[`features`])?.[index] ? 'border-imperial-red' : '' }`}
                             />
                             <span>{findUnit(item.filterId)}</span>
+                            {!!errors?.features?.[index] && <IconAlertCircle className='text-red-500' />}
                         </AttrContainer>
                     else if (findType(item.filterId) === 'boolean')
                         return <AttrContainer><label id={item.id} className='flex flex-row gap-1 items-center cursor-pointer'>
-                            <span className=' text-body-2-normal  text-right'>{findTitle(item.filterId)} دارد</span>
-                            <input type='checkbox' {...register(`features.${index}.value`, {
-                                required: {
-                                    value: true,
-                                    message: `${findTitle(item.filterId)} وارد نشده است`
-                                }
+                            <span className=' text-body-2-normal  text-right'>{findTitle(item.filterId)}</span>
+                            <input type='checkbox' defaultChecked={false} {...register(`features.${index}.value`, {
+                                
+                                // required: {
+                                //     value: true,
+                                //     message: `${findTitle(item.filterId)} وارد نشده است`
+                                // }
 
                             })} />
+                             {!!errors?.features?.[index] && <IconAlertCircle className='text-red-500' />}
                         </label></AttrContainer>
                     else
-                        return <>sdf</>
+                        return <>-</>
                 })}
             </div>
 

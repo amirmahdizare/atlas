@@ -47,7 +47,7 @@ export const SelectCategory = () => {
                 {isError && <div className='text-red-500'>خطا در دریافت زیردسته بندی ها</div>}
 
                 {fullData?.data && <Select
-                    items={fullData?.data?.find(i => i.id == getValues('category'))?.subCategories?.map(i => ({ lable: i.title, value: i.id.toString() })) ?? []}
+                    items={fullData?.data?.find(i => i.id == getValues('category')?.toString() )?.subCategories?.map(i => ({ lable: i.title, value: i.id.toString() }))?? []}
                     onChange={(v) => setValue('subCategory', v)}
                     value={getValues('subCategory')}
                     placeHolder='انتخاب زیردسته بندی'
