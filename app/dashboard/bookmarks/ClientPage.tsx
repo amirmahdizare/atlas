@@ -24,8 +24,8 @@ export const ClientPage = () => {
 
                 <div className='grid grid-cols-2 xl:grid-cols-3 gap-2 '>
 
-                    {data.data.map(item => <div className='col-span-2 lg:col-span-1 border rounded p-1'>
-                        <BookmarkCard {...item} />
+                    {data.data.toReversed().map(item => <div className='col-span-2 lg:col-span-1 border rounded p-1'>
+                        <BookmarkCard key={item.id} {...item} />
                     </div>)}
 
                     {/* {bookmarks.map(item => <div className='col-span-2 lg:col-span-1'>

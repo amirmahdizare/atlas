@@ -87,22 +87,27 @@ export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
     onError: () => toast.error('خطا در دریافت برچسب ها'),
 })
 
-export const useBookmark = (productId: string, isActive: boolean) => {
+export const useBookmark = (productId: string) => {
 
     const pathname = usePathname()
 
+    const {data , refetch} = useMyBookmarks()
+
     const { push } = useRouter()
 
+    const state = !!data?.data.find(d=>d.product.id==productId)
+
     const store = create<{ isActive: boolean, toggle: (state: boolean) => void }>((set) => ({
-        isActive: isActive,
+        isActive: state,
         toggle: () => set((state) => ({ isActive: !state.isActive }))
     }))
 
 
     const { mutate: baseMutate, ...mutQury } = useCustomMutation({
-        mutationFn: () => store.getState().isActive ? api.delete(BookmarkEndPoints.OFF(productId)) : api.post(BookmarkEndPoints.ON(productId)),
+        mutationFn: () => store.getState().isActive ? api.delete(BookmarkEndPoints.OFF(productId)) : api.post(BookmarkEndPoints.ON(productId), { productId: productId }),
         onSuccess: (d, v) => {
             store.getState().toggle(v)
+            refetch()
         },
         onError: (e) => {
             console.log(e)

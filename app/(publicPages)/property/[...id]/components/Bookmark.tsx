@@ -7,10 +7,10 @@ import { Spinner } from '@components'
 // import { usePathname } from 'next/navigation'
 // import { revalidatePath } from 'next/cache'
 
-export const Bookmark = ({ isBookmarked, id }: { isBookmarked: boolean, id: string }) => {
+export const Bookmark = ({  id }: {  id: string }) => {
 
 
-    const { isActive, mutate, isLoading } = useBookmark(id, isBookmarked)
+    const { isActive, mutate, isLoading } = useBookmark(id)
 
     // const pathname = usePathname()
 
