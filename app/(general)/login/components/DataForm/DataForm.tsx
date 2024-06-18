@@ -16,7 +16,7 @@ export const DataForm = () => {
                 &nbsp;
                 به اطلس
             </span>
-
+            {/* <VerifyCode /> */}
             {step=='enter' ? <EnterPhone /> : <VerifyCode />}
 
 

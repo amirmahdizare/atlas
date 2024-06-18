@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { Button, Input } from '@components'
 import { api } from '_api/config';
@@ -10,6 +10,7 @@ import { redirectJs, startWithZero, storeToken } from 'utils';
 import { useLoginPage } from '../../hooks';
 import { toast } from 'react-toastify';
 import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import VerificationInput from 'react-verification-input';
 
 
 
@@ -19,8 +20,10 @@ export const VerifyCode = () => {
 
     const { refetch } = useUserInfo()
 
+    const [value, setValue] = useState<string>('')
+
     const callBackUrl = useSearchParams().get('callbackUrl')
-    const { register, handleSubmit, formState: { errors } } = useForm<{ verifyCode: string }>()
+    // const { register, handleSubmit, formState: { errors } } = useForm<{ verifyCode: string }>()
 
     const { phoneNumber, dispatch } = useLoginPage()
 
@@ -50,14 +53,23 @@ export const VerifyCode = () => {
     })
 
     const handleEnter = (data: { verifyCode: string }) => {
+        if (!data.verifyCode) {
+            toast.warn('کد تایید وارد نشده است')
+            return
+        }
+        else if (data?.verifyCode?.length != 5) {
+            toast.warn('کد تایید به طور کامل وارد نشده است')
+            return
+        }
         if (phoneNumber)
             mutate({ code: data.verifyCode, phoneNumber })
     }
-
+    //  onSubmit={handleSubmit(handleEnter)}
+    console.log(value)
     return (
-        <form className='flex flex-col gap-3' onSubmit={handleSubmit(handleEnter)}>
+        <form className='flex flex-col gap-3'>
             <span className='text-h5-normal text-gray-400'>لطفا کد ارسال شده به موبایل خود را وارد کنید</span>
-            <Input
+            {/* <Input
                 required
                 placeholder='کد تایید'
                 register={register('verifyCode'
@@ -67,8 +79,25 @@ export const VerifyCode = () => {
                     })}
                 type='tel'
                 dir='rtl'
+            /> */}
+            <VerificationInput
+                classNames={{
+                    container: "container ltr flex-row-reverse flex text-body-2-normal scale-75",
+                    character: "character border rounded",
+                    characterInactive: "character--inactive border-french-gray",
+                    characterSelected: "border-robin-egg",
+                    characterFilled: "character--filled",
+                }}
+                length={5}
+                onChange={(f) => setValue(f)}
+                value={value}
+                onComplete={(f) => handleEnter({ verifyCode: f })}
+                autoFocus
+                placeholder=' '
+                inputProps={{autoComplete:'one-time-code' , inputMode:'numeric'}}
+                
             />
-            <div className='flex flex-row gap-2 text-body-3-normal items-center'>
+            <div className='flex flex-row gap-2 text-body-3-normal items-center '>
                 <Countdown
                     date={Date.now() + (1000 * 60 * 2)}
                     renderer={renderer}
@@ -76,9 +105,9 @@ export const VerifyCode = () => {
 
             </div>
 
-            {errors.verifyCode && <span className='text-red-500 text-body-3-light font-bold text-right'>{errors.verifyCode.message}</span>}
+            {/* {errors.verifyCode && <span className='text-red-500 text-body-3-light font-bold text-right'>{errors.verifyCode.message}</span>} */}
 
-            <Button bgColor='primaryNormal' loading={isLoading}>
+            <Button type='button' onClick={() => handleEnter({ verifyCode: value ?? '' })} bgColor='primaryNormal' loading={isLoading}>
                 تایید
             </Button>
 
