@@ -31,7 +31,7 @@ export const accessPairs: Array<{ frontRoute: string, permissionsAction: Array<k
     {
         //Todo
         frontRoute: 'base/permissions',
-        permissionsAction: ['USER_CREATE']
+        permissionsAction: ['ROLE_CREATE','ROLE_DELETE']
     },
     {
         frontRoute: 'property/list',
