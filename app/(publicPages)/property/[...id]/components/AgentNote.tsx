@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 
 
 import { PropertyDetailType } from 'types'
+import { agentRoles } from 'variables'
 
 export const AgentNote = (data: PropertyDetailType) => {
 
@@ -19,7 +20,7 @@ export const AgentNote = (data: PropertyDetailType) => {
     const { data: agentsData, isLoading, isError: agentNoteError, refetch } = useCustomQuery<AgentNoteEndPointsType['SINGLE_PRODUCT']>({
         queryFn: () => api.get(AgentNoteEndPoints.SINGLE_PRODUCT(data.id)),
         queryKey: ['agentNote', data.id],
-        enabled:false
+        enabled: false
     })
 
     useEffect(() => {
@@ -43,8 +44,8 @@ export const AgentNote = (data: PropertyDetailType) => {
             toast.success('یادداشت مشاور با موفقیت ذخیره شد. ')
         }
     })
-
-    const isUserPermitToNote = userData?.data.role.name == 'superAdmin' || data.user?.id == userData?.data.id
+    
+    const isUserPermitToNote = agentRoles.indexOf(userData?.data.role.name ?? '') != -1 || data.user?.id == userData?.data.id
 
     const isMutateSuccessful = !!mutateResult?.data?.id
 
@@ -53,7 +54,7 @@ export const AgentNote = (data: PropertyDetailType) => {
 
     useEffect(() => {
         if (userData?.data) {
-            const isUserPermitToNote = userData?.data.role.name == 'superAdmin' || data.user?.id == userData?.data.id
+            const isUserPermitToNote = agentRoles.indexOf(userData?.data.role.name) != -1  || data.user?.id == userData?.data.id
             if (isUserPermitToNote)
                 refetch()
         }
