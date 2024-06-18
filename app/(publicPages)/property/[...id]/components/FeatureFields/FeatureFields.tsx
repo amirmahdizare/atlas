@@ -18,11 +18,11 @@ export const FeatureFields = ({ data: { subCategory, category, features: baseFea
 
     if (data && !!subCategory?.id && !!category?.id && baseFeatures?.length > 0) {
 
-        const filtersData = data.data.find(c => c.id = category?.id.toString())?.subCategories.find(sc => sc.id == subCategory?.id.toString())?.filters
+        const filtersData = data.data.find(c => c.id == category?.id.toString())?.subCategories.find(sc => sc.id == subCategory?.id.toString())?.filters
 
         if (filtersData) {
 
-            const features = baseFeatures.map(i => ({ ...i, type: filtersData.find(fd => fd.id == i.filterId)?.type, isPrimary: filtersData.find(fd => fd.id == i.filterId)?.isPrimary == 'true' ? true : false, title: filtersData.find(fd => fd.id == i.filterId)?.title ?? '' }))
+            const features = baseFeatures.filter(f=>filtersData.findIndex (a=>a.id == f.filterId)!=-1 ).map(i => ({ ...i, type: filtersData.find(fd => fd.id == i.filterId)?.type, isPrimary: filtersData.find(fd => fd.id == i.filterId)?.isPrimary == 'true' ? true : false, title: filtersData.find(fd => fd.id == i.filterId)?.title ?? '' }))
 
             return (
                 <>
