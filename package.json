@@ -27,6 +27,7 @@
     "react-quill": "^2.0.0",
     "react-switch": "^7.0.0",
     "react-toastify": "^10.0.4",
+    "react-verification-input": "^4.1.2",
     "swiper": "^11.0.3",
     "zustand": "^4.4.4"
   },
