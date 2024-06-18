@@ -16,8 +16,6 @@ export const ClientPage = () => {
 
     const { data, isError } = useUserInfo()
 
-    console.log({data , isError})
-
     if (!!data?.data?.id)
         return redirect('/')
     else if (!data?.data?.id)
