@@ -150,7 +150,7 @@ export const usePropertySearchResults = () => {
     }
 
     useEffect(() => {
-        if (locationsData?.data)
+        if (locationsData?.data && catData?.data)
             push(`/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}`)
     }, [searchHook.filter])
 

@@ -56,7 +56,7 @@ export const Slider = () => {
           onSwiper={(swiper) => console.log(swiper)}
           className='flex flex-col items-stretch justify-stretch'
         >
-          {data.data.map(item => <SwiperSlide className='h-full'><SingleItem title={item.title} id={item.id} key={item.title} /></SwiperSlide>)}
+          {data.data.map(item => <SwiperSlide className='h-full'><SingleItem enTitle={item.enTitle} title={item.title} id={item.id} key={item.title} /></SwiperSlide>)}
         </Swiper>
       </div>
     );
