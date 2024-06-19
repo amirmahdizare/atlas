@@ -25,7 +25,7 @@ export const Converter = ({ filters }: { filters: string[] }) => {
 
     useEffect(() => {
 
-        var citiesFilter: Array<number | undefined> = []
+        var citiesFilter: Array<number> = []
 
         /// From URL  to Client Query
 
@@ -36,7 +36,7 @@ export const Converter = ({ filters }: { filters: string[] }) => {
 
         if (cityQry.split('-').length > 1 && cityQry.split('-')[1] == 'city') {
             if (citiesData?.data.find(c => c.name.toLowerCase() == cityQry.split('-')[0].toLowerCase())) {
-                citiesFilter = [citiesData?.data.find(c => c.name == cityQry.split('-')[0])?.id]
+                citiesFilter = [citiesData?.data.find(c => c.name == cityQry.split('-')[0])?.id ?? 0]
             }
             else {
                 //Incorrect City
@@ -78,10 +78,10 @@ export const Converter = ({ filters }: { filters: string[] }) => {
         else if (catQry.split('-')[1] == 'subcategory' && catQry.split('-').length > 1) {
             //Subcategory 
 
-            const allSubcategories = catData?.data.reduce <SubCategoryType<string,string>[]>((pv, cv) =>{
+            const allSubcategories = catData?.data.reduce<SubCategoryType<string, string>[]>((pv, cv) => {
                 pv.push(...cv.subCategories)
                 return pv
-            } , [])
+            }, [])
             if (allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
                 //CorrectSubCategory
                 subCategoryFilter = allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
@@ -92,15 +92,25 @@ export const Converter = ({ filters }: { filters: string[] }) => {
         }
 
 
+        const categoryFilterFn = () => {
+            if (categoryFilter)
+                return categoryFilter
+            else if (subCategoryFilter)
+                return catData?.data.find(c => c.subCategories.findIndex(d => d.id == subCategoryFilter) != -1)?.id
+            return undefined
+        }
+
+        dispatchFilter({
+            location: citiesFilter ?? [],
+            category: categoryFilterFn() ? [Number(categoryFilterFn())] : undefined,
+            subCategory: subCategoryFilter ? [Number(subCategoryFilter)] : undefined
+        })
 
 
+        console.log({ citiesFilter, categoryFilter, subCategoryFilter })
 
 
-
-        console.log({citiesFilter  ,categoryFilter ,subCategoryFilter})
-
-
-    }, [citiesData, filters  , catData])
+    }, [citiesData, filters, catData])
 
     const city = cityQry.split('-')
     return (
