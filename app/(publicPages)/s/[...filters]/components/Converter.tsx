@@ -107,7 +107,8 @@ export const Converter = ({ filters }: { filters: string[] }) => {
         dispatchFilter({
             location: citiesFilter ?? [],
             category: categoryFilterFn() ? [Number(categoryFilterFn())] : undefined,
-            subCategory: subCategoryFilter ? [Number(subCategoryFilter)] : undefined
+            subCategory: subCategoryFilter ? [Number(subCategoryFilter)] : undefined,
+            title: searchQuery.get('title') ?? undefined
         })
 
 

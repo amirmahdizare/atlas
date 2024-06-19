@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { CategoryFilter, SelectArea, SelectCity, SelectType } from './components'
+import { CategoryFilter, SelectArea, SelectCity, SelectType, Title } from './components'
 import { usePropertySearchResults, useSearchProperty } from '../../hooks/index'
 // import { categories } from './components/CategoryFilter/data.mock'
 import { BooleanFilter, OneButtonFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
@@ -34,11 +34,11 @@ export const Filters = () => {
 
     return (
       <>
-      <div className='flex flex-row gap-2 items-center justify-between lg:hidden'>
-        <span className='text-body-1-bolder'>جستجوی ملک در اطلس</span>
+        <div className='flex flex-row gap-2 items-center justify-between lg:hidden'>
+          <span className='text-body-1-bolder'>جستجوی ملک در اطلس</span>
 
-        <Button bgColor='secondary' icon={IconFilter} onClick={() => setIsOpen(true)}>فیلتر</Button>
-      </div>
+          <Button bgColor='secondary' icon={IconFilter} onClick={() => setIsOpen(true)}>فیلتر</Button>
+        </div>
         <div className={` flex-col gap-2 ${isOpen ? 'fixed top-0 left-0 w-full h-screen overflow-auto bg-white p-2.5 lg:p-0 lg:w-auto lg:static lg:top-0 z-50 flex' : 'hidden lg:flex'}`}>
           <div className='lg:hidden cursor-pointer float-left flex flex-row justify-between items-center' onClick={() => setIsOpen(false)}>
             <span className='text-body-2-bolder'>فیلتر ملک</span>
@@ -46,6 +46,10 @@ export const Filters = () => {
           </div>
           <SelectType />
           <Divider />
+          {filter?.title && <>
+            <Title />
+            <Divider />
+          </>}
           <CategoryFilter />
           <PriceFilter />
           <Divider />

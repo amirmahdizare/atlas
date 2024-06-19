@@ -18,7 +18,7 @@ export const List = () => {
         return pv
     }, [])
 
-    const {dispatchFilter} = useSearchProperty()
+    const { dispatchFilter, dispatch } = useSearchProperty()
     if (allProprties && allProprties?.length > 0)
         return (
             <div className='max-h-full overflow-auto' id='search-results'>
@@ -54,7 +54,7 @@ export const List = () => {
         return <div className='h-full flex flex-col gap-2 items-center justify-center p-2'>
             <div className='text-center  w-full  text-dark-orange flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
             <Button icon={IconArrowDownLeft} iconSide='left' bgColor='secondary' href='/requestproperty' textColor='white'>درخواست ملک</Button>
-            <span className='cursor-pointer hover:text-coral' onClick={()=>dispatchFilter({category:undefined})}>بازگشت به همه</span>
+            <span className='cursor-pointer hover:text-coral' onClick={() => dispatch({ filter: {} })}>بازگشت به همه</span>
         </div>
 
     return <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 '>

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import landingOne from 'images/landingRight.svg'
 import landingTwo from 'images/landingLeft.svg'
 import { Suggest } from './components/Suggest/Suggest'
+import { Search } from './components/Search'
 
 export const HeroSection = () => {
     return (
@@ -25,10 +26,7 @@ export const HeroSection = () => {
                     </p>
                 </div>
 
-                <div className='bg-white p-1 flex flex-row gap-1 lg:gap-2 items-center border border-gray-100  whitespace-nowrap w-full'>
-                    <Input customMinWidthClass='-' fullWidth  placeholder='مثلا : ویلا یا خانه' />
-                    <Button bgColor='secondary' >جستجو کن !</Button>
-                </div>
+                <Search />
 
                 <Suggest />
 

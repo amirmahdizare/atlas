@@ -73,7 +73,7 @@ export const convertClientParamtToUrl = (filter: PropertySearchParams, push: (hr
 
 export const usePropertySearchResults = () => {
 
-    // const searchParams = useSearchParams()
+    const searchParams = useSearchParams()
 
     const { data: locationsData } = useCities()
 
@@ -151,7 +151,7 @@ export const usePropertySearchResults = () => {
 
     useEffect(() => {
         if (locationsData?.data && catData?.data)
-            push(`/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}`)
+            push(`/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}${searchHook.filter.title ? `&?title=${searchHook.filter.title}` : ''}`)
     }, [searchHook.filter])
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({

@@ -467,7 +467,8 @@ export interface PropertySearchParams {
     productType?: ProductType,
     price?: string,
     prePrice?: string,
-    rentPrice?: string
+    rentPrice?: string,
+    title?:string
 }
 
 
