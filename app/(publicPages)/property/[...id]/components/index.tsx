@@ -1,6 +1,6 @@
 export { Title } from './Title'
 export { Descriptions } from './Descriptions'
-export { SimilarCategories } from './SimilarCategories'
+// export { SimilarCategories } from './SimilarCategories'
 export { AgentInfo } from './AgentInfo/AgentInfo'
 export { Note } from './Note'
 export { Media } from './Media/Media'

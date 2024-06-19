@@ -38,7 +38,7 @@ export const PropertyCard = ({ img, id, price, location, agentInfo, title }: Pro
 
             </div>
             <div className='flex flex-row gap-1 justify-evenly col-span-3'>
-                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => {e.preventDefault();  e.stopPropagation() ; dispatch({ mode: 'edit', blogId: id })}} icon={IconPencil}>ویرایش</Button>
+                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => {e.preventDefault();  e.stopPropagation() ; dispatch({ mode: 'edit', blogId: Number(id) })}} icon={IconPencil}>ویرایش</Button>
                 <Button bgColor='gray' textColor='secondary' icon={IconArrowBigUp}>نردبان</Button>
                 <label className='flex flex-row gap-1 items-center'>
                     <ReactSwitch

@@ -4,12 +4,13 @@ import { SingleSubcategory } from './components/SingleSubcategory'
 import { IconPlus } from '@tabler/icons-react'
 import { MutateSubcategory } from './components/MutateSubcategory'
 
-export const SubCategories = ({ catId  , catTitle}: { catId: string , catTitle:string}) => {
+export const SubCategories = ({ catId, catTitle }: { catId: string, catTitle: string }) => {
 
     const { data } = useSubCategoryList()
 
-    const targetSubCategories = data?.data.filter(i => i.category?.id == catId)
+    const targetSubCategories = data?.data.filter(i => i.category?.id == catId.toString())
 
+    console.log({ catId, targetSubCategories })
     return (
         <div className='flex flex-col gap-2 rounded border p-2 bg-gray-100'>
 

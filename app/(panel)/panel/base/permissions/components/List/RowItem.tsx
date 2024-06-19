@@ -5,7 +5,7 @@ import ClickAwayListener from 'react-click-away-listener'
 import { PermissionType } from 'types'
 import { usePermissionsSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
-import { ChangeUserRole } from './components/ChangeUserRole'
+// import { ChangeUserRole } from './components/ChangeUserRole'
 import { captilizeFirstLetter } from 'utils'
 import { DeletePermission } from './components/DeletePermission'
 

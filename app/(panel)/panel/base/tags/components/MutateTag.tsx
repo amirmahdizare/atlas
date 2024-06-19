@@ -39,7 +39,7 @@ export const MutateTag = ({ mode, recordId, children }: { mode: 'add' | 'edit', 
     useEffect(() => {
 
         if (mode == 'edit' && !!recordId && data?.data) {
-            const targetTag = data.data.find(t => t.id == recordId)
+            const targetTag = data.data.find(t => t.id.toString() == recordId)
             reset({ ...targetTag })
 
         }

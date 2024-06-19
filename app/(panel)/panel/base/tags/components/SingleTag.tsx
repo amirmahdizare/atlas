@@ -14,7 +14,7 @@ export const SingleTag = ({ backgrondColor, textColor, name, id }: TagReadType) 
 
     const { mutate, isLoading } = useCustomMutation({
         mutationKey: ['deleteTag', id],
-        mutationFn: () => api.delete(TagsEndPoints.SINGLE(id)),
+        mutationFn: () => api.delete(TagsEndPoints.SINGLE(id.toString())),
         onSuccess: () => {
             toast.success('برچسب با موفقیت حذف شد.')
             refetch()
@@ -36,7 +36,7 @@ export const SingleTag = ({ backgrondColor, textColor, name, id }: TagReadType) 
 
             <span className='col-span-1 flex flex-row gap-2 items-center text-body-2-light'>
                 {isLoading ? <Spinner /> : <IconTrash className='text-red-500 cursor-pointer h-2.5 aspect-square' onClick={handleDelete} />}
-                <MutateTag mode='edit' recordId={id ?? ''}><IconPencil className='text-mint-green h-2.5 aspect-square' /></MutateTag>
+                <MutateTag mode='edit' recordId={id.toString() ?? ''}><IconPencil className='text-mint-green h-2.5 aspect-square' /></MutateTag>
             </span>
 
         </div>

@@ -17,6 +17,8 @@ export const RowItem = (ad: CategoryType_API<string>) => {
 
     const { dispatch } = useCategorySection()
 
+    console.log(ad)
+
     return (
         <div className={`grid grid-cols-5  p-1.5 text-space-codet text-body-2-normal items-center translate-all duration-300 bg-gray-50 ${isOpen ? 'gap-3' : ''}`}>
 

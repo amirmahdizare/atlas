@@ -26,7 +26,7 @@ export const List = () => {
 
                 </div>
 
-                {data?.data.map(i => <RowItem {...i} />)}
+                {data?.data.map(i => <RowItem  {...i} id={i.id.toString()} />)}
 
 
 

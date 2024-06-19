@@ -1,6 +1,6 @@
 export { Description } from './Description'
 export { HeroSection } from './HeroSection'
 export { TeamBanner } from './TeamBanner'
-export { Advisers } from './Advisers/Advisers'
+// export { Advisers } from './Advisers/Advisers'
 export { Goals } from './Goals/Goals'
 export { Album } from './Album/Album'

@@ -32,7 +32,7 @@ export const DataForm = () => {
 
     useEffect(() => {
 
-        const selectedCat = categoriesData?.data.find(i => i.id == catId?.toString())
+        const selectedCat = categoriesData?.data.find(i => i.id == catId)
         if (selectedCat) {
             const { id, ...items } = selectedCat
             reset(items)

@@ -299,7 +299,7 @@ export interface PermissionType<IT> {
     title: string,
     isMenuItem: boolean,
     hint: string,
-    action: typeof PermissionBackendRoutes.BLOG_CREATE
+    action: string
 
     // keyof  typeof  PermissionBackendRoutes
 }

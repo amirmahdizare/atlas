@@ -1,12 +1,12 @@
 import React from 'react'
-import { useAdvisersSection } from '../../hooks'
+import { useCategorySection } from '../../hooks'
 import { IconArrowBack, IconUser } from '@tabler/icons-react'
 import { Button } from '@components'
 import { DataForm } from './DataForm/DataForm'
 
 export const SingleUser = () => {
 
-    const { dispatch, mode, userId } = useAdvisersSection()
+    const { dispatch, mode, catId } = useCategorySection()
 
     return (
         <div className='flex flex-col gap-2 items-stretch'>
