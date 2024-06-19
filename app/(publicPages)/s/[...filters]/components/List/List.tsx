@@ -3,7 +3,7 @@
 import React from 'react'
 import { properties } from './data.mock'
 import { PropertyListCard } from '../PropertyListCard/PropertyListCard'
-import { usePropertySearchResults } from '../../hooks'
+import { usePropertySearchResults, useSearchProperty } from '../../hooks'
 import { PropertyDetailType } from 'types'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Button, Spinner } from '@components'
@@ -18,6 +18,7 @@ export const List = () => {
         return pv
     }, [])
 
+    const {dispatchFilter} = useSearchProperty()
     if (allProprties && allProprties?.length > 0)
         return (
             <div className='max-h-full overflow-auto' id='search-results'>
@@ -50,9 +51,10 @@ export const List = () => {
     //TODO Replace NoProperty Found
 
     else if (allProprties && allProprties?.length == 0)
-        return <div className='h-full flex flex-col gap-1 items-center justify-center'>
-            <div className='text-center p-2 w-full  text-dark-orange flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
+        return <div className='h-full flex flex-col gap-2 items-center justify-center p-2'>
+            <div className='text-center  w-full  text-dark-orange flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
             <Button icon={IconArrowDownLeft} iconSide='left' bgColor='secondary' href='/requestproperty' textColor='white'>درخواست ملک</Button>
+            <span className='cursor-pointer hover:text-coral' onClick={()=>dispatchFilter({category:undefined})}>بازگشت به همه</span>
         </div>
 
     return <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 '>
