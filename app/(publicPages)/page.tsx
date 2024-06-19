@@ -2,13 +2,13 @@ import { Banner, Blogs, ContactSummary, Corporate, HeroSection, MostViewed, News
 
 export default function Home() {
   return (
-    <main className="flex flex-col py-4 gap-8 box-border ">
+    <main className="flex flex-col py-4 gap-8 box-border px-1.5">
       <HeroSection/>
       <Services />
       <News />
       <Banner />
       <Corporate/>
-      <MostViewed/>
+      {/* <MostViewed/> */}
       <SecondBanner/>
       <Blogs />
       {/* <ContactSummary /> */}
