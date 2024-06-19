@@ -11,7 +11,7 @@ export const Services = () => {
                 <div className='relative text-h3-bolder'>
                     {/* دسترسی سریع */}
                     {/* خدمات املاک اطلس */}
-                    دسته بندی آگهی ها
+                    دسته بندی املاک
                     <div className='top-full w-1/4 right-0  absolute bg-mint-green mt-1 h-[2px] rounded'></div>
                 </div>
 
