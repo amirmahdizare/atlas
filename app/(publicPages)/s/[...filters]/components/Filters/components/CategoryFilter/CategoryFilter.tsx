@@ -28,13 +28,13 @@ export const CategoryFilter = () => {
                 {filter.category && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ category: undefined , subCategory:undefined })}>
                     <IconArrowRight width={15} />
                     <span>
-                        همه آگهی ها
+                        همه دسته بندی ها
                     </span>
                 </span>}
 
 
                 {!filter.category && <div className={`px-1 py-0.5 transition-all duration-150 border-r-2 text-body-3-bolder cursor-pointer  ${!filter.category ? 'border-r-robin-egg-blue-00  text-robin-egg-blue-00 font-bold' : 'text-ultra-violet hover:text-coral border-r-white'}`}>
-                    همه آگهی ها
+                    همه دسته بندی ها
                 </div>}
 
                 <div className='flex flex-col gap-1  items-start pr-1'>
