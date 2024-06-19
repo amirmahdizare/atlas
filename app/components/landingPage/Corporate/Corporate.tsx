@@ -1,5 +1,5 @@
 import React from 'react'
-import {  IconCurrencyDollar, IconScale, IconUser, IconUserCheck, TablerIconsProps } from '@tabler/icons-react'
+import { IconArrowLeft, IconArrowsLeftDown, IconCurrencyDollar, IconScale, IconUser, IconUserCheck, TablerIconsProps } from '@tabler/icons-react'
 import corporate from 'images/corporate.png'
 import Image from 'next/image'
 import { Button } from '@components'
@@ -32,14 +32,14 @@ export const Corporate = () => {
 
                     <div className='w-full relative max-h-[400px]'>
 
-                        <Image src={corporate} alt='مشارکت در ساخت | دپارتمان املاک اطلس' className='w-full object-contain rounded max-h-[400px]'  />
+                        <Image src={corporate} alt='مشارکت در ساخت | دپارتمان املاک اطلس' className='w-full object-contain rounded max-h-[400px]' />
 
                         <div className='flex flex-col bg-white rounded gap-2 absolute bottom-2 left-1/2 -translate-x-1/2 p-2'>
                             <span className='text-space-codet text-h4-bolder leading-3 text-center'>برای مشارکت در ساخت قدم به قدم با اطلس همراه باشید.</span>
-                            <Button href='/participation' bgColor='secondary'>مشارکت در ساخت</Button>
+
                             <div className='absolute top-0 -translate-y-3/4 bg-white border aspect-square p-1.5 border-robin-egg right-1/2 translate-x-1/2 rounded-circle '>
                                 <div className='w-6 h-6 relative'>
-                                <Image src={logo} alt='لوگوی دپارتمان املاک اطلس' fill />
+                                    <Image src={logo} alt='لوگوی دپارتمان املاک اطلس' fill />
                                 </div>
                             </div>
                         </div>
@@ -64,6 +64,9 @@ export const Corporate = () => {
                         <CorporateOption icon={IconScale} title='طرح دعوی و پیگیری حقوقی' />
                         <CorporateOption icon={IconCurrencyDollar} title='سودآوری مشارکت' />
 
+                    </div>
+                    <div>
+                        <Button  href='/participation' bgColor='secondary'>مشاهده پروژه های مشارکت در ساخت</Button>
                     </div>
                 </div>
 
