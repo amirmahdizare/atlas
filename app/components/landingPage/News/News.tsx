@@ -62,7 +62,7 @@ export const News = async () => {
                     <Slider data={news} />
 
                     <ul className='sr-only'>
-                        {news.map(item => <a href={`/proprrty/${item.id}/${item.title}`}>{item.title} | دپارتمان املاک اطلس</a>)}
+                        {news.map(item => <a href={`/property/${item.id}/${item.title}`}>{item.title} | دپارتمان املاک اطلس</a>)}
                     </ul>
                 </div>
 
