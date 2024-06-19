@@ -1,18 +1,23 @@
 'use client'
 import React, { useEffect } from 'react'
-import { useCities } from '@hooks'
+import { useCities, useFullCategories } from '@hooks'
 import { useSearchParams } from 'next/navigation'
 import { useSearchProperty } from '../hooks'
+import { SubCategoryType } from 'types'
 
 export const Converter = ({ filters }: { filters: string[] }) => {
 
 
 
     const cityQry = filters?.[0]
+    const catQry = filters?.[1]
 
-    const { data, isLoading } = useCities()
+    const { data: citiesData, isLoading } = useCities()
 
     const searchQuery = useSearchParams()
+
+
+    const { data: catData, isError } = useFullCategories()
 
 
     const { dispatchFilter } = useSearchProperty()
@@ -24,26 +29,24 @@ export const Converter = ({ filters }: { filters: string[] }) => {
 
         /// From URL  to Client Query
 
-        console.log({cityQry ,c: cityQry.split('-').length > 1 && cityQry.split('-')[1] == 'city'})
+
+        ///City
+
 
 
         if (cityQry.split('-').length > 1 && cityQry.split('-')[1] == 'city') {
-            console.log(data?.data)
-            if (data?.data.find(c => c.name == cityQry.split('-')[0])) {
-                console.log('Here')
-                citiesFilter = [data?.data.find(c => c.name == cityQry.split('-')[0])?.id]
-
+            if (citiesData?.data.find(c => c.name.toLowerCase() == cityQry.split('-')[0].toLowerCase())) {
+                citiesFilter = [citiesData?.data.find(c => c.name == cityQry.split('-')[0])?.id]
             }
             else {
-                console.log('FAlse')
-                //False City
+                //Incorrect City
             }
         }
         else if (cityQry == 'iran') {
             if (searchQuery.get('cities')) {
                 const citiesIds = searchQuery.get('cities')?.split(',').reduce<number[]>((pv, cv) => {
-                    if (!!data?.data.find(c => c.name == cv)?.id)
-                        pv.push(data?.data.find(c => c.name == cv)?.id ?? 0)
+                    if (!!citiesData?.data.find(c => c.name == cv)?.id)
+                        pv.push(citiesData?.data.find(c => c.name == cv)?.id ?? 0)
                     return pv
                 }, [])
 
@@ -55,9 +58,49 @@ export const Converter = ({ filters }: { filters: string[] }) => {
             //Nothing
         }
 
+        //Category
 
-        console.log({citiesFilter})
-    }, [data , filters])
+
+        var categoryFilter: string | undefined = undefined
+        var subCategoryFilter: string | undefined = undefined
+
+        if (catQry.split('-')[1] == 'category' && catQry.split('-').length > 1) {
+            //Category 
+            if (catData?.data.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
+                //CorrectCategory
+                categoryFilter = catData?.data.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
+            }
+            else {
+                //InCorrectCategory
+            }
+        }
+
+        else if (catQry.split('-')[1] == 'subcategory' && catQry.split('-').length > 1) {
+            //Subcategory 
+
+            const allSubcategories = catData?.data.reduce <SubCategoryType<string,string>[]>((pv, cv) =>{
+                pv.push(...cv.subCategories)
+                return pv
+            } , [])
+            if (allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
+                //CorrectSubCategory
+                subCategoryFilter = allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
+            }
+            else {
+                //InCorrectSubCategory
+            }
+        }
+
+
+
+
+
+
+
+        console.log({citiesFilter  ,categoryFilter ,subCategoryFilter})
+
+
+    }, [citiesData, filters  , catData])
 
     const city = cityQry.split('-')
     return (
