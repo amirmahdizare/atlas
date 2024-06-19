@@ -6,7 +6,8 @@ import { PropertyListCard } from '../PropertyListCard/PropertyListCard'
 import { usePropertySearchResults } from '../../hooks'
 import { PropertyDetailType } from 'types'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Spinner } from '@components'
+import { Button, Spinner } from '@components'
+import { IconArrowDownLeft } from '@tabler/icons-react'
 
 export const List = () => {
 
@@ -32,7 +33,7 @@ export const List = () => {
                     }
                     next={() => fetchNextPage()}
                     style={{ overflow: 'unset' }}
-                    // scrollableTarget='search-results'
+                // scrollableTarget='search-results'
                 >
                     {/* <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-1 items-stretch justify-stretch'> */}
                     {allProprties?.map(item => <div className='col-span-1 '>
@@ -49,7 +50,10 @@ export const List = () => {
     //TODO Replace NoProperty Found
 
     else if (allProprties && allProprties?.length == 0)
-        return <div className='text-center p-2 w-full  text-dark-orange h-full flex flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
+        return <div className='h-full flex flex-col gap-1 items-center justify-center'>
+            <div className='text-center p-2 w-full  text-dark-orange flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
+            <Button icon={IconArrowDownLeft} iconSide='left' bgColor='secondary' href='/requestproperty' textColor='white'>درخواست ملک</Button>
+        </div>
 
     return <div className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 '>
         {Array.from(new Array(20)).map((i, index) => <div key={index} className='col-span-1 bg-gray-100 animate-pulse  w-full aspect-[10/16]'></div>)}
