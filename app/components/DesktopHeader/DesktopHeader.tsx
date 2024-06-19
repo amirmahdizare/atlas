@@ -74,7 +74,7 @@ export const DesktopHeader = () => {
                     ]} /> */}
                     {/* //Todo Search Property For All Cities and SubCities */}
 
-                <LinkComponent link='/s/mehestan' title='جستجوی ملک' />
+                <LinkComponent link='/s/all' title='جستجوی ملک' />
                 <LinkComponent link='/blogs' title='اخبار و مقالات' />
                 <LinkComponent link='/aboutus' title='درباره ما' />
                 <LinkComponent link='/contactus' title='تماس با ما' />

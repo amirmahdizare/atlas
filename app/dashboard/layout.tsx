@@ -77,7 +77,7 @@ export default function layout({ children }: { children: ReactNode }) {
 
                         <div className='hidden lg:flex flex-row gap-2.5 items-center text-french-gray text-body-3-normal'>
 
-                            <Link className='hover:text-coral' href={'/s/mehestan'}>جستجوی ملک</Link>
+                            <Link className='hover:text-coral' href={'/s/all'}>جستجوی ملک</Link>
                             <Link className='hover:text-coral' href={'/addproperty'}>فروش ملک</Link>
                             <Link className='hover:text-coral' href={'/requestproperty'}>درخواست ملک</Link>
                             <Link className='hover:text-coral' href={'/aboutus'}>درباره ما</Link>

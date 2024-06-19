@@ -19,7 +19,7 @@ export const News = ({ data }: { data: UserFullInfo }) => {
 
 
 
-                    <Link href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
+                    <Link href={'/s/all'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
                         <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                         <IconArrowDownLeft width={15} height={15} />
                     </Link>

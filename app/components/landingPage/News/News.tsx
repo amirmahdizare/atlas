@@ -28,7 +28,7 @@ export const News = async () => {
 
 
 
-                    <Link className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden' href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'}>
+                    <Link className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden' href={'/s/all'}>
                         <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                         <IconArrowDownLeft width={15} height={15} />
                     </Link>
@@ -52,7 +52,7 @@ export const News = async () => {
 
                         </div>
 
-                        <Link href={'/s/hashtgerd-newcity/شهر جدید هشتگرد'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
+                        <Link href={'/s/all'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
                             <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                             <IconArrowDownLeft width={15} height={15} />
                         </Link>

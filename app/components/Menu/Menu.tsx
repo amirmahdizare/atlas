@@ -16,7 +16,7 @@ export const Menu = ({ onClickLink }: { onClickLink?: Function }) => {
       {!!isError && <Link className='hover:text-coral' href={'/login'}>ورود / ثبت نام</Link>}
       {!!data?.data && <Link className='hover:text-coral' href={'/dashboard'}>پنل کاربری</Link>}
       {data?.data.role.name && isUserAgent(data?.data?.role?.name) && <Link className='hover:text-coral' href={'/panel'}>ورود به پنل {translateRole(data?.data?.role?.name)}</Link>}
-      <Link className='hover:text-coral' href={'/s/mehestan'}>جستجوی ملک</Link>
+      <Link className='hover:text-coral' href={'/s/all'}>جستجوی ملک</Link>
       <Link className='hover:text-coral' href={'/addproperty'}>فروش ملک</Link>
       <Link className='hover:text-coral' href={'/requestproperty'}>درخواست ملک</Link>
       <Link className='hover:text-coral' href={'/aboutus'}>درباره ما</Link>
