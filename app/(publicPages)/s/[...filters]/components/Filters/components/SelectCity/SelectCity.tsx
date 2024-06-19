@@ -20,7 +20,7 @@ export const SelectCity = () => {
 
     const handleToggleCity = (city: CityType) => {
         if (filter.location?.find(i => i == city.id))
-            dispatchFilter({ location: filter.location.filter(i => i != city.id), sublocation: [] })
+            dispatchFilter({ location: filter.location.filter(i => i != city.id), subLocation: [] })
         else
             dispatchFilter({ location: [...(filter?.location ?? []), city.id ] })
     }
@@ -49,7 +49,7 @@ export const SelectCity = () => {
 
                 <div className={`flex flex-col gap-1.5  duration-300 transition-all ${isOpen ? 'max-h-[10000px] opacity-1' : 'max-h-0 h-0 overflow-hidden opacity-0'}`} >
 
-                    {!!filter.location?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ location: [], sublocation: [] })}>
+                    {!!filter.location?.length && <span className='text-ultra-violet text-body-3-light cursor-pointer hover:text-coral flex flex-row gap-0.5 items-center' onClick={() => dispatchFilter({ location: [], subLocation: [] })}>
                         <IconArrowRight width={15} />
                         <span>
                             همه شهر ها
