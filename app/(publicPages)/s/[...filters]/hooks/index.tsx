@@ -1,8 +1,11 @@
-import { useCustomInfiniteQuery } from '@hooks'
+import { useCities, useCustomInfiniteQuery, useSubCities } from '@hooks'
 import { api } from '_api/config'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
-import { useSearchParams } from 'next/navigation'
+import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 import { PropertyListFilterType, PropertySearchParams } from 'types'
+import { URLSearchParams } from 'url'
 import { convertSearchParamToObject, minuteToMs } from 'utils'
 import { SEARCH_PRODUCT_LIMIT } from 'variables'
 import { create } from 'zustand'
@@ -63,10 +66,20 @@ const convertUrlToFilter = (searchObject: { [key: string]: any }) => {
 
 }
 
+export const convertClientParamtToUrl = (filter: PropertySearchParams, push: (href: string, options?: NavigateOptions | undefined) => void) => {
+
+
+}
+
 export const usePropertySearchResults = () => {
 
     // const searchParams = useSearchParams()
+
+    const { data: locationsData } = useCities()
+    // const {} = useSubCities()
     const searchHook = useSearchProperty()
+
+    const { push } = useRouter()
 
     // const dispatchFilter = useSearchProperty(s => s.dispatch)
 
@@ -97,18 +110,49 @@ export const usePropertySearchResults = () => {
     }, {})
 
     const currentFilter: PropertySearchParams = {
-        ...rest ,
+        ...rest,
         ...especialFiltersObj,
         ...featureValues?.filter(i => especialFilters.indexOf(i.filterId) == -1),
 
     }
+
+    const locationSlug = (): { slug: string, param?: string } => {
+
+        if (!searchHook.filter.location) return { slug: 'iran' }
+
+        if (searchHook.filter.location?.length == 1)
+            return { slug: locationsData?.data.find(c => c.id == searchHook.filter.location?.[0])?.name.concat('-city') ?? '' }
+        else if (searchHook.filter.location?.length > 1)
+            return { slug: 'iran', param: searchHook.filter.location.map(i => locationsData?.data.find(d => d.id == i)?.name)?.join(',') }
+
+        return { slug: 'iran' }
+    }
+
+    useEffect(() => {
+        if (locationsData?.data)
+            push(`/s/${locationSlug().slug}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}`)
+    }, [searchHook.filter])
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
         queryFn: ({ queryKey, pageParam = 1 }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? { ...JSON.parse(queryKey[1]), limit: SEARCH_PRODUCT_LIMIT, page: pageParam } : {}),
         queryKey: ['SearchProprtyResults', JSON.stringify(currentFilter)],
         staleTime: minuteToMs(2),
         getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined,
-    
+        onSuccess: (s) => {
+
+            console.log(searchHook.filter)
+            // convertClientParamtToUrl(searchHook.filter, push)
+
+            // var
+
+
+            // const locationSlug = searchHook.filter.location > 1 :
+
+            // const searchQuery = new URLSearchParams([['cities', locationSlug().param ?? '']]).toString()
+
+
+        }
+
     })
 
 

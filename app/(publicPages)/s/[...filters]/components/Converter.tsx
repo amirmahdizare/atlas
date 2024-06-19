@@ -64,30 +64,34 @@ export const Converter = ({ filters }: { filters: string[] }) => {
         var categoryFilter: string | undefined = undefined
         var subCategoryFilter: string | undefined = undefined
 
-        if (catQry.split('-')[1] == 'category' && catQry.split('-').length > 1) {
-            //Category 
-            if (catData?.data.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
-                //CorrectCategory
-                categoryFilter = catData?.data.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
-            }
-            else {
-                //InCorrectCategory
-            }
-        }
+        if (catQry) {
 
-        else if (catQry.split('-')[1] == 'subcategory' && catQry.split('-').length > 1) {
-            //Subcategory 
 
-            const allSubcategories = catData?.data.reduce<SubCategoryType<string, string>[]>((pv, cv) => {
-                pv.push(...cv.subCategories)
-                return pv
-            }, [])
-            if (allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
-                //CorrectSubCategory
-                subCategoryFilter = allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
+            if (catQry.split('-')[1] == 'category' && catQry.split('-').length > 1) {
+                //Category 
+                if (catData?.data.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
+                    //CorrectCategory
+                    categoryFilter = catData?.data.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
+                }
+                else {
+                    //InCorrectCategory
+                }
             }
-            else {
-                //InCorrectSubCategory
+
+            else if (catQry.split('-')[1] == 'subcategory' && catQry.split('-').length > 1) {
+                //Subcategory 
+
+                const allSubcategories = catData?.data.reduce<SubCategoryType<string, string>[]>((pv, cv) => {
+                    pv.push(...cv.subCategories)
+                    return pv
+                }, [])
+                if (allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())) {
+                    //CorrectSubCategory
+                    subCategoryFilter = allSubcategories?.find(c => c.enTitle.toLowerCase() == catQry.split('-')[0].toLowerCase())?.id
+                }
+                else {
+                    //InCorrectSubCategory
+                }
             }
         }
 
