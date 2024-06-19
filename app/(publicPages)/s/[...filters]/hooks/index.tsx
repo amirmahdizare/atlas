@@ -1,10 +1,10 @@
-import { useCities, useCustomInfiniteQuery, useSubCities } from '@hooks'
+import { useCities, useCustomInfiniteQuery, useFullCategories, useSubCities } from '@hooks'
 import { api } from '_api/config'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
-import { PropertyListFilterType, PropertySearchParams } from 'types'
+import { PropertyListFilterType, PropertySearchParams, SubCategoryType } from 'types'
 import { URLSearchParams } from 'url'
 import { convertSearchParamToObject, minuteToMs } from 'utils'
 import { SEARCH_PRODUCT_LIMIT } from 'variables'
@@ -76,7 +76,11 @@ export const usePropertySearchResults = () => {
     // const searchParams = useSearchParams()
 
     const { data: locationsData } = useCities()
+
+    const { data: catData } = useFullCategories()
+
     // const {} = useSubCities()
+
     const searchHook = useSearchProperty()
 
     const { push } = useRouter()
@@ -128,31 +132,33 @@ export const usePropertySearchResults = () => {
         return { slug: 'all' }
     }
 
+    const categorySlug = (): { slug: string | undefined } => {
+
+        if (searchHook.filter.subCategory && searchHook.filter.subCategory?.length > 0) {
+
+            const allSubcategories = catData?.data.reduce<SubCategoryType<string, string>[]>((pv, cv) => {
+                pv.push(...cv.subCategories)
+                return pv
+            }, [])
+
+            return { slug: allSubcategories?.find(f => f.id == searchHook.filter.subCategory?.[0].toString())?.enTitle.concat('-subcategory') }
+        }
+        else if (searchHook.filter.category && searchHook.filter.category.length > 0)
+            return { slug: catData?.data.find(f => f.id == searchHook.filter.category?.[0].toString())?.enTitle.concat('-category') }
+
+        return { slug: undefined }
+    }
+
     useEffect(() => {
         if (locationsData?.data)
-            push(`/s/${locationSlug().slug}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}`)
+            push(`/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}`)
     }, [searchHook.filter])
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
         queryFn: ({ queryKey, pageParam = 1 }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? { ...JSON.parse(queryKey[1]), limit: SEARCH_PRODUCT_LIMIT, page: pageParam } : {}),
         queryKey: ['SearchProprtyResults', JSON.stringify(currentFilter)],
         staleTime: minuteToMs(2),
-        getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined,
-        onSuccess: (s) => {
-
-            console.log(searchHook.filter)
-            // convertClientParamtToUrl(searchHook.filter, push)
-
-            // var
-
-
-            // const locationSlug = searchHook.filter.location > 1 :
-
-            // const searchQuery = new URLSearchParams([['cities', locationSlug().param ?? '']]).toString()
-
-
-        }
-
+        getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined
     })
 
 
