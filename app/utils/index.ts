@@ -25,14 +25,21 @@ export const isStringExist = (string?: string) => typeof string == 'string' && s
 export const generateTenDigitOfPhoneNumber = (phoneNumber: string) => phoneNumber.substring(phoneNumber.length - 10)
 
 
-const cookieValue = (item: 'access_token') => document?.cookie
-  .split("; ")
-  .find((row) => row.startsWith(item + "="))
-  ?.split("=")[1];
+const cookieValue = (item: 'access_token') => {
+
+  if (typeof document != 'undefined') {
+
+    document?.cookie
+      .split("; ")
+      .find((row) => row.startsWith(item + "="))
+      ?.split("=")[1];
+  }
+}
 
 
 export const storeToken = (access_token: string) => {
-  document.cookie = `access_token=${access_token}; path=/;`
+  if (typeof document != 'undefined')
+    document.cookie = `access_token=${access_token}; path=/;`
 
 
 }
@@ -40,7 +47,8 @@ export const storeToken = (access_token: string) => {
 
 
 export const clearToken = () => {
-  document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  if (typeof document != 'undefined')
+    document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
 export const getToken = () => cookieValue('access_token')
@@ -157,7 +165,7 @@ export const isUserAgent = (role: RoleTypeName) => agentRoles.indexOf(role) != -
 export const minuteToMs = (minute: number) => 1000 * 60 * minute
 
 
-export const convertSearchParamToObject = <T extends {[k:string]:string}  ,> (searchParam: ReadonlyURLSearchParams)  :T=>{
+export const convertSearchParamToObject = <T extends { [k: string]: string },>(searchParam: ReadonlyURLSearchParams): T => {
   return Object.fromEntries(searchParam.entries()) as T
 }
 
@@ -165,7 +173,7 @@ export const convertSearchParamToObject = <T extends {[k:string]:string}  ,> (se
 export const redirectJs = (path: string) => {
 
   if (typeof window != 'undefined')
-      window.location.href = path
+    window.location.href = path
 
   return
 }
