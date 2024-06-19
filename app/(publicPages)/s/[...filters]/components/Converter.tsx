@@ -42,7 +42,7 @@ export const Converter = ({ filters }: { filters: string[] }) => {
                 //Incorrect City
             }
         }
-        else if (cityQry == 'iran') {
+        else if (cityQry == 'all') {
             if (searchQuery.get('cities')) {
                 const citiesIds = searchQuery.get('cities')?.split(',').reduce<number[]>((pv, cv) => {
                     if (!!citiesData?.data.find(c => c.name == cv)?.id)

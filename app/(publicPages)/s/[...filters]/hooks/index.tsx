@@ -118,14 +118,14 @@ export const usePropertySearchResults = () => {
 
     const locationSlug = (): { slug: string, param?: string } => {
 
-        if (!searchHook.filter.location) return { slug: 'iran' }
+        if (!searchHook.filter.location) return { slug: 'all' }
 
         if (searchHook.filter.location?.length == 1)
             return { slug: locationsData?.data.find(c => c.id == searchHook.filter.location?.[0])?.name.concat('-city') ?? '' }
         else if (searchHook.filter.location?.length > 1)
-            return { slug: 'iran', param: searchHook.filter.location.map(i => locationsData?.data.find(d => d.id == i)?.name)?.join(',') }
+            return { slug: 'all', param: searchHook.filter.location.map(i => locationsData?.data.find(d => d.id == i)?.name)?.join(',') }
 
-        return { slug: 'iran' }
+        return { slug: 'all' }
     }
 
     useEffect(() => {
