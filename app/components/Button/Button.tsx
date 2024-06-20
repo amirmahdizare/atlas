@@ -15,6 +15,9 @@ const bgColors = {
     white: 'bg-white',
     textGray: 'bg-ultra-violet',
     lightBlue: 'bg-celeste-lighter',
+    red:'bg-imperial-red',
+    jade:'bg-jade',
+    honeyDraw:'bg-honeydew',
 }
 
 const textColors = {
@@ -26,7 +29,10 @@ const textColors = {
     gray: 'text-anti-flash-white-lighter',
     white: 'text-white',
     textGray: 'text-ultra-violet',
-    lightBlue: 'text-celeste-lighter'
+    lightBlue: 'text-celeste-lighter',
+    red:'text-imperial-red',
+    jade:'text-jade',
+    honeyDraw:'text-honeydew'
 }
 
 
