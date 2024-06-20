@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
   description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستغلات استان البرز',
   manifest: '/manifest.json',
+  viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 }
 }
 
 export default function RootLayout({
