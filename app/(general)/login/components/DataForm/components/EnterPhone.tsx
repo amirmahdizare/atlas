@@ -18,7 +18,7 @@ export const EnterPhone = () => {
     const { data, mutate, isLoading } = useCustomMutation<AuthEndpointType['SEND_OTP']>({
         mutationFn: (data) => api.post(AuthEndpoints.SEND_OTP, data),
         onSuccess: (data, { phoneNumber }) => {
-            toast.success(`کد احراز هویت برای شما ارسال شد. ${data?.data?.code?.code}`)
+            toast.success(`کد احراز هویت برای شما ارسال شد.`)
             dispatch({ step: 'verify', phoneNumber })
         },
         onError: () => {
