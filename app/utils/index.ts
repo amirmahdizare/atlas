@@ -151,7 +151,7 @@ export const translateRole = (roleEng: RoleTypeName) => {
     case 'admin': return 'ادمین'
     case 'guest': return 'میهمان'
     case 'superAdmin': return 'مدیریت'
-    case 'user': 'کاربر'
+    case 'user': return 'کاربر'
     default: return 'میهمان'
   }
 
