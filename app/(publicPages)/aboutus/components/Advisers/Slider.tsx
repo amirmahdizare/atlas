@@ -59,7 +59,7 @@ export const Slider = ({ advisers }: { advisers: Array<UserInfoType<string>> }) 
                 // onSwiper={(swiper) => console.log(swiper)}
                 className='flex flex-col items-stretch justify-stretch'
             >
-                {advisers.map(item => <SwiperSlide className='h-full'>
+                {advisers.map(item => <SwiperSlide key={item.id} className='h-full'>
                     <AdviserCard {...item} />
                 </SwiperSlide>)}
 

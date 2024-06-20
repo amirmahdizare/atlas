@@ -54,7 +54,7 @@ export const Slider = ({ data }: { data: PropertyDetailType[] }) => {
           onSwiper={(swiper) => console.log(swiper)}
           className='flex flex-col items-stretch justify-stretch'
         >
-          {data.map(item => <SwiperSlide className='h-full'><PropertyListCard key={item.id} {...item} /></SwiperSlide>)}
+          {data.map(item => <SwiperSlide key={item.id} className='h-full'><PropertyListCard key={item.id} {...item} /></SwiperSlide>)}
 
         </Swiper>
       </div>
