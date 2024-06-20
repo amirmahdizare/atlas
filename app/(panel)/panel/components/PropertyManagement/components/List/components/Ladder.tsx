@@ -31,7 +31,7 @@ export const Ladder = ({ id, title }: PropertyDetailType) => {
   else if (data?.data)
     return (
       <div>
-        <Button bgColor='gray' textColor='secondary' loading={isLoading} onClick={() => mutate({})} icon={IconArrowBigUp} title='نردبان'></Button>
+        <Button bgColor='honeyDraw' textColor='jade' loading={isLoading} onClick={() => mutate({})} icon={IconArrowBigUp} title='نردبان'></Button>
       </div>
     )
 

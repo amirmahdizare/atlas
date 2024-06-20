@@ -8,7 +8,7 @@ import { PropertyDetailType } from 'types'
 import { usePropertyList, usePropertySection } from '../../../hooks'
 import { NO_NAME_USER } from 'variables'
 import { createMediaUrl } from 'utils'
-import { useCustomMutation, useUserInfo } from '@hooks'
+import { useCustomMutation, usePermission, useUserInfo } from '@hooks'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
@@ -17,7 +17,7 @@ import { Ladder } from './Ladder'
 export const PropertyCard = (pr: PropertyDetailType) => {
 
 
-    const { medias, id, price, location, user, title, prePrice, rentPrice, active , tags } = pr
+    const { medias, id, price, location, user, title, prePrice, rentPrice, active, tags } = pr
     const { data, isLoading: loadingUserData } = useUserInfo()
 
     const { refetch } = usePropertyList()
@@ -47,6 +47,10 @@ export const PropertyCard = (pr: PropertyDetailType) => {
     const { dispatch } = usePropertySection()
 
 
+    const editPermission = usePermission('PRODUCT_UPDATE')
+
+    const deletePermission = usePermission('PRODUCT_DELETE')
+
     const handleChangeActive = () => {
         if (data?.data.role.name != 'superAdmin')
             return
@@ -56,6 +60,7 @@ export const PropertyCard = (pr: PropertyDetailType) => {
     }
 
     const isUserCanChangeStatus = data?.data.role.name == 'superAdmin'
+
     return (
         <div className='grid grid-cols-3 gap-1.5 ' >
 
@@ -105,12 +110,12 @@ export const PropertyCard = (pr: PropertyDetailType) => {
             </div>
             <div className='flex flex-row gap-1 justify-evenly col-span-3 items-center'>
                 <Link href={`/property/${id}`} target='_blank'><Button bgColor='gray' textColor='secondary' icon={IconEye} title='پیش نمایش'></Button></Link>
-                <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch({ mode: 'edit', proprtyId: id }) }} icon={IconPencil} title='ویرایش'></Button>
-                <Button bgColor='white' textColor='secondary' icon={isLoading ? IconLoader : IconTrash} title='حذف' onClick={() => {
+                {(editPermission.state || user?.id == data?.data.id) && <Button bgColor='lightBlue' textColor='primaryNormal' onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch({ mode: 'edit', proprtyId: id }) }} icon={IconPencil} title='ویرایش'></Button>}
+                {(deletePermission.state || user?.id == data?.data.id) && <Button bgColor='white' textColor='red' icon={isLoading ? IconLoader : IconTrash} title='حذف' onClick={() => {
                     if (prompt(`آیا مایل به حذف آگهی ${title} هستید؟`, 'بله'))
                         mutate({})
-                }}></Button>
-                <Ladder {...pr}/>
+                }}></Button>}
+                {(data?.data.role.name == 'superAdmin' || user?.id == data?.data.id) && <Ladder {...pr} />}
                 {isUserCanChangeStatus && <label className='flex flex-row gap-1 items-center'>
                     {!toggleLoading
                         ? <ReactSwitch
