@@ -29,7 +29,7 @@ const cookieValue = (item: 'access_token') => {
 
   if (typeof document != 'undefined') {
 
-    document?.cookie
+    return document?.cookie
       .split("; ")
       .find((row) => row.startsWith(item + "="))
       ?.split("=")[1];
@@ -80,7 +80,6 @@ export const createFormData = (data: { [key: string]: any }, arrayItems: string[
       data[item].forEach((f: string | Blob) => form_data.append(item, f))
   })
 
-  console.log(form_data)
 
   return form_data
 }
