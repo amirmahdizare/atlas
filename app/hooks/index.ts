@@ -9,6 +9,7 @@ import { CorpEndPoints, CorpEndPointsType } from "_api/endpoints/participation";
 import { TagsEndPoints, TagsEndPointsType } from "_api/endpoints/tag";
 import { UsersEndpointType, UsersEndpoints } from "_api/endpoints/users";
 import { AxiosError, AxiosResponse } from "axios";
+import { PermissionBackendRoutes } from "enums";
 import { usePathname, useRouter } from "next/navigation";
 import { UseInfiniteQueryOptions, UseMutationOptions, UseQueryOptions, useInfiniteQuery, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -91,11 +92,11 @@ export const useBookmark = (productId: string) => {
 
     const pathname = usePathname()
 
-    const {data , refetch} = useMyBookmarks()
+    const { data, refetch } = useMyBookmarks()
 
     const { push } = useRouter()
 
-    const state = !!data?.data.find(d=>d.product.id==productId)
+    const state = !!data?.data.find(d => d.product.id == productId)
 
     const store = create<{ isActive: boolean, toggle: (state: boolean) => void }>((set) => ({
         isActive: state,
@@ -160,3 +161,21 @@ export const useBuyOrSells = (props?: any) => useCustomQuery<BuyOrSellEndPointsT
     staleTime: minuteToMs(5),
     ...props
 })
+
+
+export const usePermission = (permissionItem: keyof typeof PermissionBackendRoutes): { state: boolean, isLoading: boolean } => {
+
+    const { data, isError, isFetching } = useUserInfo()
+
+
+    if (isError)
+        return { state: false, isLoading: isFetching }
+
+    else if (data?.data)
+        return {
+            state: data.data.role.name == 'superAdmin' || data.data.permissions.findIndex(pr => pr.action == PermissionBackendRoutes[permissionItem]) != -1, isLoading: isFetching
+        }
+
+
+    return { state: false, isLoading: isFetching }
+}
