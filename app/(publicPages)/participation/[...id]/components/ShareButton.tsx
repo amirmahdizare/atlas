@@ -10,7 +10,7 @@ export const ShareBlog = ({ id, title , description }: { id: string  , title:str
     const shareData = {
         title: `${title} |  پروژه های مشارکت دپارتمان املاک اطلس `,
         text: description,
-        url: `${window.location.origin}/property/${id}/${title}`
+        url: `${window?.location?.origin}/property/${id}/${title}`
     };
 
     const handleShare = () => {

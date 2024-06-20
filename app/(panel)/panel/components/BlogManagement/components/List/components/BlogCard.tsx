@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { Button } from '@components'
 import { IconEye, IconPencil, IconTrash } from '@tabler/icons-react'
@@ -6,10 +7,16 @@ import { useBlogsSection } from '../../../hooks'
 import { DeleteBlog } from './DeleteBlog'
 import { createMediaUrl } from 'utils'
 import Link from 'next/link'
+import { usePermission, useUserInfo } from '@hooks'
 
-export const BlogCard = ({ title, description, duration, images, id, summary, createTime }: BlogReadType) => {
+export const BlogCard = ({ title, description, duration, images, id, summary, createTime, user }: BlogReadType) => {
 
     const { dispatch } = useBlogsSection()
+
+    const { data: userData } = useUserInfo()
+
+    const editPermission = usePermission('BLOG_UPDATE')
+    const deletePermission = usePermission('BLOG_DELETE')
 
     return (
         <div className='grid grid-cols-2 lg:grid-cols-4 gap-2 border-b pb-2'>
@@ -28,9 +35,9 @@ export const BlogCard = ({ title, description, duration, images, id, summary, cr
 
             <div className='col-span-2 lg:col-span-1 flex flex-row items-start justify-evenly'>
                 <Link target='_blank' title='مشاهده پیش نمایش' href={`/blogs/${id}`}><Button icon={IconEye} textColor='primaryDarker' bgColor='gray'> </Button></Link>
-                <DeleteBlog id={id} />
+                {(deletePermission || userData?.data.id == user.id.toString()) && <DeleteBlog id={id} />}
                 {/* <Button icon={IconTrash} bgColor='white' textColor='secondary'>حذف</Button> */}
-                <Button title='ویرایش' icon={IconPencil} bgColor='primaryLighter' textColor='white' onClick={() => dispatch({ mode: 'edit', blogId: id })}></Button>
+                {(editPermission || userData?.data.id == user.id.toString() ) && <Button title='ویرایش' icon={IconPencil} bgColor='primaryLighter' textColor='white' onClick={() => dispatch({ mode: 'edit', blogId: id })}></Button>}
             </div>
 
         </div>
