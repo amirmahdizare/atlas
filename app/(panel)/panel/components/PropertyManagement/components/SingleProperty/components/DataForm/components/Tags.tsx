@@ -13,7 +13,6 @@ export const Tags = () => {
 
     const currentTags = watch('tagIds')
 
-    console.log(currentTags)
 
     const toggleTag = (tagId: number) => {
 
