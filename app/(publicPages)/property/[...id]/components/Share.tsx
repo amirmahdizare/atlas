@@ -9,7 +9,7 @@ export const Share = ({ id, data }: { id: string, data: PropertyDetailType }) =>
 
     const shareData = {
         title: `${title} |  دپارتمان املاک اطلس  | مشاور ${user?.firstName} ${user?.lastName}`,
-        // text: description,
+        text: `${title} |  دپارتمان املاک اطلس  | مشاور ${user?.firstName} ${user?.lastName}`,
         url: `${window?.location?.origin}/property/${id}/${title}`
     };
 
