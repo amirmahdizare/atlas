@@ -2,13 +2,14 @@ import React from 'react'
 import Link from 'next/link'
 import { BlogItemType, BlogReadType } from 'types'
 import { IconMessage, IconMessages, IconThumbUp } from '@tabler/icons-react'
+import { createMediaUrl } from 'utils'
 
 export const SingleBlog = ({ id, title, createTime, duration, images, summary }: BlogReadType) => {
 
     return (
         <Link href={`/blogs/${id}`} className='flex flex-col gap-1.5'>
 
-            <img src={"https://cdn.baharnews.ir/images/docs/000213/n00213226-r-b-001.jpg"?? images[0] } className='aspect-video rounded w-full object-cover' />
+            <img src={createMediaUrl(images[0])} className='aspect-video rounded w-full object-cover' />
 
             <span className='text-body-2-bolder line-clamp-2 text-ellipsis leading-3 h-6'>
                 {title}
