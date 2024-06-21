@@ -21,6 +21,13 @@ import ReactQuill from 'react-quill'
 import { useMutation } from 'react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 
+
+const customDefaultValue : Partial<PropertyCUType<{ content: File | string }>> = {
+    productType: 'sell',
+    agentNote: '',
+    tagIds: []
+}
+
 export const DataForm = () => {
 
     const { mode, proprtyId, dispatch } = usePropertySection()
@@ -30,10 +37,10 @@ export const DataForm = () => {
     const { data: userInfo } = useUserInfo()
 
     const methods = useForm<PropertyCUType<{ content: File | string }>>({
-        defaultValues: {
-            productType: 'sell'
-        }
+        defaultValues: customDefaultValue 
+        
     })
+
 
     const { data, mutate, isLoading } = useCustomMutation<PropretyEndPointsType['CREATE']>({
         mutationKey: mode == 'add' ? 'addProprty' : 'editProperty',
@@ -90,7 +97,12 @@ export const DataForm = () => {
     })
 
     const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch, setError } = methods
-    console.log(errors)
+
+
+    useEffect(() => {
+        console.log('Here')
+        reset(customDefaultValue)
+    }, [mode , proprtyId])
 
     watch(['description', 'tagIds'])
 
@@ -100,7 +112,7 @@ export const DataForm = () => {
         return pv
     }, [])
 
-    console.log(allProprties)
+    console.log(errors)
 
 
     useEffect(() => {

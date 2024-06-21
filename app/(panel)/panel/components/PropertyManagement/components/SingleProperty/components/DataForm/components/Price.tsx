@@ -16,12 +16,12 @@ focus:bg-white
  [&:not(:placeholder-shown)]:text-space-codet
 focus: border
 
- border-ultra-violet    [&:not(:focus):placeholder-shown]:border-anti-flash-white-lighter bg-seasalt
+      bg-seasalt
 lg:min-w-[300px] min-w-[150px]`
 
 export const Price = () => {
 
-    const { setValue, getValues, register, unregister, formState: { errors }, watch } = useFormContext<PropertyCUType<File>>()
+    const { setValue, getValues, register, unregister, formState: { errors }, watch, resetField } = useFormContext<PropertyCUType<File>>()
 
     const productType = getValues('productType')
 
@@ -37,7 +37,9 @@ export const Price = () => {
             unregister('prePrice')
             register('price', { required: { value: true, message: 'قیمت وارد نشده است.' } })
         }
-    }, [productType])
+    })
+
+    const returnClassName = (isError: boolean) => `${inputClassName} ${!!isError ? 'border-imperial-red bg-white' : ' [&:not(:focus):placeholder-shown]:border-anti-flash-white-lighter border-ultra-violet'}`
 
     return (
         <div className='flex flex-col gap-3'>
@@ -48,15 +50,16 @@ export const Price = () => {
 
 
                     <NumericFormat
-                        className={inputClassName}
-                        onValueChange={(e) => setValue('price', Number(e.floatValue))}
+                        className={returnClassName(!!errors.price)}
+                        onValueChange={(e) => resetField('price', { defaultValue: Number(e.floatValue) })}
                         value={getValues('price')}
                         thousandSeparator
                         placeholder='مثلا : 500,000,000'
 
+
                     />
 
-                    {errors.price && <span className='text-bittersweet text-body-2-normal'>{errors.price.message}</span>}
+                    {errors.price && <span className='text-bittersweet text-body-3-normal'>{errors.price.message}</span>}
 
                 </div>
             }
@@ -68,8 +71,8 @@ export const Price = () => {
 
 
                     <NumericFormat
-                        className={inputClassName}
-                        onValueChange={(e) => setValue('prePrice', Number(e.floatValue))}
+                        className={returnClassName(!!errors.prePrice)}
+                        onValueChange={(e) => resetField('prePrice', { defaultValue: Number(e.floatValue) })}
                         value={getValues('prePrice')}
                         thousandSeparator
                         placeholder='مثلا : 1,000,000,000'
@@ -86,8 +89,8 @@ export const Price = () => {
 
 
                     <NumericFormat
-                        className={inputClassName}
-                        onValueChange={(e) => setValue('rentPrice', Number(e.floatValue))}
+                        className={returnClassName(!!errors.rentPrice)}
+                        onValueChange={(e) => resetField('rentPrice', { defaultValue: Number(e.floatValue) })}
                         value={getValues('rentPrice')}
                         thousandSeparator
                         placeholder='مثلا : 15,000,000'

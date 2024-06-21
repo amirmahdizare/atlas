@@ -14,10 +14,10 @@ export const SelectLocations = () => {
 
     const { data: subCitiesData, isLoading: subCityLoading } = useSubCities()
 
+    register('location', { required: { value: true, message: 'انتخاب شهر اجباری است.' } })
+    register('subLocation', { required: { value: true, message: 'انتخاب منطقه اجباری است.' } })
     useEffect(() => {
 
-        register('location', { required: { value: true, message: 'انتخاب شهر اجباری است.' } })
-        register('subLocation', { required: { value: true, message: 'انتخاب منطقه اجباری است.' } })
 
     }, [])
 

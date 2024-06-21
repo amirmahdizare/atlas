@@ -13,10 +13,10 @@ export const SelectCategory = () => {
 
     watch(['category', 'subCategory'])
     
+    register('category', { required: { value: true, message: 'انتخاب دسته بندی اجباری است.' } })
+    register('subCategory', { required: { value: true, message: 'انتخاب زیر دسته بندی اجباری است.' } })
     useEffect(() => {
 
-        register('category', { required: { value: true, message: 'انتخاب دسته بندی اجباری است.' } })
-        register('subCategory', { required: { value: true, message: 'انتخاب زیر دسته بندی اجباری است.' } })
 
     }, [])
 
