@@ -21,8 +21,11 @@ export const MutateSubcategory = ({ children, mode, catId, subcatId, catTitle }:
     const modeTitle = mode == 'edit' ? 'ویرایش' : 'ایجاد'
 
     const { mutate, isLoading } = useCustomMutation<SubcategoryEndPointsType['CREATE']>({
-        mutationFn: (data) => subcatId && mode == 'edit' ? api.patch(SubcategoryEndPoints.SINGLE(subcatId.toString()), { ...data, categoryId: catId }) : api.post(SubcategoryEndPoints.CREATE, { ...data, categoryId: catId }),
-        onSuccess: (d, {title}) => {
+        mutationFn: (data) => subcatId && mode == 'edit'
+            ? api.patch(SubcategoryEndPoints.SINGLE(subcatId.toString()),
+                { ...data, categoryId: Number(catId) }) : api.post(SubcategoryEndPoints.CREATE, { ...data, categoryId: Number(catId) }
+                ),
+        onSuccess: (d, { title }) => {
             toast.success(`زیرگروه ${title} با موفقیت ${modeTitle} شد.`)
             refetch()
             setShow(false)
@@ -43,6 +46,10 @@ export const MutateSubcategory = ({ children, mode, catId, subcatId, catTitle }:
         }
 
     }, [subcatId])
+
+    useEffect(()=>{
+        reset()
+    },[show])
 
 
 

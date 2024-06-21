@@ -67,6 +67,11 @@ export const MutateSuggest = ({ children, mode, parentId, recordId, parentTitle 
     />
 
 
+    useEffect(() => {
+        reset()
+    }, [show])
+
+
 
     return (
         <>

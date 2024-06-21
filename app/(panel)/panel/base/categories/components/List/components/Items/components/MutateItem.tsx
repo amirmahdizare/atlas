@@ -24,13 +24,13 @@ export const MutateItem = ({ children, mode, parentId, recordId, parentTitle }: 
 
     const { refetch, data } = useItemsList()
 
-    const { register, formState: { errors }, handleSubmit, reset} = useForm<FormType>()
+    const { register, formState: { errors }, handleSubmit, reset } = useForm<FormType>()
 
 
     const modeTitle = mode == 'edit' ? 'ویرایش' : 'ایجاد'
 
     const { mutate, isLoading } = useCustomMutation<ItemsEndPointsType['CREATE']>({
-        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(ItemsEndPoints.SINGLE(recordId.toString()), { ...data , suggestId:parentId}) : api.post(ItemsEndPoints.CREATE, { ...data  , suggestId:parentId}),
+        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(ItemsEndPoints.SINGLE(recordId.toString()), { ...data, suggestId: parentId }) : api.post(ItemsEndPoints.CREATE, { ...data, suggestId: parentId }),
         onSuccess: (d, { title }) => {
             toast.success(`آیتم ${title} با موفقیت ${modeTitle} شد.`)
             refetch()
@@ -47,7 +47,7 @@ export const MutateItem = ({ children, mode, parentId, recordId, parentTitle }: 
 
         const targetItem = data?.data.find(i => i.id == recordId?.toString())
         if (targetItem) {
-            const { title , value} = targetItem
+            const { title, value } = targetItem
             reset({ title, value })
         }
 
@@ -66,6 +66,10 @@ export const MutateItem = ({ children, mode, parentId, recordId, parentTitle }: 
         errorText={errors[itemKey]?.message}
         type={inputType}
     />
+
+    useEffect(() => {
+        reset()
+    }, [show])
 
 
 

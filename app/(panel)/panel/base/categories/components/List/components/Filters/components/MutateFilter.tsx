@@ -14,13 +14,13 @@ import { FilterMutateType, FilterReadType, FilterRecordType } from 'types'
 
 
 
- interface FormType extends Omit<FilterRecordType ,'subCategoryId'> {}
+interface FormType extends Omit<FilterRecordType, 'subCategoryId'> { }
 
 export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }: { parentId: string, mode: 'add' | 'edit', recordId?: string, children: ReactNode, parentTitle: string }) => {
 
     const [show, setShow] = useState<boolean>(false)
 
-    const { refetch , data } = useFiltersList()
+    const { refetch, data } = useFiltersList()
 
     const { register, formState: { errors }, handleSubmit, reset, getValues, setValue, watch } = useForm<FormType>()
 
@@ -29,7 +29,7 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
     const modeTitle = mode == 'edit' ? 'ویرایش' : 'ایجاد'
 
     const { mutate, isLoading } = useCustomMutation<FilterEndPointsType['CREATE']>({
-        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(FilterEndPoints.SINGLE(recordId.toString()), { ...data, subCategoryId: parentId , isPrimary:data.isPrimary.toString() }) : api.post(FilterEndPoints.CREATE, { ...data, subCategoryId: parentId , isPrimary:data.isPrimary.toString() }),
+        mutationFn: (data) => recordId && mode == 'edit' ? api.patch(FilterEndPoints.SINGLE(recordId.toString()), { ...data, subCategoryId: parentId, isPrimary: data.isPrimary.toString() }) : api.post(FilterEndPoints.CREATE, { ...data, subCategoryId: parentId, isPrimary: data.isPrimary.toString() }),
         onSuccess: (d, { title }) => {
             toast.success(`ویژگی ${title} با موفقیت ${modeTitle} شد.`)
             refetch()
@@ -46,20 +46,24 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
 
         const targetFilter = data?.data.find(i => i.id == recordId?.toString())
         if (targetFilter) {
-            const { id  , ...items} = targetFilter
+            const { id, ...items } = targetFilter
             reset(items)
         }
 
     }, [recordId])
 
+    useEffect(() => {
+        reset()
+    }, [show])
 
-    const FormItem = <T extends keyof FormType,>({ label, placeHolder, itemKey, inputType, options }: { label: string, placeHolder: string, itemKey: keyof FormType, inputType?: string, options?: RegisterOptions<FormType> | undefined }) => <Input label={label} placeholder={placeHolder} 
-    register={register(itemKey, {
-        required: {
-            value: true,
-            message: `وارد کردن ${label} اجباری است.`
-        } ,...options
-    })}
+
+    const FormItem = <T extends keyof FormType,>({ label, placeHolder, itemKey, inputType, options }: { label: string, placeHolder: string, itemKey: keyof FormType, inputType?: string, options?: RegisterOptions<FormType> | undefined }) => <Input label={label} placeholder={placeHolder}
+        register={register(itemKey, {
+            required: {
+                value: true,
+                message: `وارد کردن ${label} اجباری است.`
+            }, ...options
+        })}
 
         error={!!errors[itemKey]}
         errorText={errors[itemKey]?.message}
@@ -78,9 +82,9 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
                 open={show}
                 setOpen={setShow}
                 fitHeight
-                // fitWidth
+            // fitWidth
             >
-                <form className='flex flex-col gap-2  p-2' onSubmit={handleSubmit((d) => mutate({ ...d ,subCategoryId:parentId}))}>
+                <form className='flex flex-col gap-2  p-2' onSubmit={handleSubmit((d) => mutate({ ...d, subCategoryId: parentId }))}>
                     <span className='flex flex-row gap-0.5 items-center'>{parentTitle} <IconChevronLeft width={20} height={20} /> {modeTitle} ویژگی</span>
 
                     <FormItem
@@ -105,17 +109,17 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
 
                     <FormItem
                         itemKey='itemKey'
-                        label='فیلد دیتابیس'
+                        label='نام انگلیسی'
                         placeHolder='مثلا : price به انگلیسی باید وارد شود'
                         options={{
                             pattern: {
                                 value: /^[a-z]*$/,
-                                message: 'فیلد با فرمت درستی وارد نشده است.'
+                                message: 'نام انگلیسی با فرمت درستی وارد نشده است.'
                             }
                         }}
                     />
 
-                    <span  className='text-gray-500'>نوع فیلتری که میخواد اعمال شود</span>
+                    <span className='text-gray-500'>نوع فیلتری که میخواد اعمال شود</span>
 
                     <Select
                         items={Object.values(CategorySpecialField).map(i => ({ value: i, lable: i }))}
@@ -123,8 +127,8 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
                         value={getValues('filtertype')}
                     />
 
-                    <span  className='text-gray-500'>نوع ویژگی</span>
-                    
+                    <span className='text-gray-500'>نوع ویژگی</span>
+
                     <Select
                         items={Object.values(FilterBaseType).map(i => ({ value: i, lable: i }))}
                         onChange={(value) => setValue('type', value)}
