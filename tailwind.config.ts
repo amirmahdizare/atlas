@@ -34,7 +34,7 @@ const config: Config = {
       },
       fontSize: {
         'desktop': '35px',
-        'mobile': '31px',
+        'mobile': '30px',
         ...createTypography('h1', rem / rem),
         ...createTypography('h2', 31 / rem),
         ...createTypography('h3', 23 / rem),
