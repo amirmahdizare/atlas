@@ -64,10 +64,9 @@ export const VerifyCode = () => {
         if (phoneNumber)
             mutate({ code: data.verifyCode, phoneNumber })
     }
-    //  onSubmit={handleSubmit(handleEnter)}
-    console.log(value)
+
     return (
-        <form className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3'>
             <span className='text-h5-normal text-gray-400'>لطفا کد ارسال شده به موبایل خود را وارد کنید</span>
             {/* <Input
                 required
@@ -111,6 +110,6 @@ export const VerifyCode = () => {
                 تایید
             </Button>
 
-        </form>
+        </div>
     )
 }
