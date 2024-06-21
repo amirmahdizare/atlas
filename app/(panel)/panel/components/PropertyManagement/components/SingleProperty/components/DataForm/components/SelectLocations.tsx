@@ -50,7 +50,7 @@ export const SelectLocations = () => {
 
                 {subCitiesData?.data && <Select
                     items={subCitiesData?.data.filter(i => getValues('location') && i.parentLocation?.id == getValues('location') ? true : false).map(i => ({ lable: i.faTitle, value: i.id.toString() }))}
-                    onChange={(v) => setValue('subLocation', v)}
+                    onChange={(v) => resetField('subLocation', { defaultValue: v })}
                     value={getValues('subLocation') ?? ''}
                     placeHolder='انتخاب منطقه'
                     label='منطقه'

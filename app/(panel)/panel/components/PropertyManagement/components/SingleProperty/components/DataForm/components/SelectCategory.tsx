@@ -12,7 +12,7 @@ export const SelectCategory = () => {
     const { data: fullData, isError, isLoading } = useFullCategories()
 
     watch(['category', 'subCategory'])
-    
+
     register('category', { required: { value: true, message: 'انتخاب دسته بندی اجباری است.' } })
     register('subCategory', { required: { value: true, message: 'انتخاب زیر دسته بندی اجباری است.' } })
     useEffect(() => {
@@ -47,8 +47,8 @@ export const SelectCategory = () => {
                 {isError && <div className='text-red-500'>خطا در دریافت زیردسته بندی ها</div>}
 
                 {fullData?.data && <Select
-                    items={fullData?.data?.find(i => i.id == getValues('category')?.toString() )?.subCategories?.map(i => ({ lable: i.title, value: i.id.toString() }))?? []}
-                    onChange={(v) => setValue('subCategory', v)}
+                    items={fullData?.data?.find(i => i.id == getValues('category')?.toString())?.subCategories?.map(i => ({ lable: i.title, value: i.id.toString() })) ?? []}
+                    onChange={(v) => resetField('subCategory', { defaultValue: v })}
                     value={getValues('subCategory')}
                     placeHolder='انتخاب زیردسته بندی'
                     label='زیر دسته بندی'
