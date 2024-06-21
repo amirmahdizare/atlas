@@ -20,8 +20,6 @@ export const Attributes = ({ initialSubCategoryId }: { initialSubCategoryId?: nu
         name: 'features'
     })
 
-    console.log(fields)
-
     watch('features')
 
     const { data, isLoading, isError } = useFullCategories()
