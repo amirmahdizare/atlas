@@ -71,7 +71,7 @@ export const RowItem = (ad: UserListType) => {
 
                                 <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id} />
 
-                                {type == 'agent' && <ChangeUserPermissions userId={ad.id} />}
+                                {type == 'agent' && <ChangeUserPermissions userName={ad.userName ?? ''} userId={ad.id} />}
 
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>

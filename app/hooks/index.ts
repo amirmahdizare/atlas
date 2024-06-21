@@ -179,3 +179,11 @@ export const usePermission = (permissionItem: keyof typeof PermissionBackendRout
 
     return { state: false, isLoading: isFetching }
 }
+
+export const useAllAgents = (props?: any) => useCustomQuery<UsersEndpointType['GET_AGENTS']>({
+    queryFn: () => api.get(UsersEndpoints.GET_AGENTS),
+    queryKey: ['getAllAgents'],
+    onError: (e) => { console.log(e) },
+    staleTime: minuteToMs(5),
+    ...props
+})

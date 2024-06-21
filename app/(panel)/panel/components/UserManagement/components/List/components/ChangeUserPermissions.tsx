@@ -5,7 +5,7 @@ import { IconKey, IconUser } from '@tabler/icons-react'
 import { api } from '_api/config'
 import { RoleEndPoints, RoleEndPointsType } from '_api/endpoints/roles'
 import { UsersEndpointType, UsersEndpoints } from '_api/endpoints/users'
-import { useCustomMutation, useCustomQuery } from 'hooks'
+import { useAllAgents, useCustomMutation, useCustomQuery } from 'hooks'
 import { toast } from 'react-toastify'
 import { captilizeFirstLetter } from 'utils'
 import { useUserList } from '../../../hooks'
@@ -32,17 +32,17 @@ type FormValues = {
     [key: string]: boolean
 };
 
-export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, userRoleId?: number }) => {
+export const ChangeUserPermissions = ({ userId, userRoleId, userName }: { userId: number, userRoleId?: number, userName: string }) => {
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
 
     const { register, handleSubmit, control, watch, getValues, reset, setValue } = useForm<FormValues>()
 
-    useEffect(() => {
-        if (isModalOpen)
-            fetchUserInfo()
-    }, [isModalOpen])
+    // useEffect(() => {
+    //     if (isModalOpen)
+    //         fetchUserInfo()
+    // }, [isModalOpen])
 
     const { data, isLoading } = useCustomQuery<PermissionEndPointsType['GET_LIST']>({
         queryFn: () => api.get(PermissionEndPoints.GET_LIST),
@@ -52,17 +52,29 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
 
 
     const currentSelected = watch()
-    const { isLoading: loadingUserInfo, data: userInfo, isError, refetch: fetchUserInfo } = useCustomQuery<UsersEndpointType['GET_SINGLE']>({
-        queryKey: ['getUserInfo', userId.toString()],
-        queryFn: ({ queryKey }) => api.get(UsersEndpoints.SINGLE_USER(userId.toString())),
-        onSuccess: (d) => {
-            if (d?.data?.permissions) {
-                const currentPermissionObj = d?.data?.permissions.reduce((pv, cv) => ({ ...pv, [cv.id]: true }), {})
-                reset(currentPermissionObj)
-            }
-        },
-        enabled: false
-    })
+    // const { isLoading: loadingUserInfo, data: userInfo, isError, refetch: fetchUserInfo } = useCustomQuery<UsersEndpointType['GET_SINGLE']>({
+    //     queryKey: ['getUserInfo', userId.toString()],
+    //     queryFn: ({ queryKey }) => api.get(UsersEndpoints.SINGLE_USER(userName.toString())),
+    //     onSuccess: (d) => {
+    //         if (d?.data?.permissions) {
+    //             const currentPermissionObj = d?.data?.permissions.reduce((pv, cv) => ({ ...pv, [cv.id]: true }), {})
+    //             reset(currentPermissionObj)
+    //         }
+    //     },
+    //     enabled: false
+    // })
+
+    const { data: agentsData , isError ,  } = useAllAgents()
+
+    useEffect(() => {
+        if (agentsData?.data.find(f => f.id == userId.toString())) {
+            const currentPermissionObj = agentsData?.data.find(f => f.id == userId.toString())?.permissions.reduce((pv, cv) => ({ ...pv, [cv.id]: true }), {})
+            reset(currentPermissionObj)
+        }
+
+
+    }, [agentsData, userId])
+
 
     const { refetch } = useUserList()
 
@@ -119,18 +131,18 @@ export const ChangeUserPermissions = ({ userId, userRoleId }: { userId: number, 
         if (isError)
             return <span className='text-red-500 text-center w-full'>خطا در دریافت اطلاعات کاربر</span>
 
-        else if (userInfo?.data) {
+        else if (agentsData?.data) {
 
 
             const proccessedData = data?.data.reduce<Array<{ title: string, items: PermissionType<string>[] }>>((pv, cv, index, array) => {
                 if (pv.findIndex(i => i.title == cv.action.split('_')[1]) == -1 && pv.findIndex(i => i.items.findIndex(i => i.action == cv.action) != -1) == -1)
                     pv.push({
-                        title: batchAccesses.findIndex(ba => ba.records.indexOf(  cv.action.split('_')[1])) !=-1 ?   batchAccesses.find(ba => ba.records.indexOf(  cv.action.split('_')[1]) != -1 )?.title  ?? cv.action.split('_')[1]:   cv.action.split('_')[1]
+                        title: batchAccesses.findIndex(ba => ba.records.indexOf(cv.action.split('_')[1])) != -1 ? batchAccesses.find(ba => ba.records.indexOf(cv.action.split('_')[1]) != -1)?.title ?? cv.action.split('_')[1] : cv.action.split('_')[1]
                         ,
-                         items: array.filter(i =>
-                            batchAccesses.find(ba => ba.records.indexOf(  cv.action.split('_')[1]) == -1
+                        items: array.filter(i =>
+                            batchAccesses.find(ba => ba.records.indexOf(cv.action.split('_')[1]) == -1
                                 ? i.action.split('_')[1] == cv.action.split('_')[1]
-                                : (i.action.split('_')[1] == cv.action.split('_')[1] || batchAccesses.findIndex(f => f.records.indexOf(cv.action.split('_')[1])!=-1 )== batchAccesses.findIndex(f => f.records.indexOf(i.action.split('_')[1])!=-1 ))))
+                                : (i.action.split('_')[1] == cv.action.split('_')[1] || batchAccesses.findIndex(f => f.records.indexOf(cv.action.split('_')[1]) != -1) == batchAccesses.findIndex(f => f.records.indexOf(i.action.split('_')[1]) != -1))))
                     })
                 return pv
             }, [])
