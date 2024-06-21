@@ -16,7 +16,9 @@ export const PropertyManagement = () => {
 
             <div className={`${mode == 'list' ? 'flex flex-col h-full' : 'hidden'}`}>   <List /></div>
 
-            <div className={`${mode != 'list' ? '' : 'hidden'}`}>  <SingleProperty  propertyId={proprtyId} /></div>
+            {mode!='list' &&  <SingleProperty  propertyId={proprtyId} />}
+
+            <div className={`${mode != 'list' ? '' : 'hidden'}`}> </div>
 
         </div>
     )

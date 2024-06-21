@@ -19,7 +19,7 @@ export const SingleProperty = ({ propertyId }: { propertyId?: string }) => {
                 </div>
 
 
-                <Button icon={IconArrowBack} bgColor='secondary' iconSide='right' onClick={() => dispatch({ mode: 'list' })}>بازگشت</Button>
+                <Button icon={IconArrowBack} bgColor='secondary' iconSide='right' onClick={() => dispatch({ mode: 'list'  , proprtyId:undefined})}>بازگشت</Button>
 
             </div>
             <DataForm />

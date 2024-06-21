@@ -22,7 +22,7 @@ import { useMutation } from 'react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 
 
-const customDefaultValue : Partial<PropertyCUType<{ content: File | string }>> = {
+const customDefaultValue: Partial<PropertyCUType<{ content: File | string }>> = {
     productType: 'sell',
     agentNote: '',
     tagIds: []
@@ -37,8 +37,8 @@ export const DataForm = () => {
     const { data: userInfo } = useUserInfo()
 
     const methods = useForm<PropertyCUType<{ content: File | string }>>({
-        defaultValues: customDefaultValue 
-        
+        defaultValues: customDefaultValue
+
     })
 
 
@@ -96,13 +96,14 @@ export const DataForm = () => {
         }
     })
 
-    const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch, setError } = methods
+    const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch, setError, } = methods
 
 
-    useEffect(() => {
-        console.log('Here')
-        reset(customDefaultValue)
-    }, [mode , proprtyId])
+    // useEffect(() => {
+    //     console.log('Here' , mode , proprtyId)
+    //     console.log(getValues())
+    //     reset(customDefaultValue)
+    // }, [mode , proprtyId])
 
     watch(['description', 'tagIds'])
 
@@ -112,15 +113,14 @@ export const DataForm = () => {
         return pv
     }, [])
 
-    console.log(errors)
 
 
     useEffect(() => {
-        if (mode == 'edit') {
+        if (mode == 'edit' && proprtyId) {
             const targetProperty = allProprties?.find(i => i.id == proprtyId)
             if (targetProperty) {
                 const { location, subLocation, category, subCategory, tags, user, medias, price, rentPrice, prePrice, features, ...restProperty } = targetProperty
-                console.log('Here', allProprties)
+                console.log('Set Dobare', allProprties)
                 reset({
                     ...restProperty,
                     category: category?.id ?? undefined,
@@ -144,19 +144,23 @@ export const DataForm = () => {
                 })
             }
         }
+        else {
+            console.log("Reset Show ")
+            reset(customDefaultValue)
+        }
     }, [proprtyId, mode, isFetched])
 
     const handleMutateProperty = (data: PropertyCUType<{ content: File | string }>) => {
         const { prePrice, price, rentPrice, ...restData } = data
-        mutate({ ...restData, medias: data.medias.map(i => i.content), isBookmarked: false, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0, price }) : ({ price: 0, rentPrice, prePrice })) })
+        mutate({ ...restData, medias: data?.medias?.map(i => i.content), agentNote: '', tagIds: restData?.tagIds ?? [], isBookmarked: false, ...(data.productType == 'sell' ? ({ rentPrice: 0, prePrice: 0, price }) : ({ price: 0, rentPrice, prePrice })) })
         // console.log(data)
     }
 
     // if (document?.querySelector('#media-1') != null) {
     // console.log(document.querySelector('#media-0')  ? getBase64Image(document.querySelector('#media-0') as any ):'' )
     // }
-
-
+    console.log(watch())
+    console.log(proprtyId)
     return (
 
         <FormProvider {...methods} >

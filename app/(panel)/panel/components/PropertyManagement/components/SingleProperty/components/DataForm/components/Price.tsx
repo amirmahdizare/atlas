@@ -69,6 +69,7 @@ export const Price = () => {
                                 value={value}
                                 thousandSeparator
                                 placeholder='مثلا : 500,000,000'
+                                defaultValue={undefined}
                             />
                         } />
 

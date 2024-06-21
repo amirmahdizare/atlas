@@ -26,7 +26,8 @@ export const useCustomInfiniteQuery = <T extends ApiGetRequestType, CT = unknown
 
 export const useFullCategories = () => useCustomQuery<CategoryEndPointsType['ALL_WITH_RELATION']>({
     queryFn: () => api.post(CategoryEndPoints.ALL_WITH_RELATION),
-    queryKey: 'GetAllCategories'
+    queryKey: 'GetAllCategories',
+    staleTime:minuteToMs(10)
 })
 
 
@@ -86,6 +87,7 @@ export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
     queryKey: 'getTags',
     queryFn: () => api.get(TagsEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت برچسب ها'),
+    staleTime:minuteToMs(10)
 })
 
 export const useBookmark = (productId: string) => {

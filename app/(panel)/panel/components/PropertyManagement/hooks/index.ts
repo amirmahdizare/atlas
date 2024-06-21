@@ -23,14 +23,12 @@ export const usePropertySection = create<StoreType>((set) => ({
 }))
 
 
-export const usePropertyList = (f = 'sdf') => {
+const ProductListLimit = 10
 
-    const ProductListLimit = 10
-
-    return useCustomInfiniteQuery<PropretyEndPointsType['LIST']>({
-        queryFn: ({ pageParam = 1 }) => api.get(PropretyEndPoints.LIST, { params: { limit: ProductListLimit, page: pageParam } }),
-        queryKey: ['propertyList', f],
-        // cacheTime: minuteToMs(5),
-        getNextPageParam: (last, all) => last.data.length == ProductListLimit ? all.length + 1 : undefined
-    })
-}
+export const usePropertyList = () => useCustomInfiniteQuery<PropretyEndPointsType['LIST']>({
+    queryFn: ({ pageParam = 1 }) => api.get(PropretyEndPoints.LIST, { params: { limit: ProductListLimit, page: pageParam } }),
+    queryKey: ['propertyList'],
+    cacheTime: minuteToMs(5),
+    getNextPageParam: (last, all) => last.data.length == ProductListLimit ? all.length + 1 : undefined,
+    refetchOnMount:false,
+})
