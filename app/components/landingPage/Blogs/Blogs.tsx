@@ -5,6 +5,7 @@ import { TopBlog } from './components/TopBlog'
 // import { blogs } from './data.mock'
 import { SingleBlog } from './components/SingleBlogs'
 import { useBlogs } from '@hooks'
+import Link from 'next/link'
 
 export const Blogs = () => {
 
@@ -25,10 +26,10 @@ export const Blogs = () => {
 
 
 
-                    <div className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
+                    <Link href={'/blogs'} className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden'>
                         <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه مقالات</span>
                         <IconArrowDownLeft width={15} height={15} />
-                    </div>
+                    </Link>
                 </div>
 
                 <div className='flex flex-col p-0.5   gap-2 overflow-hidden'>
@@ -46,10 +47,10 @@ export const Blogs = () => {
 
                         </div>
 
-                        <div className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
+                        <Link  href={'/blogs'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
                             <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه مقالات</span>
                             <IconArrowDownLeft width={15} height={15} />
-                        </div>
+                        </Link>
 
                     </div>
 
