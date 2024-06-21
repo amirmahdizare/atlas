@@ -120,7 +120,6 @@ export const DataForm = () => {
             const targetProperty = allProprties?.find(i => i.id == proprtyId)
             if (targetProperty) {
                 const { location, subLocation, category, subCategory, tags, user, medias, price, rentPrice, prePrice, features, ...restProperty } = targetProperty
-                console.log('Set Dobare', allProprties)
                 reset({
                     ...restProperty,
                     category: category?.id ?? undefined,
@@ -145,7 +144,6 @@ export const DataForm = () => {
             }
         }
         else {
-            console.log("Reset Show ")
             reset(customDefaultValue)
         }
     }, [proprtyId, mode, isFetched])
@@ -156,11 +154,6 @@ export const DataForm = () => {
         // console.log(data)
     }
 
-    // if (document?.querySelector('#media-1') != null) {
-    // console.log(document.querySelector('#media-0')  ? getBase64Image(document.querySelector('#media-0') as any ):'' )
-    // }
-    console.log(watch())
-    console.log(proprtyId)
     return (
 
         <FormProvider {...methods} >
