@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react'
 import { Button, Input, Select, TextArea } from '@components'
-import { FormProvider, useForm } from 'react-hook-form'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { PropertyCUType, PropertyDetailType } from 'types'
 import { Medias } from './components/Medias'
 import { usePropertyList, usePropertySection } from '(panel)/panel/components/PropertyManagement/hooks'
@@ -96,7 +96,7 @@ export const DataForm = () => {
         }
     })
 
-    const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch, setError, } = methods
+    const { register, formState: { errors }, getValues, handleSubmit, reset, setValue, watch, setError, control } = methods
 
 
     // useEffect(() => {
@@ -203,19 +203,24 @@ export const DataForm = () => {
                         <SelectCategory />
                     </div>
 
+                    <Controller
+                        control={control}
+                        name='description'
+                        rules={{required:{value:true , message:'توضیحات خالی می باشد!!'}}}
+                        render={({ field: { name, onChange, onBlur, value } }) =>
 
-                    <ReactQuill modules={{
-                        toolbar: [
-                            [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }],
-                            [{ size: [] }],
-                            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                            ['link', 'image', 'video'],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' },
-                            { 'indent': '-1' }, { 'indent': '+1' }],
-                            ['clean']
-                        ]
-                    }} className='!text-right' theme="snow" value={getValues('description')} onChange={(value: string) => { setValue('description', value) }} />
-
+                            <ReactQuill modules={{
+                                toolbar: [
+                                    [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }],
+                                    [{ size: [] }],
+                                    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                    ['link', 'image', 'video'],
+                                    [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                                    { 'indent': '-1' }, { 'indent': '+1' }],
+                                    ['clean']
+                                ]
+                            }} className='!text-right' theme="snow" value={value} onChange={(value: string) => onChange({ target: { value: value } })} />
+                        } />
 
                     {!!errors?.description && <span className='text-red-500 text-body-3-normal'>{errors.description.message}</span>}
                     {/* <TextArea
