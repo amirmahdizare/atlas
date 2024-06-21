@@ -6,7 +6,7 @@ import { List } from './components/List/List'
 import { usePropertySection } from './hooks'
 import { SingleProperty } from './components/SingleProperty/SingleProperty'
 
-export const PropertyManagement = ({ me }: { me: boolean }) => {
+export const PropertyManagement = () => {
 
     const { mode, proprtyId, dispatch } = usePropertySection()
 
@@ -16,7 +16,7 @@ export const PropertyManagement = ({ me }: { me: boolean }) => {
 
             <div className={`${mode == 'list' ? 'flex flex-col h-full' : 'hidden'}`}>   <List /></div>
 
-            <div className={`${mode != 'list' ? '' : 'hidden'}`}>  <SingleProperty mode={mode == 'list' ? 'add' : 'edit'} propertyId={proprtyId} /></div>
+            <div className={`${mode != 'list' ? '' : 'hidden'}`}>  <SingleProperty  propertyId={proprtyId} /></div>
 
         </div>
     )

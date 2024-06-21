@@ -5,9 +5,9 @@ import { usePropertySection } from '../../hooks'
 import Head from 'next/head'
 import { DataForm } from './components/DataForm/DataForm'
 
-export const SingleProperty = ({ mode, propertyId }: { mode: 'add' | 'edit', propertyId?: string }) => {
+export const SingleProperty = ({ propertyId }: { propertyId?: string }) => {
 
-    const { dispatch } = usePropertySection()
+    const { dispatch, mode } = usePropertySection()
 
     return (
         <div className='flex flex-col gap-2'>
