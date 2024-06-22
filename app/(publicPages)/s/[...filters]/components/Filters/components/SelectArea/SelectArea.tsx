@@ -5,6 +5,7 @@ import { useSearchProperty } from '../../../../hooks'
 // import { cities } from '../SelectCity/data.mock'
 import { LocationType, SubLocationReadType } from 'types'
 import { useSubCities } from '@hooks'
+import { useToggleArea } from './hook'
 
 export const SelectArea = () => {
 
@@ -14,7 +15,7 @@ export const SelectArea = () => {
 
     const { filter, dispatchFilter } = useSearchProperty()
 
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const { isOpen, setIsOpen } = useToggleArea()
 
     const [modal, setModal] = useState<boolean>(false)
 

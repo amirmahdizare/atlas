@@ -178,3 +178,4 @@ export const useToggleFilter = create<{ isOpen: boolean, setIsOpen: (state: bool
     isOpen: false,
     setIsOpen: (data) => set((state) => ({ ...state, isOpen: data })),
 }))
+
