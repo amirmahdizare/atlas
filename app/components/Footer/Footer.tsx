@@ -3,7 +3,7 @@ import Image from 'next/image'
 import logofull from 'images/logo-full.svg'
 // import { IconArrowDownLeft } from '@tabler/icons-react'
 import Link from 'next/link'
-import { Icon123, IconMap, IconMessage, IconPhone, IconPhoneCall } from '@tabler/icons-react'
+import { Icon123, IconArrowUp, IconArrowUpRight, IconLink, IconMap, IconMessage, IconPhone, IconPhoneCall } from '@tabler/icons-react'
 import { CONTACT_INFO, DESCRIPTION, MAIN_AGENTS, NESHAN_SHORTCUT } from 'variables'
 import { IconArrowLeft, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp, IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
 import { Button } from '@components'
@@ -54,7 +54,7 @@ const PersonContactInfo = ({ title, phoneNumber, instaUserName }: { title: strin
 
 export const Footer = () => {
     return (
-        <div className='bg-seasalt grid grid-cols-2 gap-6 p-2 lg:p-4' id='footer'>
+        <div className='bg-seasalt grid grid-cols-2 gap-6 p-2 lg:p-4 pb-0 lg:pb-0' id='footer'>
 
             <div className='col-span-2 lg:col-span-1 flex flex-col gap-4'>
 
@@ -97,7 +97,7 @@ export const Footer = () => {
                 </div>
 
                 <ContactItem icon={IconMap} link={NESHAN_SHORTCUT} title='شهر جدید هشتگرد (مهستان) ، فاز 2 ، بلوار شهریار شمالی' />
-                
+
                 <div className='flex flex-col gap-3 border-r pr-1  '>
                     {MAIN_AGENTS.map(item =>
                         <PersonContactInfo key={item.phoneNumber}
@@ -125,6 +125,13 @@ export const Footer = () => {
 
             </div>
 
+            <div className='flex flex-row gap-1  justify-center bg-gray-200 w-full col-span-2 p-2 lg:p-1 text-body-2-normal' >
+                <span>پیاده سازی داده شده توسط</span>
+                <a target='_blank' href='https://amkz.dev' className='hover:text-coral flex flex-row gap-0.5 items-center'>
+                    <span>AMKZ Team </span>
+                    <IconArrowUpRight className='w-2 h-2' /></a>
+
+            </div>
 
         </div>
     )
