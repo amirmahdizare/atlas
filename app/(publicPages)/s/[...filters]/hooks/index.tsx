@@ -149,13 +149,13 @@ export const usePropertySearchResults = () => {
             return { slug: catData?.data.find(f => f.id == searchHook.filter.category?.[0].toString())?.enTitle.concat('-category') }
 
         return { slug: undefined }
-    }, [searchHook.filter.subCategory])
+    }, [searchHook.filter.subCategory , searchHook.filter.category])
 
     const newFilterQuery = `/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}${searchHook.filter.title ? `&?title=${searchHook.filter.title}` : ''}`
 
     useEffect(() => {
 
-        if (locationsData?.data && catData?.data && pathname != newFilterQuery) {
+        if (locationsData?.data && catData?.data) {
             push(newFilterQuery)
         }
     }, [newFilterQuery])
