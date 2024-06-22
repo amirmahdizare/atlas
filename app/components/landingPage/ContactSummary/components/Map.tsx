@@ -23,7 +23,6 @@ export const Map = () => {
 
     const marker = ({ points }: { points: Array<number> }) => {
 
-        console.log(points, mapRef)
 
         let currentOlMap = mapRef.current?.map
 
@@ -39,7 +38,6 @@ export const Map = () => {
             }
         })
 
-        console.log(currentOl.proj.fromLonLat(points))
 
         let instance = new currentOl.layer.Vector({
             source: new currentOl.source.Vector({
