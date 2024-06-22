@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { CategoryFilter, SelectArea, SelectCity, SelectType, Title } from './components'
-import { usePropertySearchResults, useSearchProperty } from '../../hooks/index'
+import { usePropertySearchResults, useSearchProperty, useToggleFilter } from '../../hooks/index'
 // import { categories } from './components/CategoryFilter/data.mock'
 import { BooleanFilter, OneButtonFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
 import { useFullCategories } from '@hooks'
@@ -15,7 +15,7 @@ const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]
 
 export const Filters = () => {
 
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { isOpen, setIsOpen } = useToggleFilter()
 
   const { filter } = useSearchProperty()
 

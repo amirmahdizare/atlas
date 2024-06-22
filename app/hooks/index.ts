@@ -36,7 +36,8 @@ export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndP
     queryKey: 'getCities',
     queryFn: () => api.get(LocationEndPoints.GET_LIST),
     onError: (e) => console.log('خطا در دریافت لیست شهرها', e),
-    staleTime: minuteToMs(10)
+    staleTime: minuteToMs(10),
+    refetchOnMount:false,
 })
 
 
@@ -44,14 +45,16 @@ export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocati
     queryKey: 'getSubCities',
     queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
     onError: (e) => console.log('خطا در دریافت لیست مناطق', e),
-    staleTime: minuteToMs(10)
+    staleTime: minuteToMs(10),
+    refetchOnMount:false,
 })
 
 export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
     queryKey: 'getBlogs',
     queryFn: () => api.get(BlogEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست مقالات'),
-    staleTime: minuteToMs(10)
+    staleTime: minuteToMs(10),
+    refetchOnMount:false,
 })
 
 

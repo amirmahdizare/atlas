@@ -2,8 +2,8 @@ import { useCities, useCustomInfiniteQuery, useFullCategories, useSubCities } fr
 import { api } from '_api/config'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { NavigateOptions } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect } from 'react'
 import { PropertyListFilterType, PropertySearchParams, SubCategoryType } from 'types'
 import { URLSearchParams } from 'url'
 import { convertSearchParamToObject, minuteToMs } from 'utils'
@@ -73,11 +73,13 @@ export const convertClientParamtToUrl = (filter: PropertySearchParams, push: (hr
 
 export const usePropertySearchResults = () => {
 
-    const searchParams = useSearchParams()
+    // const searchParams = useSearchParams()
 
     const { data: locationsData } = useCities()
 
     const { data: catData } = useFullCategories()
+
+    const pathname = usePathname()
 
     // const {} = useSubCities()
 
@@ -132,7 +134,7 @@ export const usePropertySearchResults = () => {
         return { slug: 'all' }
     }
 
-    const categorySlug = (): { slug: string | undefined } => {
+    const categorySlug = useCallback((): { slug: string | undefined } => {
 
         if (searchHook.filter.subCategory && searchHook.filter.subCategory?.length > 0) {
 
@@ -147,18 +149,23 @@ export const usePropertySearchResults = () => {
             return { slug: catData?.data.find(f => f.id == searchHook.filter.category?.[0].toString())?.enTitle.concat('-category') }
 
         return { slug: undefined }
-    }
+    }, [searchHook.filter.subCategory])
+
+    const newFilterQuery = `/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}${searchHook.filter.title ? `&?title=${searchHook.filter.title}` : ''}`
 
     useEffect(() => {
-        if (locationsData?.data && catData?.data)
-            push(`/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}${searchHook.filter.title ? `&?title=${searchHook.filter.title}` : ''}`)
-    }, [searchHook.filter])
+
+        if (locationsData?.data && catData?.data && pathname != newFilterQuery) {
+            push(newFilterQuery)
+        }
+    }, [newFilterQuery])
 
     const dataQuery = useCustomInfiniteQuery<PropretyEndPointsType['LIST'], { f: string }>({
         queryFn: ({ queryKey, pageParam = 1 }) => api.post(PropretyEndPoints.SEARCH, typeof queryKey[1] == 'string' ? { ...JSON.parse(queryKey[1]), limit: SEARCH_PRODUCT_LIMIT, page: pageParam } : {}),
         queryKey: ['SearchProprtyResults', JSON.stringify(currentFilter)],
         staleTime: minuteToMs(2),
-        getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined
+        getNextPageParam: (last, all) => last.data.length == SEARCH_PRODUCT_LIMIT ? all.length + 1 : undefined,
+        refetchOnMount: false,
     })
 
 
@@ -166,3 +173,8 @@ export const usePropertySearchResults = () => {
 
 
 }
+
+export const useToggleFilter = create<{ isOpen: boolean, setIsOpen: (state: boolean) => void }>((set) => ({
+    isOpen: false,
+    setIsOpen: (data) => set((state) => ({ ...state, isOpen: data })),
+}))
