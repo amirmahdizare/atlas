@@ -3,18 +3,19 @@ import Image from 'next/image'
 import logofull from 'images/logo-full.svg'
 // import { IconArrowDownLeft } from '@tabler/icons-react'
 import Link from 'next/link'
-import { Icon123, IconMap, IconMessage, IconPhone } from '@tabler/icons-react'
-import { CONTACT_INFO, DESCRIPTION, NESHAN_SHORTCUT } from 'variables'
-import { IconArrowLeft , IconBrandInstagram , IconBrandTwitter , IconBrandWhatsapp ,IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
+import { Icon123, IconMap, IconMessage, IconPhone, IconPhoneCall } from '@tabler/icons-react'
+import { CONTACT_INFO, DESCRIPTION, MAIN_AGENTS, NESHAN_SHORTCUT } from 'variables'
+import { IconArrowLeft, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp, IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
 import { Button } from '@components'
+import { captilizeFirstLetter, createPhoneCallLink } from 'utils'
 
-const SocialMediaButton = ({ icon :Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
+const SocialMediaButton = ({ icon: Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
 
     const appendClassName = type == 'colored' ? 'bg-coral text-white' : 'bg-gray-300 text-gray-800'
     return <Link href={link} className={`rounded-circle p-1.5 aspect-square ${appendClassName}`
     }>
         <span className='sr-only'>دپارتمان اطلس در شبکه های اجتماعی</span>
-        <Icon width={22.5} height={22.5}/>
+        <Icon width={22.5} height={22.5} />
     </Link>
 }
 const ContactItem = ({ icon: Icon, link, title }: { icon: typeof Icon123, link: string, title: string }) => <  Link href={link} className='hover:text-blue-600 flex flex-row gap-2 items-center'>
@@ -30,9 +31,30 @@ const ContactItem = ({ icon: Icon, link, title }: { icon: typeof Icon123, link: 
 
 </Link>
 
+
+const PersonContactInfo = ({ title, phoneNumber, instaUserName }: { title: string, phoneNumber: string, instaUserName: string }) => <div className='flex flex-row w- 2/3 gap-2 items-center lg:text-body-3-normal text-body-2-normal'>
+
+    <span className='flex-1 font-semibold'>{title}</span>
+
+    <a className='cursor-pointer hover:text-coral flex-row flex gap-0.5 items-center flex-1 ' href={createPhoneCallLink(phoneNumber)}>
+        {phoneNumber}
+        <IconPhoneCall className='text-french-gray w-2 h-2' />
+    </a >
+
+    <a className='cursor-pointer hover:text-coral flex-row flex gap-0.5 items-center flex-1 text-body-3-normal' href={`https://instagram.com/${instaUserName}`}>
+        {captilizeFirstLetter(instaUserName)}
+        <IconBrandInstagram className='text-french-gray w-2 h-2' />
+    </a>
+
+
+
+
+
+</div>
+
 export const Footer = () => {
     return (
-        <div className='bg-seasalt grid grid-cols-2 gap-6 p-4'>
+        <div className='bg-seasalt grid grid-cols-2 gap-6 p-2 lg:p-4'>
 
             <div className='col-span-2 lg:col-span-1 flex flex-col gap-4'>
 
@@ -74,10 +96,20 @@ export const Footer = () => {
                     <div className='absolute bg-mint-green w-[80px] left-1/2  h-[2px] top-full mt-1.5 rounded '></div>
                 </div>
 
-
                 <ContactItem icon={IconMap} link={NESHAN_SHORTCUT} title='شهر جدید هشتگرد (مهستان) ، فاز 2 ، بلوار شهریار شمالی' />
-                <ContactItem icon={IconMessage} link={`mailto:${CONTACT_INFO.email}`} title={CONTACT_INFO.email} />
-                <ContactItem icon={IconPhone} link={`tel:+${CONTACT_INFO.phone}`} title={CONTACT_INFO.phone} />
+                
+                <div className='flex flex-col gap-3 border-r pr-1  '>
+                    {MAIN_AGENTS.map(item =>
+                        <PersonContactInfo key={item.phoneNumber}
+                            instaUserName={item.instaUserName}
+                            phoneNumber={item.phoneNumber}
+                            title={item.lastName}
+                        />
+
+                    )}
+                </div>
+                {/* <ContactItem icon={IconMessage} link={`mailto:${CONTACT_INFO.email}`} title={CONTACT_INFO.email} />
+                <ContactItem icon={IconPhone} link={`tel:+${CONTACT_INFO.phone}`} title={CONTACT_INFO.phone} /> */}
 
 
                 {/* <div className='flex flex-row gap-2 items-center bottom-4 justify-center '>

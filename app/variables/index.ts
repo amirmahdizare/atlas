@@ -31,3 +31,22 @@ export const NO_PHOTO_IMAGE = noPhoto.src
 export const agentRoles = ['superAdmin', 'admin', 'agent']
 
 export const SEARCH_PRODUCT_LIMIT = 10
+
+
+export const MAIN_AGENTS = [
+    {
+        lastName: 'زارع',
+        phoneNumber: '09196442725',
+        instaUserName: 'amirzare__official'
+    },
+    {
+        lastName: 'اخلاقی',
+        phoneNumber: '09377634864',
+        instaUserName: 'hosseinakhlaghi14'
+    },
+    {
+        lastName: 'امین دهقان',
+        phoneNumber:'09129675563',
+        instaUserName:'hameddehghan_realestate'
+    }
+]

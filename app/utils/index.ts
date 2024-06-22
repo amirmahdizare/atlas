@@ -183,3 +183,5 @@ export const copyLink = (text: string) => {
   navigator.clipboard.writeText(text);
 
 }
+
+export const createPhoneCallLink = (number: string) => `tel:+98${number[0] == '0' ? number.substring(1) : number}`
