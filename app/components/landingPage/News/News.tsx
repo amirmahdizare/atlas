@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { ssrMutate } from '_api/serverSideConfig'
 import { PropretyEndPoints } from '_api/endpoints/property'
 import { PropertyDetailType } from 'types'
+import { Button } from '@components'
+import { ButtonToAll } from '@components'
 
 export const News = async () => {
 
@@ -19,19 +21,24 @@ export const News = async () => {
 
         return (
             <div className='flex flex-col gap-6 items-stretch'>
-                <div className='flex flex-row gap-4 justify-between lg:justify-center'>
+                <div className='flex flex-row gap-4 justify-between lg:justify-center items-center'>
 
                     <div className='text-raisin-black text-h3-bolder relative text-center'>
                         آگهی های جدید
-                        <div className='absolute bg-mint-green w-[80px] left-1/2 -translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
+                        <div className='absolute bg-mint-green w-[80px]  lg:left-1/2 -translate- x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
                     </div>
 
 
 
-                    <Link className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden' href={'/s/all'}>
+                    {/* <Link className='flex flex-row gap-1 cursor-pointer hover:text-coral lg:hidden' href={'/s/all'}>
                         <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه آگهی ها</span>
                         <IconArrowDownLeft width={15} height={15} />
-                    </Link>
+                    </Link> */}
+
+                    <ButtonToAll />
+
+
+
                 </div>
 
                 <div className='flex flex-col p-2 lg:p-4 bg-seasalt gap-2 overflow-hidden'>
