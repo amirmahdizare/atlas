@@ -115,7 +115,7 @@ export const PropertyCard = (pr: PropertyDetailType) => {
                     if (prompt(`آیا مایل به حذف آگهی ${title} هستید؟`, 'بله'))
                         mutate({})
                 }}></Button>}
-                {(data?.data.role.name == 'superAdmin' || user?.id == data?.data.id) && <Ladder {...pr} />}
+                {(data?.data.role.name == 'superAdmin') && <Ladder {...pr} />}
                 {isUserCanChangeStatus && <label className='flex flex-row gap-1 items-center'>
                     {!toggleLoading
                         ? <ReactSwitch
