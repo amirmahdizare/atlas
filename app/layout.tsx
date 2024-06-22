@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { IRANYekan, IRANYekanNumber } from './fonts/iranYekan'
 import { ClientLayout } from 'ClientLayout';
@@ -12,7 +12,12 @@ export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
   description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستغلات استان البرز',
   manifest: '/manifest.json',
-  viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
