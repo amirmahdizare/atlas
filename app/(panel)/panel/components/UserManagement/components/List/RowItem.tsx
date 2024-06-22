@@ -3,12 +3,16 @@ import { IconDotsVertical, IconPencil, IconPhoneCall, IconTrash, IconUser } from
 import ClickAwayListener from 'react-click-away-listener'
 import ReactSwitch from 'react-switch'
 import { AgentListInfo, UserListType } from 'types'
-import { useUsersSection } from '../../hooks'
+import { useUserList, useUsersSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
 import { ChangeUserPermissions } from './components/ChangeUserPermissions'
 import { createPhoneCallLink, translateRole } from 'utils'
-import { CopyLink } from '@components'
+import { CopyLink, Spinner } from '@components'
+import { useCustomMutation } from '@hooks'
+import { api } from '_api/config'
+import { UsersEndpoints } from '_api/endpoints/users'
+import { toast } from 'react-toastify'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -23,6 +27,20 @@ export const RowItem = (ad: UserListType) => {
     const [more, setMore] = useState<boolean>(false)
 
     const { dispatch, type } = useUsersSection()
+
+    const { refetch } = useUserList()
+
+    const { mutate, isLoading } = useCustomMutation({
+        mutationFn: () => api.delete(UsersEndpoints.SINGLE_USER(ad.id.toString())),
+        mutationKey: ['DeleteUser', ad.id],
+        onSuccess: () => {
+            toast.success(`${ad.firstName} ${ad.lastName} با موفقیت حذف شد.`)
+            refetch()
+        },
+        onError: () => {
+            toast.error('خطا در حذف کاربر')
+        }
+    })
 
     return (
         <div className='grid grid-cols-5 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
@@ -74,9 +92,9 @@ export const RowItem = (ad: UserListType) => {
                                 {type == 'agent' && <ChangeUserPermissions userName={ad.userName ?? ''} userId={ad.id} />}
 
 
-                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={isLoading ? undefined : () => mutate({})}>
                                     <span>حذف کاربر</span>
-                                    <IconTrash width={20} height={20} className='text-red-500' />
+                                    {isLoading ? <Spinner /> : <IconTrash width={20} height={20} className='text-red-500' />}
                                 </div>
 
                             </div>
