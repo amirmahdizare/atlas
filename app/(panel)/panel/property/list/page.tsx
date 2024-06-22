@@ -7,6 +7,6 @@ export const metadata: Metadata = {
 }
 export default function page() {
     return (
-        <PropertyManagement me={false} />
+        <PropertyManagement />
     )
 }
