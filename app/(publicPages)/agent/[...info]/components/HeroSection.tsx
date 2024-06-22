@@ -9,7 +9,7 @@ import { IconArrowDownLeft, IconBell, IconPhoneCall } from '@tabler/icons-react'
 // import avatar from 'images/agents/dadash.png'
 import { UserFullInfo } from 'types'
 import { NO_NAME_USER } from 'variables'
-import { createMediaUrl } from 'utils'
+import { createMediaUrl, createPhoneCallLink } from 'utils'
 
 export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
@@ -41,7 +41,7 @@ export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
                 <div className='flex flex-row gap-2'>
 
-                    <a href={`tel:${phoneNumber}`}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left' href='requestproperty'>تماس با مشاور</Button></a>
+                    <a href={createPhoneCallLink(phoneNumber)}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left' href='requestproperty'>تماس با مشاور</Button></a>
 
                     <Link href={'#properties'}><Button bgColor='secondary' icon={IconBell} textColor='white' iconSide='left' >آگهی ها</Button></Link>
 
@@ -52,7 +52,7 @@ export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
             <div className=' col-span-3 md:col-span-1 relative flex flex-row justify-center z-[2] p-4 order-1 lg:order-2 '>
 
-                <img alt='درباره ما | دپارتمان املاک اطلس'  src={createMediaUrl(avatar)} className='rounded-lg aspect-square max- w-full lg:w-full  object-cover  max-h-[250px] max-w-[250px] md:max-w-none md:max-h-none' />
+                <img alt='درباره ما | دپارتمان املاک اطلس' src={createMediaUrl(avatar)} className='rounded-lg aspect-square max- w-full lg:w-full  object-cover  max-h-[250px] max-w-[250px] md:max-w-none md:max-h-none' />
 
             </div>
 

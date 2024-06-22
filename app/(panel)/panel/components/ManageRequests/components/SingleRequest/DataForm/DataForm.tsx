@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRequestSection } from '../../../hooks'
 import { useBuyOrSells } from '@hooks'
-import { createMediaUrl, isFileSrcImage, isFileSrcVideo } from 'utils'
+import { createMediaUrl, createPhoneCallLink, isFileSrcImage, isFileSrcVideo } from 'utils'
 import { IconPhoneCall } from '@tabler/icons-react'
 import { CopyLink } from '@components'
 
@@ -53,7 +53,7 @@ export const DataForm = () => {
               <span> {targetRecord?.user.firstName ?? '-'} &nbsp;
                 {targetRecord?.user.lastName ?? '-'}</span> 
                 |
-                <a href={`tel:${targetRecord?.user.phoneNumber}`} className='flex flex-row gap-0.5 items-center hover:text-coral'>
+                <a href={createPhoneCallLink(targetRecord?.user.phoneNumber ??'')} className='flex flex-row gap-0.5 items-center hover:text-coral'>
                     <span>{targetRecord?.user.phoneNumber}</span>
                     <IconPhoneCall className='w-2 h-2 text-gray-400 text-inherit' />
                 </a>

@@ -2,7 +2,7 @@ import { IconArrowDownLeft, IconPhoneCall } from '@tabler/icons-react'
 import Link from 'next/link'
 import React from 'react'
 import { UserInfoType } from 'types'
-import { createMediaUrl } from 'utils'
+import { createMediaUrl, createPhoneCallLink } from 'utils'
 import { NO_NAME_USER } from 'variables'
 
 export const AdviserCard = ({ avatar, firstName, lastName, userName, phoneNumber, id }: UserInfoType<string>) => {
@@ -29,7 +29,7 @@ export const AdviserCard = ({ avatar, firstName, lastName, userName, phoneNumber
 
             </div>
 
-            <a className='flex flex-row gap-2 items-center px-2 pb-1 pt-0 justify-between' onClick={(e) => e.stopPropagation()} href={`tel:${phoneNumber}`}>
+            <a className='flex flex-row gap-2 items-center px-2 pb-1 pt-0 justify-between' onClick={(e) => e.stopPropagation()} href={createPhoneCallLink(phoneNumber)}>
                 <span className='text-gray-400 text-[10px] whitespace-nowrap '>تماس</span>
                 <span className='text-raisin-black'>{phoneNumber}</span>
                 <span className='bg-anti-flash-white-lighter p-1 rounded hover:bg-green-300 transition-all' >

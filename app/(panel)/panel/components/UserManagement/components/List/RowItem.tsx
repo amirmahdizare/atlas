@@ -7,7 +7,7 @@ import { useUsersSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
 import { ChangeUserPermissions } from './components/ChangeUserPermissions'
-import { translateRole } from 'utils'
+import { createPhoneCallLink, translateRole } from 'utils'
 import { CopyLink } from '@components'
 
 
@@ -32,12 +32,12 @@ export const RowItem = (ad: UserListType) => {
             </div>
             {/* <div className='col-span-1'>{ad.propertyCount.toLocaleString()}</div> */}
             {/* <div className='col-span-1'>{(new Date()).toLocaleDateString('fa-ir')}</div> */}
-            <div   className='col-span-1 flex flex-row items-center gap-0.5 relative '>
+            <div className='col-span-1 flex flex-row items-center gap-0.5 relative '>
                 <div className='absolute -right-3 top-1/2 -translate-y-1/2 lg:translate-y-0 lg:top-0 lg:static'><CopyLink text={ad.phoneNumber} /></div>
-               <a className=' hover:text-coral' title='تماس' href={`tel:${ad.phoneNumber}`}> {ad.phoneNumber}</a>
+                <a className=' hover:text-coral' title='تماس' href={createPhoneCallLink(ad.phoneNumber)}> {ad.phoneNumber}</a>
                 {/* <IconPhoneCall width={15} height={15} className='text-french-gray hidden lg:block' /> */}
             </div>
-            {type == 'agent' && <span className='col-span-1 pr-1 lg:pr-0' >{ad.role ?translateRole(ad.role.name) :'-'}</span>}
+            {type == 'agent' && <span className='col-span-1 pr-1 lg:pr-0' >{ad.role ? translateRole(ad.role.name) : '-'}</span>}
             <div className='col-span-1 flex flex-row gap-2 justify-center'>
 
 

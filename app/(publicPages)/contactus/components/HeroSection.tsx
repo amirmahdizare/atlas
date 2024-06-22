@@ -20,7 +20,7 @@ export const HeroSection = () => {
 
                     <Link href={'/requestproperty'}><Button bgColor='gray' icon={IconArrowDownLeft} href='requestproperty' textColor='dark' iconSide='left'>درخواست ملک</Button></Link>
 
-                    <a href={`tel:+02644250952`}><Button bgColor='primaryNormal' icon={IconPhoneCall} textColor='white' iconSide='left' >تماس با اطلس</Button></a>
+                    <a href={`#footer`}><Button bgColor='primaryNormal' icon={IconPhoneCall} textColor='white' iconSide='left' >تماس با اطلس</Button></a>
 
                 </div>
 

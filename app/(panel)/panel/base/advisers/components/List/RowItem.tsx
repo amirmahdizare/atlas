@@ -4,12 +4,13 @@ import ClickAwayListener from 'react-click-away-listener'
 import ReactSwitch from 'react-switch'
 import { AgentListInfo } from 'types'
 import { useAdvisersSection } from '../../hooks'
+import { createPhoneCallLink } from 'utils'
 
 export const RowItem = (ad: AgentListInfo) => {
 
     const [more, setMore] = useState<boolean>(false)
 
-    const {dispatch} =useAdvisersSection()
+    const { dispatch } = useAdvisersSection()
 
     return (
         <div className='grid grid-cols-6 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
@@ -22,10 +23,10 @@ export const RowItem = (ad: AgentListInfo) => {
             </div>
             <div className='col-span-1'>{ad.propertyCount.toLocaleString()}</div>
             <div className='col-span-1'>{(new Date()).toLocaleDateString('fa-ir')}</div>
-            <a href={`tel:${ad.phoneNumber}`} title='تماس' className='col-span-1 hover:text-coral flex flex-row items-center gap-0.5'>
+            <a href={createPhoneCallLink(ad.phoneNumber)} title='تماس' className='col-span-1 hover:text-coral flex flex-row items-center gap-0.5'>
                 {ad.phoneNumber}
-                <IconPhoneCall width={15} height={15} className='text-french-gray'/>
-                </a>
+                <IconPhoneCall width={15} height={15} className='text-french-gray' />
+            </a>
             <div className='col-span-1 flex flex-row gap-2 justify-center'>
 
 
@@ -49,10 +50,10 @@ export const RowItem = (ad: AgentListInfo) => {
                 <div className='border rounded-circle bg-anti-flash-white-lighter cursor-pointer hover:bg-gray-200 transition-all text-raisin-black p-0.5 aspect-square relative' onClick={() => setMore(true)}>
                     <IconDotsVertical width={15} height={15} />
                     {more &&
-                        <ClickAwayListener onClickAway={()=>setMore(false)}>
+                        <ClickAwayListener onClickAway={() => setMore(false)}>
 
                             <div className='absolute shadow-sm rounded border flex flex-col  items-stretch min-w-[234px] top-full bg-white z-20 left-1/2 -transla te-x-1/2 text-body-3-normal'>
-                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({mode:'edit' , adviserId:ad.id})}>
+                                <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => dispatch({ mode: 'edit', adviserId: ad.id })}>
                                     <span>ویرایش</span>
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div>

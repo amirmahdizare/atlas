@@ -7,6 +7,7 @@ import { useAdvisersSection } from '../../hooks'
 import { NEW_USER_DEFAULT_NAME } from 'variables'
 import { ChangeUserRole } from './components/ChangeUserRole'
 import { ChangeUserPermissions } from './components/ChangeUserPermissions'
+import { createPhoneCallLink } from 'utils'
 
 
 const RenderName = ({ firstName, lastName }: { firstName?: string, lastName?: string }) => {
@@ -30,7 +31,7 @@ export const RowItem = (ad: UserListType) => {
             </div>
             {/* <div className='col-span-1'>{ad.propertyCount.toLocaleString()}</div> */}
             {/* <div className='col-span-1'>{(new Date()).toLocaleDateString('fa-ir')}</div> */}
-            <a href={`tel:${ad.phoneNumber}`} title='تماس' className='col-span-1 hover:text-coral flex flex-row items-center gap-0.5'>
+            <a href={createPhoneCallLink(ad.phoneNumber)} title='تماس' className='col-span-1 hover:text-coral flex flex-row items-center gap-0.5'>
                 {ad.phoneNumber}
                 <IconPhoneCall width={15} height={15} className='text-french-gray' />
             </a>
@@ -66,9 +67,9 @@ export const RowItem = (ad: UserListType) => {
                                     <IconPencil width={20} height={20} className='text-mint-green' />
                                 </div> */}
 
-                                <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id}/>
+                                <ChangeUserRole userId={ad.id} userRoleId={ad.role?.id} />
 
-                                <ChangeUserPermissions userId={ad.id}  />
+                                <ChangeUserPermissions userId={ad.id} />
 
 
                                 <div className='flex flex-row gap-2 items-center justify-between hover:bg-gray-100 transition-all p-1' onClick={() => alert('Delete')}>

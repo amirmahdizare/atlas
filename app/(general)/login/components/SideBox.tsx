@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { IconArrowLeft, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp, IconBrandTelegram, IconArrowDownLeft, IconPlus, IconPhoneCall, IconMail } from '@tabler/icons-react'
 import { Button } from '@components'
 import { CONTACT_INFO } from 'variables'
+import { createPhoneCallLink } from 'utils'
 
 const SocialMediaButton = ({ icon: Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
 
@@ -41,7 +42,7 @@ export const SideBox = () => {
             <div className='flex flex-row gap-2 items-center lg:absolute bottom-4'>
                 {/* <SocialMediaButton icon={IconBrandInstagram} link='www.google.com' type='normal' /> */}
                 <SocialMediaButton icon={IconMail} link={`mailto:${CONTACT_INFO.email}`} type='normal' />
-                <SocialMediaButton icon={IconPhoneCall} link={`tel:+${CONTACT_INFO.phone}`} type='colored' />
+                <SocialMediaButton icon={IconPhoneCall} link={createPhoneCallLink(CONTACT_INFO.phone)} type='colored' />
                 {/* <SocialMediaButton icon={IconBrandTelegram} link='www.telegram' type='normal' /> */}
             </div>
 
