@@ -37,7 +37,7 @@ export const ResponsiveMenu = () => {
 
                             <IconX className='cursor-pointer absolute top-2  left-2 text-gray-500 ' onClick={() => setIsOpen(false)} />
 
-                            <Image src={fullogo} className='max-h-4' alt='لوگوی اطلس' />
+                            <Link href={'/'}><Image src={fullogo} className='max-h-4' alt='لوگوی اطلس' /></Link>
 
                             <Divider />
 
