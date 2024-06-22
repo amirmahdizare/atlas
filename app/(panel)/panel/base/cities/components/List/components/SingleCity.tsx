@@ -9,6 +9,7 @@ import { LocationEndPoints } from '_api/endpoints/location'
 import { toast } from 'react-toastify'
 import { useCitiesSection } from '../../../hooks'
 import { useForm } from 'react-hook-form'
+import { SEO_WORD_REGEX } from 'variables'
 
 export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: string, children: ReactNode }) => {
 
@@ -49,8 +50,8 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
 
     const handleSubmitCity = (formData: { name: string }) => {
 
-        
-        if (data?.data?.find(i => i.name == formData.name)  )
+
+        if (data?.data?.find(i => i.name == formData.name))
             return toast.info('شهری با این نام انگلیسی قبلا ثبت شده است . لطفا نام انگلیسی دیگری قرار دهید')
         if (mode == 'add')
             mutate(formData)
@@ -128,6 +129,10 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                             required: {
                                 value: true,
                                 message: 'وارد کردن نام انگلیسی اجباری است.'
+                            },
+                            pattern: {
+                                value: SEO_WORD_REGEX,
+                                message: 'فرمت نام انگلیسی درست نیست.'
                             }
                         }
 
@@ -136,6 +141,7 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                             error={!!errors.name}
                             errorText={errors.name?.message}
                         />
+                        <span>مثال : hastgerd یا new-city (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
 
 
 

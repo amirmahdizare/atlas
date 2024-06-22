@@ -9,6 +9,7 @@ import { useCustomMutation } from 'hooks'
 import { api } from '_api/config'
 import { SubLocationEndPoints } from '_api/endpoints/location'
 import { useSubCities } from '@hooks'
+import { SEO_WORD_REGEX } from 'variables'
 
 export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'add' | 'edit', id?: string, children: ReactNode, cityTitle: string, cityId: number }) => {
 
@@ -49,7 +50,7 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
 
     const handleSubmitSubCity = (data: { name: string }) => {
 
-        if (subLocationData?.data?.find(i => i.name == data.name) && subLocationData?.data?.find(i => i.parentLocation?.id == cityId) )
+        if (subLocationData?.data?.find(i => i.name == data.name) && subLocationData?.data?.find(i => i.parentLocation?.id == cityId))
             return toast.info('منطقه ای با این نام انگلیسی قبلا ثبت شده است . لطفا نام انگلیسی دیگری قرار دهید')
         if (mode == 'add')
             mutate(data)
@@ -123,6 +124,10 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
                             required: {
                                 value: true,
                                 message: 'وارد کردن نام انگلیسی اجباری است.'
+                            },
+                            pattern: {
+                                value: SEO_WORD_REGEX,
+                                message: 'فرمت نام انگلیسی درست نیست.'
                             }
                         }
 
@@ -132,6 +137,7 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
                             errorText={errors.name?.message}
                         />
 
+                        <span>مثال : vali-asr یا baghshahr (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
                         {/* <Input label='نام انگلیسی منطقه' placeholder='مثلا : tehran' /> */}
 
 

@@ -9,6 +9,7 @@ import React, { ReactNode, useEffect, useState } from 'react'
 
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { SEO_WORD_REGEX } from 'variables'
 
 export const MutateSubcategory = ({ children, mode, catId, subcatId, catTitle }: { catId: string, mode: 'add' | 'edit', subcatId?: number, children: ReactNode, catTitle: string }) => {
 
@@ -47,9 +48,9 @@ export const MutateSubcategory = ({ children, mode, catId, subcatId, catTitle }:
 
     }, [subcatId])
 
-    useEffect(()=>{
+    useEffect(() => {
         reset()
-    },[show])
+    }, [show])
 
 
 
@@ -86,12 +87,18 @@ export const MutateSubcategory = ({ children, mode, catId, subcatId, catTitle }:
                         required: {
                             value: true,
                             message: 'وارد کردن نام انگلیسی اجباری است.'
+                        },
+                        pattern: {
+                            value: SEO_WORD_REGEX,
+                            message: 'فرمت نام انگلیسی درست نیست.'
                         }
                     })}
 
                         error={!!errors.enTitle}
                         errorText={errors.enTitle?.message}
                     />
+
+                    <span>مثال : doublex یا ab-dar (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
 
                     <div className='flex flex-row gap-2'>
                         <Button type='button' bgColor='gray' textColor='dark' onClick={() => setShow(false)} fullWidth>انصراف</Button>

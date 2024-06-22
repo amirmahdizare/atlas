@@ -8,6 +8,7 @@ import { api } from '_api/config'
 import { toast } from 'react-toastify'
 import { CategoryEndPoints, CategoryEndPointsType } from '_api/endpoints/category'
 import { CategoryType_API } from 'types'
+import { SEO_WORD_REGEX } from 'variables'
 
 export const DataForm = () => {
 
@@ -17,7 +18,7 @@ export const DataForm = () => {
 
 
     const { mutate, isLoading } = useCustomMutation<CategoryEndPointsType['CREATE']>({
-        mutationFn: (data) => mode == 'edit' && catId ? api.patch(CategoryEndPoints.SINGLE(catId.toString()),data) : api.post(CategoryEndPoints.CREATE, data),
+        mutationFn: (data) => mode == 'edit' && catId ? api.patch(CategoryEndPoints.SINGLE(catId.toString()), data) : api.post(CategoryEndPoints.CREATE, data),
         mutationKey: [mode == 'add' ? 'addCategory' : 'editCategory', catId],
         onSuccess: (data, { title }) => {
             dispatch({ mode: 'list' });
@@ -63,11 +64,17 @@ export const DataForm = () => {
                     required: {
                         value: true,
                         message: 'نام انگلیسی ضروری است.'
+                    },
+                    pattern: {
+                        value: SEO_WORD_REGEX,
+                        message: 'فرمت نام انگلیسی درست نیست.'
                     }
                 })}
                     error={!!errors.enTitle}
                     errorText={errors.enTitle?.message}
                 />
+
+                <span>مثال : apartment یا bagh-vila (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
 
                 <div className='flex flex-row gap-4'>
 
