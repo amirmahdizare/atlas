@@ -103,6 +103,9 @@ export const Converter = ({ filters }: { filters: string[] }) => {
                 return catData?.data.find(c => c.subCategories.findIndex(d => d.id == subCategoryFilter) != -1)?.id
             return undefined
         }
+        // console.log({ citiesFilter, categoryFilter, subCategoryFilter })
+
+
 
         dispatchFilter({
             location: citiesFilter ?? [],
@@ -112,7 +115,6 @@ export const Converter = ({ filters }: { filters: string[] }) => {
         })
 
 
-        console.log({ citiesFilter, categoryFilter, subCategoryFilter })
 
 
     }, [citiesData, filters, catData])
