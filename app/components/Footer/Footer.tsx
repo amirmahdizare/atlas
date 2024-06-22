@@ -37,7 +37,7 @@ const PersonContactInfo = ({ title, phoneNumber, instaUserName }: { title: strin
     <span className='flex-1 font-semibold'>{title}</span>
 
     <a className='cursor-pointer hover:text-coral flex-row flex gap-0.5 items-center flex-1 ' href={createPhoneCallLink(phoneNumber)}>
-        {phoneNumber}
+       <span className='lg:text-body-2-normal'>{phoneNumber}</span> 
         <IconPhoneCall className='text-french-gray w-2 h-2' />
     </a >
 
