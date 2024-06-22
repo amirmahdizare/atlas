@@ -17,7 +17,7 @@ export const Filters = () => {
 
   const { isOpen, setIsOpen } = useToggleFilter()
 
-  const { filter } = useSearchProperty()
+  const { filter, dispatch } = useSearchProperty()
 
   const { data, isLoading, isError } = useFullCategories()
 
@@ -29,6 +29,15 @@ export const Filters = () => {
     return pv
   }, [])
 
+
+  const resultText = (number: number) => {
+    if (number < SEARCH_PRODUCT_LIMIT && !!number)
+      return `مشاهده ${number} نتیجه`
+    else if (number >= SEARCH_PRODUCT_LIMIT)
+      return `مشاهده +${SEARCH_PRODUCT_LIMIT} نتیجه`
+
+    return 'نتیجه ای یافت نشد.'
+  }
 
   if (categories)
 
@@ -88,7 +97,10 @@ export const Filters = () => {
             : undefined}
 
           {isFetching && <div className='flex flex-row justify-center w-full lg:hidden'><Spinner /></div>}
-          {Array.isArray(allProprties) && !isFetching && <Button className='lg:hidden' onClick={() => setIsOpen(false)} loading={isLoading}> مشاهده  {allProprties && allProprties?.length > SEARCH_PRODUCT_LIMIT ? `+${SEARCH_PRODUCT_LIMIT}` : allProprties?.length} نتیجه</Button>}
+          {Array.isArray(allProprties) && allProprties.length == 0 && <div className='text-center w-full p-1.5 text-gray-700'>{resultText(allProprties?.length)}</div>}
+          {Array.isArray(allProprties) && allProprties.length > 0 && !isFetching && <Button className='lg:hidden' onClick={() => setIsOpen(false)} loading={isLoading}> {resultText(allProprties.length)}</Button>}
+          {Array.isArray(allProprties) && allProprties?.length == 0 && <Button bgColor='secondary' onClick={() => dispatch({ filter: {} })} >پاک کردن فیلتر </Button>}
+
           {searchResultError && !isFetching && <span className='text-red-500 lg:hidden text-center'>خطا در دریافت اطلاعات</span>}
 
         </div>
