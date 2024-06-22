@@ -54,7 +54,7 @@ const PersonContactInfo = ({ title, phoneNumber, instaUserName }: { title: strin
 
 export const Footer = () => {
     return (
-        <div className='bg-seasalt grid grid-cols-2 gap-6 p-2 lg:p-4'>
+        <div className='bg-seasalt grid grid-cols-2 gap-6 p-2 lg:p-4' id='footer'>
 
             <div className='col-span-2 lg:col-span-1 flex flex-col gap-4'>
 
