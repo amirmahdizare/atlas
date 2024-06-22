@@ -39,6 +39,7 @@ export const Filters = () => {
     return 'نتیجه ای یافت نشد.'
   }
 
+
   if (categories)
 
     return (
@@ -97,9 +98,10 @@ export const Filters = () => {
             : undefined}
 
           {isFetching && <div className='flex flex-row justify-center w-full lg:hidden'><Spinner /></div>}
-          {Array.isArray(allProprties) && allProprties.length == 0 && <div className='text-center w-full p-1.5 text-gray-700'>{resultText(allProprties?.length)}</div>}
+          {Array.isArray(allProprties) && allProprties.length == 0 && <div className='text-center w-full p-1.5 text-gray-700 lg:hidden'>{resultText(allProprties?.length)}</div>}
           {Array.isArray(allProprties) && allProprties.length > 0 && !isFetching && <Button className='lg:hidden' onClick={() => setIsOpen(false)} loading={isLoading}> {resultText(allProprties.length)}</Button>}
-          {Array.isArray(allProprties) && allProprties?.length == 0 && <Button bgColor='secondary' onClick={() => dispatch({ filter: {} })} >پاک کردن فیلتر </Button>}
+          <Divider />
+          {Object.values(filter).filter(i => !!i  &&  (Array.isArray(i) && i.length > 0)).length > 0 && <Button bgColor={isFetching ? 'gray' : 'secondary'} disabled={isFetching} onClick={() => dispatch({ filter: {} })} >پاک کردن فیلترها </Button>}
 
           {searchResultError && !isFetching && <span className='text-red-500 lg:hidden text-center'>خطا در دریافت اطلاعات</span>}
 
