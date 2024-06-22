@@ -5,6 +5,7 @@ import { useSearchProperty } from '../../../../hooks'
 // import { cities } from './data.mock'
 import { CityType, LocationType } from 'types'
 import { useCities } from '@hooks'
+import { useToggleCity } from './hook'
 
 export const SelectCity = () => {
 
@@ -14,7 +15,7 @@ export const SelectCity = () => {
 
     const { filter, dispatchFilter } = useSearchProperty()
 
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const { isOpen, setIsOpen } = useToggleCity()
 
     const [modal, setModal] = useState<boolean>(false)
 
@@ -22,7 +23,7 @@ export const SelectCity = () => {
         if (filter.location?.find(i => i == city.id))
             dispatchFilter({ location: filter.location.filter(i => i != city.id), subLocation: [] })
         else
-            dispatchFilter({ location: [...(filter?.location ?? []), city.id ] })
+            dispatchFilter({ location: [...(filter?.location ?? []), city.id] })
     }
 
     const isLocationInclude = (cityId: number) => !!filter?.location && filter.location?.findIndex(i => i == cityId) != -1
