@@ -125,7 +125,7 @@ export const Footer = () => {
 
             </div>
 
-            <div className='flex flex-row gap-1  justify-center bg-gray-200 w-full col-span-2 p-2 lg:p-1 text-body-2-normal' >
+            <div className='flex flex-row gap-1  justify-center bg-gray-200 w-full col-span-2 p-2 lg:p-1.5 text-body-2-normal' >
                 <span>پیاده سازی داده شده توسط</span>
                 <a target='_blank' href='https://amkz.dev' className='hover:text-coral flex flex-row gap-0.5 items-center'>
                     <span>AMKZ Team </span>
