@@ -4,7 +4,7 @@ import { ContactSummary } from 'components/landingPage';
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
-  description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستغلات استان البرز',
+  description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستقلات استان البرز',
 }
 
 export default function RootLayout({

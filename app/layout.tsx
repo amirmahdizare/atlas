@@ -10,7 +10,7 @@ import 'react-quill/dist/quill.snow.css';
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
-  description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستغلات استان البرز',
+  description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستقلات استان البرز',
   manifest: '/manifest.json',
 }
 
