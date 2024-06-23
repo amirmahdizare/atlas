@@ -74,7 +74,7 @@ export const DataForm = () => {
                     errorText={errors.enTitle?.message}
                 />
 
-                <span>مثال : apartment یا bagh-vila (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
+                <span>مثال : apartment یا bagh_vila (بدون فاصله داخل کلمه فقط حروف و عدد و آندرلاین)</span>
 
                 <div className='flex flex-row gap-4'>
 

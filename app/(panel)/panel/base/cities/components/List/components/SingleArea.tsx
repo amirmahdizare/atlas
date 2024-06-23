@@ -137,7 +137,7 @@ export const SingleArea = ({ mode, id, children, cityTitle, cityId }: { mode: 'a
                             errorText={errors.name?.message}
                         />
 
-                        <span>مثال : vali-asr یا baghshahr (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
+                        <span>مثال : vali_asr یا baghshahr (بدون فاصله داخل کلمه فقط حروف و عدد و آندرلاین)</span>
                         {/* <Input label='نام انگلیسی منطقه' placeholder='مثلا : tehran' /> */}
 
 

@@ -141,7 +141,7 @@ export const SingleCity = ({ mode, id, children }: { mode: 'add' | 'edit', id?: 
                             error={!!errors.name}
                             errorText={errors.name?.message}
                         />
-                        <span>مثال : hastgerd یا new-city (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
+                        <span>مثال : hastgerd یا new_city (بدون فاصله داخل کلمه فقط حروف و عدد و آندرلاین )</span>
 
 
 

@@ -98,7 +98,7 @@ export const MutateSubcategory = ({ children, mode, catId, subcatId, catTitle }:
                         errorText={errors.enTitle?.message}
                     />
 
-                    <span>مثال : doublex یا ab-dar (بدون فاصله داخل کلمه فقط حروف و عدد و خط تیره)</span>
+                    <span>مثال : doublex یا ab_dar (بدون فاصله داخل کلمه فقط حروف و عدد و  آندرلاین)</span>
 
                     <div className='flex flex-row gap-2'>
                         <Button type='button' bgColor='gray' textColor='dark' onClick={() => setShow(false)} fullWidth>انصراف</Button>

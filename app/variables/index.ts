@@ -51,4 +51,4 @@ export const MAIN_AGENTS = [
     }
 ]
 
-export const SEO_WORD_REGEX=/^[0-9A-Za-z_-]+$/
+export const SEO_WORD_REGEX=/^[0-9A-Za-z_]+$/
