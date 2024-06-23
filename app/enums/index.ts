@@ -14,10 +14,26 @@ export enum CategorySpecialField {
 
 }
 
+export enum CategorySpecialFieldTranslate {
+    "NUMBER" = "عدد",
+    "RANGE" = "رنج (Range)",
+    "BOOLEAN" = "داشتن یا نداشتن",
+    "STRING" = "کلمه",
+    "ONESELECTRANGE" = 'انتخاب تکی',
+    "ONEBUTTON" = 'دکمه ای',
+
+}
+
 export enum FilterBaseType {
     "STRING" = 'string',
     "NUMBER" = 'number',
     "BOOLEAN" = 'boolean'
+}
+
+export const FilterBaseTypeTranslate = {
+    "STRING": 'کلمه (متن)',
+    "NUMBER": 'عدد',
+    "BOOLEAN": 'دارد یا ندارد (boolean)'
 }
 
 export enum PermissionBackendRoutes {
@@ -50,7 +66,7 @@ export enum PermissionBackendRoutes {
     LOCATIONS_DELETE = 'delete_locations',
 
 
-    
+
     SUBLOCATIONS_CREATE = 'create_sublocations',
     SUBLOCATIONS_READ = 'read_sublocations',
     SUBLOCATIONS_UPDATE = 'update_sublocations',
@@ -80,7 +96,7 @@ export enum PermissionBackendRoutes {
     FILTER_UPDATE = 'update_filter',
     FILTER_DELETE = 'delete_filter',
 
-    
+
     SUGGEST_CREATE = 'create_suggest',
     SUGGEST_READ = 'read_suggest',
     SUGGEST_UPDATE = 'update_suggest',

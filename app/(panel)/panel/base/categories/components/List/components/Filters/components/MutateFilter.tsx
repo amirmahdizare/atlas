@@ -3,7 +3,7 @@ import { Button, Input, Modal, Select } from '@components'
 import { IconChevronLeft } from '@tabler/icons-react'
 import { api } from '_api/config'
 import { FilterEndPoints, FilterEndPointsType } from '_api/endpoints/filter'
-import { CategorySpecialField, FilterBaseType } from 'enums'
+import { CategorySpecialField, CategorySpecialFieldTranslate, FilterBaseType, FilterBaseTypeTranslate } from 'enums'
 import { useCustomMutation } from 'hooks'
 import { extend } from 'ol/extent'
 import React, { ReactNode, useEffect, useState } from 'react'
@@ -11,6 +11,7 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import { RegisterOptions, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { FilterMutateType, FilterReadType, FilterRecordType } from 'types'
+import { SEO_WORD_REGEX } from 'variables'
 
 
 
@@ -113,27 +114,31 @@ export const MutateFilter = ({ children, mode, parentId, recordId, parentTitle }
                         placeHolder='مثلا : price به انگلیسی باید وارد شود'
                         options={{
                             pattern: {
-                                value: /^[a-z]*$/,
+                                value: SEO_WORD_REGEX,
                                 message: 'نام انگلیسی با فرمت درستی وارد نشده است.'
                             }
                         }}
                     />
 
-                    <span className='text-gray-500'>نوع فیلتری که میخواد اعمال شود</span>
-
-                    <Select
-                        items={Object.values(CategorySpecialField).map(i => ({ value: i, lable: i }))}
-                        onChange={(value) => setValue('filtertype', value)}
-                        value={getValues('filtertype')}
-                    />
+                    <span className='text-gray-400 text-body-3-normal leading-3'>مثال : room یا water_pool (بدون فاصله داخل کلمه فقط حروف و عدد و  آندرلاین)</span>
 
                     <span className='text-gray-500'>نوع ویژگی</span>
 
                     <Select
-                        items={Object.values(FilterBaseType).map(i => ({ value: i, lable: i }))}
+                        items={Object.values(FilterBaseType).map((i, index) => ({ value: i, lable: Object.entries(FilterBaseTypeTranslate).find(i => i[0] == Object.keys(FilterBaseType)[index])?.[1] ?? '' }))}
                         onChange={(value) => setValue('type', value)}
                         value={getValues('type')}
                     />
+
+
+                    <span className='text-gray-500'>نوع فیلتری که میخواد اعمال شود</span>
+
+                    <Select
+                        items={Object.values(CategorySpecialField).map((i, index) => ({ value: i, lable: Object.entries(CategorySpecialFieldTranslate).find(i => i[0] == Object.keys(CategorySpecialField)[index])?.[1] ?? '' }))}
+                        onChange={(value) => setValue('filtertype', value)}
+                        value={getValues('filtertype')}
+                    />
+
 
                     <label className='flex flex-row gap-2 items-center'>
                         <span>آیا ویژگی اصلی است؟</span>
