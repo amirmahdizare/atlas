@@ -12,7 +12,7 @@ export default async function SSR() {
         const citiesData: LocationType[] = await response.json()
 
         return <ul className='sr-only'>
-            {citiesData.map(i => <a href={`/s/${i.name}-city`}>خرید و فروش ملک در {i.faTitle}</a>)}
+            {citiesData.map(i => <li><a href={`/s/${i.name}-city`}>خرید و فروش ملک در {i.faTitle}</a></li>)}
         </ul>
     } catch (error) {
 
