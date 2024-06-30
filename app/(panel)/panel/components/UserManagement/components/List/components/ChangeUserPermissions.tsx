@@ -13,7 +13,7 @@ import { PermissionEndPoints, PermissionEndPointsType } from '_api/endpoints/per
 import { useFieldArray, useForm } from 'react-hook-form'
 import { PermissionType } from 'types'
 
-const batchAccesses = [
+const batchAccesses: Array<{ title: string, records: string[] }> = [
     {
         title: 'مدیریت دسته بندی',
         records: ['category', 'subcategory', 'filter', 'suggest', 'item']
@@ -21,8 +21,31 @@ const batchAccesses = [
     {
         title: 'مدیریت شهر ها',
         records: ['locations', 'sublocations']
+    },
+    {
+        title: 'مدیریت آگهی',
+        records: ['product']
+    },
+    {
+        title: 'مدیریت کاربران',
+        records: ['user']
+    },
+    {
+        title: 'مدیریت برچسب ها',
+        records: ['tag']
+    },
+    {
+        title: 'مدیریت مقالات',
+        records: ['blog']
+    },
+    {
+        title: 'مدیریت پروژه های مشارکت',
+        records: ['participation']
+    },
+    {
+        title: 'مدیریت درخواست های خرید و فروش',
+        records: ['saleOrBuyProduct']
     }
-
 ]
 
 
@@ -64,7 +87,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId, userName }: { userId
     //     enabled: false
     // })
 
-    const { data: agentsData , isError ,  } = useAllAgents()
+    const { data: agentsData, isError, } = useAllAgents()
 
     useEffect(() => {
         if (agentsData?.data.find(f => f.id == userId.toString())) {
@@ -115,16 +138,11 @@ export const ChangeUserPermissions = ({ userId, userRoleId, userName }: { userId
     }, [])
 
 
-    console.log(proccessedData)
-
-
     const handleToggleCatSelect = (catName: string, state: boolean, items: Array<any>) => {
 
         reset({ ...currentSelected, ...items.reduce((pv, cv) => ({ ...pv, [cv.id]: state }), {}) })
 
     }
-
-
 
     const Content = () => {
 
@@ -165,7 +183,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId, userName }: { userId
 
                 {/* {data?.data.reduce<Array<{title:string , items : PermissionType[]}>>((pv, cv) => [] , []) } */}
 
-                {proccessedData?.filter(i => bannedPermissions.indexOf(i.title) == -1).map(cat => <div className='flex flex-col gap-1 col-span-2 lg:col-span-1 border rounded p-1'>
+                {proccessedData?.filter(i => bannedPermissions.indexOf(i.title) == -1).map(cat => <div key={cat.title} className='flex flex-col gap-1 col-span-4 md:col-span-2 lg:col-span-1 border rounded p-1'>
 
                     <div className='flex flex-row gap-2 items-center justify-between'>
                         <span className='text-body-2-bolder'>{captilizeFirstLetter(cat.title)}</span>
@@ -204,7 +222,7 @@ export const ChangeUserPermissions = ({ userId, userRoleId, userName }: { userId
         }
 
         return <div className='flex flex-col gap-2 items-center max-h-[80vh] overflow-auto w-full min-w-[90vw]'>
-            {Array.from(new Array(10)).map((i, index) => <div className='bg-gray-50 animate-pulse w-full h-8 '></div>)}
+            {Array.from(new Array(10)).map((i, index) => <div key={i} className='bg-gray-50 animate-pulse w-full h-8 '></div>)}
         </div>
 
     }
