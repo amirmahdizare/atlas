@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@components'
+import { Button } from '../Button/Button'
 import { IconArrowDownLeft } from '@tabler/icons-react'
 import Link from 'next/link'
 
