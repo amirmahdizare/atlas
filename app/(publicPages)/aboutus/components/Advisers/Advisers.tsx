@@ -22,42 +22,42 @@ export default async function () {
 
 
 
-                    <div className='flex flex-col gap-4  overflow-hidden box-border px-2'>
+                <div className='flex flex-col gap-4  overflow-hidden box-border px-2'>
 
-                        <div className='flex flex-col gap-2'>
-                            <div className='flex flex-row justify-center relative py-2'>
-                                <span className='text-h6-bolder text-raisin-black'>کارشناسان دپارتمان املاک اطلس</span>
-                                <div className='h-[3px] w-8 bg-robin-egg-blue-00 rounded absolute left-1/2 -translate-x-1/2 bottom-0'></div>
-                            </div>
-                            <span className='text-body-2-bolder text-ultra-violet text-center'>خانه دلخواه تان را به کمک مشاورین متخصص اطلس پیدا کنید.</span>
+                    <div className='flex flex-col gap-2'>
+                        <div className='flex flex-row justify-center relative py-2'>
+                            <span className='text-h6-bolder text-raisin-black'>کارشناسان دپارتمان املاک اطلس</span>
+                            <div className='h-[3px] w-8 bg-robin-egg-blue-00 rounded absolute left-1/2 -translate-x-1/2 bottom-0'></div>
                         </div>
+                        <span className='text-body-2-bolder text-ultra-violet text-center'>خانه دلخواه تان را به کمک مشاورین متخصص اطلس پیدا کنید.</span>
+                    </div>
 
-                        <div className='flex flex-col sr-only'>
-                            <h1>لیست مشاورین دپارتمان املاک اطلس</h1>
-                            <ul>
-
-
-                                {data.map(item =>
-                                    <>
-                                        <br />
-
-                                        <li><Link href={`/agent/${item.id}`} className='flex flex-row gap-2'>
-                                            <span>نام و نام خانوادگی : {item.firstName} {item.lastName}</span> &nbsp;&nbsp;
-                                            <span>شماره تماس : {item.phoneNumber}</span>&nbsp;&nbsp;
-
-                                        </Link>
-
-                                        </li>
-                                    </>)}
-
-                            </ul>
-
-                        </div>
-
-                        {typeof data == 'object' && <Slider advisers={data} />}
+                    <div className='flex flex-col sr-only'>
+                        <h1>لیست مشاورین دپارتمان املاک اطلس</h1>
+                        <ul>
 
 
-                    </div >
+                            {data.map(item =>
+                                <>
+                                    <br />
+
+                                    <li><Link href={`/agent/${item.id}/${item.firstName.replaceAll('', '-')}-${item.lastName.replaceAll('', '-')}`} className='flex flex-row gap-2'>
+                                        <span>نام و نام خانوادگی : {item.firstName} {item.lastName}</span> &nbsp;&nbsp;
+                                        <span>شماره تماس : {item.phoneNumber}</span>&nbsp;&nbsp;
+
+                                    </Link>
+
+                                    </li>
+                                </>)}
+
+                        </ul>
+
+                    </div>
+
+                    {typeof data == 'object' && <Slider advisers={data} />}
+
+
+                </div >
             )
         }
         return <></>

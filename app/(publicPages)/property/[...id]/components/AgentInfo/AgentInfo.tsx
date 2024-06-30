@@ -18,7 +18,7 @@ export const AgentInfo = ({ data: { user, agentNote } }: { data: PropertyDetailT
         return (
             <div className='bg-seasalt rounded-xs p-1 flex flex-col gap-3'>
                 <div className='flex flex-row gap-2 items-center  justify-between'>
-                    <Link href={`/agent/${id}`} className='flex flex-row gap-1 items-center' prefetch={false}>
+                    <Link href={`/agent/${id}/${firstName.replaceAll('', '-')}-${lastName.replaceAll('', '-')}`} className='flex flex-row gap-1 items-center' prefetch={false}>
 
                         <div className='w-5 h-5 aspect-square rounded-circle relative '>
                             <Image fill className='object-cover rounded-circle' src={avatar ? createMediaUrl(avatar) : SAMPLE_AVATAR} alt={`تصویر مشاور ${firstName} ${lastName} | دپارتمان املاک اطلس`} />
