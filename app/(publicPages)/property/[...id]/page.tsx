@@ -19,7 +19,7 @@ export async function generateMetadata(
 
         const id = params.id
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API}${PropretyEndPoints.SINGLE(id[0])}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API}${PropretyEndPoints.SINGLE(id[0])}`,{cache:'reload'})
 
         const data: PropertyDetailType = await response.json()
 
