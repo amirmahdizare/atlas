@@ -245,7 +245,7 @@ export const DataForm = () => {
                     </div> */}
 
                     <label htmlFor='isSuggested' className='flex flex-row gap-2 items-center cursor-pointer'>
-                        <span className='text-body-2-normal'>آیا آگهی پیشنهادی است ؟ (در صورت پیشنهادی مورد آگهی  این آگهی در صفحه اصلی نمایش داده می شود.)</span>
+                        <span className='text-body-2-normal leading-4'>آیا آگهی پیشنهادی است ؟ (در صورت پیشنهادی مورد آگهی  این آگهی در صفحه اصلی نمایش داده می شود.)</span>
                         <input id='isSuggested' type='checkbox' {...register('isSuggested')} />
                     </label>
 
