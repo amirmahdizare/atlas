@@ -22,19 +22,19 @@ export const AgentInfo = ({ data: { user, agentNote } }: { data: PropertyDetailT
         const pageHref = `/agent/${id}/${firstName.replaceAll(' ', '-')}-${lastName.replaceAll(' ', '-')}`
 
         return (
-            <div className='bg-seasalt rounded-xs p-1 flex flex-col gap-3'>
+            <div className='bg-seasalt rounded-xs p-1 flex flex-col gap-3 '>
 
                 <div className='flex flex-row gap-2 items-center  justify-between'>
 
-                    <div className='flex flex-row gap-1 items-center cursor-pointer' onClick={() => setOpen(true)} >
+                    <div className='flex flex-row gap-1 items-center cursor-pointer hover:text-coral' onClick={() => setOpen(true)} >
 
-                        <div className='w-5 h-5 aspect-square rounded-circle relative '>
+                        <div className='w-6 h-6 aspect-square rounded-circle relative '>
                             <Image fill className='object-cover rounded-circle' src={avatar ? createMediaUrl(avatar) : SAMPLE_AVATAR} alt={`تصویر مشاور ${firstName} ${lastName} | دپارتمان املاک اطلس`} />
                         </div>
 
                         <div className='flex flex-col gap-1.5'>
-                            <span className='text-space-codet text-body-1-bolder line-clamp-1 lg:text-body-2-bolder' title={`${firstName} ${lastName}`}>{firstName} {lastName ?? NO_NAME_USER}</span>
-                            <span className='text-body-2-normal lg:text-body-3-normal text-ultra-violet'>کارشناس ملک</span>
+                            <span className='text-space-codet text-body-1-bolder line-clamp-1 lg:text-body-2-bolder hover:text-coral' title={`${firstName} ${lastName}`}>{firstName} {lastName ?? NO_NAME_USER}</span>
+                            <span className='text-body-2-normal lg:text-body-3-normal text-ultra-violet hover:text-coral'>کارشناس ملک</span>
                         </div>
 
                     </div>
