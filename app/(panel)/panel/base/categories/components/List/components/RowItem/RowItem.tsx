@@ -53,8 +53,8 @@ export const RowItem = (ad: CategoryType_API<string>) => {
 
             </div>
 
-            <div className={`col-span-5 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[1000px]' : 'max-h-0 opacity-0'}`}>
-                <SubCategories catTitle={ad.title} catId={ad.id} />
+            <div className={`col-span-5 transition-all duration-300 over flow-h idden ${isOpen ? 'max-h-[1000px]' : 'max-h-0 opacity-0'}`}>
+                {isOpen && <SubCategories catTitle={ad.title} catId={ad.id} />}
             </div>
 
         </div>

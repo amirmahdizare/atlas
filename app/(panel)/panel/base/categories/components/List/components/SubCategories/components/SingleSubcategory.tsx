@@ -47,8 +47,8 @@ export const SingleSubcategory = (subcategory: SubCategoryType<string, string>) 
                 </div>
             </span>
 
-            <div className={`col-span-3 transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[1000px]' : 'max-h-0 opacity-0'}`}>
-                <Filters subCategory={subcategory} />
+            <div className={`col-span-3 transition-all duration-300 over flow-hi dden ${isOpen ? 'max-h-[1000px]' : 'max-h-fit opacity-0'}`}>
+               {isOpen &&  <Filters subCategory={subcategory} />}
             </div>
         </div>
     )
