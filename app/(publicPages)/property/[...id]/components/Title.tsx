@@ -47,7 +47,7 @@ export const Title = ({ data, }: { data: PropertyDetailType }) => {
                 <span className='text-space-codet text-body-1-bolder lg:text-[0.50rem] leading-4 whitespace-pre-wrap break-words'>{title}</span>
 
                 <div className=' flex-row gap-1 hidden lg:flex'>
-                    <Bookmark id={id}  />
+                    <Bookmark id={id} />
                     <Share id={id} data={data} />
                 </div>
 
@@ -63,6 +63,21 @@ export const Title = ({ data, }: { data: PropertyDetailType }) => {
 
             {productType == 'sell' && <PriceComponent primary={{ title: 'قیمت کل', value: Number(price ?? 0) }} secondary={{ title: 'قیمت هر متر', value: Math.floor(Number(price ?? 0) / metr) }} />}
             {productType == 'rent' && <PriceComponent primary={{ title: 'ودیعه', value: Number(prePrice ?? 0) }} secondary={{ title: 'اجاره', value: Number(rentPrice ?? 0), replacer: Number(rentPrice) == 0 ? 'رهن کامل' : undefined }} />}
+            <div className='bg-anti-flash-white-lighter w-full h-[1px]'>
+
+            </div>
+            <div className='flex flex-row gap-2 items-center text-ultra-violet justify-between '>
+
+                <span className='text-body-2-normal'>متراژ</span>
+
+                <div className='flex flex-row gap-1 items-center'>
+                    {/* <span className='text-h6-normal'>{(Math.floor(Number(price ?? 0) / metr )).toLocaleString()}</span> */}
+                    <span className='text-h6-normal'>{(metr).toLocaleString()}</span>
+                    <span className='text-ultra-violet text-body-2-normal' >متر</span>
+                </div>
+
+            </div>
+
 
         </div>
     )
