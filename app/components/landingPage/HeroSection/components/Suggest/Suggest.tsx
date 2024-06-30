@@ -21,7 +21,7 @@ import { createMediaUrl, isFileSrcImage } from 'utils'
 // ]
 
 const Item = ({ img, title, id }: { img: string, title: string, id: string }) => <Link href={`/property/${id}/${title}`} className='flex flex-col gap-4 lg:m-0.5 items-end justify-end brightne relative ss-75 rounded aspect-square object-scale-down w-[120px] lg:w-[140px] shrink-0 ' style={{ backgroundImage: `url(${img})` }}>
-    <Image src={img} alt='j' fill className='rounded-lg aspect-square' />
+    <Image src={img} alt='j' fill className='rounded-lg aspect-square object-cover ' />
     <span className='text-body-3-bolder text-white  text-ellipsis line-clamp-2 overflow -hidden whitespace- pre- wrap backdrop-brightness-50 leading-3 p-0.5 w-full text-center  h-6 align-start '>{title}</span>
 </Link>
 
