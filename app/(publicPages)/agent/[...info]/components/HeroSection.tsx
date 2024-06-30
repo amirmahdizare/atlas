@@ -41,9 +41,9 @@ export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
                 <div className='flex flex-row gap-2'>
 
-                    <a href={createPhoneCallLink(phoneNumber)}><Button bgColor='gray' icon={IconArrowDownLeft} textColor='dark' iconSide='left' href='requestproperty'>تماس با مشاور</Button></a>
+                    <a href={createPhoneCallLink(phoneNumber)}><Button bgColor='secondary' icon={IconArrowDownLeft} textColor='white' iconSide='left' href='requestproperty'>تماس با مشاور</Button></a>
 
-                    <Link href={'#properties'}><Button bgColor='secondary' icon={IconBell} textColor='white' iconSide='left' >آگهی ها</Button></Link>
+                    <Link href={'#properties'}><Button bgColor='gray' icon={IconBell} textColor='dark' iconSide='left' >آگهی ها</Button></Link>
 
                 </div>
 
