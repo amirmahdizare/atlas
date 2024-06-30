@@ -16,7 +16,7 @@ export default async function page({ params: { info } }: pageProps<{ info: strin
     try {
 
 
-        const response = await fetch(`${ApiBaseURL}${UsersEndpoints.GET_AGENTS}`)
+        const response = await fetch(`${ApiBaseURL}${UsersEndpoints.GET_AGENTS}`,{cache:'reload'})
 
         const data: UserFullInfo[] = await response.json()
 
