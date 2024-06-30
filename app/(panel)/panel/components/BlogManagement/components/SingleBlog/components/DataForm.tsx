@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { Button, Input, TextArea } from '@components'
 import { IconInfoCircle, IconUpload } from '@tabler/icons-react'
 import { useBlogsSection } from '../../../hooks'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { BlogItemTypeAPI } from 'types'
 import { useBlogs, useCustomMutation } from '@hooks'
 import { BlogEndPoints, BlogEndPointsType } from '_api/endpoints/blog'
 import { api } from '_api/config'
 import { toast } from 'react-toastify'
-import { createFormData, createMediaUrl } from 'utils'
+import { convertMediaUrlToFile, createFormData, createMediaUrl } from 'utils'
 import ReactQuill from 'react-quill';
 import { } from 'react-quill';
 
@@ -21,7 +21,7 @@ export const DataForm = () => {
 
     const modeTitle = mode == 'add' ? 'افزودن' : 'ویرایش'
 
-    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue } = useForm<BlogItemTypeAPI<undefined, File | string | undefined>>()
+    const { register, handleSubmit, formState: { errors }, watch, reset, getValues, setValue, control } = useForm<BlogItemTypeAPI<undefined, File | string | undefined>>()
 
     watch(['description'])
 
@@ -30,7 +30,21 @@ export const DataForm = () => {
     const { mutate, isLoading } = useCustomMutation<BlogEndPointsType['CREATE']>(
         {
             mutationKey: 'mutateBlog',
-            mutationFn: (data) => mode == 'edit' && blogId ? api.patch(BlogEndPoints.SINGLE(blogId), data) : api.post(BlogEndPoints.CREATE, data),
+            mutationFn: async (data) => {
+
+
+                if (mode == 'edit' && blogId) {
+
+                    const imagesFiles = data.images.length == 1 && typeof data.images[0] == 'string' ? await Promise.all(data.images.map(i => convertMediaUrlToFile(createMediaUrl(i) as any))) : data.images
+
+                    return api.patch(BlogEndPoints.SINGLE(blogId), createFormData({ ...data, images: imagesFiles }, ['images']))
+                }
+                else {
+
+                    console.log(data)
+                    return api.post(BlogEndPoints.CREATE, createFormData({ ...data, images: Array.from(data.images) }, ['images']))
+                }
+            },
             onSuccess: () => {
                 toast.success(`${modeTitle} مقاله با موفقیت انجام شد.`)
                 refetch()
@@ -42,7 +56,7 @@ export const DataForm = () => {
         }
     )
 
-    const handleMutate = (data: BlogItemTypeAPI<undefined, File | string | undefined>) => {
+    const handleMutate = async (data: BlogItemTypeAPI<undefined, any>) => {
 
         var currentImages: string[] = []
 
@@ -55,7 +69,8 @@ export const DataForm = () => {
         // }
 
 
-        mutate(createFormData({ ...data, images: [...currentImages, ...Array.from(data.images)] }, ['images']))
+        mutate(data)
+        // mutate(createFormData({ ...data, images: [...currentImages, ...Array.from(data.images)] }, ['images']))
     }
 
     useEffect(() => {
@@ -163,19 +178,31 @@ export const DataForm = () => {
 
                 <div className='mb-2 flex text-french-gray text-body-2-normal  text-right'>متن مقاله</div>
 
+                <Controller
+                    control={control}
+                    name='description'
+                    rules={{ required: true }}
+                    render={({ field: { name, onChange, value } }) => {
+
+                        return <ReactQuill modules={{
+                            toolbar: [
+                                [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }],
+                                [{ size: [] }],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                ['link', 'image', 'video'],
+                                [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                                { 'indent': '-1' }, { 'indent': '+1' }],
+                                ['clean']
+                            ]
+                        }} className={`!text-right ${!!errors.description ? 'border border-bittersweet rounded overflow-hidden' : ''}`} theme="snow"
+                            value={value}
+                            onChange={(value: string) => onChange({ target: { value } })} />
+                    }}
+                />
+
+                {!!errors.description && <div className=' text-body-3-normal mt-2 text-bittersweet'>متن مقاله ضروری می باشد</div>}
 
 
-                <ReactQuill modules={{
-                    toolbar: [
-                        [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' }, { 'header': '4' }],
-                        [{ size: [] }],
-                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                        ['link', 'image', 'video'],
-                        [{ 'list': 'ordered' }, { 'list': 'bullet' },
-                        { 'indent': '-1' }, { 'indent': '+1' }],
-                        ['clean']
-                    ]
-                }} className='!text-right' theme="snow" value={getValues('description')} onChange={(value: string) => { setValue('description', value) }} />
                 {/* <TextArea register={register('description', {
                     required: {
                         value: true,
