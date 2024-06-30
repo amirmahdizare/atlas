@@ -38,7 +38,7 @@ export default async function () {
                                 <>
                                     <br />
 
-                                    <li><Link href={`/agent/${item.id}/${item.firstName.replaceAll('', '-')}-${item.lastName.replaceAll('', '-')}`} className='flex flex-row gap-2'>
+                                    <li><Link href={`/agent/${item.id}/${item.firstName.replaceAll(' ', '-')}-${item.lastName.replaceAll(' ', '-')}`} className='flex flex-row gap-2'>
                                         <span>نام و نام خانوادگی : {item.firstName} {item.lastName}</span> &nbsp;&nbsp;
                                         <span>شماره تماس : {item.phoneNumber}</span>&nbsp;&nbsp;
 

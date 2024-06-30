@@ -22,10 +22,8 @@ export const HeroSection = ({ data }: { data: UserFullInfo }) => {
             <div className=' col-span-3 md:col-span-2 flex flex-col gap-4 p-2 lg:p-4 order-2 lg:order-1'>
 
                 <div className='flex flex-col gap-2'>
-                    <span className='text-h3-bolder'>
+                    <span className='text-h3-bolder leading-4 whitespace-break-spaces flex flex-col lg:flex-row gap-2'>
                         <span className='text-space-codet'>{agentName}</span>
-                        &nbsp;
-                        &nbsp;
                         <span className='text-robin-egg'>کارشناس دپارتمان اطلس</span>
                     </span>
                     <p className='leading-3 text-ultra-violet text-h6-normal'>
