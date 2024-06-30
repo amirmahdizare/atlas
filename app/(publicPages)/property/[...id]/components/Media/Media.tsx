@@ -7,6 +7,8 @@ import { IconChevronLeft, IconChevronRight, IconX } from '@tabler/icons-react';
 import { Thumb } from './components/Thumb';
 import { View } from './components/View';
 import ClickAwayListener from 'react-click-away-listener';
+import { createMediaUrl } from 'utils';
+import Image from 'next/image';
 
 export const Media = ({ data: { medias, title, category, subCategory, location, subLocation } }: { data: PropertyDetailType }) => {
 
@@ -25,6 +27,9 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
 
     const imageAltProp = `${title} | ${category?.title} | ${subCategory?.title} | ${location?.faTitle} | ${subLocation?.faTitle} | دپارتمان املاک اطلس`
 
+
+    if (medias?.length == 0)
+        return <img src={createMediaUrl(undefined)} alt={imageAltProp} className='aspect-video w-full rounded' />
 
     return (
         <div className={`w-full ${state ? 'fixed top-0 left-0 w-full h-full backdrop-brightness-[12.5%] transition-all duration-300  lg:backdrop-brightness-[12.5%] p-1  box-border flex justify-center items-center z-30' : 'relative '}`}>
@@ -93,6 +98,7 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mt-1"
+                onClick={()=>setState(true)}
             >
                 {medias?.map(item => <SwiperSlide className='h-full'>
                     <Thumb altProps={imageAltProp} src={item} onClick={() => { }} />
