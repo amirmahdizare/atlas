@@ -12,7 +12,7 @@ export default async function () {
 
     try {
 
-        const response = await fetch(`${ApiBaseURL}${UsersEndpoints.GET_AGENTS}`)
+        const response = await fetch(`${ApiBaseURL}${UsersEndpoints.GET_AGENTS}`,{cache:'reload'})
 
         const data: UserInfoType<string>[] = await response.json()
 

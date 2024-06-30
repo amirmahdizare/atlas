@@ -4,13 +4,12 @@ import { UsersEndpoints } from '_api/endpoints/users'
 import { UserInfoType } from 'types'
 import { Slider } from './Slider'
 import Link from 'next/link'
-import { minuteToMs } from 'utils'
 
 export default async function () {
 
     try {
 
-        const response = await fetch(`${ApiBaseURL}${UsersEndpoints.GET_AGENTS}`, { next: { revalidate: minuteToMs(15) } })
+        const response = await fetch(`${ApiBaseURL}${UsersEndpoints.GET_AGENTS}`, { cache:'reload'})
 
         const data: UserInfoType<string>[] = await response.json()
 
