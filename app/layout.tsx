@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
   description: 'دپارتمان املاک اطلس : مرجع تخصصی املاک و مستقلات استان البرز',
   manifest: '/manifest.json',
-  verification: { google: 'iNyGU7IkeTOV8tVOw6Ysbt4QASKXwzY2uIYqbt3urgc-lI' },
+  verification: { google: 'iNyGU7IkeTOV8tVOw6Ysbt4QASKXwzY2uIYqbt3urgc' },
 }
 
 export const viewport: Viewport = {
