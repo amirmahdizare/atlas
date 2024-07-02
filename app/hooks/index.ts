@@ -27,7 +27,7 @@ export const useCustomInfiniteQuery = <T extends ApiGetRequestType, CT = unknown
 export const useFullCategories = () => useCustomQuery<CategoryEndPointsType['ALL_WITH_RELATION']>({
     queryFn: () => api.post(CategoryEndPoints.ALL_WITH_RELATION),
     queryKey: 'GetAllCategories',
-    staleTime:minuteToMs(10)
+    staleTime: minuteToMs(10)
 })
 
 
@@ -37,7 +37,7 @@ export const useCities = (data?: UseQueryOptions) => useCustomQuery<LocationEndP
     queryFn: () => api.get(LocationEndPoints.GET_LIST),
     onError: (e) => console.log('خطا در دریافت لیست شهرها', e),
     staleTime: minuteToMs(10),
-    refetchOnMount:false,
+    refetchOnMount: false,
 })
 
 
@@ -46,7 +46,7 @@ export const useSubCities = (data?: UseQueryOptions) => useCustomQuery<SubLocati
     queryFn: () => api.get(SubLocationEndPoints.GET_LIST),
     onError: (e) => console.log('خطا در دریافت لیست مناطق', e),
     staleTime: minuteToMs(10),
-    refetchOnMount:false,
+    refetchOnMount: false,
 })
 
 export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
@@ -54,33 +54,19 @@ export const useBlogs = () => useCustomQuery<BlogEndPointsType['LIST']>({
     queryFn: () => api.get(BlogEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت لیست مقالات'),
     staleTime: minuteToMs(10),
-    refetchOnMount:false,
+    refetchOnMount: false,
 })
 
 
 export const useUserInfo = () => {
 
-    // return {
-    //     data: {
-    //         firstName: 'امیر حسین',
-    //         lastName: 'کشن زارع',
-    //         phoneNumber: '09196442725',
-    //         blogs: [],
-    //         bookmarks: [],
-    //         permissions: [],
-    //         privateNotes: [],
-    //         products: [],
-    //         tags: [],
-    //         role: { id: 1, name: 'superAdmin' },
-    //         id: '',
-    //         avatar: 'uploads/avatar-1714907579743-746723178.jpg',
-    //         userName: 'asdf'
-    //     }
-    // }
-
     return useCustomQuery<UsersEndpointType['USER_INFO']>({
         queryKey: 'getUserInfo',
-        queryFn: () => api.post(UsersEndpoints.USER_INFO),
+        queryFn: () => {
+            if (!!getToken())
+                return api.post(UsersEndpoints.USER_INFO)
+            return Promise.reject()
+        },
         staleTime: 1000 * 60 * 10
         // onError: () => toast.error('خطا در دریافت اطلاعات کاربری'),
     })
@@ -90,7 +76,7 @@ export const useTags = () => useCustomQuery<TagsEndPointsType['LIST']>({
     queryKey: 'getTags',
     queryFn: () => api.get(TagsEndPoints.LIST),
     onError: () => toast.error('خطا در دریافت برچسب ها'),
-    staleTime:minuteToMs(10)
+    staleTime: minuteToMs(10)
 })
 
 export const useBookmark = (productId: string) => {
