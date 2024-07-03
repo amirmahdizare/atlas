@@ -3,7 +3,7 @@ import React from 'react'
 import { useUsersSection, useUserList } from '../../hooks'
 import { RowItem } from './RowItem'
 import { UserSkeleton } from './components/UserSkeleton'
-import { agentRoles } from 'variables'
+import { agentRoles, bannedAgentNumbers } from 'variables'
 
 export const List = () => {
 
@@ -28,7 +28,7 @@ export const List = () => {
 
                 {data?.data.filter(i => {
                     if (type == 'agent')
-                        return agentRoles.indexOf(i.role?.name ?? '') != - 1
+                        return agentRoles.indexOf(i.role?.name ?? '') != - 1 && bannedAgentNumbers.indexOf(i.phoneNumber) == -1
                     else
                         return agentRoles.indexOf(i.role?.name ?? '') == - 1
                 }).map(i => <RowItem key={i.id} {...i} />)}
