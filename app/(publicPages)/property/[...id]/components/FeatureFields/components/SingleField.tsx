@@ -18,18 +18,23 @@ export const SingleField = ({ isPrimary, title, value }: { title: string | undef
 
 
     const finalValue = convertValue(value)
-    return (
-        <div className='flex flex-row justify-between items-center py-2 hover:bg-gray-50'>
 
-            <span>{title}</span>
+    if (typeof finalValue == 'boolean' && value == 'false')
+        return <></>
 
-            {typeof finalValue == 'string' && <span>{value}</span>}
+    else
+        return (
+            <div className='flex flex-row justify-between items-center py-2 hover:bg-gray-50'>
 
-            {typeof finalValue == 'boolean' && <> {value == 'true' ? <IconCheck className='text-green-500' /> : <IconX className='text-red-500' />}</>}
+                <span>{title}</span>
 
-            {typeof finalValue == 'number' && <span>{value}</span>}
+                {typeof finalValue == 'string' && <span>{value}</span>}
+
+                {typeof finalValue == 'boolean' && <> {value == 'true' ? <IconCheck className='text-green-500' /> : <IconX className='text-red-500' />}</>}
+
+                {typeof finalValue == 'number' && <span>{value}</span>}
 
 
-        </div>
-    )
+            </div>
+        )
 }
