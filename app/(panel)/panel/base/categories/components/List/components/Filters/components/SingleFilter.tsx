@@ -56,7 +56,7 @@ export const SingleFilter = (filter: FilterReadType & { index: number }) => {
 
                 <Cell colSpan={1} title={'ویژگی اصلی'} value={isPrimary == 'false' ? 'خیر' : 'بله'} />
 
-                <Cell colSpan={1} title={'فیلد دیتابیس'} value={itemKey} />
+                <Cell colSpan={1} title={'نام فیلد (انگلیسی)'} value={itemKey} />
 
                 <Cell colSpan={1} title={'نوع فیلتر'} value={filtertype} />
 
