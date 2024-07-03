@@ -11,7 +11,7 @@ export const List = () => {
 
     const { dispatch } = usePropertySection()
 
-    const { data, isFetching, isError  , hasNextPage , fetchNextPage} = usePropertyList()
+    const { data, isFetching, isError, hasNextPage, fetchNextPage } = usePropertyList()
 
 
     const allProprties = data?.pages?.reduce<Array<PropertyDetailType>>((pv, cv) => {
@@ -51,6 +51,18 @@ export const List = () => {
             </>
         )
 
+    else if (allProprties && allProprties?.length == 0)
+
+        return  <div className='flex flex-row gap-2 justify-between '>
+
+            <div className='flex flex-row gap-1 items-center'>
+                <IconHome width={25} height={25} className='text-french-gray' />
+                <span>لیست آگهی ها</span>
+            </div>
+
+            <Button icon={IconPlus} bgColor='primaryNormal' iconSide='right' onClick={() => dispatch({ mode: 'add', proprtyId: undefined })}>ثبت آگهی</Button>
+
+        </div>
     else if (isError)
         return <span className='text-red-500 text-center'>خطا در دریافت اطلاعات</span>
 
