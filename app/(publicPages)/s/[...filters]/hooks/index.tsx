@@ -121,8 +121,6 @@ export const usePropertySearchResults = () => {
     }
 
 
-    console.log({featureValues , currentFilter})
-
     const locationSlug = (): { slug: string, param?: string } => {
 
         if (!searchHook.filter.location) return { slug: 'all' }
