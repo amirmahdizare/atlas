@@ -8,6 +8,7 @@ import { CONTACT_INFO, DESCRIPTION, MAIN_AGENTS, NESHAN_SHORTCUT } from 'variabl
 import { IconArrowLeft, IconBrandInstagram, IconBrandTwitter, IconBrandWhatsapp, IconBrandTelegram, IconArrowDownLeft, IconPlus } from '@tabler/icons-react'
 import { Button } from '@components'
 import { captilizeFirstLetter, createPhoneCallLink } from 'utils'
+import { Spacer } from './Spacer'
 
 const SocialMediaButton = ({ icon: Icon, link, type }: { icon: typeof IconArrowLeft, link: string, type: 'colored' | 'normal' }) => {
 
@@ -37,7 +38,7 @@ const PersonContactInfo = ({ title, phoneNumber, instaUserName }: { title: strin
     <span className='flex-1 font-semibold'>{title}</span>
 
     <a className='cursor-pointer hover:text-coral flex-row flex gap-0.5 items-center flex-1 ' href={createPhoneCallLink(phoneNumber)}>
-       <span className='lg:text-body-2-normal'>{phoneNumber}</span> 
+        <span className='lg:text-body-2-normal'>{phoneNumber}</span>
         <IconPhoneCall className='text-french-gray w-2 h-2' />
     </a >
 
@@ -83,9 +84,9 @@ export const Footer = () => {
 
                 </div>
 
-                <span className='text-ultra-violet text-body-2-normal hidden lg:block'>کلیه حقوق این سایت متعلق به دپارتمان املاک اطلس می باشد.</span>
 
 
+                <span className='text-ultra-violet text-body-2-normal hidden lg:block leading-3 '>کلیه حقوق این سایت متعلق به دپارتمان املاک اطلس می باشد و هرگونه کپی برداری پیگرد قانونی دارد.</span>
 
             </div>
 
@@ -119,7 +120,7 @@ export const Footer = () => {
                     <SocialMediaButton icon={IconBrandTelegram} link='www.telegram' type='normal' />
                 </div> */}
 
-                <span className='text-ultra-violet text-body-2-normal  lg:hidden'>کلیه حقوق این سایت متعلق به دپارتمان املاک اطلس می باشد.</span>
+                <span className='text-ultra-violet text-body-2-normal  lg:hidden leading-3 text-center'>کلیه حقوق این سایت متعلق به دپارتمان املاک اطلس می باشد و هر گونه کپی برداری پیگرد قانونی دارد.</span>
 
 
 
@@ -132,6 +133,8 @@ export const Footer = () => {
                     <IconArrowUpRight className='w-2 h-2' /></a>
 
             </div>
+
+            <Spacer />
 
         </div>
     )
