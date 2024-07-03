@@ -37,7 +37,7 @@ export const OneSelectFilter = ({ title, suggests, itemKey, hint, unit, id }: Fu
 
             <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen ? 'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                 <div className='flex flex-row gap-1 items-center'>
-                    <span className='text-body-2-bolder'>{title}</span>
+                    <span className='text-body-2-bolder leading-3'>{title}</span>
                 </div>
 
 

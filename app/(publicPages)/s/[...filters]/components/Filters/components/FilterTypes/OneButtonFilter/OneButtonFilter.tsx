@@ -49,7 +49,7 @@ export const OneButtonFilter = ({ title, type, hint, unit, itemKey, id, suggests
 
             <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen ? 'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                 <div className='flex flex-row gap-1 items-center'>
-                    <span className='text-body-2-bolder'>{title}</span>
+                    <span className='text-body-2-bolder leading-3'>{title}</span>
                     {/* {!!filter.zone?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
          rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.zone?.length}</span>} */}
                 </div>

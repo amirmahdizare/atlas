@@ -60,7 +60,7 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests, id }: 
 
             <div className={`flex flex-row gap-4 justify-between  items-center cursor-pointer ${isOpen ? 'text-raisin-black' : 'text-ultra-violet'}`} onClick={() => setIsOpen(!isOpen)}>
                 <div className='flex flex-row gap-1 items-center'>
-                    <span className='text-body-2-bolder'>{title}</span>
+                    <span className='text-body-2-bolder leading-3'>{title}</span>
                     {/* {!!filter.zone?.length && <span className='bg-mint-green w-2 h-2 aspect-square shrink-0
          rounded-circle text-white flex flex-row items-center justify-center text-body-3-light'>{filter.zone?.length}</span>} */}
                 </div>
@@ -79,7 +79,7 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests, id }: 
 
                 {suggests?.map((item, index) => <div className='flex flex-col gap-1.5 w-full'>
 
-                    <span className='text-body-3-bolder text-ultra-violet'>{item.title}</span>
+                    <span className='text-body-3-bolder text-ultra-violet '>{item.title}</span>
 
                     <ClickAwayListener onClickAway={() => setIsActive({ ...isActive, [index]: false })}>
                         <div className={`border border-anti-flash-white-lighter rounded-app w- full justify -stretch items-center   flex flex-row  relative p-1.5 text-body-3-normal cursor-pointer ${isActive?.[index] ? 'bg-white' : 'bg-seasalt'}`} onClick={() => setIsActive({ ...isActive, [index]: !isActive[index] })}>
