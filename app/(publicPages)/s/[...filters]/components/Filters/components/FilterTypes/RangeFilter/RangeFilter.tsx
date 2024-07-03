@@ -84,13 +84,13 @@ export const RangeFilter = ({ title, type, hint, unit, itemKey, suggests, id }: 
                     <ClickAwayListener onClickAway={() => setIsActive({ ...isActive, [index]: false })}>
                         <div className={`border border-anti-flash-white-lighter rounded-app w- full justify -stretch items-center   flex flex-row  relative p-1.5 text-body-3-normal cursor-pointer ${isActive?.[index] ? 'bg-white' : 'bg-seasalt'}`} onClick={() => setIsActive({ ...isActive, [index]: !isActive[index] })}>
 
-                            <div className='flex flex-row gap-1 flex-1 w  '>
+                            <div className='flex flex-row gap-1 flex-1 w  items-center '>
                                 {!!fieldfilterByIndex(itemKey, index) && <IconX width={15} height={15} className='cursor-pointer' onClick={() => dispachFilter(itemKey, '', index)} />}
 
                                 {item.items.find(i => {
                                     return i.value == fieldfilterByIndex(itemKey, index)
                                 }) ?
-                                    <span>{item.items.find(i => i.value == fieldfilterByIndex(itemKey, index))?.title}</span>
+                                    <span className='leading-3'>{item.items.find(i => i.value == fieldfilterByIndex(itemKey, index))?.title}</span>
                                     : <>
                                         <NumericFormat
                                             onKeyDown={handleKeyPress((e) => dispachFilter(itemKey, e.currentTarget.value.replaceAll(',', ''), index))}
