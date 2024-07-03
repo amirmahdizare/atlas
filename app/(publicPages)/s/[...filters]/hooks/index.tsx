@@ -103,8 +103,6 @@ export const usePropertySearchResults = () => {
     const especialFilters = rest.productType == 'sell' ? ['price'] : ['prePrice', 'rentPrice']
 
 
-    //TODO Price Filter
-
     const especialFiltersObj = featureValues?.reduce<Partial<PropertySearchParams>>((pv, cv) => {
         if (especialFilters.indexOf(cv.filterId) != -1) {
             const keyFilter = especialFilters.find(i => i == cv.filterId)
@@ -118,9 +116,12 @@ export const usePropertySearchResults = () => {
     const currentFilter: PropertySearchParams = {
         ...rest,
         ...especialFiltersObj,
-        ...featureValues?.filter(i => especialFilters.indexOf(i.filterId) == -1),
+        featureValues: featureValues?.filter(i => especialFilters.indexOf(i.filterId) == -1),
 
     }
+
+
+    console.log({featureValues , currentFilter})
 
     const locationSlug = (): { slug: string, param?: string } => {
 
