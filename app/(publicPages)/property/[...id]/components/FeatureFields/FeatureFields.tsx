@@ -39,6 +39,8 @@ export const FeatureFields = ({ data: { subCategory, category, features: baseFea
                             </>)}
                         </div>
 
+                        {features.sort((a, b) => (a?.type ?? 0) < (b?.type ?? 0) ? 1 : -1).filter(i => i.isPrimary).length ==0 && <span onClick={() => setIsOpen(true)} className='text-gray-500 text-body-3-normal cursor-pointer'>برای مشاهده همه جزییات کلیک کنید.</span>}
+
 
                         <span className='text-mint-green cursor-pointer font-bold' onClick={() => setIsOpen(true)}>نمایش همه جزییات</span>
 
