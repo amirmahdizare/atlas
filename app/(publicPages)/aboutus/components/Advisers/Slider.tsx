@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { AdviserCard } from '@components'
 import { UserInfoType } from 'types'
 import { Navigation } from 'swiper/modules'
+import { bannedAgentNumbers } from 'variables'
 
 export const Slider = ({ advisers }: { advisers: Array<UserInfoType<string>> }) => {
     return (
@@ -59,7 +60,7 @@ export const Slider = ({ advisers }: { advisers: Array<UserInfoType<string>> }) 
                 // onSwiper={(swiper) => console.log(swiper)}
                 className='flex flex-col items-stretch justify-stretch'
             >
-                {advisers.map(item => <SwiperSlide key={item.id} className='h-full'>
+                {advisers.filter(i => bannedAgentNumbers.indexOf(i.phoneNumber) == -1).map(item => <SwiperSlide key={item.id} className='h-full'>
                     <AdviserCard {...item} />
                 </SwiperSlide>)}
 

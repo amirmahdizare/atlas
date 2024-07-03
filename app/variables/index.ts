@@ -46,9 +46,11 @@ export const MAIN_AGENTS = [
     },
     {
         lastName: 'امین دهقان',
-        phoneNumber:'09129675563',
-        instaUserName:'hameddehghan_realestate'
+        phoneNumber: '09129675563',
+        instaUserName: 'hameddehghan_realestate'
     }
 ]
 
-export const SEO_WORD_REGEX=/^[0-9A-Za-z_]+$/
+export const SEO_WORD_REGEX = /^[0-9A-Za-z_]+$/
+
+export const bannedAgentNumbers = ['09199660906', '09355583212']

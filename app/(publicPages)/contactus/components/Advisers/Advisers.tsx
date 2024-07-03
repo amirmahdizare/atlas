@@ -4,6 +4,7 @@ import { UsersEndpoints } from '_api/endpoints/users'
 import { UserInfoType } from 'types'
 import { Slider } from './Slider'
 import Link from 'next/link'
+import { bannedAgentNumbers } from 'variables'
 
 export default async function () {
 
@@ -34,7 +35,7 @@ export default async function () {
                         <ul>
 
 
-                            {data.map(item =>
+                            {data.filter(i => bannedAgentNumbers.indexOf(i.phoneNumber) == -1).map(item =>
                                 <>
                                     <br />
 
