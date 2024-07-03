@@ -31,7 +31,7 @@ export const PropertyListCard = ({ id, medias, location, price, subLocation, tit
 
             {!!location && <div className='flex flex-row gap-0.5 items-center'>
                 <IconMapPin width={20} height={20} className='text-french-gray' />
-                <span className='text-ultra-violet line-clamp-1 text-ellipsis' title={`${location?.faTitle} ${subLocation ? `, ${subLocation.faTitle}` : ''}`}>{location?.name} {subLocation ? `, ${subLocation.faTitle}` : ''}</span>
+                <span className='text-ultra-violet line-clamp-1 text-ellipsis' title={`${location?.faTitle} ${subLocation ? `, ${subLocation.faTitle}` : ''}`}>{location?.faTitle} {subLocation ? `, ${subLocation.faTitle}` : ''}</span>
             </div>}
 
             {!Number(rentPrice) && <div className='flex flex-row gap-3 justify-between h-2'></div>}
