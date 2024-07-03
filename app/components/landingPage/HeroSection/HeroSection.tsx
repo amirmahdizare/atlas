@@ -16,7 +16,7 @@ export const HeroSection = () => {
                     <span className='text-h2-bolder text-raisin-black'>
                         حس
                         &nbsp;<span className='text-robin-egg '>خوب</span>&nbsp;
-                        و خرید مطمئن
+                        _ خرید مطمئن
                     </span>
 
                     <p className='leading-3 text-ultra-violet text-h6-normal'>

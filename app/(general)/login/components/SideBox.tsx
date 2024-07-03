@@ -34,7 +34,7 @@ export const SideBox = () => {
                 &nbsp;
                 <span className='text-green-600'>خوب</span>
                 &nbsp;
-                و خرید مطمئن
+                _ خرید مطمئن
             </span>
             <span className='text-h6-normal text-gray-500 lg:block hidden'>خانه دلخواه تان را به کمک مشاورین متخصص اطلس پیدا کنید.</span>
 
