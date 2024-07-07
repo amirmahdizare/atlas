@@ -38,7 +38,8 @@ export default async function page({ params: { info } }: pageProps<{ info: strin
 
         const data: UserFullInfo[] = await response.json()
 
-        const targetAgent = data.find(i => i.id == info[0])
+
+        const targetAgent = data?.find(i => i.id == info[0])
 
         if (targetAgent)
             return (
@@ -50,6 +51,7 @@ export default async function page({ params: { info } }: pageProps<{ info: strin
         else
             return <span className='text-red-500 p-2 text-center'>مشاور مورد نظر یافت نشد</span>
     } catch (error) {
+        console.log(error)
         return <span className='text-red-500 p-2 text-center'>خطا در دریافت اطلاعات مشاور</span>
     }
 }
