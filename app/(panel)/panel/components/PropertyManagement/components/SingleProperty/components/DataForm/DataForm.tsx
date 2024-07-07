@@ -77,7 +77,7 @@ export const DataForm = () => {
             }
             else {
 
-                toast.error(`خطا در ${mode == 'add' ? 'ایجاد' : 'ویرایش'} آگهی`)
+                toast.error(e.response?.data.message ?? `خطا در ${mode == 'add' ? 'ایجاد' : 'ویرایش'} آگهی`)
             }
             // setError(``)
         }
@@ -199,7 +199,7 @@ export const DataForm = () => {
                     <Controller
                         control={control}
                         name='description'
-                        rules={{required:{value:true , message:'توضیحات خالی می باشد!!'}}}
+                        rules={{ required: { value: true, message: 'توضیحات خالی می باشد!!' } }}
                         render={({ field: { name, onChange, onBlur, value } }) =>
 
                             <ReactQuill modules={{
