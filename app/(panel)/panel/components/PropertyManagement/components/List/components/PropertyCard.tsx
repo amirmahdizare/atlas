@@ -7,7 +7,7 @@ import ReactSwitch from 'react-switch'
 import { PropertyDetailType } from 'types'
 import { usePropertyList, usePropertySection } from '../../../hooks'
 import { NO_NAME_USER } from 'variables'
-import { createMediaUrl } from 'utils'
+import { createMediaUrl, isFileSrcImage } from 'utils'
 import { useCustomMutation, usePermission, useUserInfo } from '@hooks'
 import { PropretyEndPoints, PropretyEndPointsType } from '_api/endpoints/property'
 import { api } from '_api/config'
@@ -65,7 +65,7 @@ export const PropertyCard = (pr: PropertyDetailType) => {
         <div className='grid grid-cols-3 gap-1.5 ' >
 
             <div className='col-span-1 relative'>
-                <img src={createMediaUrl(medias?.[0])} className='object-cover aspect-square w-full rounded ' />
+                <img src={createMediaUrl(medias?.find(i => isFileSrcImage(i)))} className='object-cover aspect-square w-full rounded ' />
                 <div className='flex flex-row gap-0.5 items-center absolute left-0.5 bottom-0.5 text-body-3-normal ' dir='ltr'>
                     {/* target='_blank' href={`/s/tag=[${tag.name}]`} */}
                     {tags?.slice(0, 2).map(tag => <div style={{ backgroundColor: tag.backgrondColor, color: tag.textColor }} className=' p-0.5 rounded'>

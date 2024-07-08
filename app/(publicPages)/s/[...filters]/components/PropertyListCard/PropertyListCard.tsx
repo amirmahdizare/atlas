@@ -7,7 +7,7 @@ import { BookmarkStatus } from './components/BookmarkStatus'
 import Link from 'next/link'
 import { Divider } from '@components'
 import logo from 'images/atlaslight.svg'
-import { createMediaUrl } from 'utils'
+import { createMediaUrl, isFileSrcImage } from 'utils'
 import { NO_NAME_USER, SAMPLE_AVATAR } from 'variables'
 import { Share } from './components/Share'
 
@@ -28,7 +28,7 @@ export const PropertyListCard = (data: PropertyDetailType) => {
 
                 <div className='relative aspect-square lg:aspect-[3/2] w- [170px] lg:w-[ 200px] flex-1 w - full rounded-sm overflow-hidden'>
 
-                    <Image src={createMediaUrl(medias?.[0])} alt={`${title} | دپارتمان املاک اطلس`} title={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect-square lg:aspect-[3/2] ' />
+                    <Image src={createMediaUrl(medias?.find(i => isFileSrcImage(i)))} alt={`${title} | دپارتمان املاک اطلس`} title={`${title} | دپارتمان املاک اطلس`} fill className='object-cover aspect-square lg:aspect-[3/2] ' />
                     {/* 
                     TODO BOOKMARK Functionliaty
                     <div className='absolute aspect-square bg-white rounded shadow left-1 top-1 p-1'>
@@ -39,7 +39,7 @@ export const PropertyListCard = (data: PropertyDetailType) => {
                         {tags?.slice(0, 2).map(tag => <div style={{ backgroundColor: tag.backgrondColor, color: tag.textColor }} className=' p-0.5 rounded'>
                             {tag.name}
                         </div>)}
-                        {!!tags && tags?.length > 2  && <div className='rounded-circle text-gray-400'>+2</div>}
+                        {!!tags && tags?.length > 2 && <div className='rounded-circle text-gray-400'>+2</div>}
 
                     </div>
 
