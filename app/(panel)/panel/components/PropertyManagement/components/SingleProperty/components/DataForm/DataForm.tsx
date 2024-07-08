@@ -45,13 +45,18 @@ export const DataForm = () => {
     const { data, mutate, isLoading } = useCustomMutation<PropretyEndPointsType['CREATE']>({
         mutationKey: mode == 'add' ? 'addProprty' : 'editProperty',
         mutationFn: async (data) => {
+            const { medias, ...restData } = data
 
             if (mode == 'edit' && typeof proprtyId != 'undefined') {
-                const mappedMedias = await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString())))
-                return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({ ...data, tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds), features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))), medias: [...data.medias.filter(i => typeof i == 'object'), ...mappedMedias] }, ['medias']))
+                const mappedMedias = data.medias.filter(i => typeof i == 'string').length != data.medias.length ? await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString()))) : undefined
+                return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({
+                    ...restData,
+                    tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds),
+                    features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))),
+                    ...(!!mappedMedias ? ({ medias: [...data.medias.filter(i => typeof i == 'object'), ...mappedMedias] }) : ({}))
+                }, ['medias']))
 
             }
-            // ,tagIds: JSON.stringify(data.tagIds) TODO Tags
             return api.post(PropretyEndPoints.CREATE, createFormData({ ...data, tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds), features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias']))
         }
         ,
