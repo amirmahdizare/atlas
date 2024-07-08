@@ -48,7 +48,8 @@ export const DataForm = () => {
             const { medias, ...restData } = data
 
             if (mode == 'edit' && typeof proprtyId != 'undefined') {
-                const mappedMedias = data.medias.filter(i => typeof i == 'string').length != data.medias.length ? await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString()))) : undefined
+                console.log({ dataMediaLenght: data.medias.filter(i => typeof i == 'string').length, currentMediaLenght: allProprties?.find(i => i.id == proprtyId)?.medias?.length })
+                const mappedMedias = data.medias.filter(i => typeof i == 'string').length == data.medias.length && data.medias.filter(i => typeof i == 'string').length == allProprties?.find(i => i.id == proprtyId)?.medias?.length ? undefined : await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString())))
                 return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({
                     ...restData,
                     tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds),
@@ -271,7 +272,7 @@ export const DataForm = () => {
                     <div className='flex flex-row gap-4'>
 
                         <Button bgColor='gray' textColor='dark' onClick={() => dispatch({ mode: 'list', proprtyId: undefined })} fullWidth>انصراف</Button>
-                        <Button bgColor='primaryNormal' textColor='white' fullWidth loading={isLoading}>ثبت </Button>
+                        <Button bgColor='primaryNormal' textColor='white' fullWidth disabled={isLoading} loading={isLoading}>ثبت </Button>
 
                     </div>
                 </div>

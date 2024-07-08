@@ -106,14 +106,23 @@ export const getBase64Image = (img: HTMLImageElement) => {
 }
 
 
-export const convertMediaUrlToFile = async (img: string) => {
+export const fileType = (src: string) => {
+
+  if (isFileSrcImage(src))
+    return `image.${src.split('.').toReversed()[0]}`
+  else if (isFileSrcVideo(src))
+    return `video.${src.split('.').toReversed()[0]}`
+  return `newFile.${src.split('.').toReversed()[0]}`
+}
+
+export const convertMediaUrlToFile = async (src: string) => {
 
   try {
-    const response = await fetch(img)
+    const response = await fetch(src)
 
     const image = await response.blob()
     // .then((res) => res.blob())
-    const file = new File([image], `image.jpeg`, { type: image.type })
+    const file = new File([image], fileType(src), { type: image.type })
 
     console.log(file)
     return file
