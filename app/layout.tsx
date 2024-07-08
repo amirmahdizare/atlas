@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
 import 'react-quill/dist/quill.snow.css';
-import Script from 'next/script';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: 'دپارتمان املاک اطلس',
@@ -33,21 +33,8 @@ export default function RootLayout({
         <ClientLayout>
           {children}
         </ClientLayout>
-        <Script
-                strategy="lazyOnload"
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-            />
-
-            <Script strategy="lazyOnload">
-                {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-                    page_path: window.location.pathname,
-                    });
-                `}
-            </Script>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />}
+        {process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER && <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER} />}
       </body>
     </html>
   )
