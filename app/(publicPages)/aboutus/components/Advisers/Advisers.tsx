@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { SwiperSlide, Swiper } from 'swiper/react'
-import { advisers } from './data.mock'
+// import { advisers } from './data.mock'
 import { AdviserCard } from '@components'
 import { ApiBaseURL } from '_api/serverSideConfig'
 import { UsersEndpoints } from '_api/endpoints/users'

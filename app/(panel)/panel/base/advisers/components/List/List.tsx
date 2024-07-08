@@ -2,7 +2,7 @@ import { Button } from '@components'
 import { IconPlus, IconUsers } from '@tabler/icons-react'
 import React from 'react'
 import { useAdvisersSection } from '../../hooks'
-import { advisers } from '../../data.mock'
+// import { advisers } from '../../data.mock'
 import ReactSwitch from 'react-switch'
 import { RowItem } from './RowItem'
 
@@ -33,7 +33,7 @@ export const List = () => {
 
             </div>
 
-            {advisers.map(i=> <RowItem {...i} />)}
+            {/* {advisers.map(i=> <RowItem {...i} />)} */}
 
             {/* {advisers?.map(ad =>
                 <div className='grid grid-cols-6 gap-1 p-1.5 text-space-codet text-body-2-normal items-center'>
