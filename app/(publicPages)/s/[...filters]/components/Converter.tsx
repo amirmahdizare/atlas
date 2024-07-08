@@ -9,8 +9,9 @@ export const Converter = ({ filters }: { filters: string[] }) => {
 
 
 
-    const cityQry = filters?.[0]
-    const catQry = filters?.[1]
+    const sideQry = filters?.[0]
+    const cityQry = filters?.[1]
+    const catQry = filters?.[2]
 
     const { data: citiesData, isLoading } = useCities()
 
@@ -106,12 +107,22 @@ export const Converter = ({ filters }: { filters: string[] }) => {
         // console.log({ citiesFilter, categoryFilter, subCategoryFilter })
 
 
+        const returnProductType = () => {
+            if (sideQry == 'sell')
+                return 'sell'
+            else if (sideQry == 'rent')
+                return 'rent'
+            return undefined
+        }
+
 
         dispatchFilter({
             location: citiesFilter ?? [],
             category: categoryFilterFn() ? [Number(categoryFilterFn())] : undefined,
             subCategory: subCategoryFilter ? [Number(subCategoryFilter)] : undefined,
-            title: searchQuery.get('title') ?? undefined
+            title: searchQuery.get('title') ?? undefined,
+            productType: returnProductType()
+
         })
 
 

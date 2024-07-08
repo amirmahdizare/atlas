@@ -13,25 +13,38 @@ import { LocationEndPoints } from '_api/endpoints/location'
 // }
 
 
-export const generateMetadata = async ({ params: { filters } , searchParams:{cities}}: pageProps<{ filters: string[]}  , {cities:string}>): Promise<Metadata> => {
+export const generateMetadata = async ({ params: { filters }, searchParams: { cities } }: pageProps<{ filters: string[] }, { cities: string }>): Promise<Metadata> => {
 
     const response = await fetch(`${ApiBaseURL}${LocationEndPoints.GET_LIST}`)
 
     const citiesData: LocationType[] = await response.json()
 
+    const returnSide = (side: string) => {
+        if (side == 'rent') return 'رهن و اجاره'
+        else if (side == 'sell') return 'خرید و فروش'
+        return 'خرید و رهن و اجاره'
+
+    }
+
+    const side = filters?.[0]
+
+    const sideTranslate = returnSide(side)
+
+    // const intialTitle = sideTranslate
+
 
 
     try {
 
-        const cityQry = filters[0]
+        const cityQry = filters?.[1]
 
         if (cityQry.split('-').length > 1 && cityQry.split('-')[1] == 'city') {
             if (citiesData.find(c => c.name.toLowerCase() == cityQry.split('-')[0].toLowerCase())) {
                 // citiesFilter = [citiesData?.find(c => c.name == cityQry.split('-')[0])?.id ?? 0]
                 const targetCity = citiesData?.find(c => c.name == cityQry.split('-')[0])
                 return {
-                    title: `خرید و فروش ملک در  ${targetCity?.faTitle}`.concat(' | دپارتمان املاک اطلس'),
-                    description:`خرید و فروش املاک در همه مناطق  ${targetCity?.faTitle} با مشاوره مشاورین دپارتمان اطلس`.concat(' | دپارتمان املاک اطلس')
+                    title: `${sideTranslate} ملک در  ${targetCity?.faTitle}`.concat(' | دپارتمان املاک اطلس'),
+                    description: `${sideTranslate} املاک در همه مناطق  ${targetCity?.faTitle} با مشاوره مشاورین دپارتمان اطلس`.concat(' | دپارتمان املاک اطلس')
                 }
             }
             else {
@@ -42,12 +55,12 @@ export const generateMetadata = async ({ params: { filters } , searchParams:{cit
             if (cities) {
                 const citiesParams = cities?.split(',').reduce<LocationType[]>((pv, cv) => {
                     if (!!citiesData.find(c => c.name == cv)?.id)
-                        pv.push(citiesData?.find(c => c.name == cv) ?? {} as  any)
+                        pv.push(citiesData?.find(c => c.name == cv) ?? {} as any)
                     return pv
                 }, [])
                 return {
-                    title: `خرید و فروش ملک در    ${citiesParams.map(i=>i.faTitle).join(' و ')}`.concat(' | دپارتمان املاک اطلس'),
-                    description:`خرید و فروش املاک در همه مناطق   ${citiesParams.map(i=>i.faTitle).join(' و ')} با مشاوره مشاورین دپارتمان اطلس`.concat(' | دپارتمان املاک اطلس')
+                    title: `${sideTranslate} ملک در    ${citiesParams.map(i => i.faTitle).join(' و ')}`.concat(' | دپارتمان املاک اطلس'),
+                    description: `${sideTranslate} املاک در همه مناطق   ${citiesParams.map(i => i.faTitle).join(' و ')} با مشاوره مشاورین دپارتمان اطلس`.concat(' | دپارتمان املاک اطلس')
                 }
             }
             // ///iran

@@ -121,6 +121,7 @@ export const usePropertySearchResults = () => {
     }
 
 
+    //Location Generator
     const locationSlug = (): { slug: string, param?: string } => {
 
         if (!searchHook.filter.location) return { slug: 'all' }
@@ -133,6 +134,8 @@ export const usePropertySearchResults = () => {
         return { slug: 'all' }
     }
 
+
+    //Category And Sublocation Generator
     const categorySlug = useCallback((): { slug: string | undefined } => {
 
         if (searchHook.filter.subCategory && searchHook.filter.subCategory?.length > 0) {
@@ -148,9 +151,33 @@ export const usePropertySearchResults = () => {
             return { slug: catData?.data.find(f => f.id == searchHook.filter.category?.[0].toString())?.enTitle.concat('-category') }
 
         return { slug: undefined }
-    }, [searchHook.filter.subCategory , searchHook.filter.category])
+    }, [searchHook.filter.subCategory, searchHook.filter.category])
 
-    const newFilterQuery = `/s/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}${searchHook.filter.title ? `&?title=${searchHook.filter.title}` : ''}`
+
+
+    ///Side Generetor
+    const sideSlug = useCallback(() => {
+        if (searchHook.filter.productType)
+            return searchHook.filter.productType
+        return 'all'
+    }, [searchHook.filter.productType])
+
+
+
+    console.log(locationSlug())
+
+    const newFilterQuery = 
+    '/s/'
+    .concat(sideSlug())
+    .concat('/')
+    .concat(locationSlug().slug ? `${locationSlug().slug}` : '')
+    .concat(categorySlug().slug ? `/${categorySlug().slug}` : '')
+    .concat(locationSlug().param ? `?cities=${locationSlug().param}` : '')
+    .concat(searchHook.filter.title ? `&?title=${searchHook.filter.title}` : '')
+
+
+    // const newFilterQuery = `/s/${sideSlug()}/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}
+    // ${searchHook.filter.title ? `&?title=${searchHook.filter.title}` : ''}`
 
     useEffect(() => {
 
