@@ -72,7 +72,7 @@ export const Title = ({ data, }: { data: PropertyDetailType }) => {
 
                 <div className='flex flex-row gap-1 items-center'>
                     {/* <span className='text-h6-normal'>{(Math.floor(Number(price ?? 0) / metr )).toLocaleString()}</span> */}
-                    <span className='text-h6-normal'>{(metr).toLocaleString()}</span>
+                    <span className='text-h6-normal'>{(metr)?.toLocaleString()}</span>
                     <span className='text-ultra-violet text-body-2-normal' >متر</span>
                 </div>
 
