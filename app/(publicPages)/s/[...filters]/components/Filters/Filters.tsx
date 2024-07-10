@@ -45,7 +45,7 @@ export const Filters = () => {
     return (
       <>
         <div className='flex flex-row gap-2 items-center justify-between lg:hidden'>
-          <span className='text-body-1-bolder'>جستجوی ملک در اطلس</span>
+          <span className='text-body-2-bolder leading-3'>{document.title.split('|')[0]}</span>
 
           <Button bgColor='secondary' icon={IconFilter} onClick={() => setIsOpen(true)}>فیلتر</Button>
         </div>

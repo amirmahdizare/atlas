@@ -6,7 +6,7 @@ import { PropertyListCard } from '../PropertyListCard/PropertyListCard'
 import { usePropertySearchResults, useSearchProperty } from '../../hooks'
 import { PropertyDetailType } from 'types'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Button, Spinner } from '@components'
+import { Button, Divider, Spinner } from '@components'
 import { IconArrowDownLeft } from '@tabler/icons-react'
 
 export const List = () => {
@@ -23,6 +23,8 @@ export const List = () => {
         return (
             <div className='max-h-full overflow-auto' id='search-results'>
 
+                <div className='text-body-2-bolder mb-1 text-gray-600 hidden lg:block'>{document?.title.split('|')[0]}</div>
+                <Divider />
                 <InfiniteScroll
                     className='grid grid-cols-2 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-1 items-stretch justify-stretch'
                     dataLength={allProprties?.length ?? 0}
