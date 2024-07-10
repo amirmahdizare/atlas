@@ -22,7 +22,7 @@ export const SelectCity = () => {
         if (filter.location?.find(i => i == city.id))
             dispatchFilter({ location: filter.location.filter(i => i != city.id), subLocation: [] })
         else
-            dispatchFilter({ location: [...(filter?.location ?? []), city.id] })
+            dispatchFilter({ location: [...(filter?.location ?? []), city.id] , subLocation:[] })
     }
 
     const isLocationInclude = (cityId: number) => !!filter?.location && filter.location?.findIndex(i => i == cityId) != -1

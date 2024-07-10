@@ -112,6 +112,8 @@ export const generateMetadata = async ({ params: { filters }, searchParams: { ci
                     return pv
                 }, [])
 
+                console.log(citiesParams)
+
                 cityTitle = citiesParams.map(i => i.faTitle).join(' و ')
                 // return {
                 //     title: `${sideTranslate} ملک در    ${citiesParams.map(i => i.faTitle).join(' و ')}`.concat(' | دپارتمان املاک اطلس'),
@@ -123,6 +125,7 @@ export const generateMetadata = async ({ params: { filters }, searchParams: { ci
         else {
             //Nothing
         }
+
         // return ({
         //     title: 'جستجوی ملک در دپارتمان املاک اطلس'
         // })
@@ -138,21 +141,21 @@ export const generateMetadata = async ({ params: { filters }, searchParams: { ci
             title: 'جستجوی ملک در دپارتمان املاک اطلس'
         })
     }
-
-
+    
+    
     try {
-
+        
         if (sublocations) {
             subLocationTitle = subLocData?.filter(i => sublocations?.split(',').indexOf(i.name) != -1).map(i => i.faTitle).join(' و ') ?? ''
         }
-
+        
     } catch (error) {
 
     }
-
-
+    
+    
     const baseDescription = (await parent).description
-
+    
     return ({
         title: sideTranslate.concat(' ')
             .concat(catTitle ? catTitle.concat(' ') : 'ملک ')
