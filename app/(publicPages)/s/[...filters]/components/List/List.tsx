@@ -52,7 +52,7 @@ export const List = () => {
 
     else if (allProprties && allProprties?.length == 0)
         return <div className='h-full flex flex-col gap-2 items-center justify-center p-2'>
-            <div className='text-center  w-full  text-dark-orange flex-row justify-center items-center'>آگهی ای با این مشخصات یافت نشد!</div>
+            <div className='text-center  w-full  text-dark-orange flex-row justify-center items-center'>ملکی با این مشخصات یافت نشد!</div>
             <Button icon={IconArrowDownLeft} iconSide='left' bgColor='secondary' href='/requestproperty' textColor='white'>درخواست ملک</Button>
             <span className='cursor-pointer hover:text-coral' onClick={() => dispatch({ filter: {} })}>بازگشت به همه</span>
         </div>
