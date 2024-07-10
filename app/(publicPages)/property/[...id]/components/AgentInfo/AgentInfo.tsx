@@ -54,7 +54,7 @@ export const AgentInfo = ({ data: { user, agentNote } }: { data: PropertyDetailT
                             <div className='flex flex-row gap-2 items-center text-body-1-normal lg:text-body-2-normal '>
                                 <Link href={pageHref} className='text-gray-700 font-semibold'>{phoneNumber}</Link>
                                 <IconCopy  className='cursor-pointer text-gray-500' onClick={() => {
-                                    copyLink(createPhoneCallLink(phoneNumber))
+                                    copyLink(phoneNumber)
                                     toast.success('شماره مشاور با موفقیت کپی شد')
                                 }} />
 

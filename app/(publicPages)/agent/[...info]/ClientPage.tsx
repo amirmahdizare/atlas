@@ -8,7 +8,6 @@ import { Blogs } from './components/Blogs/Blogs'
 
 export const ClientPage = ({ data }: { data: UserFullInfo }) => {
 
-    console.log(data.blogs)
     return (
         <div className='flex flex-col gap-2 px-2'>
             <HeroSection data={data} />

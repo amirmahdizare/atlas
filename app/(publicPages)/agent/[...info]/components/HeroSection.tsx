@@ -5,11 +5,12 @@ import React from 'react'
 import photo from 'images/aboutus.png'
 import Image from 'next/image'
 import vector from 'images/buildingVector.svg'
-import { IconArrowDownLeft, IconBell, IconPhoneCall } from '@tabler/icons-react'
+import { IconArrowDownLeft, IconBell, IconCopy, IconPhoneCall } from '@tabler/icons-react'
 // import avatar from 'images/agents/dadash.png'
 import { UserFullInfo } from 'types'
 import { NO_NAME_USER } from 'variables'
-import { createMediaUrl, createPhoneCallLink } from 'utils'
+import { copyLink, createMediaUrl, createPhoneCallLink } from 'utils'
+import { toast } from 'react-toastify'
 
 export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
@@ -19,11 +20,24 @@ export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
     return (
         <div className='grid grid-cols-3 relative items-center justify-center bg-white'>
-            <div className=' col-span-3 md:col-span-2 flex flex-col gap-4 p-2 lg:p-4 order-2 lg:order-1'>
+            <div className=' col-span-3 md:col-span-2 flex flex-col gap-4 p-1.5 lg:p-4 order-2 lg:order-1'>
 
                 <div className='flex flex-col gap-2'>
-                    <span className='text-h3-bolder leading-4 whitespace-break-spaces flex flex-col lg:flex-row gap-2'>
-                        <span className='text-space-codet'>{agentName}</span>
+                    <span className='text-h3-bolder leading-4 whitespace-break-spaces flex flex-col lg:flex-row lg:gap-2 gap-1'>
+                        <div className='flex flex-row gap-0.5 items-center justify-between'>
+
+                            <span className='text-space-codet'>{agentName}</span>
+
+                            <div className='flex flex-row gap-1 items-center text-body-1-normal lg:text-body-2-normal  p-1.5 rounded lg:hidden'>
+                                <Link href={createPhoneCallLink(phoneNumber)} className='text-gray-700 font-semibold'>{phoneNumber}</Link>
+                                <IconCopy className='cursor-pointer text-gray-500' onClick={() => {
+                                    copyLink(phoneNumber)
+                                    toast.success('شماره مشاور با موفقیت کپی شد')
+                                }} />
+
+                            </div>
+
+                        </div>
                         <span className='text-robin-egg'>کارشناس دپارتمان اطلس</span>
                     </span>
                     <p className='leading-3 text-ultra-violet text-h6-normal'>
@@ -37,9 +51,24 @@ export const HeroSection = ({ data }: { data: UserFullInfo }) => {
 
                 </div>
 
-                <div className='flex flex-row gap-2'>
+                <div className='flex flex-row gap-2   items-start lg:items-center'>
 
-                    <a href={createPhoneCallLink(phoneNumber)}><Button bgColor='secondary' icon={IconArrowDownLeft} textColor='white' iconSide='left' href='requestproperty'>تماس با مشاور</Button></a>
+
+                    <div className='flex flex-col lg:flex-row gap-2 items-center'>
+
+                        <div className=' flex-row gap-2 items-center text-body-1-normal lg:text-body-2-normal border border-gray-200 p-1.5 rounded hidden lg:flex'>
+                            <Link href={createPhoneCallLink(phoneNumber)} className='text-gray-700 font-semibold'>{phoneNumber}</Link>
+                            <IconCopy className='cursor-pointer text-gray-500' onClick={() => {
+                                copyLink(phoneNumber)
+                                toast.success('شماره مشاور با موفقیت کپی شد')
+                            }} />
+
+                        </div>
+                        <a href={createPhoneCallLink(phoneNumber)}><Button bgColor='secondary' icon={IconArrowDownLeft} textColor='white' iconSide='left' href='requestproperty'>تماس با مشاور</Button></a>
+
+
+
+                    </div>
 
                     <Link href={'#properties'}><Button bgColor='gray' icon={IconBell} textColor='dark' iconSide='left' >آگهی ها</Button></Link>
 
