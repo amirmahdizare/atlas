@@ -178,3 +178,13 @@ export const useAllAgents = (props?: any) => useCustomQuery<UsersEndpointType['G
     staleTime: minuteToMs(5),
     ...props
 })
+
+
+export const useTitle = () => {
+
+
+    usePathname()
+
+
+    return document.title
+}

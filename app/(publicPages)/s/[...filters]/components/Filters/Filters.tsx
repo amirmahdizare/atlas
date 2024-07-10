@@ -4,7 +4,7 @@ import { CategoryFilter, SelectArea, SelectCity, SelectType, Title } from './com
 import { usePropertySearchResults, useSearchProperty, useToggleFilter } from '../../hooks/index'
 // import { categories } from './components/CategoryFilter/data.mock'
 import { BooleanFilter, OneButtonFilter, OneSelectFilter, RangeFilter } from './components/FilterTypes'
-import { useFullCategories } from '@hooks'
+import { useFullCategories, useTitle } from '@hooks'
 import { PriceFilter } from './components/FilterTypes/PriceFilter/PriceFilter'
 import { Button, Spinner } from '@components'
 import { IconFilter, IconX } from '@tabler/icons-react'
@@ -14,6 +14,9 @@ import { SEARCH_PRODUCT_LIMIT } from 'variables'
 const Divider = () => <div className='bg-anti-flash-white-lighter w-full h-[1px]'></div>
 
 export const Filters = () => {
+
+
+  const pageTitle = useTitle()
 
   const { isOpen, setIsOpen } = useToggleFilter()
 
@@ -45,7 +48,7 @@ export const Filters = () => {
     return (
       <>
         <div className='flex flex-row gap-2 items-center justify-between lg:hidden'>
-          <span className='text-body-2-bolder leading-3'>{document.title.split('|')[0]}</span>
+          <span className='text-body-2-bolder leading-3'>{pageTitle.split('|')[0]}</span>
 
           <Button bgColor='secondary' icon={IconFilter} onClick={() => setIsOpen(true)}>فیلتر</Button>
         </div>
@@ -101,7 +104,7 @@ export const Filters = () => {
           {Array.isArray(allProprties) && allProprties.length == 0 && <div className='text-center w-full p-1.5 text-gray-700 lg:hidden'>{resultText(allProprties?.length)}</div>}
           {Array.isArray(allProprties) && allProprties.length > 0 && !isFetching && <Button className='lg:hidden' onClick={() => setIsOpen(false)} loading={isLoading}> {resultText(allProprties.length)}</Button>}
           <Divider />
-          {Object.values(filter).filter(i => !!i  &&  (Array.isArray(i) && i.length > 0)).length > 0 && <Button bgColor={isFetching ? 'gray' : 'secondary'} disabled={isFetching} onClick={() => dispatch({ filter: {} })} >پاک کردن فیلترها </Button>}
+          {Object.values(filter).filter(i => !!i && (Array.isArray(i) && i.length > 0)).length > 0 && <Button bgColor={isFetching ? 'gray' : 'secondary'} disabled={isFetching} onClick={() => dispatch({ filter: {} })} >پاک کردن فیلترها </Button>}
 
           {searchResultError && !isFetching && <span className='text-red-500 lg:hidden text-center'>خطا در دریافت اطلاعات</span>}
 
