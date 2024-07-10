@@ -35,7 +35,7 @@ export const Converter = ({ filters }: { filters: string[] }) => {
 
 
 
-        if (cityQry.split('-').length > 1 && cityQry.split('-')[1] == 'city') {
+        if (cityQry?.split('-').length > 1 && cityQry?.split('-')[1] == 'city') {
             if (citiesData?.data.find(c => c.name.toLowerCase() == cityQry.split('-')[0].toLowerCase())) {
                 citiesFilter = [citiesData?.data.find(c => c.name == cityQry.split('-')[0])?.id ?? 0]
             }
@@ -130,7 +130,7 @@ export const Converter = ({ filters }: { filters: string[] }) => {
 
     }, [citiesData, filters, catData])
 
-    const city = cityQry.split('-')
+    const city = cityQry?.split('-')
     return (
         <div>
 
