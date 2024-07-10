@@ -76,6 +76,7 @@ export const usePropertySearchResults = () => {
     // const searchParams = useSearchParams()
 
     const { data: locationsData } = useCities()
+    const { data: subcityData } = useSubCities()
 
     const { data: catData } = useFullCategories()
 
@@ -164,16 +165,23 @@ export const usePropertySearchResults = () => {
 
 
 
-    console.log(locationSlug())
+    const sublocationSlug = useCallback(() => {
+        if (searchHook.filter.subLocation && searchHook.filter.subLocation?.length == 0)
+            return undefined
+        else if (searchHook.filter.subLocation)
+            return searchHook.filter.subLocation.map(i => subcityData?.data.find(d => d.id == i.toString())).map(i=>i?.name)?.join(',')
+    }, [searchHook.filter.subLocation])
 
-    const newFilterQuery = 
-    '/s/'
-    .concat(sideSlug())
-    .concat('/')
-    .concat(locationSlug().slug ? `${locationSlug().slug}` : '')
-    .concat(categorySlug().slug ? `/${categorySlug().slug}` : '')
-    .concat(locationSlug().param ? `?cities=${locationSlug().param}` : '')
-    .concat(searchHook.filter.title ? `&?title=${searchHook.filter.title}` : '')
+    const newFilterQuery =
+        '/s/'
+            .concat(sideSlug())
+            .concat('/')
+            .concat(locationSlug().slug ? `${locationSlug().slug}` : '')
+            .concat(categorySlug().slug ? `/${categorySlug().slug}` : '')
+            .concat(locationSlug().param ? `?cities=${locationSlug().param}` : '?')
+            .concat(searchHook.filter.title ? `&title=${searchHook.filter.title}` : '')
+            .concat(sublocationSlug() ? `&sublocations=${sublocationSlug()}` : '')
+
 
 
     // const newFilterQuery = `/s/${sideSlug()}/${locationSlug().slug}${categorySlug().slug ? `/${categorySlug().slug}` : ''}${locationSlug().param ? `?cities=${locationSlug().param}` : ''}

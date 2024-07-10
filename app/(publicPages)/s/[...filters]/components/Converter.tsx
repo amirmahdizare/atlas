@@ -1,9 +1,10 @@
 'use client'
 import React, { useEffect } from 'react'
-import { useCities, useFullCategories } from '@hooks'
+import { useCities, useFullCategories, useSubCities } from '@hooks'
 import { useSearchParams } from 'next/navigation'
 import { useSearchProperty } from '../hooks'
 import { SubCategoryType } from 'types'
+import { useSubCategoryList } from '(panel)/panel/base/categories/hooks'
 
 export const Converter = ({ filters }: { filters: string[] }) => {
 
@@ -14,6 +15,7 @@ export const Converter = ({ filters }: { filters: string[] }) => {
     const catQry = filters?.[2]
 
     const { data: citiesData, isLoading } = useCities()
+    const { data: sublocationsData } = useSubCities()
 
     const searchQuery = useSearchParams()
 
@@ -115,14 +117,24 @@ export const Converter = ({ filters }: { filters: string[] }) => {
             return undefined
         }
 
+        var sublocations: number[] | undefined = []
+
+        if (searchQuery.get('sublocations')) {
+
+            const sub = searchQuery.get('sublocations')
+            sublocations = sublocationsData?.data.filter(i => sub?.split(',').indexOf(i.name) != -1).map(i => Number(i.id)) ?? []
+        }
+
+
+
 
         dispatchFilter({
             location: citiesFilter ?? [],
             category: categoryFilterFn() ? [Number(categoryFilterFn())] : undefined,
             subCategory: subCategoryFilter ? [Number(subCategoryFilter)] : undefined,
             title: searchQuery.get('title') ?? undefined,
-            productType: returnProductType()
-
+            productType: returnProductType(),
+            subLocation: sublocations
         })
 
 

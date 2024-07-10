@@ -1,11 +1,11 @@
-import { Metadata } from 'next'
+import { Metadata, ResolvingMetadata } from 'next'
 import React from 'react'
-import { CategoryFullType, LocationType, SubCategoryType, pageProps } from 'types'
+import { CategoryFullType, LocationType, SubCategoryType, SubLocationReadType, pageProps } from 'types'
 import { Breadcrumb } from './components'
 import { ClientPage } from './ClientPage'
 import { Converter } from './components/Converter'
 import { ApiBaseURL } from '_api/serverSideConfig'
-import { LocationEndPoints } from '_api/endpoints/location'
+import { LocationEndPoints, SubLocationEndPoints } from '_api/endpoints/location'
 import { CategoryEndPoints } from '_api/endpoints/category'
 
 
@@ -14,16 +14,21 @@ import { CategoryEndPoints } from '_api/endpoints/category'
 // }
 
 
-export const generateMetadata = async ({ params: { filters }, searchParams: { cities } }: pageProps<{ filters: string[] }, { cities: string }>): Promise<Metadata> => {
+export const generateMetadata = async ({ params: { filters }, searchParams: { cities, sublocations } }: pageProps<{ filters: string[] }, { cities: string, sublocations: string }>, parent: ResolvingMetadata): Promise<Metadata> => {
 
     const response = await fetch(`${ApiBaseURL}${LocationEndPoints.GET_LIST}`, { cache: 'reload' })
 
     const citiesData: LocationType[] = await response.json()
 
 
-    const responseCat = await fetch(`${ApiBaseURL}${CategoryEndPoints.ALL_WITH_RELATION}`,{method:'POST'})
+    const responseCat = await fetch(`${ApiBaseURL}${CategoryEndPoints.ALL_WITH_RELATION}`, { method: 'POST' })
 
     const catsData: CategoryFullType[] = await responseCat.json()
+
+    const subLocationResponse = await fetch(`${ApiBaseURL}${SubLocationEndPoints.GET_LIST}`)
+
+    const subLocData: SubLocationReadType[] = await subLocationResponse.json()
+
 
     const returnSide = (side: string) => {
         if (side == 'rent') return 'رهن و اجاره'
@@ -40,6 +45,8 @@ export const generateMetadata = async ({ params: { filters }, searchParams: { ci
     var catTitle = undefined
 
     var cityTitle = undefined
+
+    var subLocationTitle = undefined
 
 
 
@@ -132,12 +139,31 @@ export const generateMetadata = async ({ params: { filters }, searchParams: { ci
         })
     }
 
+
+    try {
+
+        if (sublocations) {
+            subLocationTitle = subLocData?.filter(i => sublocations?.split(',').indexOf(i.name) != -1).map(i => i.faTitle).join(' و ') ?? ''
+        }
+
+    } catch (error) {
+
+    }
+
+
+    const baseDescription = (await parent).description
+
     return ({
         title: sideTranslate.concat(' ')
             .concat(catTitle ? catTitle.concat(' ') : 'ملک ')
             .concat(cityTitle ? 'در '.concat(cityTitle).concat(' ') : '')
+            .concat(subLocationTitle ? (subLocationTitle).concat(' ') : '')
             .concat(' | دپارتمان املاک اطلس'),
-        //description: ''
+        description: sideTranslate.concat(' ')
+            .concat(catTitle ? catTitle.concat(' ') : 'ملک ')
+            .concat(cityTitle ? 'در '.concat(cityTitle).concat(' ') : '')
+            .concat(subLocationTitle ? (subLocationTitle).concat(' ') : '')
+            .concat(' | ').concat(baseDescription ?? '')
     })
 }
 
