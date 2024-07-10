@@ -34,3 +34,24 @@ export const ssrMutate = async <T,>({ method = 'POST', path, body }: { path: str
     }
 
 }
+
+
+export const ssrGet = async <T,>({ path, params }: { path: string, params?: any }) => {
+
+    try {
+
+
+        console.log((ApiBaseURL ?? '')?.concat(path) + '?' + (new URLSearchParams(params)).toString())
+        const response = await fetch((ApiBaseURL ?? '')?.concat(path) + '?' + (new URLSearchParams(params)).toString())
+
+        const data: T = await response.json()
+
+
+        return data
+
+    }
+    catch (error) {
+        return Promise.reject(error)
+    }
+
+}
