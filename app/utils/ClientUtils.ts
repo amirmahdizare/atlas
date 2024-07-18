@@ -5,7 +5,6 @@ import { isFileSrcImage } from "utils";
 
 export const convertIOSImage = async (file: File, { imageType = 'jpg', quality = 0.5 }: { imageType?: 'png' | 'jpg' | 'jpeg' | string, quality?: number }) => {
 
-    console.log(file)
 
     const fileType = file.name.split('.').toReversed()[0].toLowerCase()
 
@@ -45,7 +44,6 @@ export const compressImage = async (imageFile: File) => {
 
 
     const res = new File([resBlob], imageFile.name, { type: `image/${fileType}` })
-    console.log(res)
 
     return res
 }
@@ -53,7 +51,6 @@ export const compressImage = async (imageFile: File) => {
 
 export const mapMedias = async (file: File) => {
 
-    console.log(file)
 
     const fileType = file.name.split('.').toReversed()[0].toLowerCase()
 
