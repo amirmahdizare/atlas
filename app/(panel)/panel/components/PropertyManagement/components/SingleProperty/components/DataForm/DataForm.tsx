@@ -20,6 +20,7 @@ import { Tags } from './components/Tags'
 import ReactQuill from 'react-quill'
 import { useMutation } from 'react-query'
 import { AxiosError, AxiosResponse } from 'axios'
+import { mapMedias } from 'utils/ClientUtils'
 
 
 const customDefaultValue: Partial<PropertyCUType<{ content: File | string }>> = {
@@ -48,17 +49,22 @@ export const DataForm = () => {
             const { medias, ...restData } = data
 
             if (mode == 'edit' && typeof proprtyId != 'undefined') {
-                console.log({ dataMediaLenght: data.medias.filter(i => typeof i == 'string').length, currentMediaLenght: allProprties?.find(i => i.id == proprtyId)?.medias?.length })
+                //console.log({ dataMediaLenght: data.medias.filter(i => typeof i == 'string').length, currentMediaLenght: allProprties?.find(i => i.id == proprtyId)?.medias?.length })
                 const mappedMedias = data.medias.filter(i => typeof i == 'string').length == data.medias.length && data.medias.filter(i => typeof i == 'string').length == allProprties?.find(i => i.id == proprtyId)?.medias?.length ? undefined : await Promise.all(data.medias.filter(i => typeof i == 'string').map(async i => await convertMediaUrlToFile(i.toString())))
                 return api.patch(PropretyEndPoints.SINGLE(proprtyId), createFormData({
                     ...restData,
                     tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds),
                     features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))),
-                    ...(!!mappedMedias ? ({ medias: [...data.medias.filter(i => typeof i == 'object'), ...mappedMedias] }) : ({}))
+                    ...(!!mappedMedias ? ({ medias: await Promise.all([...data.medias.filter(i => typeof i == 'object').map(i => mapMedias(i as File)), ...mappedMedias]) }) : ({}))
                 }, ['medias']))
 
             }
-            return api.post(PropretyEndPoints.CREATE, createFormData({ ...data, tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds), features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))) }, ['medias']))
+            return api.post(PropretyEndPoints.CREATE, createFormData({
+                ...data,
+                tagIds: data.tagIds?.length == 1 ? JSON.stringify([...data.tagIds, ...data.tagIds]) : JSON.stringify(data.tagIds),
+                features: JSON.stringify(data.features.map(i => ({ filterId: i.filterId, value: i.value?.toString() }))),
+                ...(!!data.medias && { medias: await Promise.all([...data.medias.filter(i => typeof i == 'object').map(i => mapMedias(i as File))]) })
+            }, ['medias']))
         }
         ,
         onSuccess: (e, v) => {
@@ -83,7 +89,9 @@ export const DataForm = () => {
             }
             else {
 
-                toast.error(e.response?.data.message ?? `خطا در ${mode == 'add' ? 'ایجاد' : 'ویرایش'} آگهی`)
+                console.log(e.response)
+
+                toast.error(e.response?.data.message ?? e.response?.toString() ?? `خطا در ${mode == 'add' ? 'ایجاد' : 'ویرایش'} آگهی`)
             }
             // setError(``)
         }
@@ -186,7 +194,7 @@ export const DataForm = () => {
                         register={register('metr', { required: { value: true, message: 'متراژ آگهی اجباری می باشد' }, pattern: { value: /[0-9]/g, message: 'متراژ به درستی وارد نشده است.' } })}
                         error={!!errors.metr}
                         errorText={errors.metr?.message}
-                        type='number'
+                        type='tel'
                         min={1}
                     />
 

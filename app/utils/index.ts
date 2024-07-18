@@ -1,3 +1,5 @@
+//'use client'
+import heic2any from "heic2any";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { DOMAttributes, KeyboardEvent } from "react";
 import { ProductType, RoleTypeName } from "types";
@@ -7,8 +9,8 @@ export const startWithZero = (num: number, totalLength: number = 2) => {
   return String(num).padStart(totalLength, '0');
 }
 
-export const isFileSrcImage = (src: string) => !['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'tiff'].every(i => !src.split('.').reverse()[0].toLowerCase().includes(i.toLowerCase()) && !src.split('/').reverse()[0].toLowerCase().includes(i.toLowerCase()))
-export const isFileSrcVideo = (src: string) => !['mp4', 'webm', 'ogg', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'm4v', '3gp'].every(i => !src.split('.').reverse()[0].toLowerCase().includes(i.toLowerCase()) && !src.split('/').reverse()[0].toLowerCase().includes(i.toLowerCase()))
+export const isFileSrcImage = (src: string) => !['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp', 'tiff' ,'heic','heif'].every(i => !src.split('.').reverse()[0].toLowerCase().includes(i.toLowerCase()) && !src.split('/').reverse()[0].toLowerCase().includes(i.toLowerCase()))
+export const isFileSrcVideo = (src: string) => !['mp4', 'webm', 'ogg', 'avi', 'mov', 'wmv', 'flv', 'mkv', 'm4v', '3gp','hevc'].every(i => !src.split('.').reverse()[0].toLowerCase().includes(i.toLowerCase()) && !src.split('/').reverse()[0].toLowerCase().includes(i.toLowerCase()))
 export const isFileSrcAudio = (src: string) => !['mp3', 'ogg'].every(i => !src.split('.').reverse()[0].includes(i) && !src.split('/').reverse()[0].includes(i))
 export const isFileSrcFile = (src: string) => !['doc', 'txt', 'pdf'].every(i => !src.split('.').reverse()[0].includes(i) && !src.split('/').reverse()[0].includes(i))
 export const handleKeyPress = (onEnter: React.KeyboardEventHandler<HTMLInputElement>): React.KeyboardEventHandler<HTMLInputElement> | undefined => (e) => {
@@ -169,7 +171,6 @@ export const translateRole = (roleEng: RoleTypeName) => {
 
 export const isUserAgent = (role: RoleTypeName) => agentRoles.indexOf(role) != -1
 
-
 export const minuteToMs = (minute: number) => 1000 * 60 * minute
 
 
@@ -194,3 +195,4 @@ export const copyLink = (text: string) => {
 }
 
 export const createPhoneCallLink = (number: string) => `tel:+98${number[0] == '0' ? number.substring(1) : number}`
+
