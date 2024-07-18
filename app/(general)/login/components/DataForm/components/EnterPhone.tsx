@@ -39,13 +39,16 @@ export const EnterPhone = () => {
                 placeholder='شماره موبایل'
                 register={register('phoneNumber', {
                     required: { value: true, message: 'شماره تلفن وارد نشده است.' },
-                    pattern: { value: /9(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/, message: 'شماره موبایل صحیح نیست' }
+                    pattern: { value: /09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}/, message: 'شماره موبایل صحیح نیست' }
                 })}
                 type='tel'
+               style={{textAlign:'center'}}
                 // error
                 errorText='sdf'
                 autoComplete='off'
+                
             />
+            <span className='text-gray-500 text-right text-body-3-normal'>مثال : 09123456789</span>
 
             {errors.phoneNumber && <span className='text-red-500 text-body-3-light font-bold text-right'>{errors.phoneNumber.message}</span>}
 
