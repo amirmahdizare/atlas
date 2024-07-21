@@ -36,7 +36,7 @@ export const convertIOSImage = async (file: File, { imageType = 'jpg', quality =
 export const compressImage = async (imageFile: File) => {
     const fileType = imageFile.name.split('.').toReversed()[0].toLowerCase()
     const options = {
-        maxSizeMB: 0.15,
+        maxSizeMB: 0.3,
         maxWidthOrHeight: 1500,
         useWebWorker: true,
     }
