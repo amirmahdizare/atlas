@@ -89,7 +89,14 @@ export const DataForm = () => {
             }
             else {
 
-                console.log(e.response)
+                if(e.code=="ERR_NETWORK")
+
+                {
+                    toast.error('تعداد یا حجم تصاویر زیاد می باشد . لطفا چند مورد را حذف کنید و آن ها را در ویرایش آگهی اضافه کنید.')
+                    return
+                }
+
+                // console.log(e.response)
 
                 toast.error(e.response?.data.message ?? e.response?.toString() ?? `خطا در ${mode == 'add' ? 'ایجاد' : 'ویرایش'} آگهی`)
             }
