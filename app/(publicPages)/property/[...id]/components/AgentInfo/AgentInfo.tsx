@@ -61,7 +61,7 @@ export const AgentInfo = ({ data: { user, agentNote } }: { data: PropertyDetailT
                             </div>
 
                             <div className='flex flex-row gap-1 text-body-1-normal lg:text-body-2-normal items-center'>
-                                <ActionButton phoneNumber={phoneNumber} />
+                                <ActionButton isPopUp phoneNumber={phoneNumber} />
                                 <Link href={pageHref}><Button bgColor='secondary' icon={IconArrowUpRight}>صفحه مشاور</Button></Link>
 
                             </div>
@@ -74,7 +74,7 @@ export const AgentInfo = ({ data: { user, agentNote } }: { data: PropertyDetailT
 
                     <span className='sr-only'>شماره تماس مشاور {`${firstName} ${lastName}`} {phoneNumber} دپارتمان املاک اطلس</span>
 
-                    <ActionButton phoneNumber={phoneNumber} />
+                    <ActionButton isPopUp={false} phoneNumber={phoneNumber} />
 
                 </div>
 
