@@ -32,7 +32,7 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
         return <img src={createMediaUrl(undefined)} alt={imageAltProp} className='aspect-video w-full rounded' />
 
     return (
-        <div className={`w-full ${state ? 'fixed top-0 left-0 w-full h-full backdrop-brightness-[12.5%] transition-all duration-300  lg:backdrop-brightness-[12.5%] p-1  box-border flex justify-center items-center z-30' : 'relative '}`}>
+        <div className={`w-full ${state ? 'fixed top-0 left-0 w-full h-full backdrop-brightness-[12.5%] transitio n-all duration-300  !transition-none lg:backdrop-brightness-[12.5%] p-1  box-border flex justify-center items-center z-30' : 'relative '}`}>
 
             <IconX className='cursor-pointer absolute top-4 left-4 text-white w-3.5 h-3.5' onClick={() => setState(!state)} />
 
@@ -52,7 +52,7 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
                 slidesPerView={1}
                 onSlideChange={(e) => setSlide(e.activeIndex)}
                 onSwiper={(swiper) => console.log(swiper)}
-                className='flex flex-col items-stretch justify-stretch backdrop-brigh tness-50 relative'
+                className={`flex flex-col items-center justify-center backdrop-brigh tness-50 relative ${state ? '!h-full' : ''} `}
                 modules={[Pagination, Navigation, Thumbs, FreeMode]}
                 loop
                 pagination={{
@@ -81,8 +81,8 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
 
             >
                 <div className='pagination-ss left-4 flex flex-row gap-1 items-center justify-end -bottom-8 absolute px-1 z-10 [&_.active]:!bg-mint-green' />
-                {medias?.map(item => <SwiperSlide className='h-full max-h-[70vh] flex flex-row justify-center relative' >
-                    <div className='flex flex-row justify-center w-full ' onClick={() => setState(s => !s)}>
+                {medias?.map(item => <SwiperSlide className={` !flex !flex-row !justify-center !items-center relative ${state ? 'h-screen' : 'max-h-[70vh]'}`} >
+                    <div className='flex flex-row justify-center w-full relative ' onClick={() => setState(s => !s)}>
                         <View altProps={imageAltProp} isOpen={state} src={item} />
                     </div>
                 </SwiperSlide>)}
