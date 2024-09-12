@@ -43,9 +43,9 @@ export const DesktopHeader = () => {
 
                 <AccordionMenu
                     title='جستجوی ملک'
-                    href='/s/all'
+                    href='/s/all/all'
                     items={
-                        data?.data.map(item => ({link:`/s/${item.name}-city` , title:`جستجوی ملک در ${item.faTitle}`})) ?? []
+                        data?.data.map(item => ({link:`/s/all/${item.name}-city` , title:`جستجوی ملک در ${item.faTitle}`})) ?? []
                     //     [
                     //     {
                     //         link: '#',
