@@ -14,7 +14,7 @@ export const Blogs = () => {
 
     const blogs = data?.data
 
-    if (blogs && Array.isArray(blogs) && blogs.length>1)
+    if (blogs && Array.isArray(blogs) && blogs.length > 0)
         return (
             <div className='flex flex-col gap-3 items-stretch'>
                 <div className='flex flex-row gap-4 justify-between lg:justify-center'>
@@ -47,7 +47,7 @@ export const Blogs = () => {
 
                         </div>
 
-                        <Link  href={'/blogs'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
+                        <Link href={'/blogs'} className=' flex-row gap-1 cursor-pointer hover:text-coral hidden lg:flex'>
                             <span className='text-mint-green text-body-2-bolder hover:text-coral'>همه مقالات</span>
                             <IconArrowDownLeft width={15} height={15} />
                         </Link>
@@ -59,7 +59,7 @@ export const Blogs = () => {
                 <div className='grid grid-cols-3 gap-2'>
 
                     <div className='col-span-3 lg:col-span-1'>
-                        <TopBlog {...blogs[0]} />
+                        <TopBlog {...blogs?.[0]} />
 
                     </div>
 
@@ -75,5 +75,5 @@ export const Blogs = () => {
     else if (isError || Array.isArray(blogs) && blogs.length == 0)
         return <></>
 
-    return <div className='grid grid-cols-4 gap-4'>{Array.from(new Array(4)).map(i=><div className='aspect-square col-span-4 md:col-span-2 lg:col-span-1 animate-pulse bg-gray-100'></div>)}</div>
+    return <div className='grid grid-cols-4 gap-4'>{Array.from(new Array(4)).map(i => <div className='aspect-square col-span-4 md:col-span-2 lg:col-span-1 animate-pulse bg-gray-100'></div>)}</div>
 }

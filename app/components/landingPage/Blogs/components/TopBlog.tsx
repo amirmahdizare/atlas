@@ -11,7 +11,7 @@ export const TopBlog = ({ createTime, duration, id, images, summary, title }: Bl
         <Link href={`/blogs/${id}/${title}`} prefetch={false} className='flex flex-col gap-2 p-1 rounded overflow-hidden'>
 
             <div className='flex flex-1 aspect-video w-full relative rounded overflow-hidden'>
-                <Image src={createMediaUrl(images?.[0])} className='w-full' alt={`${title}  | دپارتمان املاک اطلس`} fill />
+                <Image src={createMediaUrl(images?.[0])} className='w-full object-cover' alt={`${title}  | دپارتمان املاک اطلس`} fill />
                 <div className='backdrop-blur-sm  backdrop-brightness-75 text-body-3-normal absolute bottom-0 text-white left-0 flex p-1 w-full items-center justify-between'>
                     <span>{duration} دقیقه مطالعه</span>
                     <span>{createTime}</span>

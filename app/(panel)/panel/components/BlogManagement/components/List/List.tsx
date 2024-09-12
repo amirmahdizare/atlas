@@ -40,7 +40,9 @@ export const List = () => {
                     >
                         {blogs?.map(item => <BlogCard {...item} />)}
                     </InfiniteScroll>
+
                 </div>
+                {blogs.length == 0 && <span className='text-center'>در حال حاضر مقاله ای وجود ندارد.</span>}
             </>
         )
 
@@ -48,7 +50,7 @@ export const List = () => {
         return <span>خطا در دریافت اطلاعات</span>
 
     return <div className='flex flex-col gap-2'>
-        {Array.from(new Array(10)).map((a ,index)=><div key={index} className='h-4 rounded w-full animate-ping bg-gray-100'></div>)}
+        {Array.from(new Array(10)).map((a, index) => <div key={index} className='h-4 rounded w-full animate-ping bg-gray-100'></div>)}
 
     </div>
 }
