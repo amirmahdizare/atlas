@@ -9,7 +9,7 @@ export const SingleBlog = ({ id, title, createTime, duration, images, summary }:
     return (
         <Link href={`/blogs/${id}`} className='flex flex-col gap-1.5'>
 
-            <img src={createMediaUrl(images[0])} className='aspect-video rounded w-full object-cover' />
+            <img src={createMediaUrl(images?.[0])} className='aspect-video rounded w-full object-cover' />
 
             <span className='text-body-2-bolder line-clamp-2 text-ellipsis leading-3 h-6'>
                 {title}

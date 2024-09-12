@@ -22,7 +22,7 @@ export const BlogCard = ({ title, description, duration, images, id, summary, cr
         <div className='grid grid-cols-2 lg:grid-cols-4 gap-2 border-b pb-2'>
 
             <div className='col-span-1'>
-                <img src={createMediaUrl(images[0])} className='rounded object-cover w-full aspect-video' />
+                <img src={createMediaUrl(images?.[0])} className='rounded object-cover w-full aspect-video' />
             </div>
 
             <div className='flex flex-col gap-2  col-span-1 lg:col-span-2'>
