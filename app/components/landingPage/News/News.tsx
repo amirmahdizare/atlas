@@ -25,7 +25,7 @@ export const News = async () => {
 
                     <div className='text-raisin-black text-h3-bolder relative text-center'>
                         آگهی های جدید
-                        <div className='absolute bg-mint-green w-[80px]  lg:left-1/2 -translate- x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
+                        <div className='absolute bg-mint-green w-[80px]  lg:left-1/2 lg:-translate-x-1/2 h-[2px] top-full mt-1.5 rounded '></div>
                     </div>
 
 
