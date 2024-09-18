@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
+import 'swiper/css/keyboard';
 import 'react-quill/dist/quill.snow.css';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 

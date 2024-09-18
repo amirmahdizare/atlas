@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { PropertyDetailType } from 'types'
-import { FreeMode, Navigation, Pagination, Thumbs } from 'swiper/modules';
+import { FreeMode, Navigation, Pagination, Thumbs ,Keyboard } from 'swiper/modules';
 import { IconChevronLeft, IconChevronRight, IconX } from '@tabler/icons-react';
 import { Thumb } from './components/Thumb';
 import { View } from './components/View';
 import ClickAwayListener from 'react-click-away-listener';
 import { createMediaUrl } from 'utils';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 export const Media = ({ data: { medias, title, category, subCategory, location, subLocation } }: { data: PropertyDetailType }) => {
 
@@ -34,17 +35,17 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
     return (
         <div className={`w-full ${state ? 'fixed top-0 left-0 w-full h-full backdrop-brightness-[12.5%] transitio n-all duration-300  !transition-none lg:backdrop-brightness-[12.5%] p-1  box-border flex justify-center items-center z-30' : 'relative '}`}>
 
-            <IconX className='cursor-pointer absolute top-4 left-4 text-white w-3.5 h-3.5' onClick={() => setState(!state)} />
+            {state && <IconX className='cursor-pointer absolute top-4 left-4 text-white w-3.5 h-3.5 z-20' onClick={() => setState(false)} />}
 
 
 
-            {!!slide && <div className='absolute top-1/2 right-1.5 -translate-y-1/2 cursor-pointer p-0.5 aspect-square lg:hover:bg-gray-50 rounded-circle z-10 text-gray-100 lg:text-gray-700' id='prevSlideMedia'>
+            <div className={clsx('absolute top-1/2 right-1.5 -translate-y-1/2 cursor-pointer p-0.5 aspect-square  rounded-circle z-10 text-gray-100 lg:text-gray-700', !state ? 'opacity-0' : (!!slide ? '' : 'opacity-0'))} id='prevSlideMedia'>
                 <IconChevronRight />
-            </div>}
+            </div>
 
-            {slide + 1 != medias?.length && <div className='absolute top-1/2 -translate-y-1/2 left-1.5 cursor-pointer p-0.5 aspect-square hover:bg-gray-50 rounded-circle z-10 text-gray-100 lg:text-gray-700' id='nextSlideMedia'>
+            <div className={clsx('absolute top-1/2 -translate-y-1/2 left-1.5 cursor-pointer p-0.5 aspect-square  rounded-circle z-10 text-gray-100 lg:text-gray-700', !state ? 'opacity-0' : (slide + 1 != medias?.length ? '' : 'opacity-0'))} id='nextSlideMedia'>
                 <IconChevronLeft />
-            </div>}
+            </div>
 
 
             <Swiper
@@ -53,8 +54,8 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
                 onSlideChange={(e) => setSlide(e.activeIndex)}
                 onSwiper={(swiper) => console.log(swiper)}
                 className={`flex flex-col items-center justify-center backdrop-brigh tness-50 relative ${state ? '!h-full' : ''} `}
-                modules={[Pagination, Navigation, Thumbs, FreeMode]}
-                loop
+                modules={[Pagination, Navigation, Thumbs, FreeMode ,Keyboard]}
+                // loop
                 pagination={{
                     enabled: state ? false : true,
                     el: '.pagination-ss',
@@ -69,6 +70,7 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
 
                     // }
                 }}
+                keyboard={{enabled:true, onlyInViewport:true}}
                 navigation={
                     {
                         enabled: true,
@@ -98,7 +100,7 @@ export const Media = ({ data: { medias, title, category, subCategory, location, 
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mt-1"
-                onClick={()=>setState(true)}
+                onClick={() => setState(true)}
             >
                 {medias?.map(item => <SwiperSlide className='h-full'>
                     <Thumb altProps={imageAltProp} src={item} onClick={() => { }} />
