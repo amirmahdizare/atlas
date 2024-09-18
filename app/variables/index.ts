@@ -42,7 +42,7 @@ export const MAIN_AGENTS = [
     {
         lastName: 'اخلاقی',
         phoneNumber: '09377634864',
-        instaUserName: 'hosseinakhlaghi14'
+        instaUserName: 'hosseinakhlaqi_official'
     },
     {
         lastName: 'امین دهقان',
