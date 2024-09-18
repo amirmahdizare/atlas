@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Button, Input, TextArea } from '@components'
 import { IconInfoCircle, IconUpload } from '@tabler/icons-react'
 import { useBlogsSection } from '../../../hooks'
@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 import { convertMediaUrlToFile, createFormData, createMediaUrl } from 'utils'
 import ReactQuill from 'react-quill';
 import { } from 'react-quill';
+import { compressImage, mapMedias } from 'utils/ClientUtils'
 
 export const DataForm = () => {
 
@@ -35,14 +36,21 @@ export const DataForm = () => {
 
                 if (mode == 'edit' && blogId) {
 
-                    const imagesFiles = data.images.length == 1 && typeof data.images[0] == 'string' ? await Promise.all(data.images.map(i => convertMediaUrlToFile(createMediaUrl(i) as any))) : data.images
+
+                    const imagesFiles =  data.images.length == 1 && typeof data.images[0] == 'string'
+                        ? await Promise.all(Array.from(data.images).map(i => convertMediaUrlToFile(createMediaUrl(i) as any)))
+                        : await Promise.all(Array.from(data.images).map(async i => typeof i == 'object'
+                            ? await mapMedias(i)
+                            : await Promise.resolve()))
+
+                    console.log({ imagesFiles })
 
                     return api.patch(BlogEndPoints.SINGLE(blogId), createFormData({ ...data, images: imagesFiles }, ['images']))
                 }
                 else {
 
                     console.log(data)
-                    return api.post(BlogEndPoints.CREATE, createFormData({ ...data, images: Array.from(data.images) }, ['images']))
+                    return api.post(BlogEndPoints.CREATE, createFormData({ ...data, images: await Promise.all(Array.from(data.images).map(async i => typeof i == 'object' ? await mapMedias(i) : await Promise.resolve())) }, ['images']))
                 }
             },
             onSuccess: () => {
@@ -84,7 +92,7 @@ export const DataForm = () => {
     }, [mode])
 
 
-    const RenderImageBox = () => {
+    const RenderImageBox = useCallback(() => {
 
         if (!currentImage)
             return <>
@@ -111,7 +119,7 @@ export const DataForm = () => {
                 <span className='text-ultra-violet text-body-3-light'>تصاویر شما باید کمتر 6 مگابایت باشند.</span>
             </div></>
 
-    }
+    }, [currentImage?.[0]])
 
     return (
         <form className='grid grid-cols-3 gap-2' onSubmit={handleSubmit(handleMutate)}>
